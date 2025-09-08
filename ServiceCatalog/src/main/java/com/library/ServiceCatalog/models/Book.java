@@ -3,20 +3,22 @@ package com.library.ServiceCatalog.models;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
+import org.hibernate.annotations.UuidGenerator;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
+import java.util.UUID;
 
 
 @Entity
-@Table(name = "book")
+@Table(name = "books")
 public class Book {
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @UuidGenerator(style = UuidGenerator.Style.TIME)
     @Column(name = "book_id")
-    private int bookId;
+    private UUID bookId;
 
     @Column(name = "book_name")
     @NotEmpty(message = "Book name must not be empty.")
@@ -67,11 +69,11 @@ public class Book {
 
     public Book() {}
 
-    public int getBookId() {
+    public UUID getBookId() {
         return bookId;
     }
 
-    public void setBookId(int bookId) {
+    public void setBookId(UUID bookId) {
         this.bookId = bookId;
     }
 

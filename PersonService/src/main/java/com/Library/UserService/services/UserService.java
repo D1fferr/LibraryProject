@@ -11,8 +11,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class UserService {
@@ -30,12 +30,12 @@ public class UserService {
         return userRepository.findAll(pageable).stream().map(this::toDTO).toList();
     }
     @Transactional(readOnly = true)
-    public Optional<UserDTO> findById(int id){
-        return userRepository.findByUserId(id).map(this::toDTO);
+    public Optional<UserDTO> findById(UUID id){
+        return userRepository.findByUserId((id)).map(this::toDTO);
     }
     @Transactional
-    public void deleteUser(int id){
-        userRepository.deleteById(id);
+    public void deleteUser(UUID id){
+        userRepository.deleteByUserId(id);
     }
     @Transactional
     public void save(UserDTO userDTO){
@@ -47,7 +47,7 @@ public class UserService {
         userRepository.save(user);
     }
     @Transactional
-    public void update(int id, UserDTO userDTO){
+    public void update(UUID id, UserDTO userDTO){
         User user = userRepository.findByUserId(id)
                 .orElseThrow(()->new UsersNotFoundException("User not found"));
         if (userDTO.getUsername()!=null)
@@ -59,7 +59,7 @@ public class UserService {
         userRepository.save(user);
     }
     @Transactional
-    public void updateLibraryCode(int id, UserDTO userDTO){
+    public void updateLibraryCode(UUID id, UserDTO userDTO){
         User user = userRepository.findByUserId(id)
                 .orElseThrow(()->new UsersNotFoundException("User not found"));
         if (userDTO.getUserLibraryCode() != null)

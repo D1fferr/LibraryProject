@@ -12,11 +12,14 @@ import org.springframework.stereotype.Repository;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Repository
 public interface BookRepository extends JpaRepository<Book, Integer> {
-    Optional<Book> findByBookId(int bookId);
+    Optional<Book> findByBookId(UUID bookId);
     Optional<Book> findByBookNameAndBookAuthor(String bookName, String bookAuthor);
 
     List<Book> findAllByOrderByBookAddedAtDesc(Pageable pageable);
+
+    void deleteByBookId(UUID bookId);
 }

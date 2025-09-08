@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/user")
@@ -45,14 +46,14 @@ public class UserController {
         return users;
     }
     @PatchMapping("/change/{user_id}")
-    public ResponseEntity<HttpStatus> changeUser(@PathVariable int user_id,
+    public ResponseEntity<HttpStatus> changeUser(@PathVariable UUID user_id,
                                                  @RequestBody @Valid UserDTO userDTO,
                                              BindingResult bindingResult) {
         checkErrors(bindingResult);
         userService.update(user_id, userDTO);
         return new ResponseEntity<>(HttpStatus.OK);
     }@PatchMapping("/changeLibraryCode/{user_id}")
-    public ResponseEntity<HttpStatus> changeUserLibraryCode(@PathVariable int user_id,
+    public ResponseEntity<HttpStatus> changeUserLibraryCode(@PathVariable UUID user_id,
                                                             @RequestBody @Valid UserDTO userDTO,
                                              BindingResult bindingResult) {
         checkErrors(bindingResult);
@@ -73,12 +74,12 @@ public class UserController {
     }
 
     @GetMapping("/{user_id}")
-    public UserDTO findById(@PathVariable("user_id") int user_id){
+    public UserDTO findById(@PathVariable("user_id") UUID user_id){
         return userService.findById(user_id).orElseThrow(()-> new UsersNotFoundException("User not found"));
     }
 
     @DeleteMapping("/{user_id}")
-    public ResponseEntity<HttpStatus> deleteUser(@PathVariable("user_id") int user_id){
+    public ResponseEntity<HttpStatus> deleteUser(@PathVariable UUID user_id){
         userService.deleteUser(user_id);
         return ResponseEntity.ok(HttpStatus.NO_CONTENT);
     }

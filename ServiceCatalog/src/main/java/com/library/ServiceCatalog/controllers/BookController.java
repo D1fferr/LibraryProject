@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/book")
@@ -57,11 +58,11 @@ public class BookController {
         }
     }
     @GetMapping("/{book_id}")
-    public BookDTO getBook(@PathVariable int book_id){
+    public BookDTO getBook(@PathVariable UUID book_id){
         return bookService.findById(book_id);
     }
     @GetMapping("/pieces/{book_id}")
-    public Integer getBookPieces(@PathVariable int book_id){
+    public Integer getBookPieces(@PathVariable UUID book_id){
         return bookService.findById(book_id).getBookPieces();
     }
 
@@ -79,12 +80,12 @@ public class BookController {
         return ResponseEntity.ok(HttpStatus.CREATED);
     }
     @DeleteMapping("/delete/{book_id}")
-    public ResponseEntity<HttpStatus> deleteBook(@PathVariable int book_id){
+    public ResponseEntity<HttpStatus> deleteBook(@PathVariable UUID book_id){
         bookService.delete(book_id);
         return ResponseEntity.ok(HttpStatus.NO_CONTENT);
     }
     @PatchMapping("/changeBook/{id}")
-    public ResponseEntity<HttpStatus> changeBook(@PathVariable int id,
+    public ResponseEntity<HttpStatus> changeBook(@PathVariable UUID id,
                                                  @RequestBody @Valid BookDTO bookDTO,
                                                  BindingResult bindingResult){
         errorCheckingWhenChangingBookFields(bindingResult);

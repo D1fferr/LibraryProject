@@ -14,6 +14,7 @@ import ua.zakharchuk.ExpectedBooksService.repositories.ExpectedBookRepositories;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @AllArgsConstructor
@@ -26,12 +27,12 @@ public class ExpectedBookService {
         expectedBookRepositories.save(toExpectedBookEntity(expectedBookDTO));
     }
     @Transactional
-    public void deleteById(int id){
-        expectedBookRepositories.deleteById(id);
+    public void deleteById(UUID id){
+        expectedBookRepositories.deleteByExpectedBookId(id);
     }
     @Transactional
-    public void update(int id, ExpectedBookDTO expectedBookDTO){
-        ExpectedBook expectedBook = expectedBookRepositories.findById(id)
+    public void update(UUID id, ExpectedBookDTO expectedBookDTO){
+        ExpectedBook expectedBook = expectedBookRepositories.findByExpectedBookId(id)
                 .orElseThrow(()->new ExpectedBookNotFoundException("The selected book was not found."));
         if (expectedBookDTO.getExpectedBookName()!=null)
             expectedBook.setExpectedBookName(expectedBookDTO.getExpectedBookName());
@@ -52,8 +53,8 @@ public class ExpectedBookService {
         expectedBookRepositories.save(expectedBook);
     }
     @Transactional(readOnly = true)
-    public ExpectedBookDTO findOneBook(int id){
-        ExpectedBook expectedBook = expectedBookRepositories.findById(id)
+    public ExpectedBookDTO findOneBook(UUID id){
+        ExpectedBook expectedBook = expectedBookRepositories.findByExpectedBookId(id)
                 .orElseThrow(()->new ExpectedBookNotFoundException("The selected book was not found."));
         return toExpectedBookDTO(expectedBook);
     }

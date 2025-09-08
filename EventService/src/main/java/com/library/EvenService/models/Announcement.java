@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Entity
 @Table(name = "announcement")
@@ -14,7 +15,7 @@ public class Announcement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "announcement_id")
-    private int id;
+    private UUID id;
     @NotEmpty(message = "Announcement name must not be empty.")
     @Size(min = 1, max = 100, message = "Announcement name must be between 1 and 100 characters long.")
     @Column(name = "announcement_name")
@@ -55,11 +56,11 @@ public class Announcement {
         this.name = name;
     }
 
-    public int getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

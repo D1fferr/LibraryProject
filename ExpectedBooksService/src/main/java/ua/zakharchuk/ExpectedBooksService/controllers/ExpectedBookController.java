@@ -13,6 +13,7 @@ import ua.zakharchuk.ExpectedBooksService.exceptions.ExpectedBookNotCreatedExcep
 import ua.zakharchuk.ExpectedBooksService.services.ExpectedBookService;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("expected-book")
@@ -22,7 +23,7 @@ public class ExpectedBookController {
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<ExpectedBookDTO> getOne(@PathVariable int id){
+    public ResponseEntity<ExpectedBookDTO> getOne(@PathVariable UUID id){
         return new ResponseEntity<>(expectedBookService.findOneBook(id), HttpStatus.OK);
     }
     @GetMapping("/get-all")
@@ -41,7 +42,7 @@ public class ExpectedBookController {
     }
     @PatchMapping("/change/{id}")
     public ResponseEntity<ExpectedBookDTO> changeExpectedBook(
-            @PathVariable int id,
+            @PathVariable UUID id,
             @RequestBody @Valid ExpectedBookDTO expectedBookDTO,
             BindingResult bindingResult){
 
@@ -50,12 +51,12 @@ public class ExpectedBookController {
         return new ResponseEntity<>(expectedBookDTO, HttpStatus.OK);
     }
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<HttpStatus> deleteBook(@PathVariable int id){
+    public ResponseEntity<HttpStatus> deleteBook(@PathVariable UUID id){
         expectedBookService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
     @GetMapping("/add-to-current-books/{id}")
-    public ResponseEntity<HttpStatus> addToCurrentBooks(@PathVariable int id){
+    public ResponseEntity<HttpStatus> addToCurrentBooks(@PathVariable UUID id){
 
         return new ResponseEntity<>(HttpStatus.OK);
     }

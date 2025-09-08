@@ -16,10 +16,10 @@ public class Config {
         return new ModelMapper();
     }
 
-    @Bean
-    public KafkaProducer<String, ExpectedBookDTO> kafkaProducer(){
-        Properties properties = new Properties();
-//        properties.put()
-        return new KafkaProducer<String, ExpectedBookDTO>(properties);
-    }
+//    @Bean
+//    public KafkaProducer<String, ExpectedBookDTO> kafkaProducer(){
+//        Properties properties = new Properties();
+////        properties.put()
+//        return new KafkaProducer<String, ExpectedBookDTO>(properties);
+//    }
 }

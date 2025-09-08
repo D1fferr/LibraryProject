@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
+import java.util.UUID;
 
 
 @Service
@@ -39,15 +40,15 @@ public class BookService {
     }
 
     @Transactional
-    public void delete(int bookId) {
-        bookRepository.deleteById(bookId);
+    public void delete(UUID bookId) {
+        bookRepository.deleteByBookId(bookId);
     }
 
     public List<BookDTO> findAll(Pageable pageable) {
         return bookRepository.findAll(pageable).stream().map(this::toDTO).toList();
     }
 
-    public BookDTO findById(int id) {
+    public BookDTO findById(UUID id) {
         if (bookRepository.findByBookId(id).isPresent())
             return toDTO(bookRepository.findByBookId(id).get());
         else
@@ -55,7 +56,7 @@ public class BookService {
                     .getMessage("book.not.found.message", new Object[0], Locale.ENGLISH));
     }
     @Transactional
-    public void updateBook(BookDTO bookDTO, int id) {
+    public void updateBook(BookDTO bookDTO, UUID id) {
         Book book = bookRepository.findByBookId(id)
                 .orElseThrow(() -> new BookNotFoundException(messageSource
                         .getMessage("book.not.found.message", new Object[0], Locale.ENGLISH)));

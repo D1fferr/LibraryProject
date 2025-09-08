@@ -6,8 +6,11 @@ import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.UuidGenerator;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
+
 @Entity
 @Table(name = "expected_book")
 @AllArgsConstructor
@@ -15,9 +18,9 @@ import java.time.LocalDateTime;
 @Data
 public class ExpectedBook {
         @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        @UuidGenerator(style = UuidGenerator.Style.TIME)
         @Column(name = "expected_book_id")
-        private int expectedBookId;
+        private UUID expectedBookId;
 
         @Column(name = "expected_book_name")
         @NotEmpty(message = "Book name must not be empty.")

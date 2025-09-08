@@ -3,8 +3,10 @@ package com.Library.UserService.models;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
+import org.hibernate.annotations.UuidGenerator;
 
 import java.util.Objects;
+import java.util.UUID;
 
 @Entity
 @Table(name = "person")
@@ -12,8 +14,8 @@ public class User {
 
     @Id
     @Column(name = "user_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int userId;
+    @UuidGenerator(style = UuidGenerator.Style.TIME)
+    private UUID userId;
     @Column(name = "user_name")
     @NotEmpty(message = "Username must not be empty")
     private String username;
@@ -41,11 +43,11 @@ public class User {
 
     public User() {}
 
-    public int getUserId() {
+    public UUID getUserId() {
         return userId;
     }
 
-    public void setUserId(int personId) {
+    public void setUserId(UUID personId) {
         this.userId = personId;
     }
 
