@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class GlobalExceptionHandler {
 
     private final ExpectedBookErrorResponse expectedBookErrorResponse;
+    private final ReportAvailabilityErrorResponse reportAvailabilityErrorResponse;
 
     @ExceptionHandler(ExpectedBookNotFoundException.class)
     public ResponseEntity<ExpectedBookErrorResponse> handleExpectedBookNotFoundException(ExpectedBookNotFoundException e){
@@ -27,5 +28,15 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ExpectedBookErrorResponse> handleExpectedBookNotCreatedException(ExpectedBookNotCreatedException e){
         expectedBookErrorResponse.setMessage(e.getMessage());
         return new ResponseEntity<>(expectedBookErrorResponse, HttpStatus.BAD_REQUEST);
+    }
+    @ExceptionHandler(ReportAvailabilityNotCreatedException.class)
+    public ResponseEntity<ReportAvailabilityErrorResponse> handleReportAvailabilityNotCreatedException(ReportAvailabilityErrorResponse e){
+        reportAvailabilityErrorResponse.setMessage(e.getMessage());
+        return new ResponseEntity<>(reportAvailabilityErrorResponse, HttpStatus.BAD_REQUEST);
+    }
+    @ExceptionHandler(ReportAvailabilityNotFoundException.class)
+    public ResponseEntity<ReportAvailabilityErrorResponse> handleReportAvailabilityNotFoundException(ReportAvailabilityNotFoundException e){
+        reportAvailabilityErrorResponse.setMessage(e.getMessage());
+        return new ResponseEntity<>(reportAvailabilityErrorResponse, HttpStatus.NOT_FOUND);
     }
 }

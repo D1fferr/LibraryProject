@@ -8,7 +8,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public interface ExpectedBookRepositories extends JpaRepository<ExpectedBook, Integer> {
+public interface ExpectedBookRepository extends JpaRepository<ExpectedBook, Integer> {
 
     void deleteByExpectedBookId(UUID expectedBookId);
 
