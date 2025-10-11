@@ -57,6 +57,11 @@ public class ExpectedBookService {
         return toExpectedBookDTO(expectedBook);
     }
     @Transactional(readOnly = true)
+    public ExpectedBook findOneBookForKafka(UUID id){
+        return expectedBookRepository.findByExpectedBookId(id)
+                .orElseThrow(()->new ExpectedBookNotFoundException("The selected book was not found."));
+    }
+    @Transactional(readOnly = true)
     public List<ExpectedBookDTO> findAll(Pageable pageable){
         List<ExpectedBookDTO> expectedBookDTOs = expectedBookRepository
                 .findAll(pageable).map(this::toExpectedBookDTO).toList();
