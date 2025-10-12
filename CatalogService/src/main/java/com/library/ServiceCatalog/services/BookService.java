@@ -38,6 +38,11 @@ public class BookService {
         book.setBookAddedAt(LocalDateTime.now());
         bookRepository.save(book);
     }
+    @Transactional
+    public void saveExpectedBookToCurrentBook(Book book) {
+        book.setBookAddedAt(LocalDateTime.now());
+        bookRepository.save(book);
+    }
 
     @Transactional
     public void delete(UUID bookId) {
