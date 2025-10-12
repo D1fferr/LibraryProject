@@ -2,13 +2,13 @@ package ua.zakharchuk.ExpectedBooksService.controllers;
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import ua.zakharchuk.ExpectedBooksService.dtos.ReportAvailabilityDTO;
-import ua.zakharchuk.ExpectedBooksService.exceptions.ExpectedBookNotCreatedException;
 import ua.zakharchuk.ExpectedBooksService.exceptions.ReportAvailabilityNotCreatedException;
 import ua.zakharchuk.ExpectedBooksService.services.ReportAvailabilityService;
 
@@ -17,7 +17,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/ReportAvailability")
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class ReportAvailabilityController {
 
     private final ReportAvailabilityService reportAvailabilityService;

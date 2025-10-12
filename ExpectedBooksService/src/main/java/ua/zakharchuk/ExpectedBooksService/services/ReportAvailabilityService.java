@@ -1,6 +1,7 @@
 package ua.zakharchuk.ExpectedBooksService.services;
 
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,7 +13,7 @@ import ua.zakharchuk.ExpectedBooksService.repositories.ReportAvailabilityReposit
 import java.util.UUID;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class ReportAvailabilityService {
 
     private final ReportAvailabilityRepository reportAvailabilityRepository;

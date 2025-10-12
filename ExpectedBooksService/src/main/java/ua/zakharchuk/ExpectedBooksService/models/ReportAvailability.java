@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.UuidGenerator;
 
 import java.util.UUID;
-
+@Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -16,7 +16,7 @@ import java.util.UUID;
 public class ReportAvailability {
     @Id
     @UuidGenerator(style = UuidGenerator.Style.TIME)
-    @Column(name = "report_availability_id")
+    @Column(name = "id")
     private UUID id;
     @Column(name = "user_id")
     @NotEmpty(message = "The user id field must not be empty.")

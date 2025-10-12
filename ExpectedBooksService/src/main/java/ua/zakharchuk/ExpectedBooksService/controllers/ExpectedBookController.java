@@ -2,6 +2,7 @@ package ua.zakharchuk.ExpectedBooksService.controllers;
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("expected-book")
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class ExpectedBookController {
     private final KafkaTemplate<String, ExpectedBook> expectedBookKafkaTemplate;
     private final ExpectedBookService expectedBookService;

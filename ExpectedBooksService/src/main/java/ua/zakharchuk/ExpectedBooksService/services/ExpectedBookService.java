@@ -1,6 +1,7 @@
 package ua.zakharchuk.ExpectedBooksService.services;
 
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -11,18 +12,21 @@ import ua.zakharchuk.ExpectedBooksService.exceptions.ExpectedBooksNotFoundExcept
 import ua.zakharchuk.ExpectedBooksService.models.ExpectedBook;
 import ua.zakharchuk.ExpectedBooksService.repositories.ExpectedBookRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class ExpectedBookService {
     private final ModelMapper modelMapper;
     private final ExpectedBookRepository expectedBookRepository;
 
     @Transactional
     public void save(ExpectedBookDTO expectedBookDTO){
-        expectedBookRepository.save(toExpectedBookEntity(expectedBookDTO));
+        ExpectedBook expectedBook = toExpectedBookEntity(expectedBookDTO);
+        expectedBook.setExpectedBookAddedAt(LocalDateTime.now());
+        expectedBookRepository.save(expectedBook);
     }
     @Transactional
     public void deleteById(UUID id){
