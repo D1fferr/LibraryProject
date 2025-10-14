@@ -13,6 +13,7 @@ public class GlobalExceptionHandler {
 
     private final ExpectedBookErrorResponse expectedBookErrorResponse;
     private final ReportAvailabilityErrorResponse reportAvailabilityErrorResponse;
+    private final EmailErrorResponse emailErrorResponse;
 
     @ExceptionHandler(ExpectedBookNotFoundException.class)
     public ResponseEntity<ExpectedBookErrorResponse> handleExpectedBookNotFoundException(ExpectedBookNotFoundException e){
@@ -35,8 +36,13 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(reportAvailabilityErrorResponse, HttpStatus.BAD_REQUEST);
     }
     @ExceptionHandler(ReportAvailabilityNotFoundException.class)
-    public ResponseEntity<ReportAvailabilityErrorResponse> handleReportAvailabilityNotFoundException(ReportAvailabilityNotFoundException e){
+    public ResponseEntity<ReportAvailabilityErrorResponse> handleReportAvailabilityNotFoundException(ReportAvailabilityNotFoundException e) {
         reportAvailabilityErrorResponse.setMessage(e.getMessage());
         return new ResponseEntity<>(reportAvailabilityErrorResponse, HttpStatus.NOT_FOUND);
+    }
+    @ExceptionHandler(EmailSendingException.class)
+    public ResponseEntity<EmailErrorResponse> handleEmailSendingException(EmailSendingException e){
+        emailErrorResponse.setMessage(e.getMessage());
+        return new ResponseEntity<>(emailErrorResponse, HttpStatus.NOT_FOUND);
     }
 }

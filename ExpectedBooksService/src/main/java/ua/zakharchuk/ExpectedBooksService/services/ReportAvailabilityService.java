@@ -10,6 +10,8 @@ import ua.zakharchuk.ExpectedBooksService.exceptions.ReportAvailabilityNotFoundE
 import ua.zakharchuk.ExpectedBooksService.models.ReportAvailability;
 import ua.zakharchuk.ExpectedBooksService.models.Status;
 import ua.zakharchuk.ExpectedBooksService.repositories.ReportAvailabilityRepository;
+
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -33,6 +35,10 @@ public class ReportAvailabilityService {
                 ()-> new ReportAvailabilityNotFoundException("Record not found"));
         reportAvailability.setStatus(Status.SENT);
         reportAvailabilityRepository.save(reportAvailability);
+    }
+    @Transactional(readOnly = true)
+    public List<ReportAvailability> findAllByBookId(UUID id){
+        return reportAvailabilityRepository.findAllByExpectedBookId(id);
     }
 
     private ReportAvailabilityDTO toDTO(ReportAvailability reportAvailability){

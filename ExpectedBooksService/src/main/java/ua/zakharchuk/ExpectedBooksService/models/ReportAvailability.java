@@ -30,5 +30,8 @@ public class ReportAvailability {
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private Status status;
+    @Column(name = "user_name")
+    @NotEmpty(message = "The username field must not be empty.")
+    private String username;
 
 }

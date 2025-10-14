@@ -15,6 +15,7 @@ import ua.zakharchuk.ExpectedBooksService.dtos.ExpectedBookDTOForKafka;
 import ua.zakharchuk.ExpectedBooksService.exceptions.ExpectedBookNotCreatedException;
 import ua.zakharchuk.ExpectedBooksService.models.ExpectedBook;
 import ua.zakharchuk.ExpectedBooksService.services.ExpectedBookService;
+import ua.zakharchuk.ExpectedBooksService.services.KafkaSenderService;
 
 import java.util.List;
 import java.util.UUID;
@@ -23,7 +24,8 @@ import java.util.UUID;
 @RequestMapping("expected-book")
 @RequiredArgsConstructor
 public class ExpectedBookController {
-    private final KafkaTemplate<String, ExpectedBookDTOForKafka> expectedBookKafkaTemplate;
+
+    private final KafkaSenderService kafkaSenderService;
     private final ExpectedBookService expectedBookService;
 
 
@@ -62,9 +64,7 @@ public class ExpectedBookController {
     }
     @GetMapping("/add-to-current-books/{id}")
     public ResponseEntity<HttpStatus> addToCurrentBooks(@PathVariable UUID id){
-
-        ExpectedBookDTOForKafka expectedBookDTOForKafka = expectedBookService.findOneBookForKafka(id);
-        expectedBookKafkaTemplate.send("expected-book-topic", expectedBookDTOForKafka);
+        kafkaSenderService.send(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

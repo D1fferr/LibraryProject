@@ -1,6 +1,7 @@
 package ua.zakharchuk.ExpectedBooksService.dtos;
 
 
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,4 +18,6 @@ public class ReportAvailabilityDTO {
     private UUID expectedBookId;
     @Size(min = 1, message = "The user email field must not be empty.")
     private String userEmail;
+    @Size(min = 1, message = "The username field must not be empty.")
+    private String username;
 }
