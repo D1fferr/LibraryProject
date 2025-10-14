@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.zakharchuk.ExpectedBooksService.dtos.ExpectedBookDTO;
+import ua.zakharchuk.ExpectedBooksService.dtos.ExpectedBookDTOForKafka;
 import ua.zakharchuk.ExpectedBooksService.exceptions.ExpectedBookNotFoundException;
 import ua.zakharchuk.ExpectedBooksService.exceptions.ExpectedBooksNotFoundException;
 import ua.zakharchuk.ExpectedBooksService.models.ExpectedBook;
@@ -23,50 +24,56 @@ public class ExpectedBookService {
     private final ExpectedBookRepository expectedBookRepository;
 
     @Transactional
-    public void save(ExpectedBookDTO expectedBookDTO){
+    public void save(ExpectedBookDTO expectedBookDTO) {
         ExpectedBook expectedBook = toExpectedBookEntity(expectedBookDTO);
         expectedBook.setExpectedBookAddedAt(LocalDateTime.now());
         expectedBookRepository.save(expectedBook);
     }
+
     @Transactional
-    public void deleteById(UUID id){
+    public void deleteById(UUID id) {
         expectedBookRepository.deleteByExpectedBookId(id);
     }
+
     @Transactional
-    public void update(UUID id, ExpectedBookDTO expectedBookDTO){
+    public void update(UUID id, ExpectedBookDTO expectedBookDTO) {
         ExpectedBook expectedBook = expectedBookRepository.findByExpectedBookId(id)
-                .orElseThrow(()->new ExpectedBookNotFoundException("The selected book was not found."));
-        if (expectedBookDTO.getExpectedBookName()!=null)
+                .orElseThrow(() -> new ExpectedBookNotFoundException("The selected book was not found."));
+        if (expectedBookDTO.getExpectedBookName() != null)
             expectedBook.setExpectedBookName(expectedBookDTO.getExpectedBookName());
-        if (expectedBookDTO.getExpectedBookAuthor()!=null)
+        if (expectedBookDTO.getExpectedBookAuthor() != null)
             expectedBook.setExpectedBookAuthor(expectedBookDTO.getExpectedBookAuthor());
-        if (expectedBookDTO.getExpectedBookYear()!=0)
+        if (expectedBookDTO.getExpectedBookYear() != 0)
             expectedBook.setExpectedBookYear(expectedBookDTO.getExpectedBookYear());
-        if (expectedBookDTO.getExpectedBookPublication()!=null)
+        if (expectedBookDTO.getExpectedBookPublication() != null)
             expectedBook.setExpectedBookPublication(expectedBookDTO.getExpectedBookPublication());
-        if (expectedBookDTO.getExpectedBookLanguage()!=null)
+        if (expectedBookDTO.getExpectedBookLanguage() != null)
             expectedBook.setExpectedBookLanguage(expectedBookDTO.getExpectedBookLanguage());
-        if (expectedBookDTO.getExpectedBookPieces()!=0)
+        if (expectedBookDTO.getExpectedBookPieces() != 0)
             expectedBook.setExpectedBookPieces(expectedBookDTO.getExpectedBookPieces());
-        if (expectedBookDTO.getExpectedBookImage()!=null)
+        if (expectedBookDTO.getExpectedBookImage() != null)
             expectedBook.setExpectedBookImage(expectedBookDTO.getExpectedBookImage());
-        if (expectedBookDTO.getExpectedBookGenre()!=null)
+        if (expectedBookDTO.getExpectedBookGenre() != null)
             expectedBook.setExpectedBookGenre(expectedBookDTO.getExpectedBookGenre());
         expectedBookRepository.save(expectedBook);
     }
+
     @Transactional(readOnly = true)
-    public ExpectedBookDTO findOneBook(UUID id){
+    public ExpectedBookDTO findOneBook(UUID id) {
         ExpectedBook expectedBook = expectedBookRepository.findByExpectedBookId(id)
-                .orElseThrow(()->new ExpectedBookNotFoundException("The selected book was not found."));
+                .orElseThrow(() -> new ExpectedBookNotFoundException("The selected book was not found."));
         return toExpectedBookDTO(expectedBook);
     }
+
     @Transactional(readOnly = true)
-    public ExpectedBook findOneBookForKafka(UUID id){
-        return expectedBookRepository.findByExpectedBookId(id)
-                .orElseThrow(()->new ExpectedBookNotFoundException("The selected book was not found."));
+    public ExpectedBookDTOForKafka findOneBookForKafka(UUID id) {
+        ExpectedBook expectedBook = expectedBookRepository.findByExpectedBookId(id)
+                .orElseThrow(() -> new ExpectedBookNotFoundException("The selected book was not found."));
+        return toExpectedBookDTOForKafka(expectedBook);
     }
+
     @Transactional(readOnly = true)
-    public List<ExpectedBookDTO> findAll(Pageable pageable){
+    public List<ExpectedBookDTO> findAll(Pageable pageable) {
         List<ExpectedBookDTO> expectedBookDTOs = expectedBookRepository
                 .findAll(pageable).map(this::toExpectedBookDTO).toList();
         if (expectedBookDTOs.isEmpty())
@@ -74,11 +81,16 @@ public class ExpectedBookService {
         return expectedBookDTOs;
     }
 
-    private ExpectedBook toExpectedBookEntity(ExpectedBookDTO expectedBookDTO){
+    private ExpectedBook toExpectedBookEntity(ExpectedBookDTO expectedBookDTO) {
         return modelMapper.map(expectedBookDTO, ExpectedBook.class);
     }
-    private ExpectedBookDTO toExpectedBookDTO(ExpectedBook expectedBook){
+
+    private ExpectedBookDTO toExpectedBookDTO(ExpectedBook expectedBook) {
         return modelMapper.map(expectedBook, ExpectedBookDTO.class);
     }
 
+    private ExpectedBookDTOForKafka toExpectedBookDTOForKafka(ExpectedBook expectedBook) {
+        return modelMapper.map(expectedBook, ExpectedBookDTOForKafka.class);
+
+    }
 }

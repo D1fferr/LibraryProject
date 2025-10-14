@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import ua.zakharchuk.ExpectedBooksService.dtos.ExpectedBookDTO;
+import ua.zakharchuk.ExpectedBooksService.dtos.ExpectedBookDTOForKafka;
 import ua.zakharchuk.ExpectedBooksService.exceptions.ExpectedBookNotCreatedException;
 import ua.zakharchuk.ExpectedBooksService.models.ExpectedBook;
 import ua.zakharchuk.ExpectedBooksService.services.ExpectedBookService;
@@ -22,7 +23,7 @@ import java.util.UUID;
 @RequestMapping("expected-book")
 @RequiredArgsConstructor
 public class ExpectedBookController {
-    private final KafkaTemplate<String, ExpectedBook> expectedBookKafkaTemplate;
+    private final KafkaTemplate<String, ExpectedBookDTOForKafka> expectedBookKafkaTemplate;
     private final ExpectedBookService expectedBookService;
 
 
@@ -62,8 +63,8 @@ public class ExpectedBookController {
     @GetMapping("/add-to-current-books/{id}")
     public ResponseEntity<HttpStatus> addToCurrentBooks(@PathVariable UUID id){
 
-        ExpectedBook expectedBook = expectedBookService.findOneBookForKafka(id);
-        expectedBookKafkaTemplate.send("expected-book-topic", expectedBook);
+        ExpectedBookDTOForKafka expectedBookDTOForKafka = expectedBookService.findOneBookForKafka(id);
+        expectedBookKafkaTemplate.send("expected-book-topic", expectedBookDTOForKafka);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
