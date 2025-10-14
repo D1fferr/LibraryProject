@@ -1,9 +1,16 @@
 package com.library.ServiceCatalog.services;
 
 import com.library.ServiceCatalog.dto.BookDTO;
+import com.library.ServiceCatalog.dto.BookDTOForKafka;
 import com.library.ServiceCatalog.models.Book;
+import com.library.ServiceCatalog.models.BookForKafka;
+import com.library.ServiceCatalog.repositories.BookForKafkaRepository;
 import com.library.ServiceCatalog.repositories.BookRepository;
+import com.library.ServiceCatalog.util.BookAlreadyExitException;
 import com.library.ServiceCatalog.util.BookNotFoundException;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.MessageSource;
 import org.springframework.data.domain.PageRequest;
@@ -20,17 +27,15 @@ import java.util.UUID;
 
 @Service
 @Transactional(readOnly = true)
+@RequiredArgsConstructor
 public class BookService {
 
+    private final EntityManager entityManager;
     private final BookRepository bookRepository;
     private final ModelMapper modelMapper;
     private final MessageSource messageSource;
+    private final BookForKafkaRepository bookForKafkaRepository;
 
-    public BookService(BookRepository bookRepository, ModelMapper modelMapper, MessageSource messageSource) {
-        this.bookRepository = bookRepository;
-        this.modelMapper = modelMapper;
-        this.messageSource = messageSource;
-    }
 
     @Transactional
     public void save(BookDTO bookDTO) {
@@ -39,9 +44,13 @@ public class BookService {
         bookRepository.save(book);
     }
     @Transactional
-    public void saveExpectedBookToCurrentBook(Book book) {
-        book.setBookAddedAt(LocalDateTime.now());
-        bookRepository.save(book);
+    public void saveExpectedBookToCurrentBook(BookDTOForKafka book) {
+        BookForKafka entity = toEntityForKafka(book);
+        entity.setBookAddedAt(LocalDateTime.now());
+        if (bookRepository.existsBookByBookId(entity.getBookId()))
+            throw new BookAlreadyExitException("");
+        bookForKafkaRepository.save(entity);
+
     }
 
     @Transactional
@@ -101,6 +110,9 @@ public class BookService {
 
     private Book toEntity(BookDTO bookDTO) {
         return modelMapper.map(bookDTO, Book.class);
+    }
+    private BookForKafka toEntityForKafka(BookDTOForKafka bookDTOForKafka) {
+        return modelMapper.map(bookDTOForKafka, BookForKafka.class);
     }
 
 

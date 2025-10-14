@@ -1,6 +1,6 @@
 package com.library.ServiceCatalog.services;
 
-import com.library.ServiceCatalog.models.Book;
+import com.library.ServiceCatalog.dto.BookDTOForKafka;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +14,7 @@ public class KafkaConsumerService {
     }
 
     @KafkaListener(topics = "expected-book-topic", groupId = "catalog-service",containerFactory = "bookConcurrentKafkaListenerContainerFactory")
-    public void addExpectedBookToCurrentBook(Book book){
+    public void addExpectedBookToCurrentBook(BookDTOForKafka book){
         bookService.saveExpectedBookToCurrentBook(book);
     }
 

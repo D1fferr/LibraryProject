@@ -22,4 +22,6 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
     List<Book> findAllByOrderByBookAddedAtDesc(Pageable pageable);
 
     void deleteByBookId(UUID bookId);
+
+    boolean existsBookByBookId(UUID bookId);
 }
