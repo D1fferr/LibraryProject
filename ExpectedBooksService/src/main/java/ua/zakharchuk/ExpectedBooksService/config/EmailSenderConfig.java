@@ -15,15 +15,15 @@ public class EmailSenderConfig {
 
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
 
-        mailSender.setHost("smtp.gmail.com");
+        mailSender.setHost("smtp-relay.brevo.com");
         mailSender.setPort(587);
-        mailSender.setUsername("");
-        mailSender.setPassword("");
+        mailSender.setUsername("*****");
+        mailSender.setPassword("****");
         Properties prop = mailSender.getJavaMailProperties();
         prop.put("mail.transport.protocol", "smtp");
         prop.put("mail.smtp.auth", "true");
-        prop.put("mail.smtp.starttls.enable", "true");
         prop.put("mail.debug", "true");
+        prop.put("mail.test-connection", "true");
         mailSender.setJavaMailProperties(prop);
         return mailSender;
     }

@@ -9,12 +9,13 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.UuidGenerator;
 
 import java.util.UUID;
+
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "report_availability")
-public class ReportAvailability {
+@Table(name = "report_availability_errors")
+public class ReportAvailabilityError {
     @Id
     @UuidGenerator(style = UuidGenerator.Style.TIME)
     @Column(name = "id")
@@ -34,5 +35,7 @@ public class ReportAvailability {
     @Column(name = "username")
     @NotEmpty(message = "The username field must not be empty.")
     private String username;
+    @Column(name = "error")
+    private String error;
 
 }

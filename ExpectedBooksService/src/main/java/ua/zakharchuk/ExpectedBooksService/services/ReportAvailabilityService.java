@@ -1,6 +1,6 @@
 package ua.zakharchuk.ExpectedBooksService.services;
 
-import lombok.AllArgsConstructor;
+
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -23,7 +23,9 @@ public class ReportAvailabilityService {
 
     @Transactional
     public void save(ReportAvailabilityDTO reportAvailabilityDTO){
-        reportAvailabilityRepository.save(toEntity(reportAvailabilityDTO));
+        ReportAvailability reportAvailability = toEntity(reportAvailabilityDTO);
+        reportAvailability.setStatus(Status.CREATED);
+        reportAvailabilityRepository.save(reportAvailability);
     }
     @Transactional
     public void deleteById(UUID id){
