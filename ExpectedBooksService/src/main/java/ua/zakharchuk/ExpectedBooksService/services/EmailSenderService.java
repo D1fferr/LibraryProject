@@ -4,13 +4,16 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.retry.support.RetryTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.zakharchuk.ExpectedBooksService.exceptions.EmailSendingException;
 import ua.zakharchuk.ExpectedBooksService.models.ReportAvailability;
 import ua.zakharchuk.ExpectedBooksService.models.ReportAvailabilityError;
+import ua.zakharchuk.ExpectedBooksService.models.Status;
 import ua.zakharchuk.ExpectedBooksService.repositories.ReportAvailabilityErrorRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -21,13 +24,43 @@ public class EmailSenderService {
     private final JavaMailSender mailSender;
     private final ReportAvailabilityService reportAvailabilityService;
     private final ReportAvailabilityErrorService errorService;
+    private final RetryTemplate retryTemplate;
 
-
-    public void send(UUID id) {
-
-        List<ReportAvailability> reportAvailabilityList = reportAvailabilityService.findAllByBookId(id);
-        System.out.println("Finding books");
+    public void retrySendingEmail(List<ReportAvailability> reportAvailabilityList){
         for (ReportAvailability reportAvailability : reportAvailabilityList) {
+            retryTemplate.execute(context->{
+                System.out.println("Retry on");
+                try {
+                    prepSending(reportAvailability);
+                    return null;
+                }catch (Exception e){
+                    if (context.getRetryCount()>=2){
+                        ReportAvailabilityError reportAvailabilityError = changeTypeToReportAvailabilityError(reportAvailability, e);
+                        errorService.save(reportAvailabilityError);
+                    }
+                    System.out.println("Good");
+                    throw new EmailSendingException(e.getMessage());
+
+                }
+            });
+        }
+    }
+
+    public void send(UUID id){
+            List<ReportAvailability> reportAvailabilityList = reportAvailabilityService.findAllByBookId(id);
+            List<ReportAvailability> listWithErrors = new ArrayList<>();
+            for (ReportAvailability reportAvailability : reportAvailabilityList){
+                try {
+                    prepSending(reportAvailability);
+                }catch (Exception e){
+                    listWithErrors.add(reportAvailability);
+                }
+            }
+            if (!listWithErrors.isEmpty())
+                retrySendingEmail(listWithErrors);
+        }
+
+    public void prepSending(ReportAvailability reportAvailability) {
             try {
                 SimpleMailMessage message = new SimpleMailMessage();
                 message.setFrom("z****");
@@ -39,14 +72,9 @@ public class EmailSenderService {
                 System.out.println("Message sent" + reportAvailability.getUserEmail());
                 reportAvailabilityService.changeStatus(reportAvailability.getId());
             } catch (Exception e) {
-                System.out.println("Error sent message");
-                ReportAvailabilityError reportAvailabilityError = changeTypeToReportAvailabilityError(reportAvailability, e);
-                System.out.println("To error");
-                errorService.save(reportAvailabilityError);
-                System.out.println("saved");
+                System.out.println("Error");
                 throw new EmailSendingException(e.getMessage());
             }
-        }
 
     }
         public String textPrep (String username, String id){

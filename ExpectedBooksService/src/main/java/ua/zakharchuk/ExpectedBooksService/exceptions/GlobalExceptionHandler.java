@@ -41,8 +41,9 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(reportAvailabilityErrorResponse, HttpStatus.NOT_FOUND);
     }
     @ExceptionHandler(EmailSendingException.class)
-    public ResponseEntity<EmailErrorResponse> handleEmailSendingException(EmailSendingException e){
+    public ResponseEntity<EmailErrorResponse> handleREmailSendingException (EmailSendingException e) {
         emailErrorResponse.setMessage(e.getMessage());
         return new ResponseEntity<>(emailErrorResponse, HttpStatus.NOT_FOUND);
     }
+
 }

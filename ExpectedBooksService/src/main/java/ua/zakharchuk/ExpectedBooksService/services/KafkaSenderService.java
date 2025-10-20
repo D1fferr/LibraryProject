@@ -14,6 +14,7 @@ public class KafkaSenderService {
     private final KafkaTemplate<String, ExpectedBookDTOForKafka> expectedBookKafkaTemplate;
     private final ExpectedBookService expectedBookService;
     private final EmailSenderService emailSenderService;
+
     public void send(UUID id){
         ExpectedBookDTOForKafka expectedBookDTOForKafka = expectedBookService.findOneBookForKafka(id);
         expectedBookKafkaTemplate.send("expected-book-topic", expectedBookDTOForKafka);

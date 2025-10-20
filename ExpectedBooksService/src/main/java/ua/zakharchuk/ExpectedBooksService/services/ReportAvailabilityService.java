@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ua.zakharchuk.ExpectedBooksService.dtos.ReportAvailabilityDTO;
 import ua.zakharchuk.ExpectedBooksService.exceptions.ReportAvailabilityNotFoundException;
 import ua.zakharchuk.ExpectedBooksService.models.ReportAvailability;
+import ua.zakharchuk.ExpectedBooksService.models.ReportAvailabilityError;
 import ua.zakharchuk.ExpectedBooksService.models.Status;
 import ua.zakharchuk.ExpectedBooksService.repositories.ReportAvailabilityRepository;
 
@@ -41,6 +42,10 @@ public class ReportAvailabilityService {
     @Transactional(readOnly = true)
     public List<ReportAvailability> findAllByBookId(UUID id){
         return reportAvailabilityRepository.findAllByExpectedBookId(id);
+    }
+    @Transactional(readOnly = true)
+    public List<ReportAvailability> findAllByStatus(Status status){
+        return reportAvailabilityRepository.findAllByStatus(status);
     }
 
     private ReportAvailabilityDTO toDTO(ReportAvailability reportAvailability){
