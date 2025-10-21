@@ -43,14 +43,7 @@ public class ReportAvailabilityService {
     public List<ReportAvailability> findAllByBookId(UUID id){
         return reportAvailabilityRepository.findAllByExpectedBookId(id);
     }
-    @Transactional(readOnly = true)
-    public List<ReportAvailability> findAllByStatus(Status status){
-        return reportAvailabilityRepository.findAllByStatus(status);
-    }
 
-    private ReportAvailabilityDTO toDTO(ReportAvailability reportAvailability){
-        return modelMapper.map(reportAvailability, ReportAvailabilityDTO.class);
-    }
     private ReportAvailability toEntity(ReportAvailabilityDTO reportAvailabilityDTO){
         return modelMapper.map(reportAvailabilityDTO, ReportAvailability.class);
     }

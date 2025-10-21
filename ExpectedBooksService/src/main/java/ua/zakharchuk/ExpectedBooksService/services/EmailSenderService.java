@@ -6,12 +6,10 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.retry.support.RetryTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import ua.zakharchuk.ExpectedBooksService.exceptions.EmailSendingException;
 import ua.zakharchuk.ExpectedBooksService.models.ReportAvailability;
 import ua.zakharchuk.ExpectedBooksService.models.ReportAvailabilityError;
-import ua.zakharchuk.ExpectedBooksService.models.Status;
-import ua.zakharchuk.ExpectedBooksService.repositories.ReportAvailabilityErrorRepository;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +18,8 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class EmailSenderService {
+    @Value("${send.message.from}")
+    private String from;
 
     private final JavaMailSender mailSender;
     private final ReportAvailabilityService reportAvailabilityService;
@@ -29,7 +29,6 @@ public class EmailSenderService {
     public void retrySendingEmail(List<ReportAvailability> reportAvailabilityList){
         for (ReportAvailability reportAvailability : reportAvailabilityList) {
             retryTemplate.execute(context->{
-                System.out.println("Retry on");
                 try {
                     prepSending(reportAvailability);
                     return null;
@@ -38,9 +37,7 @@ public class EmailSenderService {
                         ReportAvailabilityError reportAvailabilityError = changeTypeToReportAvailabilityError(reportAvailability, e);
                         errorService.save(reportAvailabilityError);
                     }
-                    System.out.println("Good");
                     throw new EmailSendingException(e.getMessage());
-
                 }
             });
         }
@@ -63,16 +60,14 @@ public class EmailSenderService {
     public void prepSending(ReportAvailability reportAvailability) {
             try {
                 SimpleMailMessage message = new SimpleMailMessage();
-                message.setFrom("z****");
+                message.setFrom(from);
                 message.setTo(reportAvailability.getUserEmail());
                 message.setSubject("Last update of books");
                 message.setText(textPrep(reportAvailability.getUsername(),
-                        reportAvailability.getId().toString()));
+                        reportAvailability.getExpectedBookId().toString()));
                 mailSender.send(message);
-                System.out.println("Message sent" + reportAvailability.getUserEmail());
                 reportAvailabilityService.changeStatus(reportAvailability.getId());
             } catch (Exception e) {
-                System.out.println("Error");
                 throw new EmailSendingException(e.getMessage());
             }
 
@@ -80,7 +75,7 @@ public class EmailSenderService {
         public String textPrep (String username, String id){
             return "Hello dear " + username +
                     "." + " The book you wanted to review is now available. You can reserve it at the link:" +
-                    "http://localhost:8081/" +
+                    "http://localhost:8081/book/" +
                     id +
                     " We will be glad to see you again";
 
