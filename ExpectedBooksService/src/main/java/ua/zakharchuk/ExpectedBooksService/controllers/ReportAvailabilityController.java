@@ -2,13 +2,17 @@ package ua.zakharchuk.ExpectedBooksService.controllers;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
+import ua.zakharchuk.ExpectedBooksService.dtos.ExpectedBookDTO;
 import ua.zakharchuk.ExpectedBooksService.dtos.ReportAvailabilityDTO;
+import ua.zakharchuk.ExpectedBooksService.dtos.ReportAvailabilityErrorDTO;
 import ua.zakharchuk.ExpectedBooksService.exceptions.ReportAvailabilityNotCreatedException;
+import ua.zakharchuk.ExpectedBooksService.models.ReportAvailabilityError;
 import ua.zakharchuk.ExpectedBooksService.services.ReportAvailabilityService;
 
 import java.util.List;
@@ -33,6 +37,7 @@ public class ReportAvailabilityController {
         reportAvailabilityService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
 
     private void checkReportAvailabilityErrors(BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
