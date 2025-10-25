@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("expected-book")
+@RequestMapping("/expected-book")
 @RequiredArgsConstructor
 public class ExpectedBookController {
 
@@ -40,14 +40,14 @@ public class ExpectedBookController {
             Integer bookPerPage){
         return new ResponseEntity<>(expectedBookService.findAll(PageRequest.of(page, bookPerPage)), HttpStatus.OK);
     }
-    @PostMapping("/create")
+    @PostMapping("/auth/create")
     public ResponseEntity<ExpectedBookDTO> createExpectedBook(@RequestBody @Valid ExpectedBookDTO expectedBookDTO,
                                                               BindingResult bindingResult){
         checkBookErrors(bindingResult);
         expectedBookService.save(expectedBookDTO);
         return new ResponseEntity<>(expectedBookDTO, HttpStatus.CREATED);
     }
-    @PatchMapping("/change/{id}")
+    @PatchMapping("/auth/change/{id}")
     public ResponseEntity<ExpectedBookDTO> changeExpectedBook(
             @PathVariable UUID id,
             @RequestBody @Valid ExpectedBookDTO expectedBookDTO,
@@ -57,12 +57,12 @@ public class ExpectedBookController {
         expectedBookService.update(id, expectedBookDTO);
         return new ResponseEntity<>(expectedBookDTO, HttpStatus.OK);
     }
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/auth/delete/{id}")
     public ResponseEntity<HttpStatus> deleteBook(@PathVariable UUID id){
         expectedBookService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-    @GetMapping("/add-to-current-books/{id}")
+    @GetMapping("/auth/add-to-current-books/{id}")
     public ResponseEntity<HttpStatus> addToCurrentBooks(@PathVariable UUID id){
         kafkaSenderService.send(id);
         return new ResponseEntity<>(HttpStatus.OK);

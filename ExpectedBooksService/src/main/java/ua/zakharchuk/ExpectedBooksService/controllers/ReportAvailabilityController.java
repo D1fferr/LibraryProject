@@ -25,14 +25,14 @@ public class ReportAvailabilityController {
 
     private final ReportAvailabilityService reportAvailabilityService;
 
-    @PostMapping("/add")
+    @PostMapping("/auth/add")
     public ResponseEntity<ReportAvailabilityDTO> addReportAvailability(@RequestBody @Valid ReportAvailabilityDTO reportAvailabilityDTO,
                                                                        BindingResult bindingResult) {
         checkReportAvailabilityErrors(bindingResult);
         reportAvailabilityService.save(reportAvailabilityDTO);
         return new ResponseEntity<>(reportAvailabilityDTO, HttpStatus.CREATED);
     }
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/auth/delete/{id}")
     public ResponseEntity<HttpStatus> deleteReportAvailability(@PathVariable UUID id){
         reportAvailabilityService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

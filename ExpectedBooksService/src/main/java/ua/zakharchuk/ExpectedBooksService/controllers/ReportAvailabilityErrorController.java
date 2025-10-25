@@ -17,7 +17,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/report-availability")
+@RequestMapping("/report-availability-error/auth")
 public class ReportAvailabilityErrorController {
 
     private final ReportAvailabilityErrorService errorService;
