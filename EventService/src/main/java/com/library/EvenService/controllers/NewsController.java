@@ -32,7 +32,7 @@ public class NewsController {
     public ResponseEntity<NewsDTO> getOneNews(@PathVariable int id){
         return new ResponseEntity<>(newsService.findOneById(id), HttpStatus.OK);
     }
-    @PostMapping("/create")
+    @PostMapping("/auth/create")
     public ResponseEntity<NewsDTO> createNews(@RequestBody @Valid NewsDTO newsDTO,
                                                  BindingResult bindingResult){
 
@@ -41,7 +41,7 @@ public class NewsController {
         return new ResponseEntity<>(newsDTO, HttpStatus.CREATED);
 
     }
-    @PatchMapping("/change/{id}")
+    @PatchMapping("/auth/change/{id}")
     public ResponseEntity<NewsDTO> changeNews(@PathVariable int id,
                                               @RequestBody @Valid NewsDTO newsDTO,
                                               BindingResult bindingResult){
@@ -49,7 +49,7 @@ public class NewsController {
         newsService.update(id, newsDTO);
         return new ResponseEntity<>(newsDTO, HttpStatus.OK);
     }
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/auth/delete/{id}")
     public ResponseEntity<HttpStatus> deleteNews(@PathVariable int id){
         newsService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

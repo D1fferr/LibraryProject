@@ -37,7 +37,7 @@ public class AnnouncementController {
                 PageRequest.of(page, announcementPerPage)), HttpStatus.OK);
     }
 
-    @PostMapping("/create")
+    @PostMapping("/auth/create")
     public ResponseEntity<AnnouncementDTO> createAnnouncement(@RequestBody @Valid AnnouncementDTO announcementDTO,
                                                          BindingResult bindingResult){
         checkAnnouncementErrors(bindingResult);
@@ -45,7 +45,7 @@ public class AnnouncementController {
         return new ResponseEntity<>(announcementDTO, HttpStatus.CREATED);
     }
 
-    @PatchMapping("/change/{id}")
+    @PatchMapping("/auth/change/{id}")
     public ResponseEntity<AnnouncementDTO> changeAnnouncement(
             @PathVariable int id,
             @RequestBody @Valid AnnouncementDTO announcementDTO,
@@ -54,7 +54,7 @@ public class AnnouncementController {
         announcementService.update(id, announcementDTO);
         return new ResponseEntity<>(announcementDTO, HttpStatus.OK);
     }
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/auth/delete/{id}")
     public ResponseEntity<HttpStatus> deleteAnnouncement(@PathVariable int id){
         announcementService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
