@@ -45,7 +45,7 @@ public class BookController {
                     .getMessage("books.not.found.message", new Object[0], Locale.ENGLISH));
         }
     }
-    @GetMapping("/recentlyAddedAt")
+    @GetMapping("/recently-added-at")
     public List<BookDTO> getAllRecentlyAddedAtBooks(@RequestParam(value = "page", defaultValue = "0") Integer page,
                                      @RequestParam(value = "booksPerPage", defaultValue = "5") Integer booksPerPage)
     {
@@ -66,7 +66,7 @@ public class BookController {
         return bookService.findById(book_id).getBookPieces();
     }
 
-    @PostMapping("/create")
+    @PostMapping("/auth/create")
     public ResponseEntity<HttpStatus> createBook(@RequestBody @Valid BookDTO bookDTO,
                                               BindingResult bindingResult){
         errorCheckingWhenChangingBookFields(bindingResult);
@@ -79,12 +79,12 @@ public class BookController {
         bookService.save(bookDTO);
         return ResponseEntity.ok(HttpStatus.CREATED);
     }
-    @DeleteMapping("/delete/{book_id}")
+    @DeleteMapping("/auth/delete/{book_id}")
     public ResponseEntity<HttpStatus> deleteBook(@PathVariable UUID book_id){
         bookService.delete(book_id);
         return ResponseEntity.ok(HttpStatus.NO_CONTENT);
     }
-    @PatchMapping("/changeBook/{id}")
+    @PatchMapping("/auth/change-book/{id}")
     public ResponseEntity<HttpStatus> changeBook(@PathVariable UUID id,
                                                  @RequestBody @Valid BookDTO bookDTO,
                                                  BindingResult bindingResult){
