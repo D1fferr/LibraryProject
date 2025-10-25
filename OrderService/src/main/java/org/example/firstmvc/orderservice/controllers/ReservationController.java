@@ -27,7 +27,7 @@ public class ReservationController {
     public ReservationController(ReservationService reservationService) {
         this.reservationService = reservationService;
     }
-    @GetMapping("/view_for_the_user/{id}")
+    @GetMapping("/auth/view_for_the_user/{id}")
     public ResponseEntity<List<ReservationDTO>> viewReservationForOneUser(@PathVariable UUID id,
                                                                           @RequestParam(value = "page", defaultValue = "0") Integer page,
                                                                           @RequestParam(value = "reservationPerPage", defaultValue = "5") Integer reservationPerPage){
@@ -37,7 +37,7 @@ public class ReservationController {
             throw new ReservationNotFoundException("No reservations found");
         return new ResponseEntity<>(reservationDTOS, HttpStatus.OK);
     }
-    @GetMapping("/view_for_the_book/{id}")
+    @GetMapping("/auth/view_for_the_book/{id}")
     public ResponseEntity<List<ReservationDTO>> viewReservationForOneBook(@PathVariable UUID id,
                                                                           @RequestParam(value = "page", defaultValue = "0") Integer page,
                                                                           @RequestParam(value = "reservationPerPage", defaultValue = "5") Integer reservationPerPage){
@@ -47,7 +47,7 @@ public class ReservationController {
             throw new ReservationNotFoundException("No reservations found");
         return new ResponseEntity<>(reservationDTOS, HttpStatus.OK);
     }
-    @GetMapping("/view_all")
+    @GetMapping("/auth/view_all")
     public ResponseEntity<List<ReservationDTO>> viewAllReservation(@RequestParam(value = "page", defaultValue = "0") Integer page,
                                                                    @RequestParam(value = "reservationPerPage", defaultValue = "5") Integer reservationPerPage,
                                                                    @RequestParam(value = "sortBy", defaultValue = "reservationDate") String sortBy){
@@ -57,7 +57,7 @@ public class ReservationController {
             throw new ReservationNotFoundException("No reservations found");
         return new ResponseEntity<>(reservationDTOS, HttpStatus.OK);
     }
-    @GetMapping("/view/{id}")
+    @GetMapping("/auth/view/{id}")
     public ResponseEntity<ReservationDTO> viewOne(@PathVariable UUID id){
         Optional<ReservationDTO> reservationDTO = reservationService.findById(id);
         if (reservationDTO.isEmpty())
@@ -65,7 +65,7 @@ public class ReservationController {
         return new ResponseEntity<>(reservationDTO.get(), HttpStatus.OK);
     }
 
-    @PostMapping("/create")
+    @PostMapping("/auth/create")
     public ResponseEntity<HttpStatus> createReservation(@RequestBody @Valid ReservationDTO reservationDTO,
                                                         BindingResult bindingResult){
 
@@ -75,7 +75,7 @@ public class ReservationController {
         reservationService.save(reservationDTO);
         return ResponseEntity.ok(HttpStatus.CREATED);
     }
-    @PatchMapping("/change_date/{id}")
+    @PatchMapping("/auth/change_date/{id}")
     public ResponseEntity<HttpStatus> changeReservationDate(@RequestBody @Valid ReservationDTO reservationDTO,
                                                         BindingResult bindingResult, @PathVariable UUID id){
         checkErrorsReservation(bindingResult);
@@ -86,13 +86,13 @@ public class ReservationController {
         reservationService.update(id, reservationDTO);
         return ResponseEntity.ok(HttpStatus.OK);
     }
-    @PatchMapping("/change_status/{id}")
+    @PatchMapping("/auth/change_status/{id}")
     public ResponseEntity<HttpStatus> changeReservationStatus(@RequestBody ReservationDTO reservationDTO,
                                                        @PathVariable UUID id){
         reservationService.updateStatus(id, reservationDTO);
         return ResponseEntity.ok(HttpStatus.OK);
     }
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/auth/delete/{id}")
     public ResponseEntity<HttpStatus> deleteReservation(@PathVariable Integer id){
         reservationService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
