@@ -25,7 +25,7 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
     private static final Set<String> PUBLIC_ROUTES = Set.of(
             "auth/login",
             "auth/registration",
-            "public/"
+            "public/**"
 
     );
     private static final Map<String, Set<String>> ROLE_REQUIREMENTS = Map.of(
@@ -61,7 +61,7 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
     }
 
     private boolean isPublicRoute(String path){
-        return PUBLIC_ROUTES.stream().anyMatch(path::startsWith);
+        return PUBLIC_ROUTES.stream().anyMatch(path::contains);
     }
 
     private Mono<Void> unauthorized (ServerWebExchange exchange, String message){
