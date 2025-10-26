@@ -1,9 +1,11 @@
 package com.Library.UserService.services;
 
+import com.Library.UserService.dto.AuthDTO;
 import com.Library.UserService.dto.UserDTO;
 import com.Library.UserService.models.User;
 import com.Library.UserService.repositories.UserRepository;
 import com.Library.UserService.util.UsersNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,16 +17,12 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
+@RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
     private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository, ModelMapper modelMapper, PasswordEncoder passwordEncoder) {
-        this.userRepository = userRepository;
-        this.modelMapper = modelMapper;
-        this.passwordEncoder = passwordEncoder;
-    }
     @Transactional(readOnly = true)
     public List<UserDTO> findAll(Pageable pageable){
         return userRepository.findAll(pageable).stream().map(this::toDTO).toList();
@@ -38,12 +36,10 @@ public class UserService {
         userRepository.deleteByUserId(id);
     }
     @Transactional
-    public void save(UserDTO userDTO){
-        User user = toEntity(userDTO);
-        System.out.println(user);
+    public void save(AuthDTO authDTO){
+        User user = toEntity(authDTO);
         user.setUserPassword(passwordEncoder.encode(user.getUserPassword()));
-        user.setUserRole("ROLE_USER");
-        System.out.println(user);
+        user.setUserRole("USER");
         userRepository.save(user);
     }
     @Transactional
@@ -77,8 +73,8 @@ public class UserService {
 
 
 
-    private User toEntity(UserDTO userDTO){
-        return modelMapper.map(userDTO, User.class);
+    private User toEntity(AuthDTO authDTO){
+        return modelMapper.map(authDTO, User.class);
     }
     private UserDTO toDTO(User user){
         return modelMapper.map(user, UserDTO.class);

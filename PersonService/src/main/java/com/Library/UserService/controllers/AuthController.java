@@ -2,13 +2,17 @@ package com.Library.UserService.controllers;
 
 import com.Library.UserService.dto.AuthDTO;
 import com.Library.UserService.dto.UserDTO;
+import com.Library.UserService.models.AuthUser;
 import com.Library.UserService.models.User;
 import com.Library.UserService.security.JWTProvider;
+import com.Library.UserService.services.AuthUserService;
+import com.Library.UserService.services.CrossServerRequestService;
 import com.Library.UserService.services.TokenBlackListService;
 import com.Library.UserService.services.UserService;
 import com.Library.UserService.util.UserAlreadyExistException;
 import com.Library.UserService.util.UserNotCreatedException;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -20,22 +24,19 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/auth")
+@RequiredArgsConstructor
 public class AuthController {
     private final AuthenticationManager authenticationManager;
     private final UserService userService;
     private final JWTProvider jwtProvider;
     private final TokenBlackListService tokenBlackListService;
+    private final AuthUserService authUserService;
+    private final CrossServerRequestService crossServerRequestService;
 
-
-    public AuthController(AuthenticationManager authenticationManager, UserService userService, JWTProvider jwtProvider, TokenBlackListService tokenBlackListService) {
-        this.authenticationManager = authenticationManager;
-        this.userService = userService;
-        this.jwtProvider = jwtProvider;
-        this.tokenBlackListService = tokenBlackListService;
-    }
 
 //    @GetMapping
 //    private List<UserDTO> getAllUsers(@RequestParam(value = "page", defaultValue = "0") Integer page,
@@ -64,15 +65,15 @@ public class AuthController {
             }
             throw new UserNotCreatedException(errorMessage.toString());
         }
-        Optional<User> userOptional = userService.findByUsername(userDTO.getUsername());
-        if (userOptional.isPresent())
-            throw new UserAlreadyExistException("A user with this username already exist");
-        userService.save(userDTO);
+
+        AuthUser authUser = authUserService.save(userDTO);
+        crossServerRequestService.send(userDTO, authUser.getId());
+
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> loginPerson(@RequestBody AuthDTO authDTO) {
+    public ResponseEntity<String> login (@RequestBody AuthDTO authDTO) {
         var authToken = new UsernamePasswordAuthenticationToken(
                 authDTO.getUsername(), authDTO.getPassword()
         );

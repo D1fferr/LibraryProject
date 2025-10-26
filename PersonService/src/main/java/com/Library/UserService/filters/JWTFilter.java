@@ -1,4 +1,4 @@
-package com.Library.UserService.config.filters;
+package com.Library.UserService.filters;
 
 import com.Library.UserService.security.JWTProvider;
 import com.Library.UserService.services.TokenBlackListService;

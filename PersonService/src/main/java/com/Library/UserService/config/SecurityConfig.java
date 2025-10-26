@@ -1,7 +1,6 @@
 package com.Library.UserService.config;
 
-import com.Library.UserService.config.filters.JWTFilter;
-import org.springframework.beans.factory.annotation.Value;
+import com.Library.UserService.filters.JWTFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
