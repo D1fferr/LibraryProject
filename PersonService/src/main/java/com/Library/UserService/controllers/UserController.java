@@ -1,29 +1,18 @@
 package com.Library.UserService.controllers;
 
-import com.Library.UserService.dto.AuthDTO;
 import com.Library.UserService.dto.UserDTO;
-import com.Library.UserService.models.User;
-import com.Library.UserService.security.JWTProvider;
-import com.Library.UserService.services.TokenBlackListService;
-import com.Library.UserService.services.UserService;
-import com.Library.UserService.util.UserAlreadyExistException;
 import com.Library.UserService.util.UserNotChangeException;
-import com.Library.UserService.util.UserNotCreatedException;
 import com.Library.UserService.util.UsersNotFoundException;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @RestController

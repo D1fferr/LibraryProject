@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.ZonedDateTime;
 import java.util.Date;
+import java.util.UUID;
 
 @Component
 public class JWTProvider {
@@ -17,9 +18,9 @@ public class JWTProvider {
     private String jwtSecretKey;
     private final Date expirationDate = Date.from(ZonedDateTime.now().plusMinutes(120).toInstant());
 
-    public String generatedToken(String username, String role) {
+    public String generatedToken(String username, UUID id, String role) {
         return JWT.create()
-                .withSubject("User details")
+                .withSubject(id.toString())
                 .withClaim("username", username)
                 .withClaim("role", role)
                 .withIssuedAt(new Date())
