@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>library.com</groupId>
-    <artifactId>UserService1</artifactId>
+    <artifactId>UserService</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>UserService1</name>
     <description>UserService1</description>
@@ -52,6 +52,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>annotationProcessor</scope>
         </dependency>
     </dependencies>
 
