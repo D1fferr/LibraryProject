@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.Library</groupId>
-	<artifactId>UserService</artifactId>
+	<artifactId>AuthService</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>UserService</name>
 	<description>Service for user authentication and registration</description>

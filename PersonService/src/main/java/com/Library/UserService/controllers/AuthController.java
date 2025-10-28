@@ -23,8 +23,6 @@ import java.util.List;
 @RequestMapping("/auth")
 @RequiredArgsConstructor
 public class AuthController {
-    private final AuthenticationManager authenticationManager;
-    private final UserService userService;
     private final JWTProvider jwtProvider;
     private final TokenBlackListService tokenBlackListService;
     private final AuthUserService authUserService;
