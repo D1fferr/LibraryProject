@@ -11,6 +11,4 @@ import java.util.UUID;
 @Repository
 public interface AuthUserRepository extends JpaRepository<AuthUser, UUID> {
     Optional<AuthUser> findFirstByUsername(@NotNull(message = "Field username must not be empty") String username);
-
-    AuthUser findAuthUserByUsername(@NotNull(message = "Field username must not be empty") String username);
 }

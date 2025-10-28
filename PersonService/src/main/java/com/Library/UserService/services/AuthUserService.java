@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -42,6 +43,13 @@ public class AuthUserService {
         if (!passwordEncoder.matches(loginDTO.getPassword(), authUser.getPassword()))
             throw new BadCredentialsException("Incorrect password");
         return authUser;
+    }
+    @Transactional(readOnly = true)
+    public void updateCredentials(UUID id, LoginDTO loginDTO){
+         AuthUser authUser = authUserRepository.findById(id)
+                 .orElseThrow(()->new UserNotFoundException("User not found"));
+         authUser.setUsername(loginDTO.getUsername());
+         authUser.setPassword(passwordEncoder.encode(loginDTO.getPassword()));
     }
 
     private AuthUser toAuthUser(UserDTO userDTO){

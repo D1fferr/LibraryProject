@@ -12,12 +12,12 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/auth")
@@ -32,15 +32,7 @@ public class AuthController {
     public ResponseEntity<HttpStatus> create(@RequestBody @Valid UserDTO userDTO,
                                              BindingResult bindingResult) {
 
-        if (bindingResult.hasErrors()) {
-            StringBuilder errorMessage = new StringBuilder();
-            List<FieldError> errors = bindingResult.getFieldErrors();
-            for (FieldError error : errors) {
-                errorMessage.append(error.getField()).append(" - ")
-                        .append(error.getDefaultMessage()).append(";");
-            }
-            throw new UserNotCreatedException(errorMessage.toString());
-        }
+        checkErrors(bindingResult);
 
         authUserService.save(userDTO);
         AuthUser authUser = authUserService.findByUsername(userDTO.getUsername());
@@ -55,7 +47,7 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<HttpStatus> login (@RequestBody LoginDTO loginDTO) {
         AuthUser authUser = authUserService.login(loginDTO);
-        String token = jwtProvider.generatedToken(loginDTO.getUsername(), authUser.getId(), "USER");
+        String token = jwtProvider.generatedToken(loginDTO.getUsername(), authUser.getId(), authUser.getRole());
         return ResponseEntity.status(HttpStatus.OK)
                 .header("Authorization", "Bearer " + token)
                 .build();
@@ -67,5 +59,25 @@ public class AuthController {
         tokenBlackListService.blacklistToken(token);
         return ResponseEntity.ok("Logged out successfully");
     }
+    @PatchMapping("/change-credentials/{id}")
+    public ResponseEntity<HttpStatus> changeCredentials(@PathVariable UUID id,
+                                                        @RequestBody @Valid LoginDTO loginDTO,
+                                                        BindingResult bindingResult){
+        checkErrors(bindingResult);
+        authUserService.updateCredentials(id, loginDTO);
+        return new ResponseEntity<>(HttpStatus.OK);
 
+    }
+
+    private void checkErrors(BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            StringBuilder errorMessage = new StringBuilder();
+            List<FieldError> errors = bindingResult.getFieldErrors();
+            for (FieldError error : errors) {
+                errorMessage.append(error.getField()).append(" - ")
+                        .append(error.getDefaultMessage()).append(";");
+            }
+            throw new UserNotCreatedException(errorMessage.toString());
+        }
+    }
 }
