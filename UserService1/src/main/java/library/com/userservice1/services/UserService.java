@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -40,6 +41,13 @@ public class UserService {
     public void deleteById(UUID id){
         userRepository.deleteById(id);
     }
+    @Transactional(readOnly = true)
+    public List<User> findUser(String param){
+        List<User> users = userRepository.findUserByEmailOrLibraryCodeOrUsername(param, param, param);
+        if (users.isEmpty())
+            throw new UserNotFoundException("Users not found");
+        return users;
+    }
 
     private UserDTOForView userToUserDTOForView(User user){
         UserDTOForView userDTOForView = new UserDTOForView();
@@ -48,6 +56,7 @@ public class UserService {
         userDTOForView.setLibraryCode(user.getLibraryCode());
         return userDTOForView;
     }
+
 
 
     private User userDTOForChangeProfileToUser(UserDTOForChangeProfile userDto, User user){

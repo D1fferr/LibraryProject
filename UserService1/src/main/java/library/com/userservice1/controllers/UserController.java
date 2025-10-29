@@ -6,6 +6,7 @@ import library.com.userservice1.dtos.UserDTOForChangeProfile;
 import library.com.userservice1.dtos.UserDTOForView;
 import library.com.userservice1.exceptions.UserNotChangedException;
 import library.com.userservice1.exceptions.UserNotCreatedException;
+import library.com.userservice1.models.User;
 import library.com.userservice1.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -64,5 +65,9 @@ public class UserController {
     public ResponseEntity<HttpStatus> delete(@PathVariable UUID id){
         userService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+    @GetMapping("/get-user-by/{param}")
+    public ResponseEntity<List<User>> getUserBy(@PathVariable String param){
+        return new ResponseEntity<>(userService.findUser(param), HttpStatus.OK);
     }
 }
