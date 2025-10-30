@@ -51,6 +51,10 @@ public class AuthUserService {
          authUser.setUsername(loginDTO.getUsername());
          authUser.setPassword(passwordEncoder.encode(loginDTO.getPassword()));
     }
+    @Transactional(readOnly = true)
+    public Optional<AuthUser> findByParam(String param){
+        return authUserRepository.findByUsernameOrEmail(param, param);
+    }
 
     private AuthUser toAuthUser(UserDTO userDTO){
         AuthUser authUser = new AuthUser();

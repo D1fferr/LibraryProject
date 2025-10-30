@@ -4,6 +4,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import org.hibernate.annotations.UuidGenerator;
@@ -26,6 +27,9 @@ public class AuthUser {
     @NotNull(message = "Field password must not be empty")
     @Column(name = "user_password")
     private String password;
+    @Column(name = "user_email")
+    @Email(message = "Email should be in format email@email.email")
+    private String email;
     @Column(name = "user_role")
     private String role;
 

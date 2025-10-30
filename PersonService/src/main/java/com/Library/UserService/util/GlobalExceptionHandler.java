@@ -44,5 +44,10 @@ public class GlobalExceptionHandler {
         userErrorResponse.setMessage(e.getMessage());
         return new ResponseEntity<>(userErrorResponse, HttpStatus.BAD_REQUEST);
     }
+    @ExceptionHandler(EmailSendingException.class)
+    public ResponseEntity<UserErrorResponse> handleEmailSendingException(EmailSendingException e){
+        userErrorResponse.setMessage(e.getMessage());
+        return new ResponseEntity<>(userErrorResponse, HttpStatus.BAD_REQUEST);
+    }
 
 }
