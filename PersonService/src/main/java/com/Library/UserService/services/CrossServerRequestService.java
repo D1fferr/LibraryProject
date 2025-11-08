@@ -16,7 +16,7 @@ public class CrossServerRequestService {
     private final RestTemplate restTemplate;
 
     public void send(UserDTO userDTO, UUID id){
-        String url = "http://localhost:8085/user/create";
+        String url = "http://localhost:8087/user/create";
 
         Map<String, String> requestBody = Map.of(
                 "id", id.toString(),

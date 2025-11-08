@@ -27,7 +27,7 @@ public class AuthUserService {
     @Transactional
     public void save(UserDTO userDTO){
         Optional<AuthUser> authUser = authUserRepository.findFirstByUsername(userDTO.getUsername());
-        if (authUser.isEmpty())
+        if (authUser.isPresent())
             throw new UserAlreadyExistException("A user with this username already exists.");
         AuthUser auth = toAuthUser(userDTO);
         auth.setPassword(passwordEncoder.encode(auth.getPassword()));
@@ -60,6 +60,7 @@ public class AuthUserService {
         AuthUser authUser = new AuthUser();
         authUser.setUsername(userDTO.getUsername());
         authUser.setPassword(userDTO.getUserPassword());
+        authUser.setEmail(userDTO.getUserEmail());
         authUser.setRole("USER");
         return authUser;
     }
