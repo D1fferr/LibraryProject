@@ -72,7 +72,7 @@ public class UserService {
         user.setId(UUID.fromString(userDTO.getId()));
         user.setEmail(userDTO.getEmail());
         user.setUsername(userDTO.getUsername());
-        userDTO.setLibraryCode(user.getLibraryCode());
+        user.setLibraryCode(userDTO.getLibraryCode());
         return user;
     }
 }
