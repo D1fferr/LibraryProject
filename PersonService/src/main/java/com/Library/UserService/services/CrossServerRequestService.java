@@ -26,4 +26,8 @@ public class CrossServerRequestService {
         );
         restTemplate.postForObject(url, requestBody, Void.class);
     }
+    public void delete(UUID id){
+        String url = "http://localhost:8087/user/delete/" + id.toString();
+        restTemplate.delete(url);
+    }
 }

@@ -33,12 +33,8 @@ public class AuthController {
                                              BindingResult bindingResult) {
 
         checkErrors(bindingResult);
-
-        authUserService.save(userDTO);
-        AuthUser authUser = authUserService.findByUsername(userDTO.getUsername());
-        crossServerRequestService.send(userDTO, authUser.getId());
+        AuthUser authUser = authUserService.save(userDTO);
         String token = jwtProvider.generatedToken(userDTO.getUsername(), authUser.getId(), "USER");
-
         return ResponseEntity.status(HttpStatus.CREATED)
                 .header("Authorization", "Bearer " + token)
                 .build();
@@ -67,6 +63,11 @@ public class AuthController {
         authUserService.updateCredentials(id, loginDTO);
         return new ResponseEntity<>(HttpStatus.OK);
 
+    }
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<HttpStatus> deleteUser(@PathVariable UUID id){
+        authUserService.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     private void checkErrors(BindingResult bindingResult) {
