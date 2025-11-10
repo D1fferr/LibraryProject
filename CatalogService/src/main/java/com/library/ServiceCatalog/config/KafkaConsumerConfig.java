@@ -1,6 +1,7 @@
 package com.library.ServiceCatalog.config;
 
 import com.library.ServiceCatalog.dto.BookDTOForKafka;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
 import com.library.ServiceCatalog.models.Book;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
@@ -32,6 +33,21 @@ public class KafkaConsumerConfig {
     }
     @Bean
     public ConcurrentKafkaListenerContainerFactory<String, BookDTOForKafka> bookConcurrentKafkaListenerContainerFactory(){
+        ConcurrentKafkaListenerContainerFactory<String, BookDTOForKafka> factory = new ConcurrentKafkaListenerContainerFactory<>();
+        factory.setConsumerFactory(bookConsumerFactory());
+        return factory;
+    }
+    @Bean
+    public ConsumerFactory<String, BookDTOForKafka> reservationConsumerFactory() {
+        Map<String, Object> configKafkaConsumer = new HashMap<>();
+        configKafkaConsumer.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        configKafkaConsumer.put(ConsumerConfig.GROUP_ID_CONFIG, "catalog-service");
+        configKafkaConsumer.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+        configKafkaConsumer.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+        return new DefaultKafkaConsumerFactory<>(configKafkaConsumer);
+    }
+    @Bean
+    public ConcurrentKafkaListenerContainerFactory<String, BookDTOForKafka> reservationConcurrentKafkaListenerContainerFactory(){
         ConcurrentKafkaListenerContainerFactory<String, BookDTOForKafka> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(bookConsumerFactory());
         return factory;
