@@ -1,5 +1,6 @@
 package org.example.firstmvc.orderservice.services;
 
+import lombok.RequiredArgsConstructor;
 import org.example.firstmvc.orderservice.dto.ReservationDTO;
 import org.example.firstmvc.orderservice.models.Reservation;
 import org.example.firstmvc.orderservice.models.ReservationStatus;
@@ -19,16 +20,13 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
+@RequiredArgsConstructor
 public class ReservationService {
     private final RestTemplate restTemplate;
     private final ReservationRepository reservationRepository;
     private final ModelMapper modelMapper;
+    private final KafkaSenderService kafkaSenderService;
 
-    public ReservationService(RestTemplate restTemplate, ReservationRepository reservationRepository, ModelMapper modelMapper) {
-        this.restTemplate = restTemplate;
-        this.reservationRepository = reservationRepository;
-        this.modelMapper = modelMapper;
-    }
     @Transactional
     public void save(ReservationDTO reservationDTO){
 
@@ -36,6 +34,7 @@ public class ReservationService {
         reservation.setReservationStatus(ReservationStatus.CREATED);
         reservation.setCreatedAt(LocalDateTime.now());
         reservationRepository.save(reservation);
+        kafkaSenderService.send(reservation.getReservationId().toString());
     }
     @Transactional
     public void update(UUID id, ReservationDTO reservationDTO){
