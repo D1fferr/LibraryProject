@@ -8,6 +8,7 @@ import com.library.ServiceCatalog.repositories.BookForKafkaRepository;
 import com.library.ServiceCatalog.repositories.BookRepository;
 import com.library.ServiceCatalog.util.BookAlreadyExitException;
 import com.library.ServiceCatalog.util.BookNotFoundException;
+import com.library.ServiceCatalog.util.BooksNotFoundException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import lombok.RequiredArgsConstructor;
@@ -30,7 +31,6 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class BookService {
 
-    private final EntityManager entityManager;
     private final BookRepository bookRepository;
     private final ModelMapper modelMapper;
     private final MessageSource messageSource;
@@ -93,14 +93,22 @@ public class BookService {
         bookRepository.save(book);
 
     }
+    @Transactional(readOnly = true)
     public Optional<Book> findByNameAndAuthor(String bookName, String bookAuthor) {
         return bookRepository.findByBookNameAndBookAuthor(bookName, bookAuthor);
     }
-
+    @Transactional(readOnly = true)
     public List<BookDTO> findAllRecentlyAddedAt(int page, int booksPerPage){
         Pageable pageable = PageRequest.of(page, booksPerPage, Sort.by("bookAddedAt"));
         return bookRepository.findAllByOrderByBookAddedAtDesc(pageable)
                 .stream().map(this::toDTO).toList();
+    }
+    @Transactional(readOnly = true)
+    public List<BookDTO> getMostPopularBooks(Pageable pageable){
+        List<BookDTO> books = bookRepository.findMostPopularBooks(pageable).stream().map(this::toDTO).toList();
+        if (books.isEmpty())
+            throw new BooksNotFoundException("Books not found");
+        return books;
     }
 
 

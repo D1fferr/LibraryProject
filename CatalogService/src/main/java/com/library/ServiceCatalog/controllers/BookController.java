@@ -92,6 +92,14 @@ public class BookController {
         bookService.updateBook(bookDTO, id);
         return ResponseEntity.ok(HttpStatus.OK);
     }
+    @GetMapping("/most-popular-books")
+    public ResponseEntity<List<BookDTO>> getMostPopularBooks(@RequestParam(value = "page", defaultValue = "0") Integer page,
+                                     @RequestParam(value = "booksPerPage", defaultValue = "5") Integer booksPerPage) {
+
+        List<BookDTO> books = bookService.getMostPopularBooks(PageRequest.of(page, booksPerPage));
+        return new ResponseEntity<>(books, HttpStatus.OK);
+
+    }
 
     private void errorCheckingWhenChangingBookFields(BindingResult bindingResult) {
         if (bindingResult.hasErrors()){
