@@ -1,5 +1,6 @@
 package library.com.userservice1.services;
 
+import library.com.userservice1.dtos.ChangeCredentialDTO;
 import library.com.userservice1.dtos.UserDTO;
 import library.com.userservice1.dtos.UserDTOForChangeProfile;
 import library.com.userservice1.dtos.UserDTOForView;
@@ -48,6 +49,14 @@ public class UserService {
             throw new UserNotFoundException("Users not found");
         return users;
     }
+    @Transactional
+    public void updateCredential(UUID id, ChangeCredentialDTO changeCredentialDTO){
+
+        User user = userRepository.findById(id).orElseThrow(()->new UserNotFoundException("User not found"));
+        user.setUsername(changeCredentialDTO.getUsername());
+        user.setEmail(changeCredentialDTO.getEmail());
+        userRepository.save(user);
+    }
 
     private UserDTOForView userToUserDTOForView(User user){
         UserDTOForView userDTOForView = new UserDTOForView();
@@ -60,8 +69,6 @@ public class UserService {
 
 
     private User userDTOForChangeProfileToUser(UserDTOForChangeProfile userDto, User user){
-        if (userDto.getEmail()!=null)
-            user.setEmail(userDto.getEmail());
         if (userDto.getLibraryCode()!=null)
             user.setLibraryCode(userDto.getLibraryCode());
         return user;

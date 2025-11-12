@@ -1,6 +1,7 @@
 package library.com.userservice1.controllers;
 
 import jakarta.validation.Valid;
+import library.com.userservice1.dtos.ChangeCredentialDTO;
 import library.com.userservice1.dtos.UserDTO;
 import library.com.userservice1.dtos.UserDTOForChangeProfile;
 import library.com.userservice1.dtos.UserDTOForView;
@@ -43,19 +44,17 @@ public class UserController {
     }
     @PatchMapping("/change-profile/{id}")
     public ResponseEntity<UserDTOForChangeProfile> changeProfile(@PathVariable UUID id,
-                                                                 @RequestBody @Valid UserDTOForChangeProfile userDTO,
-                                                                 BindingResult bindingResult){
-        if (bindingResult.hasErrors()) {
-            StringBuilder errorMessage = new StringBuilder();
-            List<FieldError> errors = bindingResult.getFieldErrors();
-            for (FieldError error : errors) {
-                errorMessage.append(error.getField()).append(" - ")
-                        .append(error.getDefaultMessage()).append(";");
-            }
-            throw new UserNotChangedException(errorMessage.toString());
-        }
+                                                                 @RequestBody UserDTOForChangeProfile userDTO){
         userService.updateProfile(id, userDTO);
         return new ResponseEntity<>(userDTO, HttpStatus.OK);
+    }
+    @PatchMapping("/change-credential/{id}")
+    public ResponseEntity<HttpStatus> changeCredential(@PathVariable UUID id,
+                                                       @RequestBody ChangeCredentialDTO changeCredentialDTO){
+
+        userService.updateCredential(id, changeCredentialDTO);
+        return new ResponseEntity<>(HttpStatus.OK);
+
     }
     @GetMapping("/{id}")
     public ResponseEntity<UserDTOForView> getOne(@PathVariable UUID id){

@@ -10,7 +10,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class UserDTOForChangeProfile {
-    @Email(message = "Email should be in format email@email.email")
-    private String email;
     private String libraryCode;
 }
