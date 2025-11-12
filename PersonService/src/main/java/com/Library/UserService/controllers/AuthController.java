@@ -1,7 +1,6 @@
 package com.Library.UserService.controllers;
 
 import com.Library.UserService.dto.ChangeCredentialDTO;
-import com.Library.UserService.dto.ChangeCredentialsDTO;
 import com.Library.UserService.dto.LoginDTO;
 import com.Library.UserService.dto.UserDTO;
 import com.Library.UserService.models.AuthUser;

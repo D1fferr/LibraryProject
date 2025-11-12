@@ -33,7 +33,7 @@ public class AuthUserService {
         AuthUser auth = toAuthUser(userDTO);
         auth.setPassword(passwordEncoder.encode(auth.getPassword()));
         authUserRepository.save(auth);
-        crossServerRequestService.send(userDTO, auth.getId());
+        crossServerRequestService.sendUser(userDTO, auth.getId());
         return auth;
     }
     public AuthUser login(LoginDTO loginDTO){

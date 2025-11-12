@@ -1,6 +1,5 @@
 package com.Library.UserService.services;
 
-import com.Library.UserService.dto.ChangeCredentialDTO;
 import com.Library.UserService.dto.UserDTO;
 import com.Library.UserService.models.AuthUser;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +15,7 @@ public class CrossServerRequestService {
 
     private final RestTemplate restTemplate;
 
-    public void send(UserDTO userDTO, UUID id){
+    public void sendUser(UserDTO userDTO, UUID id){
         String url = "http://localhost:8087/user/create";
 
         Map<String, String> requestBody = Map.of(
