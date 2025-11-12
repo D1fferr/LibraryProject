@@ -48,7 +48,7 @@ public class UserController {
         userService.updateProfile(id, userDTO);
         return new ResponseEntity<>(userDTO, HttpStatus.OK);
     }
-    @PatchMapping("/change-credential/{id}")
+    @PatchMapping("/change-credentials/{id}")
     public ResponseEntity<HttpStatus> changeCredential(@PathVariable UUID id,
                                                        @RequestBody ChangeCredentialDTO changeCredentialDTO){
 
