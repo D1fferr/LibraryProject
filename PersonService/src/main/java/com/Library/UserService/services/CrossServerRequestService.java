@@ -37,6 +37,6 @@ public class CrossServerRequestService {
                 "username", authUser.getUsername(),
                 "email", authUser.getEmail()
         );
-        restTemplate.postForObject(url, requestBody, Void.class);
+        restTemplate.patchForObject(url, requestBody, Void.class);
     }
 }
