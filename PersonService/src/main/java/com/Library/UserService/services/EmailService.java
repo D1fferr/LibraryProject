@@ -23,7 +23,7 @@ public class EmailService {
             SimpleMailMessage message = new SimpleMailMessage();
             message.setFrom(from);
             message.setTo(authUser.getEmail());
-            message.setSubject("Last update of books");
+            message.setSubject("Password recovery");
             message.setText(textPrep(authUser.getUsername(), code));
             mailSender.send(message);
         } catch (Exception e) {
