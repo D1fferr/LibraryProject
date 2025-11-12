@@ -43,7 +43,7 @@ public class AuthUserService {
             throw new BadCredentialsException("Incorrect password");
         return authUser;
     }
-    @Transactional(readOnly = true)
+    @Transactional
     public void updateCredentials(UUID id, ChangeCredentialDTO changeCredentialDTO){
          AuthUser authUser = authUserRepository.findById(id)
                  .orElseThrow(()->new UserNotFoundException("User not found"));

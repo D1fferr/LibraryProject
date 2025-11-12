@@ -31,7 +31,7 @@ public class CrossServerRequestService {
         restTemplate.delete(url);
     }
     public void sendCredential(AuthUser authUser, UUID id){
-        String url = "http://localhost:8087/user/change-credential/" + id;
+        String url = "http://localhost:8087/user/change-credentials/" + id;
 
         Map<String, String> requestBody = Map.of(
                 "username", authUser.getUsername(),
