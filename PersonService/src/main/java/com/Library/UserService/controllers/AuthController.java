@@ -1,5 +1,7 @@
 package com.Library.UserService.controllers;
 
+import com.Library.UserService.dto.ChangeCredentialDTO;
+import com.Library.UserService.dto.ChangeCredentialsDTO;
 import com.Library.UserService.dto.LoginDTO;
 import com.Library.UserService.dto.UserDTO;
 import com.Library.UserService.models.AuthUser;
@@ -57,10 +59,10 @@ public class AuthController {
     }
     @PatchMapping("/change-credentials/{id}")
     public ResponseEntity<HttpStatus> changeCredentials(@PathVariable UUID id,
-                                                        @RequestBody @Valid LoginDTO loginDTO,
+                                                        @RequestBody @Valid ChangeCredentialDTO changeCredentialDTO,
                                                         BindingResult bindingResult){
         checkErrors(bindingResult);
-        authUserService.updateCredentials(id, loginDTO);
+        authUserService.updateCredentials(id, changeCredentialDTO);
         return new ResponseEntity<>(HttpStatus.OK);
 
     }

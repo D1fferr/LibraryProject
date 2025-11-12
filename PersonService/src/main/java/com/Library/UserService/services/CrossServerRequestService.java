@@ -1,7 +1,8 @@
 package com.Library.UserService.services;
 
+import com.Library.UserService.dto.ChangeCredentialDTO;
 import com.Library.UserService.dto.UserDTO;
-import com.Library.UserService.dto.UserDTOForUserService;
+import com.Library.UserService.models.AuthUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -29,5 +30,14 @@ public class CrossServerRequestService {
     public void delete(UUID id){
         String url = "http://localhost:8087/user/delete/" + id.toString();
         restTemplate.delete(url);
+    }
+    public void sendCredential(AuthUser authUser, UUID id){
+        String url = "http://localhost:8087/user/change-credential/" + id;
+
+        Map<String, String> requestBody = Map.of(
+                "username", authUser.getUsername(),
+                "email", authUser.getEmail()
+        );
+        restTemplate.postForObject(url, requestBody, Void.class);
     }
 }

@@ -1,5 +1,6 @@
 package com.Library.UserService.services;
 
+import com.Library.UserService.dto.ChangeCredentialDTO;
 import com.Library.UserService.dto.LoginDTO;
 import com.Library.UserService.dto.UserDTO;
 import com.Library.UserService.models.AuthUser;
@@ -7,7 +8,6 @@ import com.Library.UserService.repositories.AuthUserRepository;
 import com.Library.UserService.util.UserAlreadyExistException;
 import com.Library.UserService.util.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -44,11 +44,17 @@ public class AuthUserService {
         return authUser;
     }
     @Transactional(readOnly = true)
-    public void updateCredentials(UUID id, LoginDTO loginDTO){
+    public void updateCredentials(UUID id, ChangeCredentialDTO changeCredentialDTO){
          AuthUser authUser = authUserRepository.findById(id)
                  .orElseThrow(()->new UserNotFoundException("User not found"));
-         authUser.setUsername(loginDTO.getUsername());
-         authUser.setPassword(passwordEncoder.encode(loginDTO.getPassword()));
+         if (changeCredentialDTO.getUsername()!=null)
+            authUser.setUsername(changeCredentialDTO.getUsername());
+         if (changeCredentialDTO.getPassword()!=null)
+            authUser.setPassword(passwordEncoder.encode(changeCredentialDTO.getPassword()));
+         if (changeCredentialDTO.getEmail()!=null)
+            authUser.setEmail(changeCredentialDTO.getEmail());
+         authUserRepository.save(authUser);
+         crossServerRequestService.sendCredential(authUser, id);
     }
     @Transactional(readOnly = true)
     public Optional<AuthUser> findByParam(String param){
