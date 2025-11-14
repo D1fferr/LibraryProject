@@ -1,12 +1,13 @@
 package com.library.ServiceCatalog.controllers;
 
 import com.library.ServiceCatalog.dto.BookDTO;
-import com.library.ServiceCatalog.models.Book;
+import com.library.ServiceCatalog.dto.BookDTOForResponseCreate;
+import com.library.ServiceCatalog.dto.BookDTOForResponseGetBook;
 import com.library.ServiceCatalog.services.BookService;
-import com.library.ServiceCatalog.util.BookAlreadyExitException;
 import com.library.ServiceCatalog.util.BookNotCreatedException;
 import com.library.ServiceCatalog.util.BooksNotFoundException;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -15,51 +16,37 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.List;
 import java.util.Locale;
-import java.util.Optional;
 import java.util.UUID;
 
 @RestController
 @RequestMapping("/book")
+@RequiredArgsConstructor
 public class BookController {
 
     private final BookService bookService;
-    private final MessageSource messageSource;
-
-    public BookController(BookService bookService, MessageSource messageSource) {
-        this.bookService = bookService;
-        this.messageSource = messageSource;
-    }
 
     @GetMapping()
-    public List<BookDTO> getAllBooks(@RequestParam(value = "page", defaultValue = "0") Integer page,
-                                     @RequestParam(value = "booksPerPage", defaultValue = "5") Integer booksPerPage,
-                                     @RequestParam(value = "sortBy", defaultValue = "bookName") String sortBy)
+    public ResponseEntity<List<BookDTOForResponseGetBook>> getAllBooks(@RequestParam(value = "page", defaultValue = "0") Integer page,
+                                                       @RequestParam(value = "booksPerPage", defaultValue = "5") Integer booksPerPage,
+                                                       @RequestParam(value = "sortBy", defaultValue = "bookName") String sortBy)
     {
-        List<BookDTO> bookDTOs = bookService.findAll(PageRequest.of(page, booksPerPage, Sort.by(sortBy)));
-        if (!bookDTOs.isEmpty())
-            return bookDTOs;
-        else {
-            throw new BooksNotFoundException(messageSource
-                    .getMessage("books.not.found.message", new Object[0], Locale.ENGLISH));
-        }
+        List<BookDTOForResponseGetBook> books = bookService.findAll(PageRequest.of(page, booksPerPage, Sort.by(sortBy)));
+        return new ResponseEntity<>(books, HttpStatus.OK);
     }
     @GetMapping("/recently-added-at")
-    public List<BookDTO> getAllRecentlyAddedAtBooks(@RequestParam(value = "page", defaultValue = "0") Integer page,
+    public ResponseEntity<List<BookDTOForResponseGetBook>> getAllRecentlyAddedAtBooks(@RequestParam(value = "page", defaultValue = "0") Integer page,
                                      @RequestParam(value = "booksPerPage", defaultValue = "5") Integer booksPerPage)
     {
-        List<BookDTO> bookDTOs = bookService.findAllRecentlyAddedAt(page, booksPerPage);
-        if (!bookDTOs.isEmpty())
-            return bookDTOs;
-        else {
-            throw new BooksNotFoundException(messageSource
-                    .getMessage("books.not.found.message", new Object[0], Locale.ENGLISH));
-        }
+        List<BookDTOForResponseGetBook> books = bookService.findAllRecentlyAddedAt(page, booksPerPage);
+        return new ResponseEntity<>(books, HttpStatus.OK);
     }
     @GetMapping("/{book_id}")
-    public BookDTO getBook(@PathVariable UUID book_id){
-        return bookService.findById(book_id);
+    public ResponseEntity<BookDTOForResponseGetBook> getBook(@PathVariable UUID book_id){
+        return new ResponseEntity<>(bookService.findById(book_id), HttpStatus.OK);
     }
     @GetMapping("/pieces/{book_id}")
     public Integer getBookPieces(@PathVariable UUID book_id){
@@ -67,17 +54,12 @@ public class BookController {
     }
 
     @PostMapping("/auth/create")
-    public ResponseEntity<HttpStatus> createBook(@RequestBody @Valid BookDTO bookDTO,
-                                              BindingResult bindingResult){
+    public ResponseEntity<BookDTOForResponseCreate> createBook(@RequestPart("bookData") @Valid BookDTO bookDTO,
+                                                               @RequestPart(value = "coverImage", required = false) MultipartFile coverImage,
+                                                               BindingResult bindingResult){
         errorCheckingWhenChangingBookFields(bindingResult);
-        Optional<Book> existingBook = bookService
-                .findByNameAndAuthor(bookDTO.getBookName(), bookDTO.getBookAuthor());
-        if (existingBook.isPresent())
-                throw new BookAlreadyExitException(messageSource
-                        .getMessage("book.already.exist.message", new Object[0], Locale.ENGLISH));
-
-        bookService.save(bookDTO);
-        return ResponseEntity.ok(HttpStatus.CREATED);
+        BookDTOForResponseCreate bookDTOForResponseCreate = bookService.save(bookDTO, coverImage);
+        return new ResponseEntity<>(bookDTOForResponseCreate, HttpStatus.CREATED);
     }
     @DeleteMapping("/auth/delete/{book_id}")
     public ResponseEntity<HttpStatus> deleteBook(@PathVariable UUID book_id){
@@ -85,12 +67,13 @@ public class BookController {
         return ResponseEntity.ok(HttpStatus.NO_CONTENT);
     }
     @PatchMapping("/auth/change-book/{id}")
-    public ResponseEntity<HttpStatus> changeBook(@PathVariable UUID id,
-                                                 @RequestBody @Valid BookDTO bookDTO,
-                                                 BindingResult bindingResult){
+    public ResponseEntity<BookDTOForResponseCreate> changeBook(@PathVariable UUID id,
+                                                               @RequestPart("bookData") @Valid BookDTO bookDTO,
+                                                               @RequestPart(value = "coverImage", required = false) MultipartFile coverImage,
+                                                               BindingResult bindingResult){
         errorCheckingWhenChangingBookFields(bindingResult);
-        bookService.updateBook(bookDTO, id);
-        return ResponseEntity.ok(HttpStatus.OK);
+        BookDTOForResponseCreate bookDTOForResponseCreate = bookService.updateBook(bookDTO, id, coverImage);
+        return new ResponseEntity<>(bookDTOForResponseCreate, HttpStatus.OK);
     }
     @GetMapping("/most-popular-books")
     public ResponseEntity<List<BookDTO>> getMostPopularBooks(@RequestParam(value = "page", defaultValue = "0") Integer page,

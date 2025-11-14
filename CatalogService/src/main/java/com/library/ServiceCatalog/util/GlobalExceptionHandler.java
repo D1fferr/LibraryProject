@@ -36,6 +36,11 @@ public class GlobalExceptionHandler {
         bookErrorResponse.setMessage(e.getMessage());
         return new ResponseEntity<>(bookErrorResponse, HttpStatus.BAD_REQUEST);
     }
+    @ExceptionHandler(FailedSaveImageException.class)
+    public ResponseEntity<BookErrorResponse> handleFailedSaveImageException(FailedSaveImageException e){
+        bookErrorResponse.setMessage(e.getMessage());
+        return new ResponseEntity<>(bookErrorResponse, HttpStatus.SERVICE_UNAVAILABLE);
+    }
 
 
 }
