@@ -1,12 +1,14 @@
 package ua.zakharchuk.ExpectedBooksService.services;
 
-import lombok.AllArgsConstructor;
+
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 import ua.zakharchuk.ExpectedBooksService.dtos.ExpectedBookDTO;
+import ua.zakharchuk.ExpectedBooksService.dtos.ExpectedBookDTOCreate;
 import ua.zakharchuk.ExpectedBooksService.dtos.ExpectedBookDTOForKafka;
 import ua.zakharchuk.ExpectedBooksService.exceptions.ExpectedBookNotFoundException;
 import ua.zakharchuk.ExpectedBooksService.exceptions.ExpectedBooksNotFoundException;
@@ -22,12 +24,19 @@ import java.util.UUID;
 public class ExpectedBookService {
     private final ModelMapper modelMapper;
     private final ExpectedBookRepository expectedBookRepository;
+    private final ImageService imageService;
 
     @Transactional
-    public void save(ExpectedBookDTO expectedBookDTO) {
-        ExpectedBook expectedBook = toExpectedBookEntity(expectedBookDTO);
+    public ExpectedBookDTO save(ExpectedBookDTOCreate expectedBookDTO, MultipartFile coverImage) {
+        ExpectedBook expectedBook = toExpectedBookEntityCreate(expectedBookDTO);
         expectedBook.setExpectedBookAddedAt(LocalDateTime.now());
         expectedBookRepository.save(expectedBook);
+        if (coverImage != null && !coverImage.isEmpty()) {
+            String imageUrl = imageService.storeImage(coverImage, expectedBook.getExpectedBookId());
+            expectedBook.setExpectedBookImage(imageUrl);
+            expectedBookRepository.save(expectedBook);
+        }
+        return toExpectedBookDTO(expectedBook);
     }
 
     @Transactional
@@ -36,7 +45,7 @@ public class ExpectedBookService {
     }
 
     @Transactional
-    public void update(UUID id, ExpectedBookDTO expectedBookDTO) {
+    public ExpectedBookDTO update(UUID id, ExpectedBookDTOCreate expectedBookDTO, MultipartFile coverImage) {
         ExpectedBook expectedBook = expectedBookRepository.findByExpectedBookId(id)
                 .orElseThrow(() -> new ExpectedBookNotFoundException("The selected book was not found."));
         if (expectedBookDTO.getExpectedBookName() != null)
@@ -51,11 +60,14 @@ public class ExpectedBookService {
             expectedBook.setExpectedBookLanguage(expectedBookDTO.getExpectedBookLanguage());
         if (expectedBookDTO.getExpectedBookPieces() != 0)
             expectedBook.setExpectedBookPieces(expectedBookDTO.getExpectedBookPieces());
-        if (expectedBookDTO.getExpectedBookImage() != null)
-            expectedBook.setExpectedBookImage(expectedBookDTO.getExpectedBookImage());
+        if (coverImage != null && !coverImage.isEmpty()) {
+            String imageUrl = imageService.storeImage(coverImage, expectedBook.getExpectedBookId());
+            expectedBook.setExpectedBookImage(imageUrl);
+        }
         if (expectedBookDTO.getExpectedBookGenre() != null)
             expectedBook.setExpectedBookGenre(expectedBookDTO.getExpectedBookGenre());
         expectedBookRepository.save(expectedBook);
+        return toExpectedBookDTO(expectedBook);
     }
 
     @Transactional(readOnly = true)
@@ -92,5 +104,8 @@ public class ExpectedBookService {
     private ExpectedBookDTOForKafka toExpectedBookDTOForKafka(ExpectedBook expectedBook) {
         return modelMapper.map(expectedBook, ExpectedBookDTOForKafka.class);
 
+    }
+    private ExpectedBook toExpectedBookEntityCreate(ExpectedBookDTOCreate expectedBookDTO) {
+        return modelMapper.map(expectedBookDTO, ExpectedBook.class);
     }
 }

@@ -10,7 +10,9 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import ua.zakharchuk.ExpectedBooksService.dtos.ExpectedBookDTO;
+import ua.zakharchuk.ExpectedBooksService.dtos.ExpectedBookDTOCreate;
 import ua.zakharchuk.ExpectedBooksService.dtos.ExpectedBookDTOForKafka;
 import ua.zakharchuk.ExpectedBooksService.exceptions.ExpectedBookNotCreatedException;
 import ua.zakharchuk.ExpectedBooksService.models.ExpectedBook;
@@ -41,20 +43,21 @@ public class ExpectedBookController {
         return new ResponseEntity<>(expectedBookService.findAll(PageRequest.of(page, bookPerPage)), HttpStatus.OK);
     }
     @PostMapping("/auth/create")
-    public ResponseEntity<ExpectedBookDTO> createExpectedBook(@RequestBody @Valid ExpectedBookDTO expectedBookDTO,
+    public ResponseEntity<ExpectedBookDTO> createExpectedBook(@RequestPart("bookData") @Valid ExpectedBookDTOCreate bookDTO,
+                                                              @RequestPart(value = "coverImage", required = false) MultipartFile coverImage,
                                                               BindingResult bindingResult){
         checkBookErrors(bindingResult);
-        expectedBookService.save(expectedBookDTO);
+        ExpectedBookDTO expectedBookDTO = expectedBookService.save(bookDTO, coverImage);
         return new ResponseEntity<>(expectedBookDTO, HttpStatus.CREATED);
     }
     @PatchMapping("/auth/change/{id}")
-    public ResponseEntity<ExpectedBookDTO> changeExpectedBook(
-            @PathVariable UUID id,
-            @RequestBody @Valid ExpectedBookDTO expectedBookDTO,
-            BindingResult bindingResult){
+    public ResponseEntity<ExpectedBookDTO> changeExpectedBook(@PathVariable UUID id,
+                                                              @RequestPart("bookData") @Valid ExpectedBookDTOCreate bookDTO,
+                                                              @RequestPart(value = "coverImage", required = false) MultipartFile coverImage,
+                                                              BindingResult bindingResult){
 
         checkBookErrors(bindingResult);
-        expectedBookService.update(id, expectedBookDTO);
+        ExpectedBookDTO expectedBookDTO = expectedBookService.update(id, bookDTO, coverImage);
         return new ResponseEntity<>(expectedBookDTO, HttpStatus.OK);
     }
     @DeleteMapping("/auth/delete/{id}")

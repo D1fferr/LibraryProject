@@ -2,7 +2,6 @@ package ua.zakharchuk.ExpectedBooksService.exceptions;
 
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -44,6 +43,11 @@ public class GlobalExceptionHandler {
     public ResponseEntity<EmailErrorResponse> handleREmailSendingException (EmailSendingException e) {
         emailErrorResponse.setMessage(e.getMessage());
         return new ResponseEntity<>(emailErrorResponse, HttpStatus.NOT_FOUND);
+    }
+    @ExceptionHandler(FailedSaveImageException.class)
+    public ResponseEntity<ExpectedBookErrorResponse> handleFailedSaveImageException(FailedSaveImageException e){
+        expectedBookErrorResponse.setMessage(e.getMessage());
+        return new ResponseEntity<>(expectedBookErrorResponse, HttpStatus.SERVICE_UNAVAILABLE);
     }
 
 }
