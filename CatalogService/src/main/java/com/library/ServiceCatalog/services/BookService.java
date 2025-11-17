@@ -57,7 +57,7 @@ public class BookService {
         BookForKafka entity = toEntityForKafka(book);
         entity.setBookAddedAt(LocalDateTime.now());
         if (bookRepository.existsBookByBookId(entity.getBookId()))
-            throw new BookAlreadyExitException("");
+            throw new BookAlreadyExitException("Book already exist");
         bookForKafkaRepository.save(entity);
 
     }
@@ -105,10 +105,6 @@ public class BookService {
             book.setBookGenre(bookDTO.getBookGenre());
         bookRepository.save(book);
         return toBookDTOForResponse(book);
-    }
-    @Transactional(readOnly = true)
-    public Optional<Book> findByNameAndAuthor(String bookName, String bookAuthor) {
-        return bookRepository.findByBookNameAndBookAuthor(bookName, bookAuthor);
     }
     @Transactional(readOnly = true)
     public List<BookDTOForResponseGetBook> findAllRecentlyAddedAt(int page, int booksPerPage){
