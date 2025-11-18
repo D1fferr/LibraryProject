@@ -34,4 +34,9 @@ public class GlobalExceptionHandler {
         response.setMessage(e.getMessage());
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
+    @ExceptionHandler(EmailSendingException.class)
+    public ResponseEntity<ReservationErrorResponse> handleEmailSendingException(EmailSendingException e){
+        response.setMessage(e.getMessage());
+        return new ResponseEntity<>(response, HttpStatus.SERVICE_UNAVAILABLE);
+    }
 }

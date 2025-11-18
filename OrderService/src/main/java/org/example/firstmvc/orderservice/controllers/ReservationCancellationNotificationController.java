@@ -1,0 +1,52 @@
+package org.example.firstmvc.orderservice.controllers;
+
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import org.example.firstmvc.orderservice.dto.JoinDTOForCancelledReservations;
+import org.example.firstmvc.orderservice.dto.ReservationCancellationNotificationDTO;
+import org.example.firstmvc.orderservice.services.EmailSenderService;
+import org.example.firstmvc.orderservice.services.ReservationCancellationNotificationService;
+import org.example.firstmvc.orderservice.util.ReservationNotCreatedException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.UUID;
+
+@RestController
+@RequiredArgsConstructor
+@RequestMapping("/cancel-reservation")
+public class ReservationCancellationNotificationController {
+    private final ReservationCancellationNotificationService service;
+    private final EmailSenderService emailSenderService;
+
+    @PostMapping("/cancel")
+    public ResponseEntity<ReservationCancellationNotificationDTO> cancelReservation(@RequestBody @Valid ReservationCancellationNotificationDTO dto,
+                                                                                    BindingResult bindingResult) {
+        checkErrorsReservation(bindingResult);
+        service.save(dto);
+        emailSenderService.send(dto);
+        return new ResponseEntity<>(dto, HttpStatus.CREATED);
+
+    }
+    @GetMapping("/user/{id}")
+    public ResponseEntity<List<JoinDTOForCancelledReservations>> getAllCanceledReservationsForUser(@PathVariable UUID id){
+
+        List<JoinDTOForCancelledReservations> reservations = service.findAllReservationsForUser(id);
+        return new ResponseEntity<>(reservations, HttpStatus.OK);
+    }
+    private void checkErrorsReservation(BindingResult bindingResult) {
+        if (bindingResult.hasErrors()){
+            StringBuilder errorMessage = new StringBuilder();
+            List<FieldError> errors = bindingResult.getFieldErrors();
+            for (FieldError error : errors){
+                errorMessage.append(error.getField()).append(" - ")
+                        .append(error.getDefaultMessage()).append(";");
+            }
+            throw new ReservationNotCreatedException(errorMessage.toString());
+        }
+    }
+    }

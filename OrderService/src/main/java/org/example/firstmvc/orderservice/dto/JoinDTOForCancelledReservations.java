@@ -1,23 +1,21 @@
 package org.example.firstmvc.orderservice.dto;
 
-import jakarta.validation.constraints.Future;
-import jakarta.validation.constraints.Positive;
+
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.example.firstmvc.orderservice.models.ReservationStatus;
 
 import java.time.LocalDate;
 import java.util.UUID;
 
-
+@AllArgsConstructor
 @Getter
 @Setter
-@NoArgsConstructor
-public class ReservationDTO {
-    @Future(message = "You cannot select the booking date to be in the past or today.")
+public class JoinDTOForCancelledReservations {
+
     private LocalDate reservationDate;
     private UUID reservationBook;
-    private UUID reservationUser;
     private ReservationStatus reservationStatus;
+    private String message;
 }

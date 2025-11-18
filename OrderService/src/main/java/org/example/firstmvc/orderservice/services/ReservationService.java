@@ -54,6 +54,13 @@ public class ReservationService {
         reservationRepository.save(reservation);
     }
     @Transactional
+    public void changeStatusToCanceled(UUID id){
+        Reservation reservation = reservationRepository.findReservationsByReservationId(id)
+                .orElseThrow(()->new ReservationNotFoundException("No reservations found"));
+        reservation.setReservationStatus(ReservationStatus.CANCELED);
+        reservationRepository.save(reservation);
+    }
+    @Transactional
     public void delete(int id){
         reservationRepository.deleteById(id);
     }
@@ -96,6 +103,10 @@ public class ReservationService {
     @Transactional(readOnly = true)
     public Optional<ReservationDTO> findById(UUID id){
         return reservationRepository.findByReservationId(id).map(this::toDTO);
+    }
+    @Transactional(readOnly = true)
+    public Optional<Reservation> findByReservationId(UUID id){
+        return reservationRepository.findByReservationId(id);
     }
 
     public Integer booksAvailable(UUID bookId){
