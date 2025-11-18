@@ -44,7 +44,7 @@ public class EmailSenderService {
     }
     private UserDTO getUser (UUID id) throws NoSuchElementException {
             Reservation reservation = reservationService.findByReservationId(id).get();
-            String url = "http://localhost:8086/user/" + reservation.getReservationUser();
+            String url = "http://localhost:8087/user/" + reservation.getReservationUser();
             return restTemplate.getForObject(url, UserDTO.class);
     }
     private String textPrep(String username, String message) {
