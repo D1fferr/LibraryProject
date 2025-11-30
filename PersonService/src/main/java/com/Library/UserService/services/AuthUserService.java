@@ -1,6 +1,7 @@
 package com.Library.UserService.services;
 
 import com.Library.UserService.dto.ChangeCredentialDTO;
+import com.Library.UserService.dto.DoAdminDTO;
 import com.Library.UserService.dto.LoginDTO;
 import com.Library.UserService.dto.UserDTO;
 import com.Library.UserService.models.AuthUser;
@@ -31,6 +32,20 @@ public class AuthUserService {
             throw new UserAlreadyExistException("A user with this username already exists.");
 
         AuthUser auth = toAuthUser(userDTO);
+        auth.setRole("USER");
+        auth.setPassword(passwordEncoder.encode(auth.getPassword()));
+        authUserRepository.save(auth);
+        crossServerRequestService.sendUser(userDTO, auth.getId());
+        return auth;
+    }
+    @Transactional
+    public AuthUser saveAsAdmin(UserDTO userDTO){
+        Optional<AuthUser> authUser = authUserRepository.findFirstByUsername(userDTO.getUsername());
+        if (authUser.isPresent())
+            throw new UserAlreadyExistException("A user with this username already exists.");
+
+        AuthUser auth = toAuthUser(userDTO);
+        auth.setRole("ADMIN");
         auth.setPassword(passwordEncoder.encode(auth.getPassword()));
         authUserRepository.save(auth);
         crossServerRequestService.sendUser(userDTO, auth.getId());
@@ -65,13 +80,19 @@ public class AuthUserService {
         crossServerRequestService.delete(id);
         authUserRepository.deleteById(id);
     }
+    @Transactional
+    public void doAdmin(DoAdminDTO dto){
+        AuthUser authUser = authUserRepository.findById(dto.getId())
+                .orElseThrow(()->new UserNotFoundException("User not found"));
+        authUser.setRole("ADMIN");
+        authUserRepository.save(authUser);
+    }
 
     private AuthUser toAuthUser(UserDTO userDTO){
         AuthUser authUser = new AuthUser();
         authUser.setUsername(userDTO.getUsername());
         authUser.setPassword(userDTO.getUserPassword());
         authUser.setEmail(userDTO.getUserEmail());
-        authUser.setRole("USER");
         return authUser;
     }
 }

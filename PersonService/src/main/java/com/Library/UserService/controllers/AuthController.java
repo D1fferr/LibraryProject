@@ -1,6 +1,7 @@
 package com.Library.UserService.controllers;
 
 import com.Library.UserService.dto.ChangeCredentialDTO;
+import com.Library.UserService.dto.DoAdminDTO;
 import com.Library.UserService.dto.LoginDTO;
 import com.Library.UserService.dto.UserDTO;
 import com.Library.UserService.models.AuthUser;
@@ -40,6 +41,17 @@ public class AuthController {
                 .header("Authorization", "Bearer " + token)
                 .build();
     }
+    @PostMapping("/registration/admin")
+    public ResponseEntity<HttpStatus> createAsAdmin(@RequestBody @Valid UserDTO userDTO,
+                                             BindingResult bindingResult) {
+
+        checkErrors(bindingResult);
+        AuthUser authUser = authUserService.saveAsAdmin(userDTO);
+        String token = jwtProvider.generatedToken(userDTO.getUsername(), authUser.getId(), "ADMIN");
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .header("Authorization", "Bearer " + token)
+                .build();
+    }
 
     @PostMapping("/login")
     public ResponseEntity<HttpStatus> login (@RequestBody LoginDTO loginDTO) {
@@ -69,6 +81,14 @@ public class AuthController {
     public ResponseEntity<HttpStatus> deleteUser(@PathVariable UUID id){
         authUserService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+    @PatchMapping("/do-admin")
+    public ResponseEntity<HttpStatus> doAdmin(@RequestBody @Valid DoAdminDTO dto,
+                                              BindingResult bindingResult){
+        checkErrors(bindingResult);
+        authUserService.doAdmin(dto);
+        return new ResponseEntity<>(HttpStatus.OK);
+
     }
 
     private void checkErrors(BindingResult bindingResult) {
