@@ -11,7 +11,7 @@ import java.util.UUID;
 public class ReservationCancellationNotificationDTO {
 
     @NotNull(message = "Field Reservations id must not be empty")
-    private UUID ReservationId;
+    private UUID reservationId;
     @NotNull(message = "Message must not be empty")
     private String message;
 

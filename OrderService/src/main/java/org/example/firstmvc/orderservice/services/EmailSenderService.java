@@ -27,11 +27,11 @@ public class EmailSenderService {
     private final JavaMailSender mailSender;
 
 
-    public void send(ReservationCancellationNotificationDTO dto) {
+    public void send(ReservationCancellationNotificationDTO dto, UUID id) {
         try {
             SimpleMailMessage mailMessage = new SimpleMailMessage();
 
-            UserDTO user = getUser(dto.getReservationId());
+            UserDTO user = getUser(id);
             mailMessage.setFrom(from);
             mailMessage.setTo(user.getEmail());
             mailMessage.setSubject("Cancellation of reservation");

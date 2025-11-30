@@ -25,9 +25,9 @@ public class ReservationCancellationNotificationService {
     private final ReservationService reservationService;
 
     @Transactional
-    public void save(ReservationCancellationNotificationDTO dto){
+    public void save(ReservationCancellationNotificationDTO dto, UUID id){
 
-        reservationService.changeStatusToCanceled(dto.getReservationId());
+        reservationService.changeStatusToCanceled(id);
 
         ReservationCancellationNotification reservationCancellationNotification = toEntity(dto);
         repository.save(reservationCancellationNotification);

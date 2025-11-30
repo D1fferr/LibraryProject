@@ -23,12 +23,14 @@ public class ReservationCancellationNotificationController {
     private final ReservationCancellationNotificationService service;
     private final EmailSenderService emailSenderService;
 
-    @PostMapping("/cancel")
-    public ResponseEntity<ReservationCancellationNotificationDTO> cancelReservation(@RequestBody @Valid ReservationCancellationNotificationDTO dto,
+    @PostMapping("/cancel/{id}")
+    public ResponseEntity<ReservationCancellationNotificationDTO> cancelReservation(
+            @PathVariable UUID id,
+            @RequestBody @Valid ReservationCancellationNotificationDTO dto,
                                                                                     BindingResult bindingResult) {
         checkErrorsReservation(bindingResult);
-        service.save(dto);
-        emailSenderService.send(dto);
+        service.save(dto, id);
+        emailSenderService.send(dto, id);
         return new ResponseEntity<>(dto, HttpStatus.CREATED);
 
     }
