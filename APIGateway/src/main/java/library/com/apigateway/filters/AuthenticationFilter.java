@@ -29,50 +29,63 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
             "auth/login",
             "auth/registration",
             "/book",
-            "/book/recently-added-at"
+            "/book/recently-added-at",
+            "/reset-password/",
+            "/user/create"
 
     );
 
     private Map<String, Set<String>> roleRequirements() {
         Map<String, Set<String>> role = new HashMap<>();
-        //user service
-//        role.put("user/profile", Set.of("USER", "ADMIN"));
-//        role.put("user/profile", Set.of("USER", "ADMIN"));
-//        role.put("user/profile", Set.of("USER", "ADMIN"));
-//        role.put("user/profile", Set.of("USER", "ADMIN"));
 
         // catalog service
-        role.put("/book/auth/create", Set.of("ADMIN"));
-        role.put("/book/auth/delete/", Set.of("ADMIN"));
-        role.put("/book/auth/change-book/", Set.of("ADMIN"));
+        role.put("/book/auth/create", Set.of("ADMIN", "OWNER"));
+        role.put("/book/auth/delete/", Set.of("ADMIN", "OWNER"));
+        role.put("/book/auth/change-book/", Set.of("ADMIN", "OWNER"));
 
         // expected book service
-        role.put("/expected-book/auth/create", Set.of("ADMIN"));
-        role.put("/expected-book/auth/change/", Set.of("ADMIN"));
-        role.put("/expected-book/auth/delete/", Set.of("ADMIN"));
-        role.put("/expected-book/auth/add-to-current-books/", Set.of("ADMIN"));
-        role.put("/report-availability/auth/add", Set.of("ADMIN", "USER"));
-        role.put("/report-availability/auth/delete/", Set.of("ADMIN", "USER"));
-        role.put("/report-availability-error/auth/get-all", Set.of("ADMIN"));
-        role.put("/report-availability-error/auth/send", Set.of("ADMIN"));
+        role.put("/expected-book/auth/create", Set.of("ADMIN", "OWNER"));
+        role.put("/expected-book/auth/change/", Set.of("ADMIN", "OWNER"));
+        role.put("/expected-book/auth/delete/", Set.of("ADMIN", "OWNER"));
+        role.put("/expected-book/auth/add-to-current-books/", Set.of("ADMIN", "OWNER"));
+        role.put("/report-availability/auth/add", Set.of("ADMIN", "USER", "OWNER"));
+        role.put("/report-availability/auth/delete/", Set.of("ADMIN", "USER", "OWNER"));
+        role.put("/report-availability-error/auth/get-all", Set.of("ADMIN", "OWNER"));
+        role.put("/report-availability-error/auth/send", Set.of("ADMIN", "OWNER"));
 
         //event service
-        role.put("/announcement/auth/create", Set.of("ADMIN"));
-        role.put("/announcement/auth/change/", Set.of("ADMIN"));
-        role.put("/announcement/auth/delete/", Set.of("ADMIN"));
-        role.put("/news/auth/create", Set.of("ADMIN"));
-        role.put("/news/auth/change", Set.of("ADMIN"));
-        role.put("/news/auth/delete/", Set.of("ADMIN"));
+        role.put("/announcement/auth/create", Set.of("ADMIN", "OWNER"));
+        role.put("/announcement/auth/change/", Set.of("ADMIN", "OWNER"));
+        role.put("/announcement/auth/delete/", Set.of("ADMIN", "OWNER"));
+        role.put("/news/auth/create", Set.of("ADMIN", "OWNER"));
+        role.put("/news/auth/change", Set.of("ADMIN", "OWNER"));
+        role.put("/news/auth/delete/", Set.of("ADMIN", "OWNER"));
 
         // order service
-        role.put("/reservation/auth/view_for_the_user/", Set.of("ADMIN", "USER"));
-        role.put("/reservation/auth/view_for_the_book/", Set.of("ADMIN"));
-        role.put("/reservation/auth/view_all", Set.of("ADMIN"));
-        role.put("/reservation/auth/view/", Set.of("ADMIN", "USER"));
-        role.put("/reservation/auth/create", Set.of("ADMIN", "USER"));
-        role.put("/reservation/auth/change_date/", Set.of("ADMIN", "USER"));
-        role.put("/reservation/auth/change_status/", Set.of("ADMIN"));
-        role.put("/reservation/auth/delete/", Set.of("ADMIN", "USER"));
+        role.put("/reservation/auth/view_for_the_user/", Set.of("ADMIN", "USER", "OWNER"));
+        role.put("/reservation/auth/view_for_the_book/", Set.of("ADMIN", "OWNER"));
+        role.put("/reservation/auth/view_all", Set.of("ADMIN", "OWNER"));
+        role.put("/reservation/auth/view/", Set.of("ADMIN", "USER", "OWNER"));
+        role.put("/reservation/auth/create", Set.of("ADMIN", "USER", "OWNER"));
+        role.put("/reservation/auth/change_date/", Set.of("ADMIN", "USER", "OWNER"));
+        role.put("/reservation/auth/change_status/", Set.of("ADMIN", "OWNER"));
+        role.put("/reservation/auth/delete/", Set.of("ADMIN", "USER", "OWNER"));
+
+        //auth service
+        role.put("/auth/logout", Set.of("ADMIN", "USER", "OWNER"));
+        role.put("/auth/change-credentials/", Set.of("ADMIN", "USER", "OWNER"));
+        role.put("/auth/delete/", Set.of("ADMIN", "USER", "OWNER"));
+        role.put("/auth/do-admin", Set.of("ADMIN", "USER", "OWNER"));
+
+        //user service
+        role.put("/user/change-profile/", Set.of("ADMIN", "USER", "OWNER"));
+        role.put("/user/change-credentials/", Set.of("ADMIN", "USER", "OWNER"));
+        role.put("/user/", Set.of("ADMIN", "USER", "OWNER"));
+        role.put("/user/delete/", Set.of("ADMIN", "USER", "OWNER"));
+        role.put("/user/get-user-by/", Set.of("ADMIN", "OWNER"));
+
+
+
         return role;
     }
 

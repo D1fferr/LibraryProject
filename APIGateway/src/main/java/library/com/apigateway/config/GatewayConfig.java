@@ -56,13 +56,17 @@ public class GatewayConfig {
                 .route("user-service", r->r
                         .path("/api/user/**")
                         .filters(f->f.stripPrefix(2))
-                        .uri("http:/localhost:8085"))
+                        .uri("http:/localhost:8087"))
 
                 //auth service
                 .route("auth-service", r->r
                         .path("/api/auth/**")
                         .filters(f->f.stripPrefix(2))
                         .uri("http:/localhost:8086"))
+                .route("auth-service", r->r
+                .path("/api/reset-password/**")
+                .filters(f->f.stripPrefix(2))
+                .uri("http:/localhost:8086"))
                 .build();
 
     }
