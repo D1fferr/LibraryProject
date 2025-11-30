@@ -51,6 +51,10 @@ public class GatewayConfig {
                         .path("/api/reservation/**")
                         .filters(f->f.stripPrefix(2))
                         .uri("http:/localhost:8084"))
+                .route("order-service", r->r
+                        .path("/api/cancel-reservation/**")
+                        .filters(f->f.stripPrefix(2))
+                        .uri("http:/localhost:8084"))
 
                 //user-service
                 .route("user-service", r->r

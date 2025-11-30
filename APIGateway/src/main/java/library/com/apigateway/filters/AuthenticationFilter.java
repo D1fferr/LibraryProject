@@ -70,6 +70,8 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
         role.put("/reservation/auth/change_date/", Set.of("ADMIN", "USER", "OWNER"));
         role.put("/reservation/auth/change_status/", Set.of("ADMIN", "OWNER"));
         role.put("/reservation/auth/delete/", Set.of("ADMIN", "USER", "OWNER"));
+        role.put("/cancel-reservation/cancel/", Set.of("ADMIN", "OWNER"));
+        role.put("/cancel-reservation/user/", Set.of("ADMIN", "OWNER"));
 
         //auth service
         role.put("/auth/logout", Set.of("ADMIN", "USER", "OWNER"));
