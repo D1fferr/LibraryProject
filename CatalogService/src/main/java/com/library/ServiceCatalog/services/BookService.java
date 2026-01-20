@@ -12,15 +12,18 @@ import com.library.ServiceCatalog.util.BookAlreadyExitException;
 import com.library.ServiceCatalog.util.BookNotFoundException;
 import com.library.ServiceCatalog.util.BooksNotFoundException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.MessageSource;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Locale;
@@ -31,6 +34,7 @@ import java.util.UUID;
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
+@Slf4j
 public class BookService {
 
     private final BookRepository bookRepository;
@@ -38,20 +42,28 @@ public class BookService {
     private final MessageSource messageSource;
     private final BookForKafkaRepository bookForKafkaRepository;
     private final ImageService imageService;
+    private final RedisTemplate<String, Object> redisTemplate;
+    private static final String POPULAR_BOOKS_KEY = "popular:books:page:1";
+    private static final int PAGE_SIZE = 20;
+    private final Object synchronizationForMostPopularBooks = new Object();
 
     @Transactional
-    public BookDTOForResponseCreate save(BookDTO bookDTO , MultipartFile coverImage) {
+    public BookDTOForResponseCreate save(BookDTO bookDTO, MultipartFile coverImage) {
         Book book = toEntity(bookDTO);
-
         book.setBookAddedAt(LocalDateTime.now());
+        log.info("Converted dto to entity. Title: '{}'", book.getBookName());
         bookRepository.save(book);
+        log.info("Book saved. ID: '{}'", book.getBookId());
         if (coverImage != null && !coverImage.isEmpty()) {
+            log.info("Processing cover image for book ID: {}", book.getBookId());
             String imageUrl = imageService.storeImage(coverImage, book.getBookId());
             book.setBookImage(imageUrl);
+            bookRepository.save(book);
+            log.info("Book saved. Image added. ID: '{}'", book.getBookId());
         }
-        bookRepository.save(book);
         return toBookDTOForResponse(book);
     }
+
     @Transactional
     public void saveExpectedBookToCurrentBook(BookDTOForKafka book) {
         BookForKafka entity = toEntityForKafka(book);
@@ -66,6 +78,7 @@ public class BookService {
     public void delete(UUID bookId) {
         bookRepository.deleteByBookId(bookId);
     }
+
     @Transactional(readOnly = true)
     public List<BookDTOForResponseGetBook> findAll(Pageable pageable) {
 
@@ -78,8 +91,9 @@ public class BookService {
     public BookDTOForResponseGetBook findById(UUID id) {
         return bookRepository.findByBookId(id)
                 .map(this::toBookDTOForResponseGetBook)
-                .orElseThrow(()->new BookNotFoundException("The book not found"));
+                .orElseThrow(() -> new BookNotFoundException("The book not found"));
     }
+
     @Transactional
     public BookDTOForResponseCreate updateBook(BookDTO bookDTO, UUID id, MultipartFile coverImage) {
         Book book = bookRepository.findByBookId(id)
@@ -106,20 +120,52 @@ public class BookService {
         bookRepository.save(book);
         return toBookDTOForResponse(book);
     }
+
     @Transactional(readOnly = true)
-    public List<BookDTOForResponseGetBook> findAllRecentlyAddedAt(int page, int booksPerPage){
+    public List<BookDTOForResponseGetBook> findAllRecentlyAddedAt(int page, int booksPerPage) {
         Pageable pageable = PageRequest.of(page, booksPerPage, Sort.by("bookAddedAt"));
         List<Book> books = bookRepository.findAllByOrderByBookAddedAtDesc(pageable);
         if (books.isEmpty())
             throw new BooksNotFoundException("Books not found");
         return books.stream().map(this::toBookDTOForResponseGetBook).toList();
     }
+
     @Transactional(readOnly = true)
-    public List<BookDTO> getMostPopularBooks(Pageable pageable){
-        List<BookDTO> books = bookRepository.findMostPopularBooks(pageable).stream().map(this::toDTO).toList();
-        if (books.isEmpty())
-            throw new BooksNotFoundException("Books not found");
-        return books;
+    public List<BookDTO> getMostPopularBooks(int page) {
+
+        if (page != 0) {
+            List<BookDTO> books = bookRepository.findMostPopularBooks(PageRequest.of(page, PAGE_SIZE)).stream().map(this::toDTO).toList();
+            if (books.isEmpty())
+                throw new BooksNotFoundException("Books not found");
+            return books;
+        }
+
+        List<BookDTO> redisBooks = (List<BookDTO>) redisTemplate.opsForValue().get(POPULAR_BOOKS_KEY);
+        if (redisBooks != null && !redisBooks.isEmpty()) {
+            System.out.println("From redis");
+            return redisBooks;
+        }
+        return getBooksAndSaveToRedis(page);
+    }
+
+    private List<BookDTO> getBooksAndSaveToRedis(int page) {
+        synchronized (synchronizationForMostPopularBooks) {
+            List<BookDTO> redisBooksSync = (List<BookDTO>) redisTemplate.opsForValue().get(POPULAR_BOOKS_KEY);
+            if (redisBooksSync != null && !redisBooksSync.isEmpty())
+                return redisBooksSync;
+            List<BookDTO> books = bookRepository.findMostPopularBooks(PageRequest.of(page, PAGE_SIZE)).stream().map(this::toDTO).toList();
+            if (books.isEmpty())
+                throw new BooksNotFoundException("Books not found");
+            redisTemplate.opsForValue().set(
+                    POPULAR_BOOKS_KEY,
+                    books,
+                    Duration.ofHours(2)
+            );
+            System.out.println("Redis saved");
+
+            return books;
+
+        }
     }
 
 
@@ -138,13 +184,16 @@ public class BookService {
         book.setBookAuthor(bookDTO.getBookAuthor());
         return book;
     }
+
     private BookForKafka toEntityForKafka(BookDTOForKafka bookDTOForKafka) {
         return modelMapper.map(bookDTOForKafka, BookForKafka.class);
     }
-    private BookDTOForResponseCreate toBookDTOForResponse(Book book){
+
+    private BookDTOForResponseCreate toBookDTOForResponse(Book book) {
         return modelMapper.map(book, BookDTOForResponseCreate.class);
     }
-    private BookDTOForResponseGetBook toBookDTOForResponseGetBook(Book book){
+
+    private BookDTOForResponseGetBook toBookDTOForResponseGetBook(Book book) {
         return modelMapper.map(book, BookDTOForResponseGetBook.class);
     }
 

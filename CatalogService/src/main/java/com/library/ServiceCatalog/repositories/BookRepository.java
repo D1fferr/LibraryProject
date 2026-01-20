@@ -24,6 +24,6 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
     void deleteByBookId(UUID bookId);
 
     boolean existsBookByBookId(UUID bookId);
-    @Query("SELECT b FROM MostPopularBooksCounter c JOIN Book b ON c.id = b.bookId ORDER BY c.counter DESC")
+    @Query("SELECT b FROM MostPopularBooksCounter c JOIN Book b ON c.bookId = b.bookId ORDER BY c.counter DESC")
     List<Book> findMostPopularBooks(Pageable pageable);
 }

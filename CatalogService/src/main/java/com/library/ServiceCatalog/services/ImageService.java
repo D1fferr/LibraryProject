@@ -3,6 +3,7 @@ package com.library.ServiceCatalog.services;
 import com.library.ServiceCatalog.util.FailedSaveImageException;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,6 +16,7 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class ImageService {
 
     private final S3Client s3Client;
@@ -24,27 +26,29 @@ public class ImageService {
     @PostConstruct
     public void initBucket() {
         try {
+            log.info("Initialising minio bucket '{}'", bucketName);
             s3Client.headBucket(builder -> builder.bucket(bucketName));
+            log.info("Minio bucket initialised '{}'", bucketName);
         } catch (Exception e) {
             s3Client.createBucket(builder -> builder.bucket(bucketName));
+            log.info("Minio bucket created '{}'", bucketName);
         }
     }
     public String storeImage(MultipartFile imageFile, UUID id){
-
+        String fileName = generateFileName(imageFile.getOriginalFilename(), id);
         try {
-            String fileName = generateFileName(imageFile.getOriginalFilename(), id);
-
             PutObjectRequest putObjectRequest = PutObjectRequest.builder()
                     .bucket(bucketName)
                     .key(fileName)
                     .contentType(imageFile.getContentType())
                     .build();
-
+            log.info("Trying to save image: '{}'", fileName);
             s3Client.putObject(putObjectRequest, RequestBody.fromBytes(imageFile.getBytes()));
-
+            log.info("Image saved: '{}'", fileName);
             return getImageUrl(fileName);
 
         }catch (IOException e){
+            log.info("Failed to save image: '{}'. Cause: '{}'", fileName, e.getMessage());
             throw new FailedSaveImageException("Failed to store image file");
         }
 
