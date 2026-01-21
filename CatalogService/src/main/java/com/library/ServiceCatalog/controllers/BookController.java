@@ -8,6 +8,7 @@ import com.library.ServiceCatalog.util.BookNotCreatedException;
 import com.library.ServiceCatalog.util.BooksNotFoundException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.MessageSource;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -22,6 +23,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
 
+@Slf4j
 @RestController
 @RequestMapping("/book")
 @RequiredArgsConstructor
@@ -91,6 +93,7 @@ public class BookController {
                 errorMessage.append(error.getField()).append(" - ")
                         .append(error.getDefaultMessage()).append(";");
             }
+            log.info("Errors found in entity fields. Errors: '{}'", errors);
             throw new BookNotCreatedException(errorMessage.toString());
         }
     }
