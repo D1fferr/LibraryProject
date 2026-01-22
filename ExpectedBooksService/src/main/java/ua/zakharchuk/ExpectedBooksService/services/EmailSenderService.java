@@ -1,6 +1,7 @@
 package ua.zakharchuk.ExpectedBooksService.services;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -17,6 +18,7 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class EmailSenderService {
     @Value("${send.message.from}")
     private String from;
@@ -30,13 +32,17 @@ public class EmailSenderService {
         for (ReportAvailability reportAvailability : reportAvailabilityList) {
             retryTemplate.execute(context -> {
                 try {
+
                     prepSending(reportAvailability);
                     return null;
                 } catch (Exception e) {
                     if (context.getRetryCount() >= 2) {
+
                         ReportAvailabilityError reportAvailabilityError = changeTypeToReportAvailabilityError(reportAvailability, e);
                         errorService.save(reportAvailabilityError);
+                        log.info("Saved message with errors. ID: '{}'", reportAvailabilityError.getId());
                     }
+                    log.info("Failed to sent message. ID: '{}', Errors: '{}'", reportAvailability.getId(), e.getMessage());
                     throw new EmailSendingException(e.getMessage());
                 }
             });
@@ -65,9 +71,12 @@ public class EmailSenderService {
             message.setSubject("Last update of books");
             message.setText(textPrep(reportAvailability.getUsername(),
                     reportAvailability.getExpectedBookId().toString()));
+            log.info("Trying to send message to email. Email: '{}'", reportAvailability.getUserEmail());
             mailSender.send(message);
+            log.info("Message send. Email: '{}'", reportAvailability.getUserEmail());
             reportAvailabilityService.changeStatus(reportAvailability.getId());
         } catch (Exception e) {
+            log.info("Failed to sent message. Email: '{}', Error: '{}'", reportAvailability.getUserEmail(), e.getMessage());
             throw new EmailSendingException(e.getMessage());
         }
 

@@ -25,6 +25,11 @@ application-*.properties
 *.iml
 *.ipr
 
+logs/
+**/logs/
+*.log
+**/*.log
+
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
