@@ -2,6 +2,7 @@ package org.example.firstmvc.orderservice.controllers;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.example.firstmvc.orderservice.dto.JoinDTOForCancelledReservations;
 import org.example.firstmvc.orderservice.dto.ReservationCancellationNotificationDTO;
 import org.example.firstmvc.orderservice.services.EmailSenderService;
@@ -19,6 +20,7 @@ import java.util.UUID;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/cancel-reservation")
+@Slf4j
 public class ReservationCancellationNotificationController {
     private final ReservationCancellationNotificationService service;
     private final EmailSenderService emailSenderService;
@@ -48,6 +50,7 @@ public class ReservationCancellationNotificationController {
                 errorMessage.append(error.getField()).append(" - ")
                         .append(error.getDefaultMessage()).append(";");
             }
+            log.info("Errors in entity fields. Errors: '{}'", errorMessage);
             throw new ReservationNotCreatedException(errorMessage.toString());
         }
     }

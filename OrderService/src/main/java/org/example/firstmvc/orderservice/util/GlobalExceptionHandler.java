@@ -39,4 +39,9 @@ public class GlobalExceptionHandler {
         response.setMessage(e.getMessage());
         return new ResponseEntity<>(response, HttpStatus.SERVICE_UNAVAILABLE);
     }
+    @ExceptionHandler(ReservationsNotFoundException.class)
+    public ResponseEntity<ReservationErrorResponse> handleEmailSendingException(ReservationsNotFoundException e){
+        response.setMessage(e.getMessage());
+        return new ResponseEntity<>(response, HttpStatus.SERVICE_UNAVAILABLE);
+    }
 }

@@ -1,8 +1,8 @@
 package org.example.firstmvc.orderservice.services;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.example.firstmvc.orderservice.dto.ReservationCancellationNotificationDTO;
-import org.example.firstmvc.orderservice.dto.ReservationDTO;
 import org.example.firstmvc.orderservice.dto.UserDTO;
 import org.example.firstmvc.orderservice.models.Reservation;
 import org.example.firstmvc.orderservice.util.EmailSendingException;
@@ -17,6 +17,7 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class EmailSenderService {
 
 
@@ -30,7 +31,7 @@ public class EmailSenderService {
     public void send(ReservationCancellationNotificationDTO dto, UUID id) {
         try {
             SimpleMailMessage mailMessage = new SimpleMailMessage();
-
+            log.info("Trying to send message to email. User id: '{}'", id);
             UserDTO user = getUser(id);
             mailMessage.setFrom(from);
             mailMessage.setTo(user.getEmail());
@@ -38,12 +39,13 @@ public class EmailSenderService {
             mailMessage.setText(textPrep(user.getUsername(), dto.getMessage()));
             mailSender.send(mailMessage);
         } catch (Exception e) {
+            log.info("Failed to send message to email. User id '{}', Errors: '{}'", id, e.getMessage());
             throw new EmailSendingException(e.getMessage());
         }
 
     }
     private UserDTO getUser (UUID id) throws NoSuchElementException {
-            Reservation reservation = reservationService.findByReservationId(id).get();
+            Reservation reservation = reservationService.findByReservationId(id);
             String url = "http://localhost:8087/user/" + reservation.getReservationUser();
             return restTemplate.getForObject(url, UserDTO.class);
     }

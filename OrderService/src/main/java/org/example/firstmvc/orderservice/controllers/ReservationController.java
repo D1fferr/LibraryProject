@@ -1,11 +1,15 @@
 package org.example.firstmvc.orderservice.controllers;
 
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.example.firstmvc.orderservice.dto.ReservationDTO;
+import org.example.firstmvc.orderservice.dto.ReservationDTOForChangeDate;
+import org.example.firstmvc.orderservice.models.Reservation;
+import org.example.firstmvc.orderservice.services.CrossServerRequestService;
+import org.example.firstmvc.orderservice.services.KafkaSenderService;
 import org.example.firstmvc.orderservice.services.ReservationService;
-import org.example.firstmvc.orderservice.util.ReservationNotAllowedException;
 import org.example.firstmvc.orderservice.util.ReservationNotCreatedException;
-import org.example.firstmvc.orderservice.util.ReservationNotFoundException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
@@ -15,26 +19,24 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
+
 import java.util.UUID;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/reservation")
+@Slf4j
 public class ReservationController {
 
     private final ReservationService reservationService;
-
-    public ReservationController(ReservationService reservationService) {
-        this.reservationService = reservationService;
-    }
+    private final CrossServerRequestService crossServerRequestService;
+    private final KafkaSenderService kafkaSenderService;
     @GetMapping("/auth/view_for_the_user/{id}")
     public ResponseEntity<List<ReservationDTO>> viewReservationForOneUser(@PathVariable UUID id,
                                                                           @RequestParam(value = "page", defaultValue = "0") Integer page,
                                                                           @RequestParam(value = "reservationPerPage", defaultValue = "5") Integer reservationPerPage){
         List<ReservationDTO> reservationDTOS = reservationService
                 .findReservationByUserId(id, PageRequest.of(page, reservationPerPage));
-        if (reservationDTOS.isEmpty())
-            throw new ReservationNotFoundException("No reservations found");
         return new ResponseEntity<>(reservationDTOS, HttpStatus.OK);
     }
     @GetMapping("/auth/view_for_the_book/{id}")
@@ -43,8 +45,6 @@ public class ReservationController {
                                                                           @RequestParam(value = "reservationPerPage", defaultValue = "5") Integer reservationPerPage){
         List<ReservationDTO> reservationDTOS = reservationService
                 .findReservationByBookId(id, PageRequest.of(page, reservationPerPage));
-        if (reservationDTOS.isEmpty())
-            throw new ReservationNotFoundException("No reservations found");
         return new ResponseEntity<>(reservationDTOS, HttpStatus.OK);
     }
     @GetMapping("/auth/view_all")
@@ -53,16 +53,12 @@ public class ReservationController {
                                                                    @RequestParam(value = "sortBy", defaultValue = "reservationDate") String sortBy){
         List<ReservationDTO> reservationDTOS = reservationService
                 .findAllReservation(PageRequest.of(page, reservationPerPage, Sort.by(sortBy)));
-        if (reservationDTOS.isEmpty())
-            throw new ReservationNotFoundException("No reservations found");
         return new ResponseEntity<>(reservationDTOS, HttpStatus.OK);
     }
     @GetMapping("/auth/view/{id}")
     public ResponseEntity<ReservationDTO> viewOne(@PathVariable UUID id){
-        Optional<ReservationDTO> reservationDTO = reservationService.findById(id);
-        if (reservationDTO.isEmpty())
-            throw new ReservationNotFoundException("No reservations found");
-        return new ResponseEntity<>(reservationDTO.get(), HttpStatus.OK);
+        ReservationDTO reservationDTO = reservationService.findById(id);
+        return new ResponseEntity<>(reservationDTO, HttpStatus.OK);
     }
 
     @PostMapping("/auth/create")
@@ -70,30 +66,29 @@ public class ReservationController {
                                                         BindingResult bindingResult){
 
         checkErrorsReservation(bindingResult);
-        checkAvailableDate(reservationDTO);
+        crossServerRequestService.checkAvailableDate(reservationDTO);
 
-        reservationService.save(reservationDTO);
+        Reservation reservation = reservationService.save(reservationDTO);
+        kafkaSenderService.send(reservation.getReservationId().toString());
         return ResponseEntity.ok(HttpStatus.CREATED);
     }
     @PatchMapping("/auth/change_date/{id}")
-    public ResponseEntity<HttpStatus> changeReservationDate(@RequestBody @Valid ReservationDTO reservationDTO,
+    public ResponseEntity<HttpStatus> changeReservationDate(@RequestBody @Valid ReservationDTOForChangeDate reservationDTO,
                                                         BindingResult bindingResult, @PathVariable UUID id){
         checkErrorsReservation(bindingResult);
-        ReservationDTO reservationDTOParams = reservationService.findById(id)
-                .orElseThrow(()->new ReservationNotFoundException("No reservations found"));
+        ReservationDTO reservationDTOParams = reservationService.findById(id);
         reservationDTOParams.setReservationDate(reservationDTO.getReservationDate());
-        checkAvailableDate(reservationDTOParams);
-        reservationService.update(id, reservationDTO);
+        crossServerRequestService.checkAvailableDate(reservationDTOParams);
+        reservationService.updateDate(id, reservationDTO);
         return ResponseEntity.ok(HttpStatus.OK);
     }
     @PatchMapping("/auth/change_status/{id}")
-    public ResponseEntity<HttpStatus> changeReservationStatus(@RequestBody ReservationDTO reservationDTO,
-                                                       @PathVariable UUID id){
-        reservationService.updateStatus(id, reservationDTO);
+    public ResponseEntity<HttpStatus> changeReservationStatus(@PathVariable UUID id){
+        reservationService.updateStatusToConfirmed(id);
         return ResponseEntity.ok(HttpStatus.OK);
     }
     @DeleteMapping("/auth/delete/{id}")
-    public ResponseEntity<HttpStatus> deleteReservation(@PathVariable Integer id){
+    public ResponseEntity<HttpStatus> deleteReservation(@PathVariable UUID id){
         reservationService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
@@ -106,14 +101,9 @@ public class ReservationController {
                 errorMessage.append(error.getField()).append(" - ")
                         .append(error.getDefaultMessage()).append(";");
             }
+            log.info("Errors in entity fields. Errors: '{}'", errorMessage);
             throw new ReservationNotCreatedException(errorMessage.toString());
         }
     }
-    private void checkAvailableDate(ReservationDTO reservationDTO){
-        int booksAvailable = reservationService.booksAvailable(reservationDTO.getReservationBook());
-        if (reservationService.findReservationByBookId(reservationDTO.getReservationDate(), reservationDTO.getReservationBook()).size()>booksAvailable)
-            throw new ReservationNotAllowedException("Reservations for the selected date are not available.");
-        if (reservationService.findReservationUserId(reservationDTO.getReservationDate(), reservationDTO.getReservationUser()).size()>5)
-            throw new ReservationNotAllowedException("You cannot reserve more than 5 books in 1 day. ");
-    }
+
 }
