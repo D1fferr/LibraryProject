@@ -52,13 +52,13 @@ public class BookService {
         book.setBookAddedAt(LocalDateTime.now());
         log.info("Converted dto to entity. Title: '{}'", book.getBookName());
         bookRepository.save(book);
-        log.info("Book saved. ID: '{}'", book.getBookId());
+        log.info("The book saved. ID: '{}'", book.getBookId());
         if (coverImage != null && !coverImage.isEmpty()) {
             log.info("Processing cover image for book ID: {}", book.getBookId());
             String imageUrl = imageService.storeImage(coverImage, book.getBookId());
             book.setBookImage(imageUrl);
             bookRepository.save(book);
-            log.info("Book saved. Image added. ID: '{}'", book.getBookId());
+            log.info("The book saved. Image added. ID: '{}'", book.getBookId());
         }
         return toBookDTOForResponse(book);
     }
@@ -95,14 +95,14 @@ public class BookService {
     }
 
     public BookDTOForResponseGetBook findById(UUID id) {
-        log.info("Trying to find one book");
+        log.info("Trying to find one book. ID: '{}'", id);
         Optional<Book> book  = bookRepository.findByBookId(id);
         if (book.isEmpty()){
-            log.info("The book not found");
+            log.info("The book not found. ID: '{}'", id);
             throw new BookNotFoundException("The book not found");
         }
         log.info("The book were found. ID: '{}'", book.get().getBookId());
-        return book.map(this::toBookDTOForResponseGetBook).get();
+        return toBookDTOForResponseGetBook(book.get());
     }
 
     @Transactional
@@ -110,7 +110,7 @@ public class BookService {
         log.info("Trying to find a book for updates. ID '{}'", id);
         Optional<Book> optionalBook = bookRepository.findByBookId(id);
         if (optionalBook.isEmpty()){
-            log.info("The book not found. ID: '{}'", id);
+            log.info("The book for update not found. ID: '{}'", id);
             throw new BookNotFoundException("The book not found");
         }
         Book book = optionalBook.get();
