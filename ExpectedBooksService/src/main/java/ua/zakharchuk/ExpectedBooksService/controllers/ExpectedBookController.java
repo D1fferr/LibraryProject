@@ -3,6 +3,7 @@ package ua.zakharchuk.ExpectedBooksService.controllers;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +26,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/expected-book")
 @RequiredArgsConstructor
+@Slf4j
 public class ExpectedBookController {
 
     private final KafkaSenderService kafkaSenderService;
@@ -79,6 +81,7 @@ public class ExpectedBookController {
                 errorMessage.append(fieldError.getField()).append(" - ")
                         .append(fieldError.getDefaultMessage()).append(";");
             }
+            log.info("Errors found in entity fields. Errors: '{}'", fieldErrors);
             throw new ExpectedBookNotCreatedException(errorMessage.toString());
         }
     }

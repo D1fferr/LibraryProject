@@ -2,6 +2,8 @@ package ua.zakharchuk.ExpectedBooksService.controllers;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import lombok.extern.slf4j.XSlf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +20,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/report-availability-error/auth")
+@Slf4j
 public class ReportAvailabilityErrorController {
 
     private final ReportAvailabilityErrorService errorService;
@@ -36,9 +39,11 @@ public class ReportAvailabilityErrorController {
                                                 BindingResult bindingResult){
         if (bindingResult.hasErrors()){
             String errors = bindingResult.getFieldErrors().toString();
+            log.info("Errors found in entity fields. Errors: '{}'", errors);
             throw new ReportAvailabilityErrorBadRequestException(errors);
         }
         emailSenderService.send(reportAvailabilityErrorDTOBookId.getExpectedBookId());
+
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
