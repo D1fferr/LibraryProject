@@ -8,57 +8,83 @@ import library.com.userservice1.exceptions.UserNotFoundException;
 import library.com.userservice1.models.User;
 import library.com.userservice1.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class UserService {
+
     private final UserRepository userRepository;
-
-
 
     @Transactional
     public void save(UserDTO userDTO){
-        userRepository.save(userDTOToUser(userDTO));
+        User user = userDTOToUser(userDTO);
+        userRepository.save(user);
+        log.info("User saved. ID: '{}'", user.getId());
     }
     @Transactional
     public void  updateProfile(UUID id, UserDTOForChangeProfile userDTO){
-        User user = userRepository.findById(id)
-                .orElseThrow(()->new UserNotFoundException("User not found"));
-        userRepository.save(userDTOForChangeProfileToUser(userDTO, user));
+        log.info("Trying to find one user for update profile. ID: '{}'", id);
+        Optional<User> optionalUser = userRepository.findById(id);
+        if (optionalUser.isEmpty()){
+            log.info("The user not found. ID: '{}'", id);
+            throw new UserNotFoundException("User not found");
+        }
 
+        userRepository.save(userDTOForChangeProfileToUser(userDTO, optionalUser.get()));
+        log.info("Profile updated. ID: '{}'", id);
     }
     @Transactional(readOnly = true)
     public UserDTOForView findUser(UUID id){
-        User user = userRepository.findById(id)
-                .orElseThrow(()->new UserNotFoundException("User not found"));
-        return userToUserDTOForView(user);
+        log.info("Trying to find one user. ID: '{}'", id);
+        Optional<User> optionalUser = userRepository.findById(id);
+        if (optionalUser.isEmpty()){
+            log.info("The user not found. ID: '{}'", id);
+            throw new UserNotFoundException("User not found");
+        }
+        log.info("The user found. ID: '{}'", id);
+        return userToUserDTOForView(optionalUser.get());
     }
     @Transactional
     public void deleteById(UUID id){
         userRepository.deleteById(id);
+        log.info("The user deleted. ID: '{}'", id);
     }
     @Transactional(readOnly = true)
     public List<User> findUser(String param){
+        log.info("Trying to find all users");
         List<User> users = userRepository.findUserByEmailOrLibraryCodeOrUsername(param, param, param);
-        if (users.isEmpty())
+        if (users.isEmpty()) {
+            log.info("Users not found");
             throw new UserNotFoundException("Users not found");
+        }
+        log.info("Users found");
         return users;
     }
     @Transactional
     public void updateCredential(UUID id, ChangeCredentialDTO changeCredentialDTO){
-
-        User user = userRepository.findById(id).orElseThrow(()->new UserNotFoundException("User not found"));
+        log.info("Trying to find a user for updating. ID: '{}'", id);
+        Optional<User> optionalUser = userRepository.findById(id);
+        if (optionalUser.isEmpty()){
+            log.info("The user not found. ID: '{}'", id);
+            throw new UserNotFoundException("The user not found");
+        }
+        User user = optionalUser.get();
         user.setUsername(changeCredentialDTO.getUsername());
         user.setEmail(changeCredentialDTO.getEmail());
         userRepository.save(user);
+        log.info("The user updated. ID: '{}'", id);
     }
 
     private UserDTOForView userToUserDTOForView(User user){
+        log.info("Mapping the user entity to userDTO for view");
         UserDTOForView userDTOForView = new UserDTOForView();
         userDTOForView.setEmail(user.getEmail());
         userDTOForView.setUsername(user.getUsername());
@@ -69,12 +95,14 @@ public class UserService {
 
 
     private User userDTOForChangeProfileToUser(UserDTOForChangeProfile userDto, User user){
+        log.info("Mapping the userDTO for changing profile to entity. ID: '{}'", user.getId());
         if (userDto.getLibraryCode()!=null)
             user.setLibraryCode(userDto.getLibraryCode());
         return user;
     }
 
     private User userDTOToUser(UserDTO userDTO){
+        log.info("Mapping the userDTO to entity");
         User user = new User();
         user.setId(UUID.fromString(userDTO.getId()));
         user.setEmail(userDTO.getEmail());

@@ -10,6 +10,7 @@ import library.com.userservice1.exceptions.UserNotCreatedException;
 import library.com.userservice1.models.User;
 import library.com.userservice1.services.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -22,6 +23,7 @@ import java.util.UUID;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/user")
+@Slf4j
 public class UserController {
 
     private final UserService userService;
@@ -37,6 +39,7 @@ public class UserController {
                 errorMessage.append(error.getField()).append(" - ")
                         .append(error.getDefaultMessage()).append(";");
             }
+            log.info("Errors found in entity fields. Errors: '{}'", errors);
             throw new UserNotCreatedException(errorMessage.toString());
         }
         userService.save(userDTO);
