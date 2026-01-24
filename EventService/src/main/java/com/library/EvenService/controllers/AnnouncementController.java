@@ -12,8 +12,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/announcement")
@@ -25,7 +27,7 @@ public class AnnouncementController {
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<AnnouncementDTO> getOneAnnouncement(@PathVariable int id){
+    public ResponseEntity<AnnouncementDTO> getOneAnnouncement(@PathVariable UUID id){
         return new ResponseEntity<>(announcementService.findOneById(id), HttpStatus.OK);
     }
 
@@ -38,24 +40,26 @@ public class AnnouncementController {
     }
 
     @PostMapping("/auth/create")
-    public ResponseEntity<AnnouncementDTO> createAnnouncement(@RequestBody @Valid AnnouncementDTO announcementDTO,
+    public ResponseEntity<AnnouncementDTO> createAnnouncement(@RequestPart("announcementData") @Valid AnnouncementDTO announcementDTO,
+                                                              @RequestPart(value = "coverImage", required = false) MultipartFile image,
                                                          BindingResult bindingResult){
         checkAnnouncementErrors(bindingResult);
-        announcementService.save(announcementDTO);
+        announcementService.save(announcementDTO, image);
         return new ResponseEntity<>(announcementDTO, HttpStatus.CREATED);
     }
 
     @PatchMapping("/auth/change/{id}")
     public ResponseEntity<AnnouncementDTO> changeAnnouncement(
-            @PathVariable int id,
-            @RequestBody @Valid AnnouncementDTO announcementDTO,
+            @PathVariable UUID id,
+            @RequestPart("announcementData") @Valid AnnouncementDTO announcementDTO,
+            @RequestPart(value = "coverImage", required = false) MultipartFile image,
             BindingResult bindingResult){
         checkAnnouncementErrors(bindingResult);
-        announcementService.update(id, announcementDTO);
+        announcementService.update(id, announcementDTO, image);
         return new ResponseEntity<>(announcementDTO, HttpStatus.OK);
     }
     @DeleteMapping("/auth/delete/{id}")
-    public ResponseEntity<HttpStatus> deleteAnnouncement(@PathVariable int id){
+    public ResponseEntity<HttpStatus> deleteAnnouncement(@PathVariable UUID id){
         announcementService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

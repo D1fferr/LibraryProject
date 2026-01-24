@@ -13,10 +13,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Slf4j
 @Service
@@ -25,9 +27,10 @@ public class AnnouncementService {
 
     private final AnnouncementRepository announcementRepository;
     private final ModelMapper modelMapper;
+    private final ImageService imageService;
 
     @Transactional(readOnly = true)
-    public AnnouncementDTO findOneById (int id){
+    public AnnouncementDTO findOneById (UUID id){
         log.info("Trying to find one announcement. ID: '{}'", id);
         Optional<Announcement> optionalAnnouncement = announcementRepository.findById(id);
         if (optionalAnnouncement.isEmpty()){
@@ -49,14 +52,20 @@ public class AnnouncementService {
         return allAnnouncement.stream().map(this::toDTO).toList();
     }
     @Transactional
-    public void save(AnnouncementDTO announcementDTO){
+    public void save(AnnouncementDTO announcementDTO, MultipartFile image){
+
         Announcement announcement = toEntity(announcementDTO);
         announcement.setCreatedDate(LocalDate.now());
+        if (image != null && !image.isEmpty()) {
+            log.info("Processing cover image for announcement ID: {}", announcement.getId());
+            String imageUrl = imageService.storeImage(image, announcement.getId());
+            announcement.setPhoto(imageUrl);
+        }
         announcementRepository.save(announcement);
         log.info("The announcement saved. ID: '{}'", announcement.getId());
     }
     @Transactional
-    public void  update (int id, AnnouncementDTO announcementDTO){
+    public void  update (UUID id, AnnouncementDTO announcementDTO, MultipartFile image){
         log.info("Trying to find the announcement for update. ID: '{}'", id);
         Optional<Announcement> optionalAnnouncement = announcementRepository.findById(id);
         if (optionalAnnouncement.isEmpty()){
@@ -71,12 +80,17 @@ public class AnnouncementService {
             announcement.setName(announcementDTO.getName());
         if (announcement.getPhoto()!=null)
             announcement.setPhoto(announcementDTO.getPhoto());
+        if (image != null && !image.isEmpty()) {
+            log.info("Processing cover image for announcement ID: {}", announcement.getId());
+            String imageUrl = imageService.storeImage(image, announcement.getId());
+            announcement.setPhoto(imageUrl);
+        }
         announcementRepository.save(announcement);
         log.info("The announcement updated. ID: '{}'", id);
     }
 
     @Transactional
-    public void delete(int id){
+    public void delete(UUID id){
         announcementRepository.deleteById(id);
         log.info("The announcement deleted. ID: '{}'", id);
     }

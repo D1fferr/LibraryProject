@@ -1,13 +1,12 @@
 package com.library.EvenService.utill;
+
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
 
-@Setter
 @Getter
+@Setter
 @Component
-public class AnnouncementErrorResponse {
-
+public class ImageErrorResponse {
     private String message;
-
 }
