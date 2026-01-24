@@ -4,6 +4,8 @@ import com.library.EvenService.dto.AnnouncementDTO;
 import com.library.EvenService.dto.EventDTO;
 import com.library.EvenService.services.AnnouncementService;
 import com.library.EvenService.services.EventService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,13 +18,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/events")
+@RequiredArgsConstructor
 public class EventController {
 
     private final EventService eventService;
-
-    public EventController(EventService eventService) {
-        this.eventService = eventService;
-    }
 
     @GetMapping("/get-all-events")
     public ResponseEntity<List<EventDTO>> getAllEvents(@RequestParam(value = "page", defaultValue = "0") Integer page,

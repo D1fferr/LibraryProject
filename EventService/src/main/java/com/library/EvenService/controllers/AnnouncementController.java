@@ -4,6 +4,8 @@ import com.library.EvenService.dto.AnnouncementDTO;
 import com.library.EvenService.services.AnnouncementService;
 import com.library.EvenService.utill.NewsNotCreatedException;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,13 +17,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/announcement")
+@RequiredArgsConstructor
+@Slf4j
 public class AnnouncementController {
 
     private final AnnouncementService announcementService;
-
-    public AnnouncementController(AnnouncementService announcementService) {
-        this.announcementService = announcementService;
-    }
 
 
     @GetMapping("/{id}")
@@ -68,6 +68,7 @@ public class AnnouncementController {
                 errorMessage.append(error.getField()).append(" - ")
                         .append(error.getDefaultMessage()).append(";");
             }
+            log.info("Errors found in entity fields. Errors: '{}'", errors);
             throw new NewsNotCreatedException(errorMessage.toString());
         }
     }

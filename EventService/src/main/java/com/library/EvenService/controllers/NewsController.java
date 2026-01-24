@@ -4,6 +4,8 @@ import com.library.EvenService.dto.NewsDTO;
 import com.library.EvenService.services.NewsService;
 import com.library.EvenService.utill.NewsNotCreatedException;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,13 +17,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/news")
+@RequiredArgsConstructor
+@Slf4j
 public class NewsController {
 
     private final NewsService newsService;
-
-    public NewsController(NewsService newsService) {
-        this.newsService = newsService;
-    }
 
     @GetMapping("/get-all")
     public ResponseEntity<List<NewsDTO>> getAllNews(@RequestParam(value = "page", defaultValue = "0") Integer page,
@@ -63,6 +63,7 @@ public class NewsController {
                 errorMessage.append(error.getField()).append(" - ")
                         .append(error.getDefaultMessage()).append(";");
             }
+            log.info("Errors found in entity fields. Errors: '{}'", errors);
             throw new NewsNotCreatedException(errorMessage.toString());
         }
     }
