@@ -3,6 +3,7 @@ package library.com.apigateway.filters;
 import io.jsonwebtoken.lang.Maps;
 import library.com.apigateway.security.JwtUtil;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
@@ -20,6 +21,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class AuthenticationFilter implements GlobalFilter, Ordered {
@@ -95,21 +97,27 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         ServerHttpRequest request = exchange.getRequest();
         String path = request.getPath().value();
-
-        if (isPublicRoute(path))
+        log.info("Starting of the filter");
+        if (isPublicRoute(path)) {
+            log.info("The route is public. Path: '{}'", path);
             return chain.filter(exchange);
-
+        }
         String authHeader = request.getHeaders().getFirst("Authorization");
-        if (authHeader == null || !authHeader.startsWith("Bearer "))
+        if (authHeader == null || !authHeader.startsWith("Bearer ")){
+            log.info("Missing jwt token for authorized request. Path: '{}'", path);
             return unauthorized(exchange, "Missing JWT token");
+        }
 
         String token = authHeader.substring(7);
-        if (!jwtUtil.validateToken(token))
+        if (!jwtUtil.validateToken(token)) {
+            log.info("Invalid jwt token");
             return unauthorized(exchange, "Invalid JWT token");
-
-        if (!hasRequiredRole(token, path))
+        }
+        if (!hasRequiredRole(token, path)) {
+            log.info("The role is forbidden for this route");
             return forbidden(exchange, "Insufficient permissions");
-
+        }
+        log.info("The filter is completed");
         return chain.filter(exchange.mutate().request(request).build());
     }
 
