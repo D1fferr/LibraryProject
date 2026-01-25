@@ -49,5 +49,16 @@ public class GlobalExceptionHandler {
         userErrorResponse.setMessage(e.getMessage());
         return new ResponseEntity<>(userErrorResponse, HttpStatus.BAD_REQUEST);
     }
+    @ExceptionHandler(FailedToConnectWithUserServiceException.class)
+    public ResponseEntity<UserErrorResponse> handleFailedToSendUserException(FailedToConnectWithUserServiceException e){
+        userErrorResponse.setMessage(e.getMessage());
+        return new ResponseEntity<>(userErrorResponse, HttpStatus.BAD_REQUEST);
+    }
+    @ExceptionHandler(FailedToConnectWithRedisException.class)
+    public ResponseEntity<UserErrorResponse> handleFailedToConnectWithRedisException(FailedToConnectWithRedisException e){
+        userErrorResponse.setMessage(e.getMessage());
+        return new ResponseEntity<>(userErrorResponse, HttpStatus.BAD_REQUEST);
+    }
+
 
 }

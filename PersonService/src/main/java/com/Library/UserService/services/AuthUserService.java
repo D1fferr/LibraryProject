@@ -9,6 +9,7 @@ import com.Library.UserService.repositories.AuthUserRepository;
 import com.Library.UserService.util.UserAlreadyExistException;
 import com.Library.UserService.util.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,7 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class AuthUserService {
 
     private final AuthUserRepository authUserRepository;
@@ -27,41 +29,60 @@ public class AuthUserService {
 
     @Transactional
     public AuthUser save(UserDTO userDTO){
+        log.info("Trying to find a user to save the user. Username: '{}'", userDTO.getUsername());
         Optional<AuthUser> authUser = authUserRepository.findFirstByUsername(userDTO.getUsername());
-        if (authUser.isPresent())
+        if (authUser.isPresent()) {
+            log.info("The user not found. Username: '{}'", userDTO.getUsername());
             throw new UserAlreadyExistException("A user with this username already exists.");
-
+        }
         AuthUser auth = toAuthUser(userDTO);
         auth.setRole("USER");
         auth.setPassword(passwordEncoder.encode(auth.getPassword()));
         authUserRepository.save(auth);
+        log.info("User saved. ID: '{}'", auth.getId());
         crossServerRequestService.sendUser(userDTO, auth.getId());
         return auth;
     }
     @Transactional
     public AuthUser saveAsAdmin(UserDTO userDTO){
+        log.info("Trying to find a user to save the user as admin. Username: '{}'", userDTO.getUsername());
         Optional<AuthUser> authUser = authUserRepository.findFirstByUsername(userDTO.getUsername());
-        if (authUser.isPresent())
+        if (authUser.isPresent()) {
+            log.info("The user not found. Username: '{}'", userDTO.getUsername());
             throw new UserAlreadyExistException("A user with this username already exists.");
-
+        }
         AuthUser auth = toAuthUser(userDTO);
         auth.setRole("ADMIN");
         auth.setPassword(passwordEncoder.encode(auth.getPassword()));
         authUserRepository.save(auth);
+        log.info("User saved as admin. ID: '{}'", auth.getId());
         crossServerRequestService.sendUser(userDTO, auth.getId());
         return auth;
     }
     public AuthUser login(LoginDTO loginDTO){
-        AuthUser authUser = authUserRepository.findFirstByUsername(loginDTO.getUsername())
-                .orElseThrow(()->new UserNotFoundException("User not found"));
-        if (!passwordEncoder.matches(loginDTO.getPassword(), authUser.getPassword()))
+        log.info("Trying to find the user to login. Username: '{}'", loginDTO.getUsername());
+        Optional<AuthUser> optionalAuthUser = authUserRepository.findFirstByUsername(loginDTO.getUsername());
+        if (optionalAuthUser.isEmpty()){
+            log.info("The user not found. Username: '{}'", loginDTO.getUsername());
+            throw new UserNotFoundException("The user not found");
+        }
+        AuthUser authUser = optionalAuthUser.get();
+        if (!passwordEncoder.matches(loginDTO.getPassword(), authUser.getPassword())){
+            log.info("Incorrect password. Username: '{}'", loginDTO.getUsername());
             throw new BadCredentialsException("Incorrect password");
+        }
+        log.info("Login succeed. Username: '{}'", loginDTO.getUsername());
         return authUser;
     }
     @Transactional
     public void updateCredentials(UUID id, ChangeCredentialDTO changeCredentialDTO){
-         AuthUser authUser = authUserRepository.findById(id)
-                 .orElseThrow(()->new UserNotFoundException("User not found"));
+        log.info("Trying to find the user to update credentials. ID: '{}'", id);
+        Optional<AuthUser> optionalAuthUser = authUserRepository.findById(id);
+        if (optionalAuthUser.isEmpty()){
+            log.info("The user not found. ID: '{}'", id);
+            throw new UserNotFoundException("The user not found");
+        }
+         AuthUser authUser = optionalAuthUser.get();
          if (changeCredentialDTO.getUsername()!=null)
             authUser.setUsername(changeCredentialDTO.getUsername());
          if (changeCredentialDTO.getPassword()!=null)
@@ -69,6 +90,7 @@ public class AuthUserService {
          if (changeCredentialDTO.getEmail()!=null)
             authUser.setEmail(changeCredentialDTO.getEmail());
          authUserRepository.save(authUser);
+         log.info("The user credentials updated. ID: '{}'", id);
          crossServerRequestService.sendCredential(authUser, id);
     }
     @Transactional(readOnly = true)
@@ -79,16 +101,24 @@ public class AuthUserService {
     public void deleteById(UUID id){
         crossServerRequestService.delete(id);
         authUserRepository.deleteById(id);
+        log.info("The user deleted. ID: '{}'", id);
     }
     @Transactional
     public void doAdmin(DoAdminDTO dto){
-        AuthUser authUser = authUserRepository.findById(dto.getId())
-                .orElseThrow(()->new UserNotFoundException("User not found"));
+        log.info("Trying to find user to make him admin. ID: '{}'", dto.getId());
+        Optional<AuthUser> optionalAuthUser = authUserRepository.findById(dto.getId());
+        if (optionalAuthUser.isEmpty()){
+            log.info("The user not found. ID: '{}'", dto.getId());
+            throw new UserNotFoundException("User not found");
+        }
+        AuthUser authUser = optionalAuthUser.get();
         authUser.setRole("ADMIN");
         authUserRepository.save(authUser);
+        log.info("The user saved. ID: '{}'", authUser.getId());
     }
 
     private AuthUser toAuthUser(UserDTO userDTO){
+        log.info("Mapping userDTO to an auth user entity");
         AuthUser authUser = new AuthUser();
         authUser.setUsername(userDTO.getUsername());
         authUser.setPassword(userDTO.getUserPassword());

@@ -12,6 +12,7 @@ import com.Library.UserService.services.TokenBlackListService;
 import com.Library.UserService.util.UserNotCreatedException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -24,11 +25,11 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
+@Slf4j
 public class AuthController {
     private final JWTProvider jwtProvider;
     private final TokenBlackListService tokenBlackListService;
     private final AuthUserService authUserService;
-    private final CrossServerRequestService crossServerRequestService;
 
     @PostMapping("/registration")
     public ResponseEntity<HttpStatus> create(@RequestBody @Valid UserDTO userDTO,
@@ -54,7 +55,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<HttpStatus> login (@RequestBody LoginDTO loginDTO) {
+    public ResponseEntity<HttpStatus> login(@RequestBody LoginDTO loginDTO) {
         AuthUser authUser = authUserService.login(loginDTO);
         String token = jwtProvider.generatedToken(loginDTO.getUsername(), authUser.getId(), authUser.getRole());
         return ResponseEntity.status(HttpStatus.OK)
@@ -99,6 +100,7 @@ public class AuthController {
                 errorMessage.append(error.getField()).append(" - ")
                         .append(error.getDefaultMessage()).append(";");
             }
+            log.info("Errors found in entity fields. Errors: '{}'", errors);
             throw new UserNotCreatedException(errorMessage.toString());
         }
     }
