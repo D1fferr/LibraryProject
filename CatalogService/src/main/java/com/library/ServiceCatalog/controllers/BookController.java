@@ -5,11 +5,9 @@ import com.library.ServiceCatalog.dto.BookDTOForResponseCreate;
 import com.library.ServiceCatalog.dto.BookDTOForResponseGetBook;
 import com.library.ServiceCatalog.services.BookService;
 import com.library.ServiceCatalog.util.BookNotCreatedException;
-import com.library.ServiceCatalog.util.BooksNotFoundException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.MessageSource;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
@@ -20,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
-import java.util.Locale;
 import java.util.UUID;
 
 @Slf4j
@@ -59,7 +56,7 @@ public class BookController {
     public ResponseEntity<BookDTOForResponseCreate> createBook(@RequestPart("bookData") @Valid BookDTO bookDTO,
                                                                @RequestPart(value = "coverImage", required = false) MultipartFile coverImage,
                                                                BindingResult bindingResult){
-        errorCheckingWhenChangingBookFields(bindingResult);
+        validateBookFields(bindingResult);
         BookDTOForResponseCreate bookDTOForResponseCreate = bookService.save(bookDTO, coverImage);
         return new ResponseEntity<>(bookDTOForResponseCreate, HttpStatus.CREATED);
     }
@@ -73,7 +70,7 @@ public class BookController {
                                                                @RequestPart("bookData") @Valid BookDTO bookDTO,
                                                                @RequestPart(value = "coverImage", required = false) MultipartFile coverImage,
                                                                BindingResult bindingResult){
-        errorCheckingWhenChangingBookFields(bindingResult);
+        validateBookFields(bindingResult);
         BookDTOForResponseCreate bookDTOForResponseCreate = bookService.updateBook(bookDTO, id, coverImage);
         return new ResponseEntity<>(bookDTOForResponseCreate, HttpStatus.OK);
     }
@@ -85,7 +82,7 @@ public class BookController {
 
     }
 
-    private void errorCheckingWhenChangingBookFields(BindingResult bindingResult) {
+    private void validateBookFields(BindingResult bindingResult) {
         if (bindingResult.hasErrors()){
             StringBuilder errorMessage = new StringBuilder();
             List<FieldError> errors = bindingResult.getFieldErrors();
@@ -93,7 +90,7 @@ public class BookController {
                 errorMessage.append(error.getField()).append(" - ")
                         .append(error.getDefaultMessage()).append(";");
             }
-            log.info("Errors found in entity fields. Errors: '{}'", errors);
+            log.info("\"Validation failed for book fields: {}", errors);
             throw new BookNotCreatedException(errorMessage.toString());
         }
     }

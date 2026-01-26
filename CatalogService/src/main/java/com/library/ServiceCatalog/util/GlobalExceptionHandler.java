@@ -1,7 +1,6 @@
 package com.library.ServiceCatalog.util;
 
-import com.library.ServiceCatalog.services.BookService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.RedisConnectionFailureException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -21,8 +20,8 @@ public class GlobalExceptionHandler {
         bookErrorResponse.setMessage(e.getMessage());
         return new ResponseEntity<>(bookErrorResponse, HttpStatus.BAD_REQUEST);
     }
-    @ExceptionHandler(BookAlreadyExitException.class)
-    public ResponseEntity<BookErrorResponse> handleBookAlreadyExitException(BookAlreadyExitException e){
+    @ExceptionHandler(BookAlreadyExistException.class)
+    public ResponseEntity<BookErrorResponse> handleBookAlreadyExitException(BookAlreadyExistException e){
         bookErrorResponse.setMessage(e.getMessage());
         return new ResponseEntity<>(bookErrorResponse, HttpStatus.BAD_REQUEST);
     }
@@ -41,6 +40,17 @@ public class GlobalExceptionHandler {
         bookErrorResponse.setMessage(e.getMessage());
         return new ResponseEntity<>(bookErrorResponse, HttpStatus.SERVICE_UNAVAILABLE);
     }
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<BookErrorResponse> handleIllegalArgumentException(IllegalArgumentException e){
+        bookErrorResponse.setMessage(e.getMessage());
+        return new ResponseEntity<>(bookErrorResponse, HttpStatus.SERVICE_UNAVAILABLE);
+    }
+    @ExceptionHandler(RedisConnectionFailureException.class)
+    public ResponseEntity<BookErrorResponse> handleRedisConnectionFailureException(RedisConnectionFailureException e){
+        bookErrorResponse.setMessage(e.getMessage());
+        return new ResponseEntity<>(bookErrorResponse, HttpStatus.SERVICE_UNAVAILABLE);
+    }
+
 
 
 }

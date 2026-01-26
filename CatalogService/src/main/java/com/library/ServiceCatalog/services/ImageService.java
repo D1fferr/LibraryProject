@@ -47,13 +47,12 @@ public class ImageService {
             log.info("Image saved: '{}'", fileName);
             return getImageUrl(fileName);
 
-        }catch (IOException e){
-            log.info("Failed to save image: '{}'. Cause: '{}'", fileName, e.getMessage());
-            throw new FailedSaveImageException("Failed to store image file");
+        }catch (Exception e){
+            log.warn("Failed to save image: '{}'. Cause: '{}'", fileName, e.getMessage());
+            throw new FailedSaveImageException("Failed to store image file" + e.getMessage());
         }
-
-
     }
+
     private String getImageUrl(String fileName){
         if (fileName == null || fileName.trim().isEmpty()) {
             return null;
