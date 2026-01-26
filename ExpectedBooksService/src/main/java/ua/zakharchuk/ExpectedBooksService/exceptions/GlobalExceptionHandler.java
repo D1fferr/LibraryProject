@@ -3,6 +3,7 @@ package ua.zakharchuk.ExpectedBooksService.exceptions;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.kafka.KafkaException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -46,6 +47,11 @@ public class GlobalExceptionHandler {
     }
     @ExceptionHandler(FailedSaveImageException.class)
     public ResponseEntity<ExpectedBookErrorResponse> handleFailedSaveImageException(FailedSaveImageException e){
+        expectedBookErrorResponse.setMessage(e.getMessage());
+        return new ResponseEntity<>(expectedBookErrorResponse, HttpStatus.SERVICE_UNAVAILABLE);
+    }
+    @ExceptionHandler(KafkaException.class)
+    public ResponseEntity<ExpectedBookErrorResponse> handleKafkaException(KafkaException e){
         expectedBookErrorResponse.setMessage(e.getMessage());
         return new ResponseEntity<>(expectedBookErrorResponse, HttpStatus.SERVICE_UNAVAILABLE);
     }

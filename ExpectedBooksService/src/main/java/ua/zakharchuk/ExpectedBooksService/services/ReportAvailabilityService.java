@@ -41,13 +41,13 @@ public class ReportAvailabilityService {
     public void changeStatus(UUID id){
         Optional<ReportAvailability> optionalReportAvailability = reportAvailabilityRepository.findById(id);
         if (optionalReportAvailability.isEmpty()){
-            log.info("Failed to find report availability. Record not found. ID: '{}'", id);
+            log.warn("Failed to find report availability. Record not found. ID: '{}'", id);
             throw new ReportAvailabilityNotFoundException("Record not found");
         }
         ReportAvailability reportAvailability = optionalReportAvailability.get();
         reportAvailability.setStatus(Status.SENT);
-        log.info("Change status report availability to sent. ID: '{}'", reportAvailability.getId());
         reportAvailabilityRepository.save(reportAvailability);
+        log.info("Change status report availability to sent. ID: '{}'", reportAvailability.getId());
     }
     @Transactional(readOnly = true)
     public List<ReportAvailability> findAllByBookId(UUID id){

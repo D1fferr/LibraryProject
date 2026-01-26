@@ -1,7 +1,6 @@
 package ua.zakharchuk.ExpectedBooksService.services;
 
 
-import com.fasterxml.jackson.annotation.OptBoolean;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -34,15 +33,13 @@ public class ExpectedBookService {
     public ExpectedBookDTO save(ExpectedBookDTOCreate expectedBookDTO, MultipartFile coverImage) {
         ExpectedBook expectedBook = toExpectedBookEntityCreate(expectedBookDTO);
         expectedBook.setExpectedBookAddedAt(LocalDateTime.now());
-        expectedBookRepository.save(expectedBook);
-        log.info("Expected book saved. ID: '{}'", expectedBook.getExpectedBookId());
-        if (coverImage != null && !coverImage.isEmpty()) {
+       if (coverImage != null && !coverImage.isEmpty()) {
             log.info("Processing cover image for book ID: {}", expectedBook.getExpectedBookId());
             String imageUrl = imageService.storeImage(coverImage, expectedBook.getExpectedBookId());
             expectedBook.setExpectedBookImage(imageUrl);
-            expectedBookRepository.save(expectedBook);
-            log.info("The book saved. Image added. ID: '{}'", expectedBook.getExpectedBookId());
         }
+        expectedBookRepository.save(expectedBook);
+        log.info("Expected book saved. ID: '{}'", expectedBook.getExpectedBookId());
         return toExpectedBookDTO(expectedBook);
     }
 
@@ -86,13 +83,13 @@ public class ExpectedBookService {
     }
 
     @Transactional(readOnly = true)
-    public ExpectedBookDTO findOneBook(UUID id) {
-        log.info("Trying to find one book. ID: '{}'", id);
+    public ExpectedBookDTO findById(UUID id) {
         Optional<ExpectedBook> optionalExpectedBook = expectedBookRepository.findByExpectedBookId(id);
         if (optionalExpectedBook.isEmpty()){
-            log.info("The expected book not found. ID: '{}'", id);
+            log.warn("The expected book not found. ID: '{}'", id);
             throw new ExpectedBookNotFoundException("The selected book was not found.");
         }
+        log.info("The book were found. ID: '{}'", id);
         return toExpectedBookDTO(optionalExpectedBook.get());
     }
 
@@ -101,7 +98,7 @@ public class ExpectedBookService {
         log.info("Trying to find one book for kafka for adding to current books. ID: '{}'", id);
         Optional<ExpectedBook> optionalExpectedBook = expectedBookRepository.findByExpectedBookId(id);
         if (optionalExpectedBook.isEmpty()){
-            log.info("The expected book for kafka not found. ID: '{}'", id);
+            log.warn("The expected book for kafka not found. ID: '{}'", id);
             throw new ExpectedBookNotFoundException("The selected book was not found.");
         }
         return toExpectedBookDTOForKafka(optionalExpectedBook.get());
@@ -109,11 +106,10 @@ public class ExpectedBookService {
 
     @Transactional(readOnly = true)
     public List<ExpectedBookDTO> findAll(Pageable pageable) {
-        log.info("Trying to find all books");
         List<ExpectedBookDTO> expectedBookDTOs = expectedBookRepository
                 .findAll(pageable).map(this::toExpectedBookDTO).toList();
         if (expectedBookDTOs.isEmpty()){
-            log.info("Expected books not found");
+            log.warn("Expected books not found");
             throw new ExpectedBooksNotFoundException("The selected books were not found.");
         }
         log.info("Expected books were found");

@@ -1,22 +1,18 @@
 package ua.zakharchuk.ExpectedBooksService.controllers;
 
 import jakarta.validation.Valid;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ua.zakharchuk.ExpectedBooksService.dtos.ExpectedBookDTO;
 import ua.zakharchuk.ExpectedBooksService.dtos.ExpectedBookDTOCreate;
-import ua.zakharchuk.ExpectedBooksService.dtos.ExpectedBookDTOForKafka;
 import ua.zakharchuk.ExpectedBooksService.exceptions.ExpectedBookNotCreatedException;
-import ua.zakharchuk.ExpectedBooksService.models.ExpectedBook;
 import ua.zakharchuk.ExpectedBooksService.services.ExpectedBookService;
 import ua.zakharchuk.ExpectedBooksService.services.KafkaSenderService;
 
@@ -35,7 +31,7 @@ public class ExpectedBookController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ExpectedBookDTO> getOne(@PathVariable UUID id){
-        return new ResponseEntity<>(expectedBookService.findOneBook(id), HttpStatus.OK);
+        return new ResponseEntity<>(expectedBookService.findById(id), HttpStatus.OK);
     }
     @GetMapping("/get-all")
     public ResponseEntity<List<ExpectedBookDTO>> getAll(

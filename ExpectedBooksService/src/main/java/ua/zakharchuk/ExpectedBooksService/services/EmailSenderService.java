@@ -33,7 +33,7 @@ public class EmailSenderService {
             retryTemplate.execute(context -> {
                 try {
 
-                    prepSending(reportAvailability);
+                    sendEmail(reportAvailability);
                     return null;
                 } catch (Exception e) {
                     if (context.getRetryCount() >= 2) {
@@ -42,7 +42,7 @@ public class EmailSenderService {
                         errorService.save(reportAvailabilityError);
                         log.info("Saved message with errors. ID: '{}'", reportAvailabilityError.getId());
                     }
-                    log.info("Failed to sent message. ID: '{}', Errors: '{}'", reportAvailability.getId(), e.getMessage());
+                    log.warn("Failed to sent message. ID: '{}', Errors: '{}'", reportAvailability.getId(), e.getMessage());
                     throw new EmailSendingException(e.getMessage());
                 }
             });
@@ -54,7 +54,7 @@ public class EmailSenderService {
         List<ReportAvailability> listWithErrors = new ArrayList<>();
         for (ReportAvailability reportAvailability : reportAvailabilityList) {
             try {
-                prepSending(reportAvailability);
+                sendEmail(reportAvailability);
             } catch (Exception e) {
                 listWithErrors.add(reportAvailability);
             }
@@ -63,7 +63,7 @@ public class EmailSenderService {
             retrySendingEmail(listWithErrors);
     }
 
-    private void prepSending(ReportAvailability reportAvailability) {
+    private void sendEmail(ReportAvailability reportAvailability) {
         try {
             SimpleMailMessage message = new SimpleMailMessage();
             message.setFrom(from);
@@ -76,7 +76,7 @@ public class EmailSenderService {
             log.info("Message send. Email: '{}'", reportAvailability.getUserEmail());
             reportAvailabilityService.changeStatus(reportAvailability.getId());
         } catch (Exception e) {
-            log.info("Failed to sent message. Email: '{}', Error: '{}'", reportAvailability.getUserEmail(), e.getMessage());
+            log.warn("Failed to sent message. Email: '{}', Error: '{}'", reportAvailability.getUserEmail(), e.getMessage());
             throw new EmailSendingException(e.getMessage());
         }
 

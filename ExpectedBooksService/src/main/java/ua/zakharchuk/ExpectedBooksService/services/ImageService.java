@@ -48,7 +48,7 @@ public class ImageService {
             return getImageUrl(fileName);
 
         }catch (IOException e){
-            log.info("Failed to save image: '{}'. Cause: '{}'", fileName, e.getMessage());
+            log.warn("Failed to save image: '{}'. Cause: '{}'", fileName, e.getMessage());
             throw new FailedSaveImageException("Failed to store image file");
         }
 

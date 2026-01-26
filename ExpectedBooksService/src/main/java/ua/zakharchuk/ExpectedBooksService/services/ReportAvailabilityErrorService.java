@@ -29,14 +29,12 @@ public class ReportAvailabilityErrorService {
 
     @Transactional(readOnly = true)
     public List<ReportAvailabilityErrorDTO> findAll(Pageable pageable) {
-        log.info("Trying to find all report availability errors");
         List<ReportAvailabilityErrorDTO> reportAvailabilityErrorDTOS = errorRepository
                 .findAllByStatus(Status.CREATED, pageable).stream().map(this::toDTO).toList();
         if (reportAvailabilityErrorDTOS.isEmpty()){
-            log.info("Failed to find all report availability errors. The selected record not found");
+            log.warn("Failed to find all report availability errors. The selected record not found");
             throw new ExpectedBooksNotFoundException("The selected record not found.");
         }
-        log.info("All report availability errors were found");
         return reportAvailabilityErrorDTOS;
     }
 
