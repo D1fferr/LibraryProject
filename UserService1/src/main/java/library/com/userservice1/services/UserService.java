@@ -31,10 +31,9 @@ public class UserService {
     }
     @Transactional
     public void  updateProfile(UUID id, UserDTOForChangeProfile userDTO){
-        log.info("Trying to find one user for update profile. ID: '{}'", id);
         Optional<User> optionalUser = userRepository.findById(id);
         if (optionalUser.isEmpty()){
-            log.info("The user not found. ID: '{}'", id);
+            log.warn("The user not found. ID: '{}'", id);
             throw new UserNotFoundException("User not found");
         }
 
@@ -43,10 +42,9 @@ public class UserService {
     }
     @Transactional(readOnly = true)
     public UserDTOForView findUser(UUID id){
-        log.info("Trying to find one user. ID: '{}'", id);
         Optional<User> optionalUser = userRepository.findById(id);
         if (optionalUser.isEmpty()){
-            log.info("The user not found. ID: '{}'", id);
+            log.warn("The user not found. ID: '{}'", id);
             throw new UserNotFoundException("User not found");
         }
         log.info("The user found. ID: '{}'", id);
@@ -59,10 +57,9 @@ public class UserService {
     }
     @Transactional(readOnly = true)
     public List<User> findUser(String param){
-        log.info("Trying to find all users");
         List<User> users = userRepository.findUserByEmailOrLibraryCodeOrUsername(param, param, param);
         if (users.isEmpty()) {
-            log.info("Users not found");
+            log.warn("Users not found");
             throw new UserNotFoundException("Users not found");
         }
         log.info("Users found");
@@ -70,10 +67,9 @@ public class UserService {
     }
     @Transactional
     public void updateCredential(UUID id, ChangeCredentialDTO changeCredentialDTO){
-        log.info("Trying to find a user for updating. ID: '{}'", id);
         Optional<User> optionalUser = userRepository.findById(id);
         if (optionalUser.isEmpty()){
-            log.info("The user not found. ID: '{}'", id);
+            log.warn("The user not found. ID: '{}'", id);
             throw new UserNotFoundException("The user not found");
         }
         User user = optionalUser.get();
