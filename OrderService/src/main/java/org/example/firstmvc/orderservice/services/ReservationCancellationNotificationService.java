@@ -36,7 +36,7 @@ public class ReservationCancellationNotificationService {
         log.info("Trying to find all canceled reservations");
         List<JoinDTOForCancelledReservations> reservations = repository.findReservations(id);
         if (reservations.isEmpty()) {
-            log.info("Reservations not found");
+            log.warn("Reservations not found");
             throw new ReservationNotFoundException("Reservations not found");
         }
         log.info("All canceled reservations found");

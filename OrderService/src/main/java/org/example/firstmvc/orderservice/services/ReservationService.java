@@ -34,7 +34,6 @@ public class ReservationService {
 
     @Transactional
     public Reservation save(ReservationDTO reservationDTO) {
-        log.info("Trying to save reservation");
         Reservation reservation = toEntity(reservationDTO);
         reservation.setReservationStatus(ReservationStatus.CREATED);
         reservation.setCreatedAt(LocalDateTime.now());
@@ -48,7 +47,7 @@ public class ReservationService {
         log.info("Trying to find the reservations to change reservations date. ID: '{}'", id);
         Optional<Reservation> optionalReservation = reservationRepository.findReservationsByReservationId(id);
         if (optionalReservation.isEmpty()){
-            log.info("No reservations to change reservations date. ID: '{}'", id);
+            log.warn("No reservations to change reservations date. ID: '{}'", id);
             throw new ReservationNotFoundException("No reservations found");
         }
 
@@ -63,10 +62,9 @@ public class ReservationService {
 
     @Transactional
     public void updateStatusToConfirmed(UUID id) {
-        log.info("Trying to find the reservations to change status to confirmed. ID: '{}'", id);
         Optional<Reservation> optionalReservation = reservationRepository.findReservationsByReservationId(id);
         if (optionalReservation.isEmpty()) {
-            log.info("No reservations to change status to confirmed found. ID: '{}'", id);
+            log.warn("No reservations to change status to confirmed found. ID: '{}'", id);
             throw new ReservationNotFoundException("No reservations found");
         }
         Reservation reservation = optionalReservation.get();
@@ -77,10 +75,10 @@ public class ReservationService {
 
     @Transactional
     public void changeStatusToCanceled(UUID id) {
-        log.info("Trying to find the reservations to change status to canceled. ID: '{}'", id);
+        log.info("Trying to find the reservation to change status to canceled. ID: '{}'", id);
         Optional<Reservation> optionalReservation = reservationRepository.findReservationsByReservationId(id);
         if (optionalReservation.isEmpty()) {
-            log.info("No reservations to change status to canceled found. ID: '{}'", id);
+            log.warn("No reservations to change status to canceled found. ID: '{}'", id);
             throw new ReservationNotFoundException("No reservations found");
         }
         Reservation reservation = optionalReservation.get();
@@ -92,14 +90,14 @@ public class ReservationService {
     @Transactional
     public void delete(UUID id) {
         reservationRepository.deleteById(id);
-        log.info("The reservations deleted. ID: '{}'", id);
+        log.info("The reservation deleted. ID: '{}'", id);
     }
 
     @Transactional(readOnly = true)
     public List<ReservationDTO> findReservationByBookId(LocalDate localDate, UUID reservationBook) {
         List<Reservation> reservationList = reservationRepository.findReservationByReservationDateAndReservationBook(localDate, reservationBook);
         if (reservationList.isEmpty()) {
-            log.info("No reservations for check available items found");
+            log.warn("No reservations for check available items found");
             throw new ReservationsNotFoundException("No reservations found");
         }
         return reservationList.stream().map(this::toDTO).toList();
@@ -107,10 +105,9 @@ public class ReservationService {
 
     @Transactional(readOnly = true)
     public List<ReservationDTO> findReservationByBookId(UUID reservationBook, PageRequest pageRequest) {
-        log.info("Trying to find the reservations by book id: '{}'", reservationBook);
         List<Reservation> reservationList = reservationRepository.findReservationByReservationBook(reservationBook, pageRequest);
         if (reservationList.isEmpty()) {
-            log.info("No reservations by book id found '{}'", reservationBook);
+            log.warn("No reservations by book id found '{}'", reservationBook);
             throw new ReservationsNotFoundException("No reservations found");
         }
         log.info("All reservations by book id found '{}'", reservationBook);
@@ -122,7 +119,7 @@ public class ReservationService {
     public List<ReservationDTO> findReservationUserId(LocalDate localDate, UUID reservationUser) {
         List<Reservation> reservationList = reservationRepository.findReservationByReservationDateAndReservationBook(localDate, reservationUser);
         if (reservationList.isEmpty()) {
-            log.info("No reservations for check available date found");
+            log.warn("No reservations for check available date found");
             throw new ReservationsNotFoundException("No reservations found");
         }
         return reservationList.stream().map(this::toDTO).toList();
@@ -130,10 +127,9 @@ public class ReservationService {
 
     @Transactional(readOnly = true)
     public List<ReservationDTO> findReservationByUserId(UUID reservationUser, PageRequest pageRequest) {
-        log.info("Trying to find the reservations by user id: '{}'", reservationUser);
         List<Reservation> reservationList = reservationRepository.findReservationByReservationUser(reservationUser, pageRequest);
         if (reservationList.isEmpty()) {
-            log.info("No reservations by user id found '{}'", reservationUser);
+            log.warn("No reservations by user id found '{}'", reservationUser);
             throw new ReservationsNotFoundException("No reservations found");
         }
         log.info("All reservations by user id found '{}'", reservationUser);
@@ -142,10 +138,9 @@ public class ReservationService {
 
     @Transactional(readOnly = true)
     public List<ReservationDTO> findAllReservation(PageRequest pageRequest) {
-        log.info("Trying to find all reservations");
         Page<Reservation> reservationList = reservationRepository.findAll(pageRequest);
         if (reservationList.isEmpty()) {
-            log.info("No reservations found");
+            log.warn("No reservations found");
             throw new ReservationsNotFoundException("No reservations found");
         }
         log.info("All reservations found");
@@ -154,10 +149,9 @@ public class ReservationService {
 
     @Transactional(readOnly = true)
     public ReservationDTO findById(UUID id) {
-        log.info("Trying to find the reservation by id. ID: '{}'", id);
         Optional<Reservation> optionalReservation = reservationRepository.findByReservationId(id);
         if (optionalReservation.isEmpty()) {
-            log.info("The reservation by id not found. ID: '{}'", id);
+            log.warn("The reservation by id not found. ID: '{}'", id);
             throw new ReservationNotFoundException("The reservation not found");
         }
         log.info("The reservation by id found. ID: '{}'", id);
@@ -166,10 +160,9 @@ public class ReservationService {
 
     @Transactional(readOnly = true)
     public Reservation findByReservationId(UUID id) {
-        log.info("Trying to find the reservation. ID: '{}'", id);
         Optional<Reservation> optionalReservation = reservationRepository.findByReservationId(id);
         if (optionalReservation.isEmpty()) {
-            log.info("The reservation not found. ID: '{}'", id);
+            log.warn("The reservation not found. ID: '{}'", id);
             throw new ReservationNotFoundException("The reservation not found");
         }
         log.info("The reservation found. ID: '{}'", id);
@@ -188,7 +181,7 @@ public class ReservationService {
             return items;
 
         } catch (Exception e) {
-            log.info("The connection failed. Error: '{}'", e.getMessage());
+            log.warn("The connection failed. Error: '{}'", e.getMessage());
             throw new BookNotFoundException("Book not found");
         }
 

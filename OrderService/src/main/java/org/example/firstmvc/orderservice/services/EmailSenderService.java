@@ -39,12 +39,12 @@ public class EmailSenderService {
             mailMessage.setText(textPrep(user.getUsername(), dto.getMessage()));
             mailSender.send(mailMessage);
         } catch (Exception e) {
-            log.info("Failed to send message to email. User id '{}', Errors: '{}'", id, e.getMessage());
+            log.warn("Failed to send message to email. User id '{}', Errors: '{}'", id, e.getMessage());
             throw new EmailSendingException(e.getMessage());
         }
 
     }
-    private UserDTO getUser (UUID id) throws NoSuchElementException {
+    private UserDTO getUser (UUID id) throws Exception {
             Reservation reservation = reservationService.findByReservationId(id);
             String url = "http://localhost:8087/user/" + reservation.getReservationUser();
             return restTemplate.getForObject(url, UserDTO.class);

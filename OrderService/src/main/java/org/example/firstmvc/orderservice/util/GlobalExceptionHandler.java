@@ -2,6 +2,7 @@ package org.example.firstmvc.orderservice.util;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.kafka.KafkaException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -41,6 +42,11 @@ public class GlobalExceptionHandler {
     }
     @ExceptionHandler(ReservationsNotFoundException.class)
     public ResponseEntity<ReservationErrorResponse> handleEmailSendingException(ReservationsNotFoundException e){
+        response.setMessage(e.getMessage());
+        return new ResponseEntity<>(response, HttpStatus.SERVICE_UNAVAILABLE);
+    }
+    @ExceptionHandler(KafkaException.class)
+    public ResponseEntity<ReservationErrorResponse> handleKafkaException(KafkaException e){
         response.setMessage(e.getMessage());
         return new ResponseEntity<>(response, HttpStatus.SERVICE_UNAVAILABLE);
     }
