@@ -31,7 +31,7 @@ public class EmailService {
             mailSender.send(message);
             log.info("A message sent. User id: '{}'", authUser.getId());
         } catch (Exception e) {
-            log.info("Failed to send a message. User id: '{}', Error: '{}'", authUser.getId(), e.getMessage());
+            log.warn("Failed to send a message. User id: '{}', Error: '{}'", authUser.getId(), e.getMessage());
             throw new EmailSendingException(e.getMessage());
         }
 

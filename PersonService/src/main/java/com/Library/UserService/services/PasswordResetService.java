@@ -35,7 +35,7 @@ public class PasswordResetService {
         log.info("Trying to find user to send a reset code. Searched: '{}'", param);
         Optional<AuthUser> optionalAuthUser = authUserService.findByParam(param);
         if (optionalAuthUser.isEmpty()){
-            log.info("The user not found: '{}'", param);
+            log.warn("The user not found: '{}'", param);
             throw new UsersNotFoundException("The user not found");
         }
 
@@ -49,7 +49,7 @@ public class PasswordResetService {
             valueOps.set(key, code, Duration.ofMinutes(15));
             log.info("The generated code saved to redis");
         }catch (Exception e){
-            log.info("Failed to save the generated code to redis");
+            log.warn("Failed to save the generated code to redis");
             throw new FailedToConnectWithRedisException(e.getMessage());
         }
         emailService.send(authUser, code);
@@ -59,7 +59,7 @@ public class PasswordResetService {
         log.info("Trying to find user to validate a reset code. Searched: '{}'", param);
         Optional<AuthUser> optionalAuthUser = authUserService.findByParam(param);
         if (optionalAuthUser.isEmpty()){
-            log.info("The user not found: '{}'", param);
+            log.warn("The user not found: '{}'", param);
             throw new UsersNotFoundException("The user not found");
         }
         AuthUser authUser = optionalAuthUser.get();
@@ -71,26 +71,26 @@ public class PasswordResetService {
             log.info("Got the generated code from redis");
             return code.equals(sentCode);
         }catch (Exception e){
-            log.info("Failed to get the generated code from redis");
+            log.warn("Failed to get the generated code from redis");
             throw new FailedToConnectWithRedisException(e.getMessage());
         }
     }
 
     public void resetPassword(String param, String code, String newPassword){
         if (!validateCode(param, code)){
-            log.info("Invalid the reset code. Searched: '{}'", param);
+            log.warn("Invalid the reset code. Searched: '{}'", param);
             throw new BadCredentialsException("Invalid the reset code");
         }
         log.info("Trying to find user to reset password. Searched: '{}'", param);
         Optional<AuthUser> optionalAuthUser = authUserService.findByParam(param);
         if (optionalAuthUser.isEmpty()){
-            log.info("The user not found: '{}'", param);
+            log.warn("The user not found: '{}'", param);
             throw new UsersNotFoundException("The user not found");
         }
 
         AuthUser authUser = optionalAuthUser.get();
         authUser.setPassword(passwordEncoder.encode(newPassword));
-        authUserRepository.save(authUser);
+        authUserService.saveAfterResetPassword(authUser);
         log.info("The password is reset. Searched: '{}'", param);
         String key = RESET_CODE_PREFIX + authUser.getId();
         try {
@@ -98,7 +98,7 @@ public class PasswordResetService {
             redisTemplate.delete(key);
             log.info("Deleted the generated code from redis");
         }catch (Exception e){
-            log.info("Failed to delete the generated code from redis");
+            log.warn("Failed to delete the generated code from redis");
             throw new FailedToConnectWithRedisException(e.getMessage());
         }
     }

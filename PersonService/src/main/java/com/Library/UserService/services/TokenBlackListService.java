@@ -28,7 +28,7 @@ public class TokenBlackListService {
             redisTemplate.opsForValue().set(blacklistKey, "blacklisted", blacklistTtl, TimeUnit.SECONDS);
             log.info("Added the password to the redis black list");
         }catch (Exception e){
-            log.info("Failed to add the password to the redis black list");
+            log.warn("Failed to add the password to the redis black list");
             throw new FailedToConnectWithRedisException(e.getMessage());
         }
     }

@@ -29,10 +29,9 @@ public class AuthUserService {
 
     @Transactional
     public AuthUser save(UserDTO userDTO){
-        log.info("Trying to find a user to save the user. Username: '{}'", userDTO.getUsername());
         Optional<AuthUser> authUser = authUserRepository.findFirstByUsername(userDTO.getUsername());
         if (authUser.isPresent()) {
-            log.info("The user not found. Username: '{}'", userDTO.getUsername());
+            log.warn("A user with this username already exists. '{}'", userDTO.getUsername());
             throw new UserAlreadyExistException("A user with this username already exists.");
         }
         AuthUser auth = toAuthUser(userDTO);
@@ -40,15 +39,27 @@ public class AuthUserService {
         auth.setPassword(passwordEncoder.encode(auth.getPassword()));
         authUserRepository.save(auth);
         log.info("User saved. ID: '{}'", auth.getId());
-        crossServerRequestService.sendUser(userDTO, auth.getId());
         return auth;
     }
+
+    @Transactional
+    public void saveAfterResetPassword(AuthUser authUser){
+        Optional<AuthUser> optionalAuthUser = authUserRepository.findFirstByUsername(authUser.getUsername());
+        if (optionalAuthUser.isEmpty()) {
+            log.warn("User not found. {}", authUser.getUsername());
+            throw new UserNotFoundException("User not found");
+        }
+        AuthUser auth = optionalAuthUser.get();
+        auth.setPassword(passwordEncoder.encode(authUser.getPassword()));
+        authUserRepository.save(auth);
+        log.info("User saved. ID: '{}'", auth.getId());
+    }
+
     @Transactional
     public AuthUser saveAsAdmin(UserDTO userDTO){
-        log.info("Trying to find a user to save the user as admin. Username: '{}'", userDTO.getUsername());
         Optional<AuthUser> authUser = authUserRepository.findFirstByUsername(userDTO.getUsername());
         if (authUser.isPresent()) {
-            log.info("The user not found. Username: '{}'", userDTO.getUsername());
+            log.warn("The user not found. Username: '{}'", userDTO.getUsername());
             throw new UserAlreadyExistException("A user with this username already exists.");
         }
         AuthUser auth = toAuthUser(userDTO);
@@ -60,10 +71,9 @@ public class AuthUserService {
         return auth;
     }
     public AuthUser login(LoginDTO loginDTO){
-        log.info("Trying to find the user to login. Username: '{}'", loginDTO.getUsername());
         Optional<AuthUser> optionalAuthUser = authUserRepository.findFirstByUsername(loginDTO.getUsername());
         if (optionalAuthUser.isEmpty()){
-            log.info("The user not found. Username: '{}'", loginDTO.getUsername());
+            log.warn("The user not found. Username: '{}'", loginDTO.getUsername());
             throw new UserNotFoundException("The user not found");
         }
         AuthUser authUser = optionalAuthUser.get();
@@ -79,7 +89,7 @@ public class AuthUserService {
         log.info("Trying to find the user to update credentials. ID: '{}'", id);
         Optional<AuthUser> optionalAuthUser = authUserRepository.findById(id);
         if (optionalAuthUser.isEmpty()){
-            log.info("The user not found. ID: '{}'", id);
+            log.warn("The user not found. ID: '{}'", id);
             throw new UserNotFoundException("The user not found");
         }
          AuthUser authUser = optionalAuthUser.get();
@@ -108,7 +118,7 @@ public class AuthUserService {
         log.info("Trying to find user to make him admin. ID: '{}'", dto.getId());
         Optional<AuthUser> optionalAuthUser = authUserRepository.findById(dto.getId());
         if (optionalAuthUser.isEmpty()){
-            log.info("The user not found. ID: '{}'", dto.getId());
+            log.warn("The user not found. ID: '{}'", dto.getId());
             throw new UserNotFoundException("User not found");
         }
         AuthUser authUser = optionalAuthUser.get();

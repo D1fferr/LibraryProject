@@ -32,7 +32,7 @@ public class CrossServerRequestService {
             restTemplate.postForObject(url, requestBody, Void.class);
             log.info("User sent to user service. ID: '{}'", id);
         }catch (Exception e){
-            log.info("Failed to connect with user service to send user. ID: '{}'", id);
+            log.warn("Failed to connect with user service to send user. ID: '{}'", id);
             throw new FailedToConnectWithUserServiceException("Failed to connect with user service to send user");
         }
     }
@@ -43,7 +43,7 @@ public class CrossServerRequestService {
             restTemplate.delete(url);
             log.info("User deleted. ID: '{}'", id);
         }catch (Exception e){
-            log.info("Failed to connect with user service to delete user. ID: '{}'", id);
+            log.warn("Failed to connect with user service to delete user. ID: '{}'", id);
             throw new FailedToConnectWithUserServiceException("Failed to connect with user service to delete user");
         }
     }
@@ -59,7 +59,7 @@ public class CrossServerRequestService {
             restTemplate.patchForObject(url, requestBody, Void.class);
             log.info("Credentials sent to user service. ID: '{}'", id);
         }catch (Exception e){
-            log.info("Failed to connect with user service to send credentials. ID: '{}'", id);
+            log.warn("Failed to connect with user service to send credentials. ID: '{}'", id);
             throw new FailedToConnectWithUserServiceException("Failed to connect with user service to send credentials");
         }
     }

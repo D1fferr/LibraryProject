@@ -30,7 +30,7 @@ public class AuthController {
     private final JWTProvider jwtProvider;
     private final TokenBlackListService tokenBlackListService;
     private final AuthUserService authUserService;
-
+    private final CrossServerRequestService crossServerRequestService;
     @PostMapping("/registration")
     public ResponseEntity<HttpStatus> create(@RequestBody @Valid UserDTO userDTO,
                                              BindingResult bindingResult) {
