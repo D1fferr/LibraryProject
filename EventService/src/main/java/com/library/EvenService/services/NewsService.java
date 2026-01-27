@@ -30,10 +30,9 @@ public class NewsService {
 
     @Transactional(readOnly = true)
     public List<NewsDTO> findAll(Pageable pageable){
-        log.info("Trying to find all news");
         Page<News> allNews = newsRepository.findAll(pageable);
         if (allNews.isEmpty()){
-            log.info("No news found");
+            log.warn("No news found");
             throw new NewsNotFoundException("No news found. ");
         }
         log.info("All news found");
@@ -41,10 +40,9 @@ public class NewsService {
     }
     @Transactional(readOnly = true)
     public NewsDTO findOneById(UUID id){
-        log.info("Trying to find one news. ID: '{}'", id);
         Optional<News> optionalNews = newsRepository.findById(id);
         if (optionalNews.isEmpty()){
-            log.info("The news not found. ID: '{}'", id);
+            log.warn("The news not found. ID: '{}'", id);
             throw new NewsNotFoundException("News not found. ");
         }
         log.info("The news found. ID: '{}'", id);
@@ -64,10 +62,9 @@ public class NewsService {
     }
     @Transactional
     public void update(UUID id, NewsDTO newsDTO, MultipartFile image){
-        log.info("Trying to find a news for update. ID: '{}'", id);
         Optional<News> optionalNews = newsRepository.findById(id);
         if (optionalNews.isEmpty()){
-            log.info("The news for update not found. ID: '{}'", id);
+            log.warn("The news for update not found. ID: '{}'", id);
             throw new NewsNotFoundException("News not found");
         }
         log.info("Starting of updating the news. ID: '{}'", id);

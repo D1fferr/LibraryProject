@@ -28,10 +28,9 @@ public class EventService {
 
     @Transactional(readOnly = true)
     public List<EventDTO> findAllEvents(Pageable pageable){
-        log.info("Trying to find all events");
         List<Announcement> allEvents = announcementRepository.findAllByAddEvent(true, pageable);
         if (allEvents.isEmpty()){
-            log.info("Announcements for events not found");
+            log.warn("Announcements for events not found");
             throw new AnnouncementsNotFoundException("Announcements not found");
         }
         log.info("All events found");
