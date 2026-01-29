@@ -9,7 +9,7 @@ import com.Library.UserService.security.JWTProvider;
 import com.Library.UserService.services.AuthUserService;
 import com.Library.UserService.services.CrossServerRequestService;
 import com.Library.UserService.services.TokenBlackListService;
-import com.Library.UserService.util.UserNotCreatedException;
+import com.Library.UserService.exceptions.UserNotCreatedException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

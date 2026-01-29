@@ -1,7 +1,7 @@
 package com.Library.UserService.services;
 
 import com.Library.UserService.models.AuthUser;
-import com.Library.UserService.util.EmailSendingException;
+import com.Library.UserService.exceptions.EmailSendingException;
 import lombok.RequiredArgsConstructor;
 
 import lombok.extern.slf4j.Slf4j;

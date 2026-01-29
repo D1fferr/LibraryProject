@@ -1,4 +1,4 @@
-package com.Library.UserService.util;
+package com.Library.UserService.exceptions;
 
 public class FailedToConnectWithRedisException extends RuntimeException {
     public FailedToConnectWithRedisException(String message) {

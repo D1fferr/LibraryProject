@@ -2,7 +2,7 @@ package com.Library.UserService.services;
 
 import com.Library.UserService.dto.UserDTO;
 import com.Library.UserService.models.AuthUser;
-import com.Library.UserService.util.FailedToConnectWithUserServiceException;
+import com.Library.UserService.exceptions.FailedToConnectWithUserServiceException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

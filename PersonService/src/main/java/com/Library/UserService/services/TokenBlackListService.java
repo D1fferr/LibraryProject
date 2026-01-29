@@ -1,11 +1,9 @@
 package com.Library.UserService.services;
 
-import com.Library.UserService.util.FailedToConnectWithRedisException;
+import com.Library.UserService.exceptions.FailedToConnectWithRedisException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 

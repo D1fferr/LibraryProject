@@ -2,9 +2,8 @@ package com.Library.UserService.services;
 
 import com.Library.UserService.models.AuthUser;
 import com.Library.UserService.repositories.AuthUserRepository;
-import com.Library.UserService.util.FailedToConnectWithRedisException;
-import com.Library.UserService.util.FailedToConnectWithUserServiceException;
-import com.Library.UserService.util.UsersNotFoundException;
+import com.Library.UserService.exceptions.FailedToConnectWithRedisException;
+import com.Library.UserService.exceptions.UsersNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.StringRedisTemplate;
