@@ -33,7 +33,8 @@ public class ExpectedBookService {
     public ExpectedBookDTO save(ExpectedBookDTOCreate expectedBookDTO, MultipartFile coverImage) {
         ExpectedBook expectedBook = toExpectedBookEntityCreate(expectedBookDTO);
         expectedBook.setExpectedBookAddedAt(LocalDateTime.now());
-       if (coverImage != null && !coverImage.isEmpty()) {
+        expectedBookRepository.save(expectedBook);
+        if (coverImage != null && !coverImage.isEmpty()) {
             log.info("Processing cover image for book ID: {}", expectedBook.getExpectedBookId());
             String imageUrl = imageService.storeImage(coverImage, expectedBook.getExpectedBookId());
             expectedBook.setExpectedBookImage(imageUrl);
