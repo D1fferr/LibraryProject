@@ -1,6 +1,5 @@
-package com.library.ServiceCatalog.util;
+package com.library.ServiceCatalog.exceptions;
 
-import jakarta.persistence.Column;
 import org.springframework.stereotype.Component;
 
 @Component

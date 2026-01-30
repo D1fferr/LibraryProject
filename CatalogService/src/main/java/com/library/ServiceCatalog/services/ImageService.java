@@ -1,6 +1,6 @@
 package com.library.ServiceCatalog.services;
 
-import com.library.ServiceCatalog.util.FailedSaveImageException;
+import com.library.ServiceCatalog.exceptions.FailedSaveImageException;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -11,7 +11,6 @@ import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 
-import java.io.IOException;
 import java.util.UUID;
 
 @Service

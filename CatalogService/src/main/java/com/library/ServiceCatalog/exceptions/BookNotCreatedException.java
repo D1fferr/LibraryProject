@@ -1,4 +1,4 @@
-package com.library.ServiceCatalog.util;
+package com.library.ServiceCatalog.exceptions;
 
 public class BookNotCreatedException extends RuntimeException {
     public BookNotCreatedException(String message) {

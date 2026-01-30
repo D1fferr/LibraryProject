@@ -1,4 +1,4 @@
-package com.library.ServiceCatalog.util;
+package com.library.ServiceCatalog.exceptions;
 
 public class BookAlreadyExistException extends RuntimeException {
     public BookAlreadyExistException(String message) {

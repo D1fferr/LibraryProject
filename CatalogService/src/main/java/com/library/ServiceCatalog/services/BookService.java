@@ -8,9 +8,9 @@ import com.library.ServiceCatalog.models.Book;
 import com.library.ServiceCatalog.models.BookForKafka;
 import com.library.ServiceCatalog.repositories.BookForKafkaRepository;
 import com.library.ServiceCatalog.repositories.BookRepository;
-import com.library.ServiceCatalog.util.BookAlreadyExistException;
-import com.library.ServiceCatalog.util.BookNotFoundException;
-import com.library.ServiceCatalog.util.BooksNotFoundException;
+import com.library.ServiceCatalog.exceptions.BookAlreadyExistException;
+import com.library.ServiceCatalog.exceptions.BookNotFoundException;
+import com.library.ServiceCatalog.exceptions.BooksNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -50,8 +50,9 @@ public class BookService {
         Book book = toEntity(bookDTO);
         book.setBookAddedAt(LocalDateTime.now());
         log.info("Converted dto to entity. Title: '{}'", book.getBookName());
+        bookRepository.save(book);
         if (coverImage != null && !coverImage.isEmpty()) {
-            log.info("Processing cover image for book ID: {}", book.getBookId());
+            log.info("Processing cover image for book Title: {}", book.getBookName());
             String imageUrl = imageService.storeImage(coverImage, book.getBookId());
             book.setBookImage(imageUrl);
         }
@@ -64,6 +65,7 @@ public class BookService {
     public void saveExpectedBookToCurrentBook(BookDTOForKafka book) {
         BookForKafka entity = toEntityForKafka(book);
         entity.setBookAddedAt(LocalDateTime.now());
+        bookForKafkaRepository.save(entity);
         if (bookRepository.existsBookByBookId(entity.getBookId())){
             log.warn("The expected book is not saved to the current books. The same book already exists. ID: {}", entity.getBookId());
             throw new BookAlreadyExistException("Book already exist");

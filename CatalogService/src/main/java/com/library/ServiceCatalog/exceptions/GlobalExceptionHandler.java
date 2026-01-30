@@ -1,4 +1,4 @@
-package com.library.ServiceCatalog.util;
+package com.library.ServiceCatalog.exceptions;
 
 import org.springframework.data.redis.RedisConnectionFailureException;
 import org.springframework.http.HttpStatus;

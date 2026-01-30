@@ -4,7 +4,7 @@ import com.library.ServiceCatalog.dto.BookDTO;
 import com.library.ServiceCatalog.dto.BookDTOForResponseCreate;
 import com.library.ServiceCatalog.dto.BookDTOForResponseGetBook;
 import com.library.ServiceCatalog.services.BookService;
-import com.library.ServiceCatalog.util.BookNotCreatedException;
+import com.library.ServiceCatalog.exceptions.BookNotCreatedException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
