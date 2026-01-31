@@ -27,10 +27,8 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @Slf4j
 public class ReservationService {
-    private final RestTemplate restTemplate;
     private final ReservationRepository reservationRepository;
     private final ModelMapper modelMapper;
-    private final KafkaSenderService kafkaSenderService;
 
     @Transactional
     public Reservation save(ReservationDTO reservationDTO) {
@@ -169,23 +167,7 @@ public class ReservationService {
         return optionalReservation.get();
     }
 
-    public Integer booksAvailable(UUID bookId) {
-        try {
-            log.info("Trying to connect to book service to get available items");
-            Integer items = restTemplate.getForObject(
-                    "http://localhost:8081/book/pieces/{book_id}",
-                    Integer.class,
-                    bookId
-            );
-            log.info("The connection is successful");
-            return items;
 
-        } catch (Exception e) {
-            log.warn("The connection failed. Error: '{}'", e.getMessage());
-            throw new BookNotFoundException("Book not found");
-        }
-
-    }
 
 
     private ReservationDTO toDTO(Reservation reservation) {
