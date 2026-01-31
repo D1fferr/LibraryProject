@@ -53,6 +53,7 @@ public class AnnouncementService {
 
         Announcement announcement = toEntity(announcementDTO);
         announcement.setCreatedDate(LocalDate.now());
+        announcementRepository.save(announcement);
         if (image != null && !image.isEmpty()) {
             log.info("Processing cover image for announcement ID: {}", announcement.getId());
             String imageUrl = imageService.storeImage(image, announcement.getId());
@@ -74,8 +75,6 @@ public class AnnouncementService {
             announcement.setBody(announcementDTO.getBody());
         if (announcement.getName()!=null)
             announcement.setName(announcementDTO.getName());
-        if (announcement.getPhoto()!=null)
-            announcement.setPhoto(announcementDTO.getPhoto());
         if (image != null && !image.isEmpty()) {
             log.info("Processing cover image for announcement ID: {}", announcement.getId());
             String imageUrl = imageService.storeImage(image, announcement.getId());

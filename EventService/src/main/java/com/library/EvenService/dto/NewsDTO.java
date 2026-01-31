@@ -15,5 +15,4 @@ public class NewsDTO {
     private String body;
     @Size(min = 1, max = 100, message = "News name must be between 1 and 100 characters long.")
     private String name;
-    private String photo;
 }

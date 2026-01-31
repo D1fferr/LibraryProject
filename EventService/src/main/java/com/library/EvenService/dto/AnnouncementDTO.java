@@ -20,7 +20,6 @@ public class AnnouncementDTO {
     private String type;
     @FutureOrPresent(message = "The announcement date cannot be in the past.")
     private LocalDate date;
-    private String photo;
     private Boolean addEvent;
 
 }

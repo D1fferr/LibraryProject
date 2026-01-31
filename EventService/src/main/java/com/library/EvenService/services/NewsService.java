@@ -52,6 +52,7 @@ public class NewsService {
     public void save(NewsDTO newsDTO, MultipartFile image){
         News news = toEntity(newsDTO);
         news.setDate(LocalDate.now());
+        newsRepository.save(news);
         if (image != null && !image.isEmpty()) {
             log.info("Processing cover image for news ID: {}", news.getId());
             String imageUrl = imageService.storeImage(image, news.getId());
@@ -73,8 +74,6 @@ public class NewsService {
             news.setBody(newsDTO.getBody());
         if (newsDTO.getName()!=null)
             news.setName(newsDTO.getName());
-        if (newsDTO.getPhoto()!=null)
-            news.setPhoto(newsDTO.getPhoto());
         if (image != null && !image.isEmpty()) {
             log.info("Processing cover image for news ID: {}", news.getId());
             String imageUrl = imageService.storeImage(image, news.getId());
