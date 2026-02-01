@@ -1,7 +1,0 @@
-package org.example.firstmvc.orderservice.util;
-
-public class ReservationNotFoundException extends RuntimeException {
-    public ReservationNotFoundException(String message) {
-        super(message);
-    }
-}

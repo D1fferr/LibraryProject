@@ -8,7 +8,7 @@
         <version>3.4.4</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>org.example.firstmvc</groupId>
+    <groupId>com.library</groupId>
     <artifactId>OrderService</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>OrderService</name>
