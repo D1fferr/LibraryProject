@@ -11,7 +11,7 @@ import java.util.UUID;
 @Repository
 public interface ReservationCancellationNotificationRepository extends JpaRepository<ReservationCancellationNotification, UUID> {
 
-    @Query("SELECT NEW org.example.firstmvc.orderservice.dto.JoinDTOForCancelledReservations(" +
+    @Query("SELECT NEW com.library.orderservice.dto.JoinDTOForCancelledReservations(" +
             "e1.reservationDate, e1.reservationBook, e1.reservationStatus, " +
             "e2.message) " +
             "FROM Reservation e1 LEFT JOIN ReservationCancellationNotification e2 ON e1.reservationId = e2.reservationId")
