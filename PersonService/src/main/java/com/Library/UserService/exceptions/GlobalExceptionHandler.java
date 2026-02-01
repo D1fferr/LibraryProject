@@ -1,4 +1,4 @@
-package com.Library.UserService.util;
+package com.Library.UserService.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -44,5 +44,21 @@ public class GlobalExceptionHandler {
         userErrorResponse.setMessage(e.getMessage());
         return new ResponseEntity<>(userErrorResponse, HttpStatus.BAD_REQUEST);
     }
+    @ExceptionHandler(EmailSendingException.class)
+    public ResponseEntity<UserErrorResponse> handleEmailSendingException(EmailSendingException e){
+        userErrorResponse.setMessage(e.getMessage());
+        return new ResponseEntity<>(userErrorResponse, HttpStatus.BAD_REQUEST);
+    }
+    @ExceptionHandler(FailedToConnectWithUserServiceException.class)
+    public ResponseEntity<UserErrorResponse> handleFailedToSendUserException(FailedToConnectWithUserServiceException e){
+        userErrorResponse.setMessage(e.getMessage());
+        return new ResponseEntity<>(userErrorResponse, HttpStatus.BAD_REQUEST);
+    }
+    @ExceptionHandler(FailedToConnectWithRedisException.class)
+    public ResponseEntity<UserErrorResponse> handleFailedToConnectWithRedisException(FailedToConnectWithRedisException e){
+        userErrorResponse.setMessage(e.getMessage());
+        return new ResponseEntity<>(userErrorResponse, HttpStatus.BAD_REQUEST);
+    }
+
 
 }
