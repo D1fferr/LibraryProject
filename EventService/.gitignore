@@ -10,6 +10,12 @@ application-*.properties
 *.yml
 *.yaml
 
+logs/
+**/logs/
+*.log
+**/*.log
+
+
 ### STS ###
 .apt_generated
 .classpath

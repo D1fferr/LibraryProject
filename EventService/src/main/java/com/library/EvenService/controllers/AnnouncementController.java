@@ -4,28 +4,30 @@ import com.library.EvenService.dto.AnnouncementDTO;
 import com.library.EvenService.services.AnnouncementService;
 import com.library.EvenService.utill.NewsNotCreatedException;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/announcement")
+@RequiredArgsConstructor
+@Slf4j
 public class AnnouncementController {
 
     private final AnnouncementService announcementService;
 
-    public AnnouncementController(AnnouncementService announcementService) {
-        this.announcementService = announcementService;
-    }
-
 
     @GetMapping("/{id}")
-    public ResponseEntity<AnnouncementDTO> getOneAnnouncement(@PathVariable int id){
+    public ResponseEntity<AnnouncementDTO> getOneAnnouncement(@PathVariable UUID id){
         return new ResponseEntity<>(announcementService.findOneById(id), HttpStatus.OK);
     }
 
@@ -37,25 +39,27 @@ public class AnnouncementController {
                 PageRequest.of(page, announcementPerPage)), HttpStatus.OK);
     }
 
-    @PostMapping("/create")
-    public ResponseEntity<AnnouncementDTO> createAnnouncement(@RequestBody @Valid AnnouncementDTO announcementDTO,
+    @PostMapping("/auth/create")
+    public ResponseEntity<AnnouncementDTO> createAnnouncement(@RequestPart("announcementData") @Valid AnnouncementDTO announcementDTO,
+                                                              @RequestPart(value = "coverImage", required = false) MultipartFile image,
                                                          BindingResult bindingResult){
         checkAnnouncementErrors(bindingResult);
-        announcementService.save(announcementDTO);
+        announcementService.save(announcementDTO, image);
         return new ResponseEntity<>(announcementDTO, HttpStatus.CREATED);
     }
 
-    @PatchMapping("/change/{id}")
+    @PatchMapping("/auth/change/{id}")
     public ResponseEntity<AnnouncementDTO> changeAnnouncement(
-            @PathVariable int id,
-            @RequestBody @Valid AnnouncementDTO announcementDTO,
+            @PathVariable UUID id,
+            @RequestPart("announcementData") @Valid AnnouncementDTO announcementDTO,
+            @RequestPart(value = "coverImage", required = false) MultipartFile image,
             BindingResult bindingResult){
         checkAnnouncementErrors(bindingResult);
-        announcementService.update(id, announcementDTO);
+        announcementService.update(id, announcementDTO, image);
         return new ResponseEntity<>(announcementDTO, HttpStatus.OK);
     }
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<HttpStatus> deleteAnnouncement(@PathVariable int id){
+    @DeleteMapping("/auth/delete/{id}")
+    public ResponseEntity<HttpStatus> deleteAnnouncement(@PathVariable UUID id){
         announcementService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
@@ -68,6 +72,7 @@ public class AnnouncementController {
                 errorMessage.append(error.getField()).append(" - ")
                         .append(error.getDefaultMessage()).append(";");
             }
+            log.info("Errors found in entity fields. Errors: '{}'", errors);
             throw new NewsNotCreatedException(errorMessage.toString());
         }
     }

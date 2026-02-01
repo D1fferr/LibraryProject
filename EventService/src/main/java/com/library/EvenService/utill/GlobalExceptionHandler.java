@@ -1,19 +1,19 @@
 package com.library.EvenService.utill;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
+@RequiredArgsConstructor
 public class GlobalExceptionHandler {
     private final NewsErrorResponse newsErrorResponse;
     private final AnnouncementErrorResponse announcementErrorResponse;
+    private final ImageErrorResponse imageErrorResponse;
 
-    public GlobalExceptionHandler(NewsErrorResponse newsErrorResponse, AnnouncementErrorResponse announcementErrorResponse) {
-        this.newsErrorResponse = newsErrorResponse;
-        this.announcementErrorResponse = announcementErrorResponse;
-    }
     @ExceptionHandler(NewsNotFoundException.class)
     public ResponseEntity<NewsErrorResponse> handleNewsNotFoundException(NewsNotFoundException e){
         newsErrorResponse.setMessage(e.getMessage());
@@ -30,10 +30,16 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(announcementErrorResponse, HttpStatus.NOT_FOUND);
     }
     @ExceptionHandler(AnnouncementsNotFoundException.class)
-    public ResponseEntity<AnnouncementErrorResponse> handleAnnouncementsNotFoundException(AnnouncementsNotFoundException e){
+    public ResponseEntity<AnnouncementErrorResponse> handleAnnouncementsNotFoundException(AnnouncementsNotFoundException e) {
         announcementErrorResponse.setMessage(e.getMessage());
         return new ResponseEntity<>(announcementErrorResponse, HttpStatus.NOT_FOUND);
     }
+    @ExceptionHandler(FailedSaveImageException.class)
+    public ResponseEntity<ImageErrorResponse> handleFailedSaveImageException(FailedSaveImageException e){
+        imageErrorResponse.setMessage(e.getMessage());
+        return new ResponseEntity<>(imageErrorResponse, HttpStatus.EXPECTATION_FAILED);
+    }
+
 
 
 

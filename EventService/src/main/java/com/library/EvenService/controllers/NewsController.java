@@ -1,27 +1,30 @@
 package com.library.EvenService.controllers;
 
+import com.library.EvenService.dto.AnnouncementDTO;
 import com.library.EvenService.dto.NewsDTO;
 import com.library.EvenService.services.NewsService;
 import com.library.EvenService.utill.NewsNotCreatedException;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/news")
+@RequiredArgsConstructor
+@Slf4j
 public class NewsController {
 
     private final NewsService newsService;
-
-    public NewsController(NewsService newsService) {
-        this.newsService = newsService;
-    }
 
     @GetMapping("/get-all")
     public ResponseEntity<List<NewsDTO>> getAllNews(@RequestParam(value = "page", defaultValue = "0") Integer page,
@@ -29,28 +32,30 @@ public class NewsController {
         return new ResponseEntity<>(newsService.findAll(PageRequest.of(page, newsPerPage)), HttpStatus.OK);
     }
     @GetMapping("/get-one/{id}")
-    public ResponseEntity<NewsDTO> getOneNews(@PathVariable int id){
+    public ResponseEntity<NewsDTO> getOneNews(@PathVariable UUID id){
         return new ResponseEntity<>(newsService.findOneById(id), HttpStatus.OK);
     }
-    @PostMapping("/create")
-    public ResponseEntity<NewsDTO> createNews(@RequestBody @Valid NewsDTO newsDTO,
+    @PostMapping("/auth/create")
+    public ResponseEntity<NewsDTO> createNews(@RequestPart("announcementData") @Valid NewsDTO newsDTO,
+                                              @RequestPart(value = "coverImage", required = false) MultipartFile image,
                                                  BindingResult bindingResult){
 
         checkNewsErrors(bindingResult);
-        newsService.save(newsDTO);
+        newsService.save(newsDTO, image);
         return new ResponseEntity<>(newsDTO, HttpStatus.CREATED);
 
     }
-    @PatchMapping("/change/{id}")
-    public ResponseEntity<NewsDTO> changeNews(@PathVariable int id,
-                                              @RequestBody @Valid NewsDTO newsDTO,
+    @PatchMapping("/auth/change/{id}")
+    public ResponseEntity<NewsDTO> changeNews(@PathVariable UUID id,
+                                              @RequestPart("announcementData") @Valid NewsDTO newsDTO,
+                                              @RequestPart(value = "coverImage", required = false) MultipartFile image,
                                               BindingResult bindingResult){
         checkNewsErrors(bindingResult);
-        newsService.update(id, newsDTO);
+        newsService.update(id, newsDTO, image);
         return new ResponseEntity<>(newsDTO, HttpStatus.OK);
     }
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<HttpStatus> deleteNews(@PathVariable int id){
+    @DeleteMapping("/auth/delete/{id}")
+    public ResponseEntity<HttpStatus> deleteNews(@PathVariable UUID id){
         newsService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
@@ -63,6 +68,7 @@ public class NewsController {
                 errorMessage.append(error.getField()).append(" - ")
                         .append(error.getDefaultMessage()).append(";");
             }
+            log.info("Errors found in entity fields. Errors: '{}'", errors);
             throw new NewsNotCreatedException(errorMessage.toString());
         }
     }
