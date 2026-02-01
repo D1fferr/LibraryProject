@@ -1,0 +1,38 @@
+package ua.zakharchuk.ExpectedBooksService.models;
+
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.UuidGenerator;
+
+import java.util.UUID;
+@Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "report_availability")
+public class ReportAvailability {
+    @Id
+    @UuidGenerator(style = UuidGenerator.Style.TIME)
+    @Column(name = "id")
+    private UUID id;
+    @Column(name = "user_id")
+    @NotNull(message = "The user id field must not be empty.")
+    private UUID userId;
+    @Column(name = "expected_book_id")
+    @NotNull(message = "The book id field must not be empty.")
+    private UUID expectedBookId;
+    @Column(name = "user_email")
+    @NotEmpty(message = "The user email field must not be empty.")
+    private String userEmail;
+    @Column(name = "status")
+    @Enumerated(EnumType.STRING)
+    private Status status;
+    @Column(name = "username")
+    @NotEmpty(message = "The username field must not be empty.")
+    private String username;
+
+}

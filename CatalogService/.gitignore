@@ -1,8 +1,13 @@
 HELP.md
 target/
-.mvn/wrapper/maven-wrapper.jar
+!.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+
+logs/
+**/logs/
+*.log
+**/*.log
 
 # Application configuration files
 application.properties
@@ -24,11 +29,6 @@ application-*.properties
 *.iws
 *.iml
 *.ipr
-
-logs/
-**/logs/
-*.log
-**/*.log
 
 ### NetBeans ###
 /nbproject/private/

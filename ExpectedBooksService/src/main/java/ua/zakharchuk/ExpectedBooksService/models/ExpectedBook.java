@@ -55,5 +55,4 @@ public class ExpectedBook {
         @Column(name = "expected_book_added_at", updatable = false)
         private LocalDateTime expectedBookAddedAt;
 
-
     }
