@@ -51,6 +51,10 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(bookErrorResponse, HttpStatus.SERVICE_UNAVAILABLE);
     }
 
-
+    @ExceptionHandler(CategoriesNotFoundException.class)
+    public ResponseEntity<BookErrorResponse> handleCategoriesNotFoundException(CategoriesNotFoundException e){
+        bookErrorResponse.setMessage(e.getMessage());
+        return new ResponseEntity<>(bookErrorResponse, HttpStatus.SERVICE_UNAVAILABLE);
+    }
 
 }

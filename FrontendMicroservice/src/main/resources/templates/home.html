@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookLibrary - Your Digital Library</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+<!-- Header -->
+<div th:replace="~{layout/header :: header}"></div>
+
+<!-- Main Content -->
+<div class="container">
+    <!-- Categories Sidebar -->
+    <aside class="sidebar">
+        <h3>Categories</h3>
+        <ul class="categories-list">
+            <li th:each="category : ${categories}">
+                <a href="#" th:text="${category}">Category</a>
+            </li>
+        </ul>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+        <!-- Popular Books Section -->
+        <section class="books-section">
+            <div class="section-header">
+                <h2>Most Popular Books</h2>
+                <a href="#" class="view-all">View All Popular Books <span class="material-icons">arrow_forward</span></a>
+            </div>
+
+            <div class="books-grid books-grid-3x3">
+                <div class="book-card" th:each="book : ${popularBooks}">
+                    <div class="book-cover">
+                        <img th:src="${book.bookImage}" th:alt="${book.bookName}"
+                             onerror="this.src='/images/default-book-cover.jpg'">
+                    </div>
+                    <div class="book-info">
+                        <h3 class="book-title" th:text="${book.bookName}">Book Title</h3>
+                        <p class="book-author" th:text="${book.bookAuthor}">Author Name</p>
+                        <p class="book-year" th:text="${book.bookYear}">2024</p>
+                        <a th:href="@{'/books/' + ${book.bookName}}" class="btn-details">Details</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- New Arrivals Section -->
+        <section class="books-section">
+            <div class="section-header">
+                <h2>New Arrivals</h2>
+                <a href="#" class="view-all">View All <span class="material-icons">arrow_forward</span></a>
+            </div>
+
+            <div class="books-grid">
+                <div class="book-card" th:each="book : ${newArrivals}">
+                    <div class="book-cover">
+                        <img th:src="${book.bookImage}" th:alt="${book.bookName}"
+                             onerror="this.src='/images/default-book-cover.jpg'">
+                    </div>
+                    <div class="book-info">
+                        <h3 class="book-title" th:text="${book.bookName}">Book Title</h3>
+                        <p class="book-author" th:text="${book.bookAuthor}">Author Name</p>
+                        <p class="book-year" th:text="${book.bookYear}">2024</p>
+                        <a th:href="@{'/books/' + ${book.bookName}}" class="btn-details">Details</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Upcoming Books Section -->
+        <section class="books-section">
+            <div class="section-header">
+                <h2>Upcoming Books</h2>
+                <a href="#" class="view-all">View All <span class="material-icons">arrow_forward</span></a>
+            </div>
+
+            <div class="books-grid">
+                <div class="book-card" th:each="book : ${upcomingBooks}">
+                    <div class="book-cover">
+                        <img th:src="${book.bookImage}" th:alt="${book.bookName}"
+                             onerror="this.src='/images/default-book-cover.jpg'">
+                    </div>
+                    <div class="book-info">
+                        <h3 class="book-title" th:text="${book.bookName}">Book Title</h3>
+                        <p class="book-author" th:text="${book.bookAuthor}">Author Name</p>
+                        <p class="book-year" th:text="${book.bookYear}">2025</p>
+                        <a th:href="@{'/books/' + ${book.bookName}}" class="btn-details">Details</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Links and Contact Section -->
+        <div class="info-section">
+            <div class="quick-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">Borrowing Rules</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Opening Hours</a></li>
+                    <li><a href="#">Membership</a></li>
+                </ul>
+            </div>
+
+            <div class="contact-info">
+                <h3>Contact</h3>
+                <ul>
+                    <li><span class="material-icons">email</span> library@mail.com</li>
+                    <li><span class="material-icons">phone</span> (044) 123-4567</li>
+                    <li><span class="material-icons">location_on</span> Kyiv, Book St. 1</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- Footer -->
+<div th:replace="~{layout/footer :: footer}"></div>
+</body>
+</html>

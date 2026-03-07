@@ -1,8 +1,6 @@
 package com.library.ServiceCatalog.controllers;
 
-import com.library.ServiceCatalog.dto.BookDTO;
-import com.library.ServiceCatalog.dto.BookDTOForResponseCreate;
-import com.library.ServiceCatalog.dto.BookDTOForResponseGetBook;
+import com.library.ServiceCatalog.dto.*;
 import com.library.ServiceCatalog.services.BookService;
 import com.library.ServiceCatalog.exceptions.BookNotCreatedException;
 import jakarta.validation.Valid;
@@ -29,11 +27,16 @@ public class BookController {
     private final BookService bookService;
 
     @GetMapping()
-    public ResponseEntity<List<BookDTOForResponseGetBook>> getAllBooks(@RequestParam(value = "page", defaultValue = "0") Integer page,
-                                                       @RequestParam(value = "booksPerPage", defaultValue = "5") Integer booksPerPage,
-                                                       @RequestParam(value = "sortBy", defaultValue = "bookName") String sortBy)
+    public ResponseEntity<BookDtoWithTotalElements> getAllBooks(@RequestParam(value = "page", defaultValue = "0") Integer page,
+                                                       @RequestParam(value = "booksPerPage", defaultValue = "5", required = false) Integer booksPerPage,
+                                                       @RequestParam(value = "sortBy", defaultValue = "bookAddedAt") String sortBy,
+                                                       @RequestParam(value = "genre", required = false) String genre)
     {
-        List<BookDTOForResponseGetBook> books = bookService.findAll(PageRequest.of(page, booksPerPage, Sort.by(sortBy)));
+        if (!genre.isEmpty()){
+            BookDtoWithTotalElements books = bookService.findAllByGenre(genre, PageRequest.of(page, booksPerPage, Sort.by(sortBy)));
+            return new ResponseEntity<>(books, HttpStatus.OK);
+        }
+        BookDtoWithTotalElements books = bookService.findAll(PageRequest.of(page, booksPerPage, Sort.by(sortBy)));
         return new ResponseEntity<>(books, HttpStatus.OK);
     }
     @GetMapping("/recently-added-at")
@@ -49,11 +52,11 @@ public class BookController {
     }
     @GetMapping("/pieces/{book_id}")
     public Integer getBookPieces(@PathVariable UUID book_id){
-        return bookService.findById(book_id).getBookPieces();
+        return bookService.findById(book_id).getBookItems();
     }
 
     @PostMapping("/auth/create")
-    public ResponseEntity<BookDTOForResponseCreate> createBook(@RequestPart("bookData") @Valid BookDTO bookDTO,
+    public ResponseEntity<BookDTOForResponseCreate> createBook(@RequestPart("bookData") @Valid BookDTOForCreate bookDTO,
                                                                @RequestPart(value = "coverImage", required = false) MultipartFile coverImage,
                                                                BindingResult bindingResult){
         validateBookFields(bindingResult);
@@ -81,7 +84,11 @@ public class BookController {
         return new ResponseEntity<>(books, HttpStatus.OK);
 
     }
-
+    @GetMapping("/category")
+    public ResponseEntity<List<CategoriesDTO>> getCategories(){
+        List<CategoriesDTO> categories = bookService.findCategories();
+        return new ResponseEntity<>(categories, HttpStatus.OK);
+    }
     private void validateBookFields(BindingResult bindingResult) {
         if (bindingResult.hasErrors()){
             StringBuilder errorMessage = new StringBuilder();

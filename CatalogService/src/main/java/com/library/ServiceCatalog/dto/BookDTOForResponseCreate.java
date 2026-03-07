@@ -14,7 +14,7 @@ public class BookDTOForResponseCreate {
     private int bookYear;
     private String bookPublication;
     private String bookLanguage;
-    private int bookPieces;
+    private int bookItems;
     private String bookImage;
     private String bookGenre;
 }

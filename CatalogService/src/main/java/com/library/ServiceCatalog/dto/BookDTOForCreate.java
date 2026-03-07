@@ -1,17 +1,12 @@
 package com.library.ServiceCatalog.dto;
 
 import jakarta.validation.constraints.Size;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.util.Objects;
-import java.util.UUID;
-
-@Data
-@NoArgsConstructor
-public class BookDTO {
-
-    private UUID bookId;
+@Getter
+@Setter
+public class BookDTOForCreate {
     @Size(min = 1, message = "Book name must not be empty.")
     private String bookName;
 
@@ -30,5 +25,4 @@ public class BookDTO {
 
     @Size(min = 1, message = "Book genre cannot be empty.")
     private String bookGenre;
-
 }

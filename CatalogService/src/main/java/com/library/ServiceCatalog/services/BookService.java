@@ -1,9 +1,7 @@
 package com.library.ServiceCatalog.services;
 
-import com.library.ServiceCatalog.dto.BookDTO;
-import com.library.ServiceCatalog.dto.BookDTOForKafka;
-import com.library.ServiceCatalog.dto.BookDTOForResponseCreate;
-import com.library.ServiceCatalog.dto.BookDTOForResponseGetBook;
+import com.library.ServiceCatalog.dto.*;
+import com.library.ServiceCatalog.exceptions.CategoriesNotFoundException;
 import com.library.ServiceCatalog.models.Book;
 import com.library.ServiceCatalog.models.BookForKafka;
 import com.library.ServiceCatalog.repositories.BookForKafkaRepository;
@@ -14,6 +12,7 @@ import com.library.ServiceCatalog.exceptions.BooksNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -46,7 +45,7 @@ public class BookService {
     private final Object synchronizationForMostPopularBooks = new Object();
 
     @Transactional
-    public BookDTOForResponseCreate save(BookDTO bookDTO, MultipartFile coverImage) {
+    public BookDTOForResponseCreate save(BookDTOForCreate bookDTO, MultipartFile coverImage) {
         Book book = toEntity(bookDTO);
         book.setBookAddedAt(LocalDateTime.now());
         log.info("Converted dto to entity. Title: '{}'", book.getBookName());
@@ -82,13 +81,38 @@ public class BookService {
     }
 
     @Transactional(readOnly = true)
-    public List<BookDTOForResponseGetBook> findAll(Pageable pageable) {
-        List<Book> books = bookRepository.findAll(pageable).getContent();
+    public BookDtoWithTotalElements findAll(Pageable pageable) {
+        Page<Book> booksPage = bookRepository.findAll(pageable);
+        long bookCount = booksPage.getTotalElements();
+        int bookPages = booksPage.getTotalPages();
+        List<Book> books = booksPage.getContent();
         if (books.isEmpty()) {
             log.warn("Books not found");
             throw new BooksNotFoundException("Books not found");
         }
-        return books.stream().map(this::toBookDTOForResponseGetBook).toList();
+        List<BookDTOForResponseGetBook> bookDTOForResponseGetBooks = books.stream().map(this::toBookDTOForResponseGetBook).toList();
+        BookDtoWithTotalElements bookDtoWithTotalElements = new BookDtoWithTotalElements();
+        bookDtoWithTotalElements.setBookDTOForResponseGetBookList(bookDTOForResponseGetBooks);
+        bookDtoWithTotalElements.setBookCount(bookCount);
+        bookDtoWithTotalElements.setBookPages(bookPages);
+        return bookDtoWithTotalElements;
+    }
+    @Transactional(readOnly = true)
+    public BookDtoWithTotalElements findAllByGenre(String genre, Pageable pageable) {
+        Page<Book> booksPage = bookRepository.findAllByBookGenre(genre, pageable);
+        long bookCount = booksPage.getTotalElements();
+        int bookPages = booksPage.getTotalPages();
+        List<Book> books = booksPage.getContent();
+        if (books.isEmpty()) {
+            log.warn("Books not found");
+            throw new BooksNotFoundException("Books not found");
+        }
+        List<BookDTOForResponseGetBook> bookDTOForResponseGetBooks = books.stream().map(this::toBookDTOForResponseGetBook).toList();
+        BookDtoWithTotalElements bookDtoWithTotalElements = new BookDtoWithTotalElements();
+        bookDtoWithTotalElements.setBookDTOForResponseGetBookList(bookDTOForResponseGetBooks);
+        bookDtoWithTotalElements.setBookCount(bookCount);
+        bookDtoWithTotalElements.setBookPages(bookPages);
+        return bookDtoWithTotalElements;
     }
 
     public BookDTOForResponseGetBook findById(UUID id) {
@@ -121,8 +145,8 @@ public class BookService {
             book.setBookPublication(bookDTO.getBookPublication());
         if (bookDTO.getBookLanguage() != null)
             book.setBookLanguage(bookDTO.getBookLanguage());
-        if (bookDTO.getBookPieces() != 0)
-            book.setBookPieces(bookDTO.getBookPieces());
+        if (bookDTO.getBookItems() != 0)
+            book.setBookItems(bookDTO.getBookItems());
         if (coverImage != null && !coverImage.isEmpty()) {
             String imageUrl = imageService.storeImage(coverImage, book.getBookId());
             book.setBookImage(imageUrl);
@@ -145,6 +169,15 @@ public class BookService {
         }
         log.info("All recently added books were found");
         return books.stream().map(this::toBookDTOForResponseGetBook).toList();
+    }
+    @Transactional(readOnly = true)
+    public List<CategoriesDTO> findCategories(){
+        List<CategoriesDTO> categories = bookRepository.findAllCategories();
+        if (categories.isEmpty()){
+            log.warn("The categories not found.");
+            throw new CategoriesNotFoundException("The categories not found");
+        }
+        return categories;
     }
 
     @Transactional(readOnly = true)
@@ -211,11 +244,11 @@ public class BookService {
         return modelMapper.map(book, BookDTO.class);
     }
 
-    private Book toEntity(BookDTO bookDTO) {
+    private Book toEntity(BookDTOForCreate bookDTO) {
         log.info("Mapping bookDTO to entity. Title: '{}'", bookDTO.getBookName());
         Book book = new Book();
         book.setBookName(bookDTO.getBookName());
-        book.setBookPieces(bookDTO.getBookPieces());
+        book.setBookItems(bookDTO.getBookItems());
         book.setBookLanguage(bookDTO.getBookLanguage());
         book.setBookYear(bookDTO.getBookYear());
         book.setBookPublication(bookDTO.getBookPublication());

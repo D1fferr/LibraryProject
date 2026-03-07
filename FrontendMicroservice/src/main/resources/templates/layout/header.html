@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="header">
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">
+                <a href="/">
+                    <span class="material-icons logo-icon">menu_book</span>
+                    <span class="logo-text">BookLibrary</span>
+                </a>
+            </div>
+
+            <div class="search-bar">
+                <form action="/search" method="get">
+                    <input type="text" name="query" placeholder="Search books..." class="search-input">
+                    <button type="submit" class="search-btn">
+                        <span class="material-icons">search</span>
+                    </button>
+                </form>
+            </div>
+
+            <div class="user-menu">
+                <div th:if="${isAuthenticated}" class="user-info">
+                    <span class="material-icons">account_circle</span>
+                    <span class="user-name" th:text="${userName}">User</span>
+                    <a href="/logout" class="logout-btn">
+                        <span class="material-icons">logout</span>
+                    </a>
+                </div>
+                <div th:unless="${isAuthenticated}" class="login-btn">
+                    <a href="/login">
+                        <span class="material-icons">login</span>
+                        <span>Login</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <nav class="main-nav">
+            <ul>
+                <li><a href="/" class="active">Home</a></li>
+                <li><a href="/catalog">Catalog</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+</div>
+</html>

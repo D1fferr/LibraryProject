@@ -31,8 +31,8 @@ public class BookDTOForKafka {
     @JsonProperty("expectedBookLanguage")
     @NotEmpty(message = "The language of the book cannot be empty.")
     private String bookLanguage;
-    @JsonProperty("expectedBookPieces")
-    private int bookPieces;
+    @JsonProperty("expectedBookItems")
+    private int bookItems;
     @JsonProperty("expectedBookImage")
     private String bookImage;
     @JsonProperty("expectedBookGenre")

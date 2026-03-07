@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microservices Dashboard</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+<div th:replace="~{layout/header :: header}"></div>
+
+<div class="container">
+    <div th:replace="~{layout/sidebar :: sidebar}"></div>
+
+    <main class="main-content">
+        <!-- Dashboard Header -->
+        <div class="dashboard-header">
+            <div>
+                <h1>Dashboard</h1>
+                <p>Microservices monitoring and management</p>
+            </div>
+            <div class="header-actions">
+                    <span class="last-update">
+                        Last update: <span th:text="${#dates.format(lastUpdate, 'HH:mm:ss')}"></span>
+                    </span>
+                <button class="btn-refresh" onclick="location.reload()">
+                    <span class="material-icons">refresh</span>
+                    Refresh
+                </button>
+            </div>
+        </div>
+
+        <!-- System Status -->
+        <div class="system-status" th:if="${systemStatus}">
+            <div class="status-card" th:classappend="${systemStatus == 'UP' ? 'status-up' : 'status-down'}">
+                <span class="material-icons" th:text="${systemStatus == 'UP' ? 'check_circle' : 'error'}"></span>
+                <div>
+                    <h3>System Status</h3>
+                    <p th:text="${systemStatus}"></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <span class="material-icons stat-icon">dns</span>
+                <div class="stat-info">
+                    <h3 th:text="${totalServices}">0</h3>
+                    <p>Total Services</p>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <span class="material-icons stat-icon">bolt</span>
+                <div class="stat-info">
+                    <h3 th:text="${totalRequests}">0</h3>
+                    <p>Total Requests</p>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <span class="material-icons stat-icon">speed</span>
+                <div class="stat-info">
+                    <h3 th:text="${avgLatency + ' ms'}">0 ms</h3>
+                    <p>Average Latency</p>
+                </div>
+            </div>
+
+            <div class="stat-card" th:if="${metrics}">
+                <span class="material-icons stat-icon">memory</span>
+                <div class="stat-info">
+                    <h3 th:text="${metrics.cpuUsage} + '%'">0%</h3>
+                    <p>CPU Usage</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Error Message -->
+        <div class="error-message" th:if="${error}">
+            <span class="material-icons">error</span>
+            <p th:text="${error}"></p>
+        </div>
+
+        <!-- Services Section -->
+        <div class="services-section">
+            <div class="section-header">
+                <h2>Microservices</h2>
+                <div class="status-filters">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="HEALTHY">Healthy</button>
+                    <button class="filter-btn" data-filter="WARNING">Warning</button>
+                    <button class="filter-btn" data-filter="ERROR">Error</button>
+                </div>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card" th:each="service : ${services}"
+                     th:classappend="'status-' + ${service.status.toString().toLowerCase()}">
+                    <div class="card-header">
+                        <div class="service-info">
+                                <span class="status-indicator"
+                                      th:classappend="'status-' + ${service.status.toString().toLowerCase()}">
+                                </span>
+                            <h3 th:text="${service.name}">Service Name</h3>
+                        </div>
+                        <span class="service-version" th:text="${service.version}">v1.0.0</span>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="metrics-grid">
+                            <div class="metric">
+                                <span class="metric-label">Uptime</span>
+                                <span class="metric-value" th:text="${service.uptime} + '%'">99.9%</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-label">Latency</span>
+                                <span class="metric-value" th:text="${service.latency} + ' ms'">45 ms</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-label">Requests</span>
+                                <span class="metric-value" th:text="${service.requests}">1,234</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-label">Deployed</span>
+                                <span class="metric-value"
+                                      th:text="${#temporals.format(service.lastDeployed, 'MMM dd')}">
+                                        Jan 15
+                                    </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-footer">
+                        <button class="btn-details"
+                                th:onclick="'location.href=\'/services/' + ${service.id} + '\''">
+                            Details
+                        </button>
+                        <button class="btn-restart"
+                                th:onclick="'restartService(\'' + ${service.id} + '\')'"
+                                th:disabled="${service.status.toString() == 'OFFLINE'}">
+                            <span class="material-icons">restart_alt</span>
+                            Restart
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+            <h2>Quick Actions</h2>
+            <div class="actions-grid">
+                <button class="action-btn" onclick="restartAllServices()">
+                    <span class="material-icons">restart_alt</span>
+                    Restart All
+                </button>
+                <button class="action-btn" onclick="exportLogs()">
+                    <span class="material-icons">download</span>
+                    Export Logs
+                </button>
+                <button class="action-btn" onclick="configureAlerts()">
+                    <span class="material-icons">notifications</span>
+                    Configure Alerts
+                </button>
+                <button class="action-btn" onclick="addService()">
+                    <span class="material-icons">add</span>
+                    Add Service
+                </button>
+            </div>
+        </div>
+    </main>
+</div>
+
+<div th:replace="~{layout/footer :: footer}"></div>
+
+<script src="/js/dashboard.js"></script>
+</body>
+</html>
