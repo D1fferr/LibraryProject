@@ -10,4 +10,5 @@ import java.util.UUID;
 @NoArgsConstructor
 public class Book extends BaseBook{
     private UUID bookId;
+
 }

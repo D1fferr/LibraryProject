@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ua.zakharchuk.ExpectedBooksService.dtos.ExpectedBookDTO;
 import ua.zakharchuk.ExpectedBooksService.dtos.ExpectedBookDTOCreate;
+import ua.zakharchuk.ExpectedBooksService.dtos.ExpectedBookDtoWithTotalElements;
 import ua.zakharchuk.ExpectedBooksService.exceptions.ExpectedBookNotCreatedException;
 import ua.zakharchuk.ExpectedBooksService.services.ExpectedBookService;
 import ua.zakharchuk.ExpectedBooksService.services.KafkaSenderService;
@@ -34,7 +35,7 @@ public class ExpectedBookController {
         return new ResponseEntity<>(expectedBookService.findById(id), HttpStatus.OK);
     }
     @GetMapping("/get-all")
-    public ResponseEntity<List<ExpectedBookDTO>> getAll(
+    public ResponseEntity<ExpectedBookDtoWithTotalElements> getAll(
             @RequestParam(value = "page", defaultValue = "0") Integer page,
             @RequestParam(value = "bookPerPage", defaultValue = "5")
             Integer bookPerPage){

@@ -21,6 +21,7 @@ public class JWTProvider {
     public String generatedToken(String username, UUID id, String role) {
         return JWT.create()
                 .withSubject(id.toString())
+                .withClaim("user_id", id.toString())
                 .withClaim("username", username)
                 .withClaim("role", role)
                 .withIssuedAt(new Date())

@@ -23,12 +23,23 @@ public abstract class BaseBook {
 
     @NotEmpty(message = "The language of the book cannot be empty.")
     private String bookLanguage;
-
-    private int bookItems;
-
     private String bookImage;
+    private int bookItems;
 
     @NotEmpty(message = "Book genre cannot be empty.")
     private String bookGenre;
 
+    @Override
+    public String toString() {
+        return "BaseBook{" +
+                "bookName='" + bookName + '\'' +
+                ", bookAuthor='" + bookAuthor + '\'' +
+                ", bookYear=" + bookYear +
+                ", bookPublication='" + bookPublication + '\'' +
+                ", bookLanguage='" + bookLanguage + '\'' +
+                ", bookImage='" + bookImage + '\'' +
+                ", bookItems=" + bookItems +
+                ", bookGenre='" + bookGenre + '\'' +
+                '}';
+    }
 }

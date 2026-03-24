@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - BookLibrary</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        /* Додаткові стилі специфічні для сторінки логіну */
+        .login-page {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: calc(100vh - 200px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .login-container {
+            max-width: 450px;
+            width: 100%;
+        }
+
+        .login-box {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .login-header .logo-icon {
+            font-size: 48px;
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .login-header h1 {
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .login-header p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            font-size: 15px;
+            transition: all 0.3s;
+            box-sizing: border-box;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-group input.error {
+            border-color: #e74c3c;
+        }
+
+        .alert {
+            padding: 12px 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .alert-error {
+            background: #fee;
+            color: #c0392b;
+            border: 1px solid #fcc;
+        }
+
+        .alert-warning {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeeba;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert .material-icons {
+            font-size: 20px;
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 14px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 10px;
+        }
+
+        .btn-login:hover {
+            background: #5a67d8;
+        }
+
+        .btn-login:active {
+            transform: translateY(1px);
+        }
+
+        .login-footer {
+            text-align: center;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .login-footer a {
+            color: #667eea;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .login-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .redirect-info {
+            background: #e8f0fe;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .redirect-info .material-icons {
+            font-size: 18px;
+            color: #667eea;
+        }
+
+        /* Адаптивність */
+        @media (max-width: 480px) {
+            .login-box {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- Header -->
+<div th:replace="~{layout/header :: header}"></div>
+
+<div class="login-page">
+    <div class="login-container">
+        <div class="login-box">
+            <!-- Приховане поле для redirect -->
+            <input type="hidden" id="redirectUrl" th:value="${redirect}" />
+
+            <div class="login-header">
+                <span class="material-icons logo-icon">menu_book</span>
+                <h1>Welcome Back!</h1>
+                <p>Sign in to your account</p>
+            </div>
+
+            <!-- Alert повідомлення -->
+            <div th:if="${errorMessage}" class="alert alert-error">
+                <span class="material-icons">error</span>
+                <span th:text="${errorMessage}">Invalid username or password</span>
+            </div>
+
+            <div th:if="${warningMessage}" class="alert alert-warning">
+                <span class="material-icons">warning</span>
+                <span th:text="${warningMessage}">Your session has expired</span>
+            </div>
+
+            <!-- Інформація про redirect (якщо є) -->
+            <div th:if="${redirect != null and redirect != 'null'}" class="redirect-info">
+                <span class="material-icons">login</span>
+                <span>Please login to continue to: <strong th:text="${redirect}">/books/123</strong></span>
+            </div>
+
+            <!-- Форма логіну -->
+            <form id="loginForm" method="post" action="/login">
+                <div class="form-group">
+                    <label for="username">
+                        <span class="material-icons" style="font-size: 16px; vertical-align: middle;">person</span>
+                        Username
+                    </label>
+                    <input type="text"
+                           id="username"
+                           name="username"
+                           placeholder="Enter your username"
+                           required
+                           autofocus>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">
+                        <span class="material-icons" style="font-size: 16px; vertical-align: middle;">lock</span>
+                        Password
+                    </label>
+                    <input type="password"
+                           id="password"
+                           name="password"
+                           placeholder="Enter your password"
+                           required>
+                </div>
+
+                <button type="submit" class="btn-login">
+                    <span class="material-icons" style="font-size: 18px; vertical-align: middle;">login</span>
+                    Sign In
+                </button>
+            </form>
+
+            <div class="login-footer">
+                <p>Don't have an account? <a href="/register">Sign up</a></p>
+                <p style="margin-top: 10px; font-size: 12px; color: #999;">
+                    <a href="/forgot-password">Forgot password?</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<div th:replace="~{layout/footer :: footer}"></div>
+
+<!-- JavaScript для обробки redirect -->
+<script>
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+        const redirect = document.getElementById('redirectUrl').value;
+
+        if (redirect && redirect !== 'null' && redirect !== '') {
+            const action = this.action + '?redirect=' + encodeURIComponent(redirect);
+            this.action = action;
+        }
+
+        // Можна додати валідацію перед сабмітом
+        const username = document.getElementById('username').value.trim();
+        const password = document.getElementById('password').value.trim();
+
+        if (!username || !password) {
+            e.preventDefault();
+            alert('Please fill in all fields');
+        }
+    });
+
+    // Додаємо клас error при невдалій спробі
+    <th:block th:if="${errorMessage}">
+        document.getElementById('username').classList.add('error');
+        document.getElementById('password').classList.add('error');
+    </th:block>
+</script>
+</body>
+</html>

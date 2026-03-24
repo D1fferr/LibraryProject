@@ -1,6 +1,7 @@
 package com.library.FrontendMicroservice.testclasses;
 
 import com.library.FrontendMicroservice.dto.BookDto;
+import com.library.FrontendMicroservice.dto.CategoriesDto;
 import com.library.FrontendMicroservice.exceptions.BookException;
 import com.library.FrontendMicroservice.exceptions.CategoryException;
 import com.library.FrontendMicroservice.models.Book;
@@ -13,7 +14,7 @@ import java.util.UUID;
 
 @Component
 public class BookServiceTest {
-    public List<Book> getMostPopularBooks(){
+    public BookDto getMostPopularBooks(){
         Book book1 = createBook(1);
         Book book2 = createBook(2);
         Book book3 = createBook(3);
@@ -23,9 +24,13 @@ public class BookServiceTest {
         books.add(book2);
         books.add(book3);
         books.add(book4);
-        return books;
+        BookDto bookDto = new BookDto();
+        bookDto.setBooks(books);
+        bookDto.setBookPages(2);
+        bookDto.setBookCount(10);
+        return bookDto;
     }
-    public List<Book> getRecentlyAddedAt(){
+    public BookDto getRecentlyAddedAt(){
         Book book1 = createBook(5);
         Book book2 = createBook(6);
         Book book3 = createBook(7);
@@ -35,9 +40,13 @@ public class BookServiceTest {
         books.add(book2);
         books.add(book3);
         books.add(book4);
-        return books;
+        BookDto bookDto = new BookDto();
+        bookDto.setBooks(books);
+        bookDto.setBookPages(2);
+        bookDto.setBookCount(10);
+        return bookDto;
     }
-    public BookDto getBooks(String sortBy, int page, String genre){
+    public BookDto getBooks(String sortBy, int page, String genre, String sortDir){
         Book book1 = createBook(9);
         Book book2 = createBook(10);
         Book book3 = createBook(11);
@@ -50,10 +59,10 @@ public class BookServiceTest {
         BookDto bookDto = new BookDto();
         bookDto.setBooks(books);
         bookDto.setBookCount(56);
-        bookDto.setBookPage(12);
+        bookDto.setBookPages(12);
         return bookDto;
     }
-    public List<Category> getAllCategories(){
+    public CategoriesDto getAllCategories(){
         Category category1 = createCategory(5);
         Category category2 = createCategory(6);
         Category category3 = createCategory(7);
@@ -67,8 +76,49 @@ public class BookServiceTest {
         categories.add(category4);
         categories.add(category5);
         categories.add(category6);
-        return categories;
+        CategoriesDto categoriesDto = new CategoriesDto();
+        categoriesDto.setCategories(categories);
+        return categoriesDto;
     }
+
+    public Book getBookById(UUID id){
+        return createBook(1);
+    }
+    public BookDto getBooksByAuthor(String author){
+        Book book1 = createBook(9);
+        Book book2 = createBook(10);
+        Book book3 = createBook(11);
+        Book book4 = createBook(12);
+        List<Book> books = new ArrayList<>();
+        books.add(book1);
+        books.add(book2);
+        books.add(book3);
+        books.add(book4);
+        BookDto bookDto = new BookDto();
+        bookDto.setBooks(books);
+        bookDto.setBookCount(56);
+        bookDto.setBookPages(12);
+        return bookDto;
+    }
+    public BookDto getBooksByGenre(String genre){
+        Book book1 = createBook(9);
+        Book book2 = createBook(10);
+        Book book3 = createBook(11);
+        Book book4 = createBook(12);
+        List<Book> books = new ArrayList<>();
+        books.add(book1);
+        books.add(book2);
+        books.add(book3);
+        books.add(book4);
+        BookDto bookDto = new BookDto();
+        bookDto.setBooks(books);
+        bookDto.setBookCount(56);
+        bookDto.setBookPages(12);
+        return bookDto;
+    }
+
+
+
     private Book createBook(int i){
         Book book = new Book();
         book.setBookAuthor("TestBookAuthor1" + i);
@@ -76,6 +126,7 @@ public class BookServiceTest {
         book.setBookLanguage("TestBookLanguage1" + i);
         book.setBookImage("" + i);
         book.setBookItems(4);
+        book.setBookPublication("TestBookPublication");
         book.setBookName("TestBookName1" + i);
         book.setBookYear(1999);
         book.setBookId(UUID.randomUUID());

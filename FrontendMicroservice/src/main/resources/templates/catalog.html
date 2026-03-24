@@ -6,6 +6,30 @@
   <title>Catalog - BookLibrary</title>
   <link rel="stylesheet" href="/css/style.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    /* Додаткові стилі для нових пунктів меню */
+    .category-divider {
+      height: 1px;
+      background-color: #e0e0e0;
+      margin: 12px 0;
+    }
+
+    .special-category {
+      font-weight: 600;
+      color: #e67e22 !important;
+    }
+
+    .special-category:hover {
+      color: #d35400 !important;
+      background-color: #fff3e0;
+    }
+
+    .special-category .material-icons {
+      font-size: 16px;
+      margin-right: 4px;
+      vertical-align: middle;
+    }
+  </style>
 </head>
 <body>
 <!-- Header -->
@@ -15,22 +39,51 @@
 <div class="container">
   <!-- Categories Sidebar -->
   <aside class="sidebar">
-    <h3>Genres</h3>
-    <ul class="categories-list">
+    <h3>Categories</h3>
+
+    <ul class="categories-list" th:if="${categories != null and !categories.isEmpty()}">
+      <!-- All Books - без genre, зберігаємо поточне sortBy -->
       <li>
-        <a th:href="@{/catalog(page=0, sort=${sort}, search=${search})}"
+        <a th:href="@{/catalog(page=0, sortBy=${sortBy != null ? sortBy : 'bookAddedAt'}, sortDir=${sortDir != null ? sortDir : 'desc'})}"
            th:class="${selectedGenre == null ? 'active' : ''}">
           All Books
         </a>
       </li>
+
+      <!-- Most Popular Books - спеціальна категорія (після All Books) -->
+      <li>
+        <a href="/catalog/most-popular-books"
+           class="special-category"
+           th:classappend="${currentPage == 'most-popular' ? 'active' : ''}">
+          <span class="material-icons">trending_up</span> Most Popular Books
+        </a>
+      </li>
+
+      <!-- Upcoming Books - спеціальна категорія (після Most Popular) -->
+      <li>
+        <a href="/catalog/upcoming-books"
+           class="special-category"
+           th:classappend="${currentPage == 'upcoming' ? 'active' : ''}">
+          <span class="material-icons">upcoming</span> Upcoming Books
+        </a>
+      </li>
+
+      <!-- Роздільник перед жанрами -->
+      <li class="category-divider"></li>
+
+      <!-- Жанри - додаємо genre, зберігаємо поточне sortBy -->
       <li th:each="category : ${categories}">
-        <a th:href="@{/catalog(genre=${category.name}, page=0, sort=${sort}, search=${search})}"
+        <a th:href="@{/catalog(genre=${category.name}, page=0, sortBy=${sortBy != null ? sortBy : 'bookAddedAt'}, sortDir=${sortDir != null ? sortDir : 'desc'})}"
            th:class="${selectedGenre == category.name ? 'active' : ''}"
            th:text="${category.name} + ' (' + ${category.count} + ')'">
           Fiction (98)
         </a>
       </li>
     </ul>
+
+    <div th:if="${categories == null or categories.isEmpty()}" class="no-categories">
+      <p>No categories available</p>
+    </div>
   </aside>
 
   <!-- Main Content Area -->
@@ -41,7 +94,8 @@
         <a href="/">Home</a> /
         <a href="/catalog">Catalog</a>
         <span th:if="${selectedGenre}">/ <span th:text="${selectedGenre}">Fiction</span></span>
-        <span th:if="${search}">/ Search: "<span th:text="${search}">book</span>"</span>
+        <span th:if="${currentPage == 'most-popular'}">/ Most Popular Books</span>
+        <span th:if="${currentPage == 'upcoming'}">/ Upcoming Books</span>
       </div>
 
       <div class="catalog-controls">
@@ -56,15 +110,20 @@
 
         <div class="sort-selector">
           <select id="sortSelect" onchange="applySort()">
-            <option value="newest" th:selected="${sort == 'newest'}">Newest First</option>
-            <option value="oldest" th:selected="${sort == 'oldest'}">Oldest First</option>
-            <option value="title_asc" th:selected="${sort == 'title_asc'}">Title A-Z</option>
-            <option value="title_desc" th:selected="${sort == 'title_desc'}">Title Z-A</option>
-            <option value="author_asc" th:selected="${sort == 'author_asc'}">Author A-Z</option>
-            <option value="author_desc" th:selected="${sort == 'author_desc'}">Author Z-A</option>
+            <option value="bookAddedAt,desc" th:selected="${sortBy == 'bookAddedAt' and sortDir == 'desc'}">Newest First</option>
+            <option value="bookAddedAt,asc" th:selected="${sortBy == 'bookAddedAt' and sortDir == 'asc'}">Oldest First</option>
+            <option value="bookName,asc" th:selected="${sortBy == 'bookName' and sortDir == 'asc'}">Title A-Z</option>
+            <option value="bookName,desc" th:selected="${sortBy == 'bookName' and sortDir == 'desc'}">Title Z-A</option>
+            <option value="bookAuthor,asc" th:selected="${sortBy == 'bookAuthor' and sortDir == 'asc'}">Author A-Z</option>
+            <option value="bookAuthor,desc" th:selected="${sortBy == 'bookAuthor' and sortDir == 'desc'}">Author Z-A</option>
           </select>
         </div>
       </div>
+    </div>
+
+    <!-- Error Message -->
+    <div class="error-message" th:if="${error}" th:text="${error}">
+      Error loading catalog
     </div>
 
     <!-- Books Grid -->
@@ -72,7 +131,6 @@
       <div class="books-grid" id="booksGrid">
         <div class="book-card" th:each="book : ${books}">
           <div class="book-cover">
-            <!-- ЗМІНЕНО: Логіка для зображень з перевіркою на null -->
             <img th:if="${book.bookImage != null and !book.bookImage.isEmpty()}"
                  th:src="${book.bookImage}"
                  th:alt="${book.bookName}"
@@ -87,7 +145,7 @@
             <p class="book-author" th:text="${book.bookAuthor}">Author Name</p>
             <p class="book-year" th:text="${book.bookYear}">2024</p>
             <p class="book-genre" th:text="${book.bookGenre}">Fiction</p>
-            <a th:href="@{'/books/' + ${book.bookName}}" class="btn-details">Details</a>
+            <a th:href="@{'/books/' + ${book.bookId}}" class="btn-details">Details</a>
           </div>
         </div>
       </div>
@@ -96,8 +154,7 @@
       <div class="empty-state" th:if="${books.empty}">
         <span class="material-icons empty-icon">menu_book</span>
         <h3>No books found</h3>
-        <p th:if="${search}">No results for "<span th:text="${search}"></span>"</p>
-        <p th:unless="${search}">Try selecting a different genre</p>
+        <p>Try selecting a different category</p>
       </div>
     </div>
 
@@ -112,38 +169,38 @@
       <div class="pagination">
         <!-- Previous button -->
         <a th:if="${currentPage > 0}"
-           th:href="@{/catalog(page=${currentPage - 1}, genre=${selectedGenre}, sort=${sort}, search=${search})}"
+           th:href="@{/catalog(page=${currentPage - 1}, genre=${selectedGenre}, sortBy=${sortBy != null ? sortBy : 'bookAddedAt'}, sortDir=${sortDir != null ? sortDir : 'desc'})}"
            class="page-link prev">
           <span class="material-icons">chevron_left</span>
         </a>
         <span th:unless="${currentPage > 0}" class="page-link disabled">
-                        <span class="material-icons">chevron_left</span>
-                    </span>
+          <span class="material-icons">chevron_left</span>
+        </span>
 
-        <!-- Page numbers (show max 5 pages) -->
+        <!-- Page numbers -->
         <th:block th:each="i : ${#numbers.sequence(0, totalPages - 1)}">
           <th:block th:if="${i >= currentPage - 2 and i <= currentPage + 2}">
             <a th:if="${i == currentPage}" class="page-link active"
                th:text="${i + 1}">1</a>
             <a th:unless="${i == currentPage}"
-               th:href="@{/catalog(page=${i}, genre=${selectedGenre}, sort=${sort}, search=${search})}"
+               th:href="@{/catalog(page=${i}, genre=${selectedGenre}, sortBy=${sortBy != null ? sortBy : 'bookAddedAt'}, sortDir=${sortDir != null ? sortDir : 'desc'})}"
                class="page-link" th:text="${i + 1}">2</a>
           </th:block>
         </th:block>
 
         <!-- Next button -->
         <a th:if="${currentPage < totalPages - 1}"
-           th:href="@{/catalog(page=${currentPage + 1}, genre=${selectedGenre}, sort=${sort}, search=${search})}"
+           th:href="@{/catalog(page=${currentPage + 1}, genre=${selectedGenre}, sortBy=${sortBy != null ? sortBy : 'bookAddedAt'}, sortDir=${sortDir != null ? sortDir : 'desc'})}"
            class="page-link next">
           <span class="material-icons">chevron_right</span>
         </a>
         <span th:unless="${currentPage < totalPages - 1}" class="page-link disabled">
-                        <span class="material-icons">chevron_right</span>
-                    </span>
+          <span class="material-icons">chevron_right</span>
+        </span>
       </div>
     </div>
 
-    <!-- Quick Links and Contact Section -->
+    <!-- Quick Links and Contact -->
     <div class="info-section">
       <div class="quick-links">
         <h3>Quick Links</h3>
@@ -174,10 +231,11 @@
 <script>
   function applySort() {
     const select = document.getElementById('sortSelect');
-    const sortValue = select.value;
+    const [sortBy, sortDir] = select.value.split(',');
     const url = new URL(window.location.href);
-    url.searchParams.set('sort', sortValue);
-    url.searchParams.set('page', '0'); // Скидаємо на першу сторінку
+    url.searchParams.set('sortBy', sortBy);
+    url.searchParams.set('sortDir', sortDir);
+    url.searchParams.set('page', '0');
     window.location.href = url.toString();
   }
 
@@ -198,15 +256,20 @@
           booksGrid.classList.remove('list-view');
         }
 
-        // Зберігаємо вибір в localStorage
         localStorage.setItem('catalogView', view);
       });
     });
 
-    // Відновлюємо вибір з localStorage
     const savedView = localStorage.getItem('catalogView');
     if (savedView === 'list') {
       document.querySelector('[data-view="list"]').click();
+    }
+
+    // Додаткова перевірка URL при завантаженні сторінки
+    const urlParams = new URLSearchParams(window.location.search);
+    const sortByParam = urlParams.get('sortBy');
+    if (!sortByParam) {
+      document.getElementById('sortSelect').value = 'bookAddedAt,desc';
     }
   });
 </script>

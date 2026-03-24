@@ -7,6 +7,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,20 +31,46 @@ public class BookController {
     public ResponseEntity<BookDtoWithTotalElements> getAllBooks(@RequestParam(value = "page", defaultValue = "0") Integer page,
                                                        @RequestParam(value = "booksPerPage", defaultValue = "5", required = false) Integer booksPerPage,
                                                        @RequestParam(value = "sortBy", defaultValue = "bookAddedAt") String sortBy,
-                                                       @RequestParam(value = "genre", required = false) String genre)
+                                                       @RequestParam(value = "genre", required = false) String genre,
+                                                       @RequestParam(value = "sortDir", defaultValue = "disc") String sortDir)
     {
-        if (!genre.isEmpty()){
-            BookDtoWithTotalElements books = bookService.findAllByGenre(genre, PageRequest.of(page, booksPerPage, Sort.by(sortBy)));
+        System.out.println(sortBy);
+        System.out.println(genre);
+        if (sortBy.equals("bookGenre") && genre !=null && !genre.isEmpty()){
+            System.out.println("Book genre");
+            BookDtoWithTotalElements books = bookService.findAllByGenre(genre, PageRequest.of(page, booksPerPage, Sort.by(Sort.Direction.fromString(sortDir), sortBy)));
             return new ResponseEntity<>(books, HttpStatus.OK);
         }
+        System.out.println("Other books");
         BookDtoWithTotalElements books = bookService.findAll(PageRequest.of(page, booksPerPage, Sort.by(sortBy)));
         return new ResponseEntity<>(books, HttpStatus.OK);
     }
+    @GetMapping("/{bookAuthor}")
+    public ResponseEntity<BookDtoWithTotalElements> getAllBooksByAuthor(
+            @PathVariable String bookAuthor,
+            @RequestParam(value = "page", defaultValue = "0", required = false) Integer page,
+            @RequestParam(value = "booksPerPage", defaultValue = "5", required = false) Integer booksPerPage)
+    {
+        Pageable pageable = PageRequest.of(page, booksPerPage);
+        BookDtoWithTotalElements books = bookService.findAllByAuthor(bookAuthor, pageable);
+        return new ResponseEntity<>(books, HttpStatus.OK);
+    }
+    @GetMapping("/{bookGenre}")
+    public ResponseEntity<BookDtoWithTotalElements> getAllBooksByGenre(
+            @PathVariable String bookGenre,
+            @RequestParam(value = "page", defaultValue = "0", required = false) Integer page,
+            @RequestParam(value = "booksPerPage", defaultValue = "5", required = false) Integer booksPerPage)
+    {
+        Pageable pageable = PageRequest.of(page, booksPerPage);
+        BookDtoWithTotalElements books = bookService.findAllByGenre(bookGenre, pageable);
+        return new ResponseEntity<>(books, HttpStatus.OK);
+    }
+
     @GetMapping("/recently-added-at")
-    public ResponseEntity<List<BookDTOForResponseGetBook>> getAllRecentlyAddedAtBooks(@RequestParam(value = "page", defaultValue = "0") Integer page,
+    public ResponseEntity<BookDtoWithTotalElements> getAllRecentlyAddedAtBooks(@RequestParam(value = "page", defaultValue = "0") Integer page,
                                      @RequestParam(value = "booksPerPage", defaultValue = "5") Integer booksPerPage)
     {
-        List<BookDTOForResponseGetBook> books = bookService.findAllRecentlyAddedAt(page, booksPerPage);
+        BookDtoWithTotalElements books = bookService.findAllRecentlyAddedAt(page, booksPerPage);
         return new ResponseEntity<>(books, HttpStatus.OK);
     }
     @GetMapping("/{book_id}")
@@ -78,16 +105,17 @@ public class BookController {
         return new ResponseEntity<>(bookDTOForResponseCreate, HttpStatus.OK);
     }
     @GetMapping("/most-popular-books")
-    public ResponseEntity<List<BookDTO>> getMostPopularBooks(@RequestParam(value = "page", defaultValue = "0") Integer page) {
+    public ResponseEntity<BookDtoWithTotalElements> getMostPopularBooks(@RequestParam(value = "page", defaultValue = "0") Integer page) {
 
-        List<BookDTO> books = bookService.getMostPopularBooks(page);
+        BookDtoWithTotalElements books = bookService.getMostPopularBooks(page);
         return new ResponseEntity<>(books, HttpStatus.OK);
 
     }
     @GetMapping("/category")
-    public ResponseEntity<List<CategoriesDTO>> getCategories(){
-        List<CategoriesDTO> categories = bookService.findCategories();
-        return new ResponseEntity<>(categories, HttpStatus.OK);
+    public ResponseEntity<CategoriesDtoForResponse> getCategories(){
+        CategoriesDtoForResponse dto = new CategoriesDtoForResponse();
+        dto.setCategories(bookService.findCategories());
+        return new ResponseEntity<>(dto, HttpStatus.OK);
     }
     private void validateBookFields(BindingResult bindingResult) {
         if (bindingResult.hasErrors()){

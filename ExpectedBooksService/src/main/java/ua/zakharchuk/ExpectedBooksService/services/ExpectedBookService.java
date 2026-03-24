@@ -4,6 +4,7 @@ package ua.zakharchuk.ExpectedBooksService.services;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import ua.zakharchuk.ExpectedBooksService.dtos.ExpectedBookDTO;
 import ua.zakharchuk.ExpectedBooksService.dtos.ExpectedBookDTOCreate;
 import ua.zakharchuk.ExpectedBooksService.dtos.ExpectedBookDTOForKafka;
+import ua.zakharchuk.ExpectedBooksService.dtos.ExpectedBookDtoWithTotalElements;
 import ua.zakharchuk.ExpectedBooksService.exceptions.ExpectedBookNotFoundException;
 import ua.zakharchuk.ExpectedBooksService.exceptions.ExpectedBooksNotFoundException;
 import ua.zakharchuk.ExpectedBooksService.models.ExpectedBook;
@@ -106,15 +108,19 @@ public class ExpectedBookService {
     }
 
     @Transactional(readOnly = true)
-    public List<ExpectedBookDTO> findAll(Pageable pageable) {
-        List<ExpectedBookDTO> expectedBookDTOs = expectedBookRepository
-                .findAll(pageable).map(this::toExpectedBookDTO).toList();
-        if (expectedBookDTOs.isEmpty()){
+    public ExpectedBookDtoWithTotalElements findAll(Pageable pageable) {
+        Page<ExpectedBook> expectedBook = expectedBookRepository.findAll(pageable);
+
+        if (expectedBook.getContent().isEmpty()){
             log.warn("Expected books not found");
             throw new ExpectedBooksNotFoundException("The selected books were not found.");
         }
+        ExpectedBookDtoWithTotalElements expectedBookDtoWithTotalElements = new ExpectedBookDtoWithTotalElements();
+        expectedBookDtoWithTotalElements.setExpectedBooks(expectedBook.getContent().stream().map(this::toExpectedBookDTO).toList());
+        expectedBookDtoWithTotalElements.setBookPage(expectedBook.getTotalPages());
+        expectedBookDtoWithTotalElements.setBookCount(expectedBook.getTotalElements());
         log.info("Expected books were found");
-        return expectedBookDTOs;
+        return expectedBookDtoWithTotalElements;
     }
 
 

@@ -7,8 +7,6 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor
-public class BookDtoWithTotalElements {
-    private List<BookDTOForResponseGetBook> books;
-    private long bookCount;
-    private int bookPages;
+public class CategoriesDtoForResponse {
+    private List<CategoriesDTO> categories;
 }

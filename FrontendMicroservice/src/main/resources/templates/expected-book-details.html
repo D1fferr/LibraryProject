@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${expectedBook.expectedBookName} + ' - BookLibrary (Expected)'">Expected Book - BookLibrary</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+<!-- Header -->
+<div th:replace="~{layout/header :: header}"></div>
+
+<!-- Main Content -->
+<div class="container">
+    <main class="main-content">
+        <!-- Breadcrumbs -->
+        <div class="breadcrumbs">
+            <a href="/">Home</a> /
+            <a href="/catalog">Catalog</a> /
+            <a th:href="@{/catalog(genre=${expectedBook.expectedBookGenre}, page=0, sortBy='bookGenre', sortDir='asc')}"
+               th:text="${expectedBook.expectedBookGenre}">Fiction</a> /
+            <span th:text="${expectedBook.expectedBookName}">Expected Book Title</span>
+            <span class="expected-badge">Expected</span>
+        </div>
+
+        <!-- Expected Book Details Section -->
+        <div class="book-details-section">
+            <!-- Left Column - Cover -->
+            <div class="book-cover-large">
+                <img th:src="${expectedBook.expectedBookImage != null ? expectedBook.expectedBookImage : '/images/default-book-cover.jpg'}"
+                     th:alt="${expectedBook.expectedBookName}"
+                     onerror="this.onerror=null; this.src='/images/default-book-cover.jpg';"
+                     class="book-image-large"/>
+            </div>
+
+            <!-- Right Column - Info -->
+            <div class="book-info-large">
+                <h1 class="book-title-large" th:text="${expectedBook.expectedBookName}">Expected Book Title</h1>
+                <h2 class="book-author-large" th:text="'by ' + ${expectedBook.expectedBookAuthor}">by Author Name</h2>
+
+                <div class="book-metadata">
+                    <p><span class="metadata-label">Expected:</span> <span th:text="${expectedBook.expectedBookYear}">2024</span></p>
+                    <p><span class="metadata-label">Publisher:</span> <span th:text="${expectedBook.expectedBookPublication}">Publisher Name</span></p>
+                    <p><span class="metadata-label">Language:</span> <span th:text="${expectedBook.expectedBookLanguage}">English</span></p>
+                    <p><span class="metadata-label">Genre:</span>
+                        <a th:href="@{/catalog(genre=${expectedBook.expectedBookGenre}, page=0, sortBy='bookGenre', sortDir='asc')}"
+                           th:text="${expectedBook.expectedBookGenre}" class="genre-link">
+                            Fiction
+                        </a>
+                    </p>
+                </div>
+
+                <!-- Availability Status for Expected Book -->
+                <div class="book-availability expected">
+                    <span class="material-icons">upcoming</span>
+                    <span>Expected Release</span>
+                </div>
+
+                <!-- No Reserve Button for Expected Book -->
+            </div>
+        </div>
+
+        <!-- More by This Author Section (from Book model) -->
+        <section class="books-section">
+            <div class="section-header">
+                <h2>More by <span th:text="${expectedBook.expectedBookAuthor}">Author Name</span></h2>
+                <a th:href="@{/catalog(author=${expectedBook.expectedBookAuthor}, page=0, sortBy='bookAddedAt', sortDir='desc')}"
+                   class="view-all">
+                    View All <span class="material-icons">arrow_forward</span>
+                </a>
+            </div>
+
+            <div class="books-grid" th:if="${authorBooks != null and !authorBooks.isEmpty()}">
+                <div class="book-card" th:each="authorBook : ${authorBooks}">
+                    <div class="book-cover">
+                        <img th:src="${authorBook.bookImage != null ? authorBook.bookImage : '/images/default-book-cover.jpg'}"
+                             th:alt="${authorBook.bookName}"
+                             onerror="this.onerror=null; this.src='/images/default-book-cover.jpg';"
+                             class="book-image"/>
+                    </div>
+                    <div class="book-info">
+                        <h3 class="book-title" th:text="${authorBook.bookName}">Book Title</h3>
+                        <p class="book-author" th:text="${authorBook.bookAuthor}">Author Name</p>
+                        <p class="book-year" th:text="${authorBook.bookYear}">2024</p>
+                        <a th:href="@{'/books/' + ${authorBook.bookId}}" class="btn-details">Details</a>
+                    </div>
+                </div>
+            </div>
+            <div th:unless="${authorBooks != null and !authorBooks.isEmpty()}" class="no-books-message">
+                <p>No other books by this author found</p>
+            </div>
+        </section>
+
+        <!-- Similar Books Section (from Book model) -->
+        <section class="books-section">
+            <div class="section-header">
+                <h2>Similar Books <span class="genre-tag" th:text="'(' + ${expectedBook.expectedBookGenre} + ')'">(Fiction)</span></h2>
+                <a th:href="@{/catalog(genre=${expectedBook.expectedBookGenre}, page=0, sortBy='bookAddedAt', sortDir='desc')}"
+                   class="view-all">
+                    View All <span class="material-icons">arrow_forward</span>
+                </a>
+            </div>
+
+            <div class="books-grid" th:if="${similarBooks != null and !similarBooks.isEmpty()}">
+                <div class="book-card" th:each="similarBook : ${similarBooks}">
+                    <div class="book-cover">
+                        <img th:src="${similarBook.bookImage != null ? similarBook.bookImage : '/images/default-book-cover.jpg'}"
+                             th:alt="${similarBook.bookName}"
+                             onerror="this.onerror=null; this.src='/images/default-book-cover.jpg';"
+                             class="book-image"/>
+                    </div>
+                    <div class="book-info">
+                        <h3 class="book-title" th:text="${similarBook.bookName}">Book Title</h3>
+                        <p class="book-author" th:text="${similarBook.bookAuthor}">Author Name</p>
+                        <p class="book-year" th:text="${similarBook.bookYear}">2024</p>
+                        <a th:href="@{'/books/' + ${similarBook.bookId}}" class="btn-details">Details</a>
+                    </div>
+                </div>
+            </div>
+            <div th:unless="${similarBooks != null and !similarBooks.isEmpty()}" class="no-books-message">
+                <p>No similar books found in this genre</p>
+            </div>
+        </section>
+
+        <!-- Quick Links and Contact Section -->
+        <div class="info-section">
+            <div class="quick-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">Borrowing Rules</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Opening Hours</a></li>
+                    <li><a href="#">Membership</a></li>
+                </ul>
+            </div>
+
+            <div class="contact-info">
+                <h3>Contact</h3>
+                <ul>
+                    <li><span class="material-icons">email</span> library@mail.com</li>
+                    <li><span class="material-icons">phone</span> (044) 123-4567</li>
+                    <li><span class="material-icons">location_on</span> Kyiv, Book St. 1</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- Footer -->
+<div th:replace="~{layout/footer :: footer}"></div>
+</body>
+</html>

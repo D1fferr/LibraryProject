@@ -1,14 +1,18 @@
 package com.library.FrontendMicroservice.controllers;
 
-import com.library.FrontendMicroservice.auth.FeignErrorHandler;
+import com.library.FrontendMicroservice.dto.BookDto;
+import com.library.FrontendMicroservice.dto.ExpectedBookDto;
 import com.library.FrontendMicroservice.models.Book;
 import com.library.FrontendMicroservice.models.ExpectedBook;
+import com.library.FrontendMicroservice.services.BookService;
+import com.library.FrontendMicroservice.services.ExpectedBookService;
 import com.library.FrontendMicroservice.testclasses.BookServiceTest;
 import com.library.FrontendMicroservice.testclasses.ExpectedBookServiceTest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Arrays;
 import java.util.List;
@@ -16,26 +20,36 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 public class HomeController {
-    private final BookServiceTest bookService;
-    private final ExpectedBookServiceTest expectedBookService;
+    private final BookService bookService;
+    private final ExpectedBookService expectedBookService;
 
     @GetMapping({"/", "/home"})
-    public String home(Model model) {
-        return FeignErrorHandler.handleRequest(() -> {
-                    List<Book> popularBooks = bookService.getMostPopularBooks();
+    public String home(
+            @RequestParam(value = "genre", required = false) String genre,
+            @RequestParam(value = "sortBy", defaultValue = "bookAddedAt", required = false) String sort,
+            @RequestParam(value = "sortDir", defaultValue = "disc", required = false) String sortDir,
+            Model model) {
+        try {
+
+                    BookDto popularBooksDto = bookService.getMostPopularBooks();
+                    List<Book> popularBooks = popularBooksDto.getBooks();
                     model.addAttribute("popularBooks", popularBooks);
 
-                    List<Book> newArrivals = bookService.getRecentlyAddedAt();
+                    BookDto newArrivalsDto = bookService.getRecentlyAddedAt();
+                    List<Book> newArrivals = newArrivalsDto.getBooks();
                     model.addAttribute("newArrivals", newArrivals);
 
-                    List<ExpectedBook> upcomingBooks = expectedBookService.getExpectedBooks();
+                    ExpectedBookDto upcomingBooksDto = expectedBookService.getExpectedBooks();
+                    List<ExpectedBook> upcomingBooks = upcomingBooksDto.getExpectedBooks();
                     model.addAttribute("upcomingBooks", upcomingBooks);
 
                     model.addAttribute("categories", Arrays.asList(
                             "All Books", "Fiction", "Non-Fiction", "Children's", "New Arrivals"
                     ));
                     return "home";
-                },
-                model);
+    }catch (Exception e){
+            System.out.println(e.getMessage() + e.getCause());
+            return null;
+        }
     }
 }

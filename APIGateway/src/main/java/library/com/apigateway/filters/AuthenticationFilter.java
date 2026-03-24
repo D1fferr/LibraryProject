@@ -1,6 +1,5 @@
 package library.com.apigateway.filters;
 
-import io.jsonwebtoken.lang.Maps;
 import library.com.apigateway.security.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

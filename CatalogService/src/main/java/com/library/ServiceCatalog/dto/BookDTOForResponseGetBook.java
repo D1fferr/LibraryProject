@@ -21,6 +21,7 @@ public class BookDTOForResponseGetBook {
     private String bookLanguage;
 
     private int bookItems;
+    private String bookImage;
 
     private String bookGenre;
 

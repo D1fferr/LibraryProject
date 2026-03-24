@@ -21,16 +21,16 @@ import java.util.UUID;
 @Repository
 public interface BookRepository extends JpaRepository<Book, Integer> {
     Optional<Book> findByBookId(UUID bookId);
-    Optional<Book> findByBookNameAndBookAuthor(String bookName, String bookAuthor);
 
-    List<Book> findAllByOrderByBookAddedAtDesc(Pageable pageable);
+    Page<Book> findAllByOrderByBookAddedAtDesc(Pageable pageable);
 
     void deleteByBookId(UUID bookId);
 
     boolean existsBookByBookId(UUID bookId);
     @Query("SELECT b FROM MostPopularBooksCounter c JOIN Book b ON c.bookId = b.bookId ORDER BY c.counter DESC")
-    List<Book> findMostPopularBooks(Pageable pageable);
-    Page<Book> findAllByBookGenre(@NotEmpty(message = "Book genre cannot be empty.") String bookGenre, Pageable pageable);
+    Page<Book> findMostPopularBooks(Pageable pageable);
+    Page<Book> findAllByBookGenre(String genre, Pageable pageable);
+    Page<Book> findAllByBookAuthor(String author, Pageable pageable);
     @Query("SELECT new com.library.ServiceCatalog.dto.CategoriesDTO(b.bookGenre, COUNT(b)) " +
             "from Book b GROUP BY b.bookGenre order by COUNT(b) DESC")
     List<CategoriesDTO> findAllCategories();

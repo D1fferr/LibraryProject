@@ -1,8 +1,10 @@
 package com.library.FrontendMicroservice.controllers;
 
 import com.library.FrontendMicroservice.dto.BookDto;
+import com.library.FrontendMicroservice.dto.CategoriesDto;
 import com.library.FrontendMicroservice.models.Book;
 import com.library.FrontendMicroservice.models.Category;
+import com.library.FrontendMicroservice.services.BookService;
 import com.library.FrontendMicroservice.testclasses.BookServiceTest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,21 +20,21 @@ import java.util.List;
 @Slf4j
 public class CatalogController {
 
-    private final BookServiceTest bookService;
+    private final BookService bookService;
 
     @GetMapping("/catalog")
     public String catalog(
-            @RequestParam(required = false) String genre,
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "bookAddedAt") String sort,
+            @RequestParam(value = "genre", required = false) String genre,
+            @RequestParam(value = "page", defaultValue = "0") int page,
+            @RequestParam(value = "sortBy", defaultValue = "bookAddedAt") String sort,
+            @RequestParam(value = "sortDir", defaultValue = "disc") String sortDir,
             Model model) {
-
         try {
-            List<Category> categories = bookService.getAllCategories();
-
-            BookDto booksDto = bookService.getBooks(genre, page, sort);
+            CategoriesDto categoriesDto = bookService.getAllCategories();
+            List<Category> categories = categoriesDto.getCategories();
+            BookDto booksDto = bookService.getBooks(sort, page, genre, sortDir);
             long totalBooks = booksDto.getBookCount();
-            int totalPages = booksDto.getBookPage();
+            int totalPages = booksDto.getBookPages();
             List<Book> books = booksDto.getBooks();
 
             model.addAttribute("categories", categories);
@@ -45,7 +47,7 @@ public class CatalogController {
 
 
         } catch (Exception e) {
-            log.error("Error loading catalog: {}", e.getMessage());
+            log.error("Error loading catalog: {}", e.getMessage() + e.getCause());
             model.addAttribute("error", "Unable to load catalog");
             model.addAttribute("books", List.of());
             model.addAttribute("categories", List.of());

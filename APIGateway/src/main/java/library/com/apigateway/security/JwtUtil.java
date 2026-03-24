@@ -14,11 +14,11 @@ import java.util.List;
 @Component
 public class JwtUtil {
 
-    @Value("${}")
+
     private String jwtSecret;
     private final JwtParser jwtParser;
 
-    public JwtUtil(@Value("${}") String jwtSecret){
+    public JwtUtil(@Value("${jwt.secret}") String jwtSecret){
         this.jwtSecret=jwtSecret;
         this.jwtParser=Jwts.parser()
                 .setSigningKey(getSigningKey())

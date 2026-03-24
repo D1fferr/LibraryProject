@@ -17,8 +17,29 @@
     <aside class="sidebar">
         <h3>Categories</h3>
         <ul class="categories-list">
-            <li th:each="category : ${categories}">
-                <a href="#" th:text="${category}">Category</a>
+            <!-- Простий список основних категорій (без підрахунку книг) -->
+            <li>
+                <a th:href="@{/catalog(genre='Fiction', page=0, sortBy='bookGenre', sortDir='asc')}">
+                    Fiction
+                </a>
+            </li>
+            <li>
+                <a th:href="@{/catalog(genre='Non-Fiction', page=0, sortBy='bookGenre', sortDir='asc')}">
+                    Non-Fiction
+                </a>
+            </li>
+            <li>
+                <a th:href="@{/catalog(genre='Childrens', page=0, sortBy='bookGenre', sortDir='asc')}">
+                    Children's
+                </a>
+            </li>
+
+            <!-- Спеціальне посилання для New Arrivals (без genre, тільки сортування) -->
+            <li>
+                <a th:href="@{/catalog(sortBy='bookAddedAt', sortDir='desc', page=0)}"
+                   class="new-arrivals-link">
+                    New Arrivals
+                </a>
             </li>
         </ul>
     </aside>
@@ -29,20 +50,26 @@
         <section class="books-section">
             <div class="section-header">
                 <h2>Most Popular Books</h2>
-                <a href="#" class="view-all">View All Popular Books <span class="material-icons">arrow_forward</span></a>
+                <a th:href="@{/catalog/most-popular}"
+                   class="view-all">
+                    View All Popular Books <span class="material-icons">arrow_forward</span>
+                </a>
             </div>
 
             <div class="books-grid books-grid-3x3">
                 <div class="book-card" th:each="book : ${popularBooks}">
                     <div class="book-cover">
-                        <img th:src="${book.bookImage}" th:alt="${book.bookName}"
-                             onerror="this.src='/images/default-book-cover.jpg'">
+                        <img th:src="${book.bookImage != null ? book.bookImage : '/images/default-book-cover.jpg'}"
+                             th:alt="${book.bookName}"
+                             onerror="this.onerror=null; this.src='/images/default-book-cover.jpg';"
+                             class="book-image"/>
                     </div>
                     <div class="book-info">
                         <h3 class="book-title" th:text="${book.bookName}">Book Title</h3>
                         <p class="book-author" th:text="${book.bookAuthor}">Author Name</p>
                         <p class="book-year" th:text="${book.bookYear}">2024</p>
-                        <a th:href="@{'/books/' + ${book.bookName}}" class="btn-details">Details</a>
+                        <p class="book-genre" th:text="${book.bookGenre}">Fiction</p>
+                        <a th:href="@{'/books/' + ${book.bookId}}" class="btn-details">Details</a>
                     </div>
                 </div>
             </div>
@@ -52,20 +79,26 @@
         <section class="books-section">
             <div class="section-header">
                 <h2>New Arrivals</h2>
-                <a href="#" class="view-all">View All <span class="material-icons">arrow_forward</span></a>
+                <a th:href="@{/catalog(sortBy='bookAddedAt', sortDir='desc', page=0)}"
+                   class="view-all">
+                    View All <span class="material-icons">arrow_forward</span>
+                </a>
             </div>
 
             <div class="books-grid">
                 <div class="book-card" th:each="book : ${newArrivals}">
                     <div class="book-cover">
-                        <img th:src="${book.bookImage}" th:alt="${book.bookName}"
-                             onerror="this.src='/images/default-book-cover.jpg'">
+                        <img th:src="${book.bookImage != null ? book.bookImage : '/images/default-book-cover.jpg'}"
+                             th:alt="${book.bookName}"
+                             onerror="this.onerror=null; this.src='/images/default-book-cover.jpg';"
+                             class="book-image"/>
                     </div>
                     <div class="book-info">
                         <h3 class="book-title" th:text="${book.bookName}">Book Title</h3>
                         <p class="book-author" th:text="${book.bookAuthor}">Author Name</p>
                         <p class="book-year" th:text="${book.bookYear}">2024</p>
-                        <a th:href="@{'/books/' + ${book.bookName}}" class="btn-details">Details</a>
+                        <p class="book-genre" th:text="${book.bookGenre}">Fiction</p>
+                        <a th:href="@{'/books/' + ${book.bookId}}" class="btn-details">Details</a>
                     </div>
                 </div>
             </div>
@@ -75,20 +108,26 @@
         <section class="books-section">
             <div class="section-header">
                 <h2>Upcoming Books</h2>
-                <a href="#" class="view-all">View All <span class="material-icons">arrow_forward</span></a>
+                <a th:href="@{/catalog/expected-books}"
+                   class="view-all">
+                    View All <span class="material-icons">arrow_forward</span>
+                </a>
             </div>
 
             <div class="books-grid">
                 <div class="book-card" th:each="book : ${upcomingBooks}">
                     <div class="book-cover">
-                        <img th:src="${book.bookImage}" th:alt="${book.bookName}"
-                             onerror="this.src='/images/default-book-cover.jpg'">
+                        <img th:src="${book.expectedBookImage != null ? book.expectedBookImage : '/images/default-book-cover.jpg'}"
+                             th:alt="${book.expectedBookName}"
+                             onerror="this.onerror=null; this.src='/images/default-book-cover.jpg';"
+                             class="book-image"/>
                     </div>
                     <div class="book-info">
-                        <h3 class="book-title" th:text="${book.bookName}">Book Title</h3>
-                        <p class="book-author" th:text="${book.bookAuthor}">Author Name</p>
-                        <p class="book-year" th:text="${book.bookYear}">2025</p>
-                        <a th:href="@{'/books/' + ${book.bookName}}" class="btn-details">Details</a>
+                        <h3 class="book-title" th:text="${book.expectedBookName}">Book Title</h3>
+                        <p class="book-author" th:text="${book.expectedBookAuthor}">Author Name</p>
+                        <p class="book-year" th:text="${book.expectedBookYear}">2025</p>
+                        <p class="book-genre" th:text="${book.expectedBookGenre}">Fiction</p>
+                        <a th:href="@{'/expected-books/' + ${book.expectedBookId}}" class="btn-details">Details</a>
                     </div>
                 </div>
             </div>

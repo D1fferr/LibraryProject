@@ -115,7 +115,7 @@ public class ExpectedBookServiceTest {
 
         when(bookRepository.findAll(pageable)).thenReturn(page);
 
-        List<ExpectedBookDTO> result = bookService.findAll(pageable);
+        List<ExpectedBookDTO> result = bookService.findAll(pageable).getExpectedBooks();
 
         verify(bookRepository).findAll(pageable);
         assertNotNull(result);

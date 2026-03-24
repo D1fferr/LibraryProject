@@ -1,5 +1,6 @@
 package com.library.FrontendMicroservice.testclasses;
 
+import com.library.FrontendMicroservice.dto.ExpectedBookDto;
 import com.library.FrontendMicroservice.exceptions.ExpectedBookException;
 import com.library.FrontendMicroservice.models.Book;
 import com.library.FrontendMicroservice.models.ExpectedBook;
@@ -11,7 +12,7 @@ import java.util.UUID;
 
 @Component
 public class ExpectedBookServiceTest {
-    public List<ExpectedBook> getExpectedBooks(){
+    public ExpectedBookDto getExpectedBooks(){
         ExpectedBook book1 = createBook(1);
         ExpectedBook book2 = createBook(2);
         ExpectedBook book3 = createBook(3);
@@ -21,17 +22,24 @@ public class ExpectedBookServiceTest {
         books.add(book2);
         books.add(book3);
         books.add(book4);
-        return books;
+        ExpectedBookDto expectedBookDto = new ExpectedBookDto();
+        expectedBookDto.setExpectedBooks(books);
+        expectedBookDto.setBookPage(2);
+        expectedBookDto.setBookCount(10);
+        return expectedBookDto;
+    }
+    public ExpectedBook getBookById(UUID id){
+        return createBook(1);
     }
     private ExpectedBook createBook(int i){
         ExpectedBook book = new ExpectedBook();
-        book.setBookAuthor("TestExpectedBookAuthor1" + i);
-        book.setBookGenre("TestExpectedBookGenre1" + i);
-        book.setBookLanguage("TestExpectedBookLanguage1" + i);
-        book.setBookImage("" + i);
-        book.setBookItems(4);
-        book.setBookName("TestExpectedBookName1" + i);
-        book.setBookYear(1999);
+        book.setExpectedBookAuthor("TestExpectedBookAuthor1" + i);
+        book.setExpectedBookGenre("TestExpectedBookGenre1" + i);
+        book.setExpectedBookLanguage("TestExpectedBookLanguage1" + i);
+        book.setExpectedBookImage("" + i);
+        book.setExpectedBookItems(4);
+        book.setExpectedBookName("TestExpectedBookName1" + i);
+        book.setExpectedBookYear(1999);
         book.setExpectedBookId(UUID.randomUUID());
         return book;
     }

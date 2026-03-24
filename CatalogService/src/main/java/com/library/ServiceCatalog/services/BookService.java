@@ -85,6 +85,7 @@ public class BookService {
         Page<Book> booksPage = bookRepository.findAll(pageable);
         long bookCount = booksPage.getTotalElements();
         int bookPages = booksPage.getTotalPages();
+        System.out.println(booksPage.getTotalElements() + "pages");
         List<Book> books = booksPage.getContent();
         if (books.isEmpty()) {
             log.warn("Books not found");
@@ -92,7 +93,7 @@ public class BookService {
         }
         List<BookDTOForResponseGetBook> bookDTOForResponseGetBooks = books.stream().map(this::toBookDTOForResponseGetBook).toList();
         BookDtoWithTotalElements bookDtoWithTotalElements = new BookDtoWithTotalElements();
-        bookDtoWithTotalElements.setBookDTOForResponseGetBookList(bookDTOForResponseGetBooks);
+        bookDtoWithTotalElements.setBooks(bookDTOForResponseGetBooks);
         bookDtoWithTotalElements.setBookCount(bookCount);
         bookDtoWithTotalElements.setBookPages(bookPages);
         return bookDtoWithTotalElements;
@@ -109,7 +110,24 @@ public class BookService {
         }
         List<BookDTOForResponseGetBook> bookDTOForResponseGetBooks = books.stream().map(this::toBookDTOForResponseGetBook).toList();
         BookDtoWithTotalElements bookDtoWithTotalElements = new BookDtoWithTotalElements();
-        bookDtoWithTotalElements.setBookDTOForResponseGetBookList(bookDTOForResponseGetBooks);
+        bookDtoWithTotalElements.setBooks(bookDTOForResponseGetBooks);
+        bookDtoWithTotalElements.setBookCount(bookCount);
+        bookDtoWithTotalElements.setBookPages(bookPages);
+        return bookDtoWithTotalElements;
+    }
+    @Transactional(readOnly = true)
+    public BookDtoWithTotalElements findAllByAuthor(String author, Pageable pageable) {
+        Page<Book> booksPage = bookRepository.findAllByBookAuthor(author, pageable);
+        long bookCount = booksPage.getTotalElements();
+        int bookPages = booksPage.getTotalPages();
+        List<Book> books = booksPage.getContent();
+        if (books.isEmpty()) {
+            log.warn("Books not found");
+            throw new BooksNotFoundException("Books not found");
+        }
+        List<BookDTOForResponseGetBook> bookDTOForResponseGetBooks = books.stream().map(this::toBookDTOForResponseGetBook).toList();
+        BookDtoWithTotalElements bookDtoWithTotalElements = new BookDtoWithTotalElements();
+        bookDtoWithTotalElements.setBooks(bookDTOForResponseGetBooks);
         bookDtoWithTotalElements.setBookCount(bookCount);
         bookDtoWithTotalElements.setBookPages(bookPages);
         return bookDtoWithTotalElements;
@@ -159,16 +177,21 @@ public class BookService {
     }
 
     @Transactional(readOnly = true)
-    public List<BookDTOForResponseGetBook> findAllRecentlyAddedAt(int page, int booksPerPage) {
+    public BookDtoWithTotalElements findAllRecentlyAddedAt(int page, int booksPerPage) {
         Pageable pageable = PageRequest.of(page, booksPerPage, Sort.by(Sort.Direction.DESC, "bookAddedAt"));
         log.info("Trying to find all recently added books.");
-        List<Book> books = bookRepository.findAllByOrderByBookAddedAtDesc(pageable);
+        Page<Book> books = bookRepository.findAllByOrderByBookAddedAtDesc(pageable);
         if (books.isEmpty()){
             log.warn("The recently added books were not found");
             throw new BooksNotFoundException("Books not found");
         }
         log.info("All recently added books were found");
-        return books.stream().map(this::toBookDTOForResponseGetBook).toList();
+        BookDtoWithTotalElements bookDtoWithTotalElements = new BookDtoWithTotalElements();
+        List<BookDTOForResponseGetBook> dto = books.getContent().stream().map(this::toBookDTOForResponseGetBook).toList();
+        bookDtoWithTotalElements.setBooks(dto);
+        bookDtoWithTotalElements.setBookPages(books.getTotalPages());
+        bookDtoWithTotalElements.setBookCount(books.getTotalElements());
+        return bookDtoWithTotalElements;
     }
     @Transactional(readOnly = true)
     public List<CategoriesDTO> findCategories(){
@@ -181,57 +204,69 @@ public class BookService {
     }
 
     @Transactional(readOnly = true)
-    public List<BookDTO> getMostPopularBooks(int page) {
+    public BookDtoWithTotalElements getMostPopularBooks(int page) {
         if (page < 0) {
             log.warn("Negative page. Page: {}", page);
             throw new IllegalArgumentException("Page index must not be negative");
         }
         if (page != 0) {
             log.info("Trying to find all most popular books");
-            List<BookDTO> books = bookRepository.findMostPopularBooks(PageRequest.of(page, PAGE_SIZE)).stream().map(this::toDTO).toList();
+            Page<Book> books = bookRepository.findMostPopularBooks(PageRequest.of(page, PAGE_SIZE));
             if (books.isEmpty()){
                 log.warn("The most popular books were not found.");
                 throw new BooksNotFoundException("Books not found");
             }
+            List<BookDTOForResponseGetBook> dto = books.getContent().stream().map(this::toBookDTOForResponseGetBook).toList();
+            BookDtoWithTotalElements bookDtoWithTotalElements = new BookDtoWithTotalElements();
+            bookDtoWithTotalElements.setBooks(dto);
+            bookDtoWithTotalElements.setBookCount(books.getTotalElements());
+            bookDtoWithTotalElements.setBookPages(books.getTotalPages());
+
             log.info("All most popular books were found");
-            return books;
+            return bookDtoWithTotalElements;
         }
         log.info("Trying to get all most popular books from redis");
-        List<BookDTO> redisBooks = getCacheFromRedis(POPULAR_BOOKS_KEY);
-        if (redisBooks != null && !redisBooks.isEmpty()) {
+        BookDtoWithTotalElements redisBooks = getCacheFromRedis(POPULAR_BOOKS_KEY);
+        if (redisBooks != null && !redisBooks.getBooks().isEmpty()) {
+
             log.info("All most popular books were found in redis");
             return redisBooks;
         }
         return getBooksAndSaveToRedis(page);
     }
 
-    private List<BookDTO> getBooksAndSaveToRedis(int page) {
+    private BookDtoWithTotalElements getBooksAndSaveToRedis(int page) {
         synchronized (synchronizationForMostPopularBooks) {
-            List<BookDTO> redisBooksSync = getCacheFromRedis(POPULAR_BOOKS_KEY);
-            if (redisBooksSync != null && !redisBooksSync.isEmpty()){
+            BookDtoWithTotalElements redisBooksSync = getCacheFromRedis(POPULAR_BOOKS_KEY);
+            if (redisBooksSync != null && !redisBooksSync.getBooks().isEmpty()){
                 log.info("All most popular books were found in redis");
                 return redisBooksSync;
             }
             log.info("Trying to find all most popular books");
-            List<BookDTO> books = bookRepository.findMostPopularBooks(PageRequest.of(page, PAGE_SIZE)).stream().map(this::toDTO).toList();
-            if (books.isEmpty()){
+            Page<Book> books = bookRepository.findMostPopularBooks(PageRequest.of(page, PAGE_SIZE));
+            if (books.getContent().isEmpty()){
                 log.warn("The most popular books were not found");
                 throw new BooksNotFoundException("Books not found");
             }
             log.info("Trying to save all most popular books in redis");
+            List<BookDTOForResponseGetBook> dto = books.getContent().stream().map(this::toBookDTOForResponseGetBook).toList();
+            BookDtoWithTotalElements bookDtoWithTotalElements = new BookDtoWithTotalElements();
+            bookDtoWithTotalElements.setBooks(dto);
+            bookDtoWithTotalElements.setBookCount(books.getTotalElements());
+            bookDtoWithTotalElements.setBookPages(books.getTotalPages());
             redisTemplate.opsForValue().set(
                     POPULAR_BOOKS_KEY,
-                    books,
+                    bookDtoWithTotalElements,
                     Duration.ofHours(2)
             );
             log.info("All most popular books saved in redis");
-            return books;
+            return bookDtoWithTotalElements;
 
         }
     }
-    private List<BookDTO> getCacheFromRedis(String key){
+    private BookDtoWithTotalElements getCacheFromRedis(String key){
         try {
-            return (List<BookDTO>) redisTemplate.opsForValue().get(key);
+            return (BookDtoWithTotalElements) redisTemplate.opsForValue().get(key);
         }catch (Exception e){
             log.warn("Failed to get popular books from redis. Error: {}", e.getMessage());
             throw new RedisConnectionFailureException(e.getMessage());

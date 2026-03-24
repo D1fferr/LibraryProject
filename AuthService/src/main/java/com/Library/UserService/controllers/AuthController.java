@@ -55,12 +55,11 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<HttpStatus> login(@RequestBody LoginDTO loginDTO) {
+    public ResponseEntity<LoginDTO> login(@RequestBody LoginDTO loginDTO) {
         AuthUser authUser = authUserService.login(loginDTO);
         String token = jwtProvider.generatedToken(loginDTO.getUsername(), authUser.getId(), authUser.getRole());
         return ResponseEntity.status(HttpStatus.OK)
-                .header("Authorization", "Bearer " + token)
-                .build();
+                .header("Authorization", "Bearer " + token).body(loginDTO);
     }
 
     @PostMapping("/logout")
