@@ -1,0 +1,642 @@
+2026-03-30 15:07:06 | APIGateway | INFO  | o.h.validator.internal.util.Version | HV000001: Hibernate Validator 8.0.3.Final
+2026-03-30 15:07:06 | APIGateway | INFO  | l.c.apigateway.ApiGatewayApplication | Starting ApiGatewayApplication using Java 22 with PID 20896 (D:\Library\APIGateway\target\classes started by vasia in D:\Library\APIGateway)
+2026-03-30 15:07:06 | APIGateway | INFO  | l.c.apigateway.ApiGatewayApplication | No active profile set, falling back to 1 default profile: "default"
+2026-03-30 15:07:07 | APIGateway | INFO  | o.s.cloud.context.scope.GenericScope | BeanFactory id=75412cec-13ab-32f1-87e6-021d8240753f
+2026-03-30 15:07:08 | APIGateway | WARN  | o.s.c.g.c.GatewayClassPathWarningAutoConfiguration | 
+
+**********************************************************
+
+The artifact spring-cloud-gateway-server is deprecated. It will be removed in the next major release. Please add spring-cloud-gateway-server-webflux dependency.
+
+**********************************************************
+
+
+2026-03-30 15:07:08 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [After]
+2026-03-30 15:07:08 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Before]
+2026-03-30 15:07:08 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Between]
+2026-03-30 15:07:08 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Cookie]
+2026-03-30 15:07:08 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Header]
+2026-03-30 15:07:08 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Host]
+2026-03-30 15:07:08 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Method]
+2026-03-30 15:07:08 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Path]
+2026-03-30 15:07:08 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Query]
+2026-03-30 15:07:08 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [ReadBody]
+2026-03-30 15:07:08 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [RemoteAddr]
+2026-03-30 15:07:08 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [XForwardedRemoteAddr]
+2026-03-30 15:07:08 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Weight]
+2026-03-30 15:07:08 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [CloudFoundryRouteService]
+2026-03-30 15:07:08 | APIGateway | WARN  | o.s.c.g.s.w.s.StarterDeprecatedAutoConfiguration | 
+
+**********************************************************
+
+spring-cloud-starter-gateway is deprecated. It will be removed in the next major release. Please use spring-cloud-starter-gateway-server-webflux instead.
+
+**********************************************************
+
+
+2026-03-30 15:07:08 | APIGateway | INFO  | o.s.b.w.e.netty.NettyWebServer | Netty started on port 8080 (http)
+2026-03-30 15:07:08 | APIGateway | INFO  | l.c.apigateway.ApiGatewayApplication | Started ApiGatewayApplication in 2.652 seconds (process running for 3.729)
+2026-03-30 15:18:07 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 15:18:07 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Missing jwt token for authorized request. Path: '/api/book/most-popular-books'
+2026-03-30 15:18:10 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 15:18:10 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Missing jwt token for authorized request. Path: '/api/book/most-popular-books'
+2026-03-30 15:20:29 | APIGateway | INFO  | o.s.b.w.e.netty.GracefulShutdown | Commencing graceful shutdown. Waiting for active requests to complete
+2026-03-30 15:20:29 | APIGateway | INFO  | o.s.b.w.e.netty.GracefulShutdown | Graceful shutdown complete
+2026-03-30 15:22:14 | APIGateway | INFO  | o.h.validator.internal.util.Version | HV000001: Hibernate Validator 8.0.3.Final
+2026-03-30 15:22:14 | APIGateway | INFO  | l.c.apigateway.ApiGatewayApplication | Starting ApiGatewayApplication using Java 22 with PID 21980 (D:\Library\APIGateway\target\classes started by vasia in D:\Library\APIGateway)
+2026-03-30 15:22:14 | APIGateway | INFO  | l.c.apigateway.ApiGatewayApplication | No active profile set, falling back to 1 default profile: "default"
+2026-03-30 15:22:15 | APIGateway | INFO  | o.s.cloud.context.scope.GenericScope | BeanFactory id=75412cec-13ab-32f1-87e6-021d8240753f
+2026-03-30 15:22:16 | APIGateway | WARN  | o.s.c.g.c.GatewayClassPathWarningAutoConfiguration | 
+
+**********************************************************
+
+The artifact spring-cloud-gateway-server is deprecated. It will be removed in the next major release. Please add spring-cloud-gateway-server-webflux dependency.
+
+**********************************************************
+
+
+2026-03-30 15:22:16 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [After]
+2026-03-30 15:22:16 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Before]
+2026-03-30 15:22:16 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Between]
+2026-03-30 15:22:16 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Cookie]
+2026-03-30 15:22:16 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Header]
+2026-03-30 15:22:16 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Host]
+2026-03-30 15:22:16 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Method]
+2026-03-30 15:22:16 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Path]
+2026-03-30 15:22:16 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Query]
+2026-03-30 15:22:16 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [ReadBody]
+2026-03-30 15:22:16 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [RemoteAddr]
+2026-03-30 15:22:16 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [XForwardedRemoteAddr]
+2026-03-30 15:22:16 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Weight]
+2026-03-30 15:22:16 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [CloudFoundryRouteService]
+2026-03-30 15:22:16 | APIGateway | WARN  | o.s.c.g.s.w.s.StarterDeprecatedAutoConfiguration | 
+
+**********************************************************
+
+spring-cloud-starter-gateway is deprecated. It will be removed in the next major release. Please use spring-cloud-starter-gateway-server-webflux instead.
+
+**********************************************************
+
+
+2026-03-30 15:22:16 | APIGateway | INFO  | o.s.b.w.e.netty.NettyWebServer | Netty started on port 8080 (http)
+2026-03-30 15:22:17 | APIGateway | INFO  | l.c.apigateway.ApiGatewayApplication | Started ApiGatewayApplication in 3.678 seconds (process running for 4.931)
+2026-03-30 15:22:21 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 15:22:21 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/most-popular-books'
+2026-03-30 15:22:21 | APIGateway | ERROR | o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler | [fd467cf0-1]  500 Server Error for HTTP GET "/api/book/most-popular-books"
+java.net.UnknownHostException: Failed to resolve 'http:' [A(1)]
+	at io.netty.resolver.dns.DnsResolveContext.finishResolve(DnsResolveContext.java:1150)
+	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
+Error has been observed at the following site(s):
+	*__checkpoint ⇢ org.springframework.cloud.gateway.filter.WeightCalculatorWebFilter [DefaultWebFilterChain]
+	*__checkpoint ⇢ HTTP GET "/api/book/most-popular-books" [ExceptionHandlingWebHandler]
+Original Stack Trace:
+		at io.netty.resolver.dns.DnsResolveContext.finishResolve(DnsResolveContext.java:1150)
+		at io.netty.resolver.dns.DnsResolveContext.tryToFinishResolve(DnsResolveContext.java:1097)
+		at io.netty.resolver.dns.DnsResolveContext.query(DnsResolveContext.java:455)
+		at io.netty.resolver.dns.DnsResolveContext.onResponse(DnsResolveContext.java:686)
+		at io.netty.resolver.dns.DnsResolveContext.access$500(DnsResolveContext.java:70)
+		at io.netty.resolver.dns.DnsResolveContext$2.operationComplete(DnsResolveContext.java:513)
+		at io.netty.util.concurrent.DefaultPromise.notifyListener0(DefaultPromise.java:603)
+		at io.netty.util.concurrent.DefaultPromise.notifyListeners0(DefaultPromise.java:596)
+		at io.netty.util.concurrent.DefaultPromise.notifyListenersNow(DefaultPromise.java:572)
+		at io.netty.util.concurrent.DefaultPromise.notifyListeners(DefaultPromise.java:505)
+		at io.netty.util.concurrent.DefaultPromise.setValue0(DefaultPromise.java:649)
+		at io.netty.util.concurrent.DefaultPromise.setSuccess0(DefaultPromise.java:638)
+		at io.netty.util.concurrent.DefaultPromise.trySuccess(DefaultPromise.java:118)
+		at io.netty.resolver.dns.DnsQueryContext.trySuccess(DnsQueryContext.java:308)
+		at io.netty.resolver.dns.DnsQueryContext.finishSuccess(DnsQueryContext.java:299)
+		at io.netty.resolver.dns.DnsNameResolver$DnsResponseHandler.channelRead(DnsNameResolver.java:1491)
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:444)
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420)
+		at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412)
+		at io.netty.handler.codec.MessageToMessageDecoder.channelRead(MessageToMessageDecoder.java:107)
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:444)
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420)
+		at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412)
+		at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1357)
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:440)
+		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420)
+		at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:868)
+		at io.netty.channel.nio.AbstractNioMessageChannel$NioMessageUnsafe.read(AbstractNioMessageChannel.java:97)
+		at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:796)
+		at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:732)
+		at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:658)
+		at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+		at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:998)
+		at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+		at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+		at java.base/java.lang.Thread.run(Thread.java:1570)
+Caused by: io.netty.resolver.dns.DnsErrorCauseException: Query failed with NXDOMAIN
+	at io.netty.resolver.dns.DnsResolveContext.onResponse(..)(Unknown Source)
+2026-03-30 15:25:51 | APIGateway | INFO  | o.s.b.w.e.netty.GracefulShutdown | Commencing graceful shutdown. Waiting for active requests to complete
+2026-03-30 15:25:51 | APIGateway | INFO  | o.s.b.w.e.netty.GracefulShutdown | Graceful shutdown complete
+2026-03-30 15:25:59 | APIGateway | INFO  | o.h.validator.internal.util.Version | HV000001: Hibernate Validator 8.0.3.Final
+2026-03-30 15:25:59 | APIGateway | INFO  | l.c.apigateway.ApiGatewayApplication | Starting ApiGatewayApplication using Java 22 with PID 28624 (D:\Library\APIGateway\target\classes started by vasia in D:\Library\APIGateway)
+2026-03-30 15:25:59 | APIGateway | INFO  | l.c.apigateway.ApiGatewayApplication | No active profile set, falling back to 1 default profile: "default"
+2026-03-30 15:26:00 | APIGateway | INFO  | o.s.cloud.context.scope.GenericScope | BeanFactory id=75412cec-13ab-32f1-87e6-021d8240753f
+2026-03-30 15:26:00 | APIGateway | WARN  | o.s.c.g.c.GatewayClassPathWarningAutoConfiguration | 
+
+**********************************************************
+
+The artifact spring-cloud-gateway-server is deprecated. It will be removed in the next major release. Please add spring-cloud-gateway-server-webflux dependency.
+
+**********************************************************
+
+
+2026-03-30 15:26:00 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [After]
+2026-03-30 15:26:00 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Before]
+2026-03-30 15:26:00 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Between]
+2026-03-30 15:26:00 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Cookie]
+2026-03-30 15:26:00 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Header]
+2026-03-30 15:26:00 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Host]
+2026-03-30 15:26:00 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Method]
+2026-03-30 15:26:00 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Path]
+2026-03-30 15:26:00 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Query]
+2026-03-30 15:26:00 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [ReadBody]
+2026-03-30 15:26:00 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [RemoteAddr]
+2026-03-30 15:26:00 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [XForwardedRemoteAddr]
+2026-03-30 15:26:00 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Weight]
+2026-03-30 15:26:00 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [CloudFoundryRouteService]
+2026-03-30 15:26:00 | APIGateway | WARN  | o.s.c.g.s.w.s.StarterDeprecatedAutoConfiguration | 
+
+**********************************************************
+
+spring-cloud-starter-gateway is deprecated. It will be removed in the next major release. Please use spring-cloud-starter-gateway-server-webflux instead.
+
+**********************************************************
+
+
+2026-03-30 15:26:01 | APIGateway | INFO  | o.s.b.w.e.netty.NettyWebServer | Netty started on port 8080 (http)
+2026-03-30 15:26:01 | APIGateway | INFO  | l.c.apigateway.ApiGatewayApplication | Started ApiGatewayApplication in 2.554 seconds (process running for 3.329)
+2026-03-30 15:26:08 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 15:26:08 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/most-popular-books'
+2026-03-30 15:29:08 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 15:29:08 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/most-popular-books'
+2026-03-30 15:29:43 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 15:29:43 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/most-popular-books'
+2026-03-30 15:29:45 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 15:29:45 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/most-popular-books'
+2026-03-30 15:29:47 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 15:29:47 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Missing jwt token for authorized request. Path: '/api/book/category'
+2026-03-30 15:30:35 | APIGateway | INFO  | o.s.b.w.e.netty.GracefulShutdown | Commencing graceful shutdown. Waiting for active requests to complete
+2026-03-30 15:30:35 | APIGateway | INFO  | o.s.b.w.e.netty.GracefulShutdown | Graceful shutdown complete
+2026-03-30 15:30:43 | APIGateway | INFO  | o.h.validator.internal.util.Version | HV000001: Hibernate Validator 8.0.3.Final
+2026-03-30 15:30:43 | APIGateway | INFO  | l.c.apigateway.ApiGatewayApplication | Starting ApiGatewayApplication using Java 22 with PID 29580 (D:\Library\APIGateway\target\classes started by vasia in D:\Library\APIGateway)
+2026-03-30 15:30:43 | APIGateway | INFO  | l.c.apigateway.ApiGatewayApplication | No active profile set, falling back to 1 default profile: "default"
+2026-03-30 15:30:44 | APIGateway | INFO  | o.s.cloud.context.scope.GenericScope | BeanFactory id=75412cec-13ab-32f1-87e6-021d8240753f
+2026-03-30 15:30:44 | APIGateway | WARN  | o.s.c.g.c.GatewayClassPathWarningAutoConfiguration | 
+
+**********************************************************
+
+The artifact spring-cloud-gateway-server is deprecated. It will be removed in the next major release. Please add spring-cloud-gateway-server-webflux dependency.
+
+**********************************************************
+
+
+2026-03-30 15:30:45 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [After]
+2026-03-30 15:30:45 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Before]
+2026-03-30 15:30:45 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Between]
+2026-03-30 15:30:45 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Cookie]
+2026-03-30 15:30:45 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Header]
+2026-03-30 15:30:45 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Host]
+2026-03-30 15:30:45 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Method]
+2026-03-30 15:30:45 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Path]
+2026-03-30 15:30:45 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Query]
+2026-03-30 15:30:45 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [ReadBody]
+2026-03-30 15:30:45 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [RemoteAddr]
+2026-03-30 15:30:45 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [XForwardedRemoteAddr]
+2026-03-30 15:30:45 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Weight]
+2026-03-30 15:30:45 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [CloudFoundryRouteService]
+2026-03-30 15:30:45 | APIGateway | WARN  | o.s.c.g.s.w.s.StarterDeprecatedAutoConfiguration | 
+
+**********************************************************
+
+spring-cloud-starter-gateway is deprecated. It will be removed in the next major release. Please use spring-cloud-starter-gateway-server-webflux instead.
+
+**********************************************************
+
+
+2026-03-30 15:30:45 | APIGateway | INFO  | o.s.b.w.e.netty.NettyWebServer | Netty started on port 8080 (http)
+2026-03-30 15:30:45 | APIGateway | INFO  | l.c.apigateway.ApiGatewayApplication | Started ApiGatewayApplication in 2.942 seconds (process running for 3.767)
+2026-03-30 15:30:57 | APIGateway | INFO  | o.s.b.w.e.netty.GracefulShutdown | Commencing graceful shutdown. Waiting for active requests to complete
+2026-03-30 15:30:57 | APIGateway | INFO  | o.s.b.w.e.netty.GracefulShutdown | Graceful shutdown complete
+2026-03-30 15:31:06 | APIGateway | INFO  | o.h.validator.internal.util.Version | HV000001: Hibernate Validator 8.0.3.Final
+2026-03-30 15:31:06 | APIGateway | INFO  | l.c.apigateway.ApiGatewayApplication | Starting ApiGatewayApplication using Java 22 with PID 21648 (D:\Library\APIGateway\target\classes started by vasia in D:\Library\APIGateway)
+2026-03-30 15:31:06 | APIGateway | INFO  | l.c.apigateway.ApiGatewayApplication | No active profile set, falling back to 1 default profile: "default"
+2026-03-30 15:31:07 | APIGateway | INFO  | o.s.cloud.context.scope.GenericScope | BeanFactory id=75412cec-13ab-32f1-87e6-021d8240753f
+2026-03-30 15:31:07 | APIGateway | WARN  | o.s.c.g.c.GatewayClassPathWarningAutoConfiguration | 
+
+**********************************************************
+
+The artifact spring-cloud-gateway-server is deprecated. It will be removed in the next major release. Please add spring-cloud-gateway-server-webflux dependency.
+
+**********************************************************
+
+
+2026-03-30 15:31:07 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [After]
+2026-03-30 15:31:07 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Before]
+2026-03-30 15:31:07 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Between]
+2026-03-30 15:31:07 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Cookie]
+2026-03-30 15:31:07 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Header]
+2026-03-30 15:31:07 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Host]
+2026-03-30 15:31:07 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Method]
+2026-03-30 15:31:07 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Path]
+2026-03-30 15:31:07 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Query]
+2026-03-30 15:31:07 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [ReadBody]
+2026-03-30 15:31:07 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [RemoteAddr]
+2026-03-30 15:31:07 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [XForwardedRemoteAddr]
+2026-03-30 15:31:07 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Weight]
+2026-03-30 15:31:07 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [CloudFoundryRouteService]
+2026-03-30 15:31:08 | APIGateway | WARN  | o.s.c.g.s.w.s.StarterDeprecatedAutoConfiguration | 
+
+**********************************************************
+
+spring-cloud-starter-gateway is deprecated. It will be removed in the next major release. Please use spring-cloud-starter-gateway-server-webflux instead.
+
+**********************************************************
+
+
+2026-03-30 15:31:08 | APIGateway | INFO  | o.s.b.w.e.netty.NettyWebServer | Netty started on port 8080 (http)
+2026-03-30 15:31:08 | APIGateway | INFO  | l.c.apigateway.ApiGatewayApplication | Started ApiGatewayApplication in 2.647 seconds (process running for 3.437)
+2026-03-30 15:31:17 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 15:31:17 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/most-popular-books'
+2026-03-30 15:31:19 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 15:31:19 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/category'
+2026-03-30 15:31:20 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 15:31:20 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/category'
+2026-03-30 15:32:08 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 15:32:08 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/most-popular-books'
+2026-03-30 15:33:12 | APIGateway | INFO  | o.s.b.w.e.netty.GracefulShutdown | Commencing graceful shutdown. Waiting for active requests to complete
+2026-03-30 15:33:12 | APIGateway | INFO  | o.s.b.w.e.netty.GracefulShutdown | Graceful shutdown complete
+2026-03-30 15:33:20 | APIGateway | INFO  | o.h.validator.internal.util.Version | HV000001: Hibernate Validator 8.0.3.Final
+2026-03-30 15:33:20 | APIGateway | INFO  | l.c.apigateway.ApiGatewayApplication | Starting ApiGatewayApplication using Java 22 with PID 29284 (D:\Library\APIGateway\target\classes started by vasia in D:\Library\APIGateway)
+2026-03-30 15:33:20 | APIGateway | INFO  | l.c.apigateway.ApiGatewayApplication | No active profile set, falling back to 1 default profile: "default"
+2026-03-30 15:33:21 | APIGateway | INFO  | o.s.cloud.context.scope.GenericScope | BeanFactory id=75412cec-13ab-32f1-87e6-021d8240753f
+2026-03-30 15:33:21 | APIGateway | WARN  | o.s.c.g.c.GatewayClassPathWarningAutoConfiguration | 
+
+**********************************************************
+
+The artifact spring-cloud-gateway-server is deprecated. It will be removed in the next major release. Please add spring-cloud-gateway-server-webflux dependency.
+
+**********************************************************
+
+
+2026-03-30 15:33:22 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [After]
+2026-03-30 15:33:22 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Before]
+2026-03-30 15:33:22 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Between]
+2026-03-30 15:33:22 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Cookie]
+2026-03-30 15:33:22 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Header]
+2026-03-30 15:33:22 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Host]
+2026-03-30 15:33:22 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Method]
+2026-03-30 15:33:22 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Path]
+2026-03-30 15:33:22 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Query]
+2026-03-30 15:33:22 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [ReadBody]
+2026-03-30 15:33:22 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [RemoteAddr]
+2026-03-30 15:33:22 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [XForwardedRemoteAddr]
+2026-03-30 15:33:22 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Weight]
+2026-03-30 15:33:22 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [CloudFoundryRouteService]
+2026-03-30 15:33:22 | APIGateway | WARN  | o.s.c.g.s.w.s.StarterDeprecatedAutoConfiguration | 
+
+**********************************************************
+
+spring-cloud-starter-gateway is deprecated. It will be removed in the next major release. Please use spring-cloud-starter-gateway-server-webflux instead.
+
+**********************************************************
+
+
+2026-03-30 15:33:22 | APIGateway | INFO  | o.s.b.w.e.netty.NettyWebServer | Netty started on port 8080 (http)
+2026-03-30 15:33:22 | APIGateway | INFO  | l.c.apigateway.ApiGatewayApplication | Started ApiGatewayApplication in 2.595 seconds (process running for 3.368)
+2026-03-30 15:33:32 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 15:33:32 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Missing jwt token for authorized request. Path: '/api/book/most-popular-books'
+2026-03-30 15:33:33 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 15:33:33 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Missing jwt token for authorized request. Path: '/api/book/category'
+2026-03-30 15:33:34 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 15:33:34 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Missing jwt token for authorized request. Path: '/api/book/category'
+2026-03-30 15:33:35 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 15:33:35 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Missing jwt token for authorized request. Path: '/api/book/category'
+2026-03-30 15:33:36 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 15:33:36 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Missing jwt token for authorized request. Path: '/api/book/category'
+2026-03-30 15:33:37 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 15:33:37 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Missing jwt token for authorized request. Path: '/api/book/category'
+2026-03-30 15:33:38 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 15:33:38 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Missing jwt token for authorized request. Path: '/api/book/most-popular-books'
+2026-03-30 15:34:19 | APIGateway | INFO  | o.s.b.w.e.netty.GracefulShutdown | Commencing graceful shutdown. Waiting for active requests to complete
+2026-03-30 15:34:19 | APIGateway | INFO  | o.s.b.w.e.netty.GracefulShutdown | Graceful shutdown complete
+2026-03-30 15:35:12 | APIGateway | INFO  | o.h.validator.internal.util.Version | HV000001: Hibernate Validator 8.0.3.Final
+2026-03-30 15:35:12 | APIGateway | INFO  | l.c.apigateway.ApiGatewayApplication | Starting ApiGatewayApplication using Java 22 with PID 25072 (D:\Library\APIGateway\target\classes started by vasia in D:\Library\APIGateway)
+2026-03-30 15:35:12 | APIGateway | INFO  | l.c.apigateway.ApiGatewayApplication | No active profile set, falling back to 1 default profile: "default"
+2026-03-30 15:35:13 | APIGateway | INFO  | o.s.cloud.context.scope.GenericScope | BeanFactory id=75412cec-13ab-32f1-87e6-021d8240753f
+2026-03-30 15:35:13 | APIGateway | WARN  | o.s.c.g.c.GatewayClassPathWarningAutoConfiguration | 
+
+**********************************************************
+
+The artifact spring-cloud-gateway-server is deprecated. It will be removed in the next major release. Please add spring-cloud-gateway-server-webflux dependency.
+
+**********************************************************
+
+
+2026-03-30 15:35:14 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [After]
+2026-03-30 15:35:14 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Before]
+2026-03-30 15:35:14 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Between]
+2026-03-30 15:35:14 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Cookie]
+2026-03-30 15:35:14 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Header]
+2026-03-30 15:35:14 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Host]
+2026-03-30 15:35:14 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Method]
+2026-03-30 15:35:14 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Path]
+2026-03-30 15:35:14 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Query]
+2026-03-30 15:35:14 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [ReadBody]
+2026-03-30 15:35:14 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [RemoteAddr]
+2026-03-30 15:35:14 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [XForwardedRemoteAddr]
+2026-03-30 15:35:14 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Weight]
+2026-03-30 15:35:14 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [CloudFoundryRouteService]
+2026-03-30 15:35:14 | APIGateway | WARN  | o.s.c.g.s.w.s.StarterDeprecatedAutoConfiguration | 
+
+**********************************************************
+
+spring-cloud-starter-gateway is deprecated. It will be removed in the next major release. Please use spring-cloud-starter-gateway-server-webflux instead.
+
+**********************************************************
+
+
+2026-03-30 15:35:14 | APIGateway | INFO  | o.s.b.w.e.netty.NettyWebServer | Netty started on port 8080 (http)
+2026-03-30 15:35:14 | APIGateway | INFO  | l.c.apigateway.ApiGatewayApplication | Started ApiGatewayApplication in 2.902 seconds (process running for 3.684)
+2026-03-30 15:35:19 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 15:35:19 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/most-popular-books'
+2026-03-30 15:35:21 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 15:35:21 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/category'
+2026-03-30 15:35:22 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 15:35:22 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/category'
+2026-03-30 15:37:46 | APIGateway | INFO  | o.s.b.w.e.netty.GracefulShutdown | Commencing graceful shutdown. Waiting for active requests to complete
+2026-03-30 15:37:46 | APIGateway | INFO  | o.s.b.w.e.netty.GracefulShutdown | Graceful shutdown complete
+2026-03-30 15:37:54 | APIGateway | INFO  | o.h.validator.internal.util.Version | HV000001: Hibernate Validator 8.0.3.Final
+2026-03-30 15:37:54 | APIGateway | INFO  | l.c.apigateway.ApiGatewayApplication | Starting ApiGatewayApplication using Java 22 with PID 26904 (D:\Library\APIGateway\target\classes started by vasia in D:\Library\APIGateway)
+2026-03-30 15:37:54 | APIGateway | INFO  | l.c.apigateway.ApiGatewayApplication | No active profile set, falling back to 1 default profile: "default"
+2026-03-30 15:37:55 | APIGateway | INFO  | o.s.cloud.context.scope.GenericScope | BeanFactory id=75412cec-13ab-32f1-87e6-021d8240753f
+2026-03-30 15:37:55 | APIGateway | WARN  | o.s.c.g.c.GatewayClassPathWarningAutoConfiguration | 
+
+**********************************************************
+
+The artifact spring-cloud-gateway-server is deprecated. It will be removed in the next major release. Please add spring-cloud-gateway-server-webflux dependency.
+
+**********************************************************
+
+
+2026-03-30 15:37:56 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [After]
+2026-03-30 15:37:56 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Before]
+2026-03-30 15:37:56 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Between]
+2026-03-30 15:37:56 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Cookie]
+2026-03-30 15:37:56 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Header]
+2026-03-30 15:37:56 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Host]
+2026-03-30 15:37:56 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Method]
+2026-03-30 15:37:56 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Path]
+2026-03-30 15:37:56 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Query]
+2026-03-30 15:37:56 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [ReadBody]
+2026-03-30 15:37:56 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [RemoteAddr]
+2026-03-30 15:37:56 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [XForwardedRemoteAddr]
+2026-03-30 15:37:56 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Weight]
+2026-03-30 15:37:56 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [CloudFoundryRouteService]
+2026-03-30 15:37:56 | APIGateway | WARN  | o.s.c.g.s.w.s.StarterDeprecatedAutoConfiguration | 
+
+**********************************************************
+
+spring-cloud-starter-gateway is deprecated. It will be removed in the next major release. Please use spring-cloud-starter-gateway-server-webflux instead.
+
+**********************************************************
+
+
+2026-03-30 15:37:56 | APIGateway | INFO  | o.s.b.w.e.netty.NettyWebServer | Netty started on port 8080 (http)
+2026-03-30 15:37:56 | APIGateway | INFO  | l.c.apigateway.ApiGatewayApplication | Started ApiGatewayApplication in 2.949 seconds (process running for 3.724)
+2026-03-30 15:38:00 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 15:38:00 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/most-popular-books'
+2026-03-30 15:38:01 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 15:38:01 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/recently-added-at'
+2026-03-30 15:38:01 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 15:38:01 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Missing jwt token for authorized request. Path: '/api/expected-book/get-all'
+2026-03-30 15:38:05 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 15:38:05 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/category'
+2026-03-30 15:38:05 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 15:38:05 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book'
+2026-03-30 15:38:07 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 15:38:07 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/c0a80064-99d8-1dee-8199-d890840b0001'
+2026-03-30 15:40:05 | APIGateway | INFO  | o.s.b.w.e.netty.GracefulShutdown | Commencing graceful shutdown. Waiting for active requests to complete
+2026-03-30 15:40:05 | APIGateway | INFO  | o.s.b.w.e.netty.GracefulShutdown | Graceful shutdown complete
+2026-03-30 15:40:13 | APIGateway | INFO  | o.h.validator.internal.util.Version | HV000001: Hibernate Validator 8.0.3.Final
+2026-03-30 15:40:13 | APIGateway | INFO  | l.c.apigateway.ApiGatewayApplication | Starting ApiGatewayApplication using Java 22 with PID 16224 (D:\Library\APIGateway\target\classes started by vasia in D:\Library\APIGateway)
+2026-03-30 15:40:13 | APIGateway | INFO  | l.c.apigateway.ApiGatewayApplication | No active profile set, falling back to 1 default profile: "default"
+2026-03-30 15:40:14 | APIGateway | INFO  | o.s.cloud.context.scope.GenericScope | BeanFactory id=75412cec-13ab-32f1-87e6-021d8240753f
+2026-03-30 15:40:15 | APIGateway | WARN  | o.s.c.g.c.GatewayClassPathWarningAutoConfiguration | 
+
+**********************************************************
+
+The artifact spring-cloud-gateway-server is deprecated. It will be removed in the next major release. Please add spring-cloud-gateway-server-webflux dependency.
+
+**********************************************************
+
+
+2026-03-30 15:40:15 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [After]
+2026-03-30 15:40:15 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Before]
+2026-03-30 15:40:15 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Between]
+2026-03-30 15:40:15 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Cookie]
+2026-03-30 15:40:15 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Header]
+2026-03-30 15:40:15 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Host]
+2026-03-30 15:40:15 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Method]
+2026-03-30 15:40:15 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Path]
+2026-03-30 15:40:15 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Query]
+2026-03-30 15:40:15 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [ReadBody]
+2026-03-30 15:40:15 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [RemoteAddr]
+2026-03-30 15:40:15 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [XForwardedRemoteAddr]
+2026-03-30 15:40:15 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Weight]
+2026-03-30 15:40:15 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [CloudFoundryRouteService]
+2026-03-30 15:40:15 | APIGateway | WARN  | o.s.c.g.s.w.s.StarterDeprecatedAutoConfiguration | 
+
+**********************************************************
+
+spring-cloud-starter-gateway is deprecated. It will be removed in the next major release. Please use spring-cloud-starter-gateway-server-webflux instead.
+
+**********************************************************
+
+
+2026-03-30 15:40:15 | APIGateway | INFO  | o.s.b.w.e.netty.NettyWebServer | Netty started on port 8080 (http)
+2026-03-30 15:40:15 | APIGateway | INFO  | l.c.apigateway.ApiGatewayApplication | Started ApiGatewayApplication in 2.771 seconds (process running for 3.59)
+2026-03-30 15:40:26 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 15:40:26 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/most-popular-books'
+2026-03-30 15:40:28 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 15:40:28 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/category'
+2026-03-30 15:40:28 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 15:40:28 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book'
+2026-03-30 15:40:31 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 15:40:31 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-03-30 15:40:53 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 15:40:53 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/most-popular-books'
+2026-03-30 15:42:40 | APIGateway | INFO  | o.s.b.w.e.netty.GracefulShutdown | Commencing graceful shutdown. Waiting for active requests to complete
+2026-03-30 15:42:40 | APIGateway | INFO  | o.s.b.w.e.netty.GracefulShutdown | Graceful shutdown complete
+2026-03-30 15:42:46 | APIGateway | INFO  | o.h.validator.internal.util.Version | HV000001: Hibernate Validator 8.0.3.Final
+2026-03-30 15:42:46 | APIGateway | INFO  | l.c.apigateway.ApiGatewayApplication | Starting ApiGatewayApplication using Java 22 with PID 28968 (D:\Library\APIGateway\target\classes started by vasia in D:\Library\APIGateway)
+2026-03-30 15:42:46 | APIGateway | INFO  | l.c.apigateway.ApiGatewayApplication | No active profile set, falling back to 1 default profile: "default"
+2026-03-30 15:42:47 | APIGateway | INFO  | o.s.cloud.context.scope.GenericScope | BeanFactory id=75412cec-13ab-32f1-87e6-021d8240753f
+2026-03-30 15:42:48 | APIGateway | WARN  | o.s.c.g.c.GatewayClassPathWarningAutoConfiguration | 
+
+**********************************************************
+
+The artifact spring-cloud-gateway-server is deprecated. It will be removed in the next major release. Please add spring-cloud-gateway-server-webflux dependency.
+
+**********************************************************
+
+
+2026-03-30 15:42:48 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [After]
+2026-03-30 15:42:48 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Before]
+2026-03-30 15:42:48 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Between]
+2026-03-30 15:42:48 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Cookie]
+2026-03-30 15:42:48 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Header]
+2026-03-30 15:42:48 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Host]
+2026-03-30 15:42:48 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Method]
+2026-03-30 15:42:48 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Path]
+2026-03-30 15:42:48 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Query]
+2026-03-30 15:42:48 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [ReadBody]
+2026-03-30 15:42:48 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [RemoteAddr]
+2026-03-30 15:42:48 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [XForwardedRemoteAddr]
+2026-03-30 15:42:48 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Weight]
+2026-03-30 15:42:48 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [CloudFoundryRouteService]
+2026-03-30 15:42:48 | APIGateway | WARN  | o.s.c.g.s.w.s.StarterDeprecatedAutoConfiguration | 
+
+**********************************************************
+
+spring-cloud-starter-gateway is deprecated. It will be removed in the next major release. Please use spring-cloud-starter-gateway-server-webflux instead.
+
+**********************************************************
+
+
+2026-03-30 15:42:49 | APIGateway | INFO  | o.s.b.w.e.netty.NettyWebServer | Netty started on port 8080 (http)
+2026-03-30 15:42:49 | APIGateway | INFO  | l.c.apigateway.ApiGatewayApplication | Started ApiGatewayApplication in 3.021 seconds (process running for 4.788)
+2026-03-30 15:42:52 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 15:42:52 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/category'
+2026-03-30 15:42:52 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 15:42:52 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book'
+2026-03-30 15:42:54 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 15:42:54 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/c0a80064-99d8-1dee-8199-d890840b0001'
+2026-03-30 15:47:28 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 15:47:28 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/category'
+2026-03-30 15:47:28 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 15:47:28 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book'
+2026-03-30 15:47:30 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 15:47:30 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/most-popular-books'
+2026-03-30 15:47:33 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 15:47:33 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/c0a80064-99d8-1dee-8199-d890840b0001'
+2026-03-30 15:47:33 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 15:47:33 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/author/TestBookAuthor'
+2026-03-30 15:47:33 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 15:47:33 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/genre/TestBookGenre'
+2026-03-30 15:53:37 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 15:53:37 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/most-popular-books'
+2026-03-30 15:53:40 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 15:53:40 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/category'
+2026-03-30 15:53:40 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 15:53:40 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book'
+2026-03-30 15:53:43 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 15:53:43 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/c0a80064-99d8-1dee-8199-d890840b0001'
+2026-03-30 15:53:43 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 15:53:43 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/author/TestBookAuthor'
+2026-03-30 15:53:43 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 15:53:43 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/genre/TestBookGenre'
+2026-03-30 15:53:47 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 15:53:47 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/most-popular-books'
+2026-03-30 15:54:48 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 15:54:48 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/most-popular-books'
+2026-03-30 16:02:17 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 16:02:17 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/most-popular-books'
+2026-03-30 16:02:18 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 16:02:18 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/most-popular-books'
+2026-03-30 16:02:18 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 16:02:18 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/most-popular-books'
+2026-03-30 16:10:33 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 16:10:33 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/most-popular-books'
+2026-03-30 16:10:34 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 16:10:34 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/recently-added-at'
+2026-03-30 16:10:34 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 16:10:34 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/expected-book/get-all'
+2026-03-30 16:10:56 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 16:10:56 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/most-popular-books'
+2026-03-30 16:10:56 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 16:10:56 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/recently-added-at'
+2026-03-30 16:10:56 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 16:10:56 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/expected-book/get-all'
+2026-03-30 16:11:27 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 16:11:27 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/c0a80064-99d8-1dee-8199-d890840b0001'
+2026-03-30 16:11:27 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 16:11:27 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/author/TestBookAuthor'
+2026-03-30 16:11:27 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 16:11:27 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/genre/TestBookGenre'
+2026-03-30 16:48:58 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 16:48:58 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/auth/registration'
+2026-03-30 16:48:59 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 16:48:59 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/most-popular-books'
+2026-03-30 16:48:59 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 16:48:59 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/recently-added-at'
+2026-03-30 16:48:59 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 16:48:59 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/expected-book/get-all'
+2026-03-30 16:49:02 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 16:49:02 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/c0a80064-99d8-1dee-8199-d890840b0001'
+2026-03-30 16:49:02 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 16:49:02 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/author/TestBookAuthor'
+2026-03-30 16:49:02 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 16:49:02 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/genre/TestBookGenre'
+2026-03-30 16:49:27 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 16:49:27 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/most-popular-books'
+2026-03-30 16:49:27 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 16:49:27 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/recently-added-at'
+2026-03-30 16:49:27 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 16:49:27 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/expected-book/get-all'
+2026-03-30 16:51:00 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 16:51:00 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/most-popular-books'
+2026-03-30 16:51:00 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 16:51:00 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/recently-added-at'
+2026-03-30 16:51:00 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 16:51:00 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/expected-book/get-all'
+2026-03-30 16:51:02 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 16:51:02 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/c0a80064-99d8-1dee-8199-d890840b0001'
+2026-03-30 16:51:02 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 16:51:02 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/author/TestBookAuthor'
+2026-03-30 16:51:03 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 16:51:03 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/genre/TestBookGenre'
+2026-03-30 16:51:24 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 16:51:24 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/auth/registration'
+2026-03-30 16:51:24 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 16:51:24 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/most-popular-books'
+2026-03-30 16:51:24 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 16:51:24 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/recently-added-at'
+2026-03-30 16:51:24 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 16:51:24 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/expected-book/get-all'
+2026-03-30 16:51:28 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 16:51:28 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/c0a80064-99d8-1dee-8199-d890840b0001'
+2026-03-30 16:51:28 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 16:51:28 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/author/TestBookAuthor'
+2026-03-30 16:51:28 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 16:51:28 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/genre/TestBookGenre'
+2026-03-30 16:55:04 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 16:55:04 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/most-popular-books'
+2026-03-30 16:55:04 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 16:55:04 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/recently-added-at'
+2026-03-30 16:55:04 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 16:55:04 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/expected-book/get-all'
+2026-03-30 16:55:08 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 16:55:08 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/most-popular-books'
+2026-03-30 16:55:08 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 16:55:08 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/recently-added-at'
+2026-03-30 16:55:08 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 16:55:08 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/expected-book/get-all'
+2026-03-30 16:55:11 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 16:55:11 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/c0a80064-99d8-1dee-8199-d890840b0001'
+2026-03-30 16:55:11 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 16:55:11 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/author/TestBookAuthor'
+2026-03-30 16:55:11 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 16:55:11 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/genre/TestBookGenre'
+2026-03-30 16:55:29 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 16:55:29 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/auth/registration'
+2026-03-30 16:55:30 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 16:55:30 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/most-popular-books'
+2026-03-30 16:55:30 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 16:55:30 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/recently-added-at'
+2026-03-30 16:55:30 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-03-30 16:55:30 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/expected-book/get-all'
+2026-03-30 16:55:59 | APIGateway | INFO  | o.s.b.w.e.netty.GracefulShutdown | Commencing graceful shutdown. Waiting for active requests to complete
+2026-03-30 16:55:59 | APIGateway | INFO  | o.s.b.w.e.netty.GracefulShutdown | Graceful shutdown complete

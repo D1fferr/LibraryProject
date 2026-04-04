@@ -13,9 +13,13 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import java.io.IOException;
 
 @Component
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 public class JwtInterceptor implements ClientHttpRequestInterceptor {
     private final JwtCookieManager cookieManager;
+
+    public JwtInterceptor(JwtCookieManager cookieManager) {
+        this.cookieManager = cookieManager;
+    }
 
     @Override
     public ClientHttpResponse intercept(HttpRequest request, byte[] body,

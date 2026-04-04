@@ -4,10 +4,14 @@ import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.UUID;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class ExpectedBookDTO {
+    private UUID expectedBookId;
     @Size(min = 1, message = "Book name must not be empty.")
     private String expectedBookName;
     @Size(min = 1, message = "Author name must not be empty.")

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upcoming Books - BookLibrary</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    /* Стилі для сторінки очікуваних книг */
+    .category-divider {
+      height: 1px;
+      background-color: #e0e0e0;
+      margin: 12px 0;
+    }
+
+    .special-category {
+      font-weight: 600;
+      color: #e67e22 !important;
+    }
+
+    .special-category:hover {
+      color: #d35400 !important;
+      background-color: #fff3e0;
+    }
+
+    .special-category .material-icons {
+      font-size: 16px;
+      margin-right: 4px;
+      vertical-align: middle;
+    }
+
+    .results-count {
+      color: #7f8c8d;
+      font-size: 14px;
+    }
+
+    .upcoming-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: #f39c12;
+      color: white;
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-weight: 600;
+      z-index: 10;
+    }
+  </style>
+</head>
+<body>
+<!-- Header -->
+<div th:replace="~{layout/header :: header}"></div>
+
+<!-- Main Content -->
+<div class="container">
+  <!-- Categories Sidebar -->
+  <aside class="sidebar">
+    <h3>Categories</h3>
+
+    <ul class="categories-list" th:if="${categories != null and !categories.isEmpty()}">
+      <!-- All Books -->
+      <li>
+        <a th:href="@{/catalog(page=0, sortBy=${sort != null ? sort : 'bookAddedAt'})}"
+           th:class="${selectedGenre == null ? 'active' : ''}">
+          All Books
+        </a>
+      </li>
+
+      <!-- Most Popular Books -->
+      <li>
+        <a href="/catalog/most-popular-books"
+           class="special-category">
+          <span class="material-icons">trending_up</span> Most Popular Books
+        </a>
+      </li>
+
+      <!-- Upcoming Books - активна сторінка -->
+      <li>
+        <a href="/catalog/upcoming-books"
+           class="special-category active">
+          <span class="material-icons">upcoming</span> Upcoming Books
+        </a>
+      </li>
+
+      <!-- Роздільник перед жанрами -->
+      <li class="category-divider"></li>
+
+      <!-- Жанри -->
+      <li th:each="category : ${categories}">
+        <a th:href="@{/catalog(genre=${category.name}, page=0, sortBy=${sort != null ? sort : 'bookAddedAt'})}"
+           th:class="${selectedGenre == category.name ? 'active' : ''}"
+           th:text="${category.name} + ' (' + ${category.count} + ')'">
+          Fiction (98)
+        </a>
+      </li>
+    </ul>
+
+    <div th:if="${categories == null or categories.isEmpty()}" class="no-categories">
+      <p>No categories available</p>
+    </div>
+  </aside>
+
+  <!-- Main Content Area -->
+  <main class="main-content">
+    <!-- Catalog Header -->
+    <div class="catalog-header">
+      <div class="breadcrumbs">
+        <a href="/">Home</a> /
+        <a href="/catalog">Catalog</a> /
+        <span>Upcoming Books</span>
+      </div>
+
+      <div class="catalog-controls">
+        <div class="results-count">
+          Showing <span th:text="${books != null ? books.size() : 0}">0</span>
+          of <span th:text="${totalBooks}">0</span> books
+        </div>
+
+        <div class="sort-selector">
+          <select id="sortSelect" onchange="applySort()">
+            <option value="bookAddedAt" th:selected="${sort == 'bookAddedAt'}">Newest First</option>
+            <option value="bookAddedAt,asc" th:selected="${sort == 'bookAddedAt,asc'}">Oldest First</option>
+            <option value="bookName" th:selected="${sort == 'bookName'}">Title A-Z</option>
+            <option value="bookName,desc" th:selected="${sort == 'bookName,desc'}">Title Z-A</option>
+            <option value="bookAuthor" th:selected="${sort == 'bookAuthor'}">Author A-Z</option>
+            <option value="bookAuthor,desc" th:selected="${sort == 'bookAuthor,desc'}">Author Z-A</option>
+            <option value="expectedBookYear" th:selected="${sort == 'expectedBookYear'}">Release Year (Earliest)</option>
+            <option value="expectedBookYear,desc" th:selected="${sort == 'expectedBookYear,desc'}">Release Year (Latest)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Error Message -->
+    <div class="error-message" th:if="${error}" th:text="${error}">
+      Error loading catalog
+    </div>
+
+    <!-- Books Grid -->
+    <div class="books-section">
+      <div class="books-grid" id="booksGrid">
+        <div class="book-card" th:each="book : ${books}">
+          <div class="book-cover">
+            <img th:if="${book.expectedBookImage != null and !book.expectedBookImage.isEmpty()}"
+                 th:src="${book.expectedBookImage}"
+                 th:alt="${book.expectedBookName}"
+                 class="book-image"/>
+            <div th:unless="${book.expectedBookImage != null and !book.expectedBookImage.isEmpty()}"
+                 class="no-image-placeholder">
+              <span class="material-icons">book</span>
+            </div>
+            <div class="upcoming-badge">Coming Soon</div>
+          </div>
+          <div class="book-info">
+            <h3 class="book-title" th:text="${book.expectedBookName}">Book Title</h3>
+            <p class="book-author" th:text="${book.expectedBookAuthor}">Author Name</p>
+            <p class="book-year" th:text="${book.expectedBookYear}">2024</p>
+            <p class="book-genre" th:text="${book.expectedBookGenre}">Fiction</p>
+            <a th:href="@{'/expected-books/' + ${book.expectedBookId}}" class="btn-details">Details</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Empty State -->
+      <div class="empty-state" th:if="${books.empty}">
+        <span class="material-icons empty-icon">menu_book</span>
+        <h3>No upcoming books found</h3>
+        <p>Check back later for new releases</p>
+      </div>
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination-section" th:if="${totalPages > 1}">
+      <div class="pagination-info">
+        Showing page <span th:text="${currentPage + 1}">1</span>
+        of <span th:text="${totalPages}">10</span>
+        (<span th:text="${totalBooks}">98</span> books total)
+      </div>
+
+      <div class="pagination">
+        <!-- Previous button -->
+        <a th:if="${currentPage > 0}"
+           th:href="@{/catalog/upcoming-books(page=${currentPage - 1}, sortBy=${sort})}"
+           class="page-link prev">
+          <span class="material-icons">chevron_left</span>
+        </a>
+        <span th:unless="${currentPage > 0}" class="page-link disabled">
+                    <span class="material-icons">chevron_left</span>
+                </span>
+
+        <!-- Page numbers -->
+        <th:block th:each="i : ${#numbers.sequence(0, totalPages - 1)}">
+          <th:block th:if="${i >= currentPage - 2 and i <= currentPage + 2}">
+            <a th:if="${i == currentPage}" class="page-link active"
+               th:text="${i + 1}">1</a>
+            <a th:unless="${i == currentPage}"
+               th:href="@{/catalog/upcoming-books(page=${i}, sortBy=${sort})}"
+               class="page-link" th:text="${i + 1}">2</a>
+          </th:block>
+        </th:block>
+
+        <!-- Next button -->
+        <a th:if="${currentPage < totalPages - 1}"
+           th:href="@{/catalog/upcoming-books(page=${currentPage + 1}, sortBy=${sort})}"
+           class="page-link next">
+          <span class="material-icons">chevron_right</span>
+        </a>
+        <span th:unless="${currentPage < totalPages - 1}" class="page-link disabled">
+                    <span class="material-icons">chevron_right</span>
+                </span>
+      </div>
+    </div>
+
+    <!-- Quick Links and Contact -->
+    <div class="info-section">
+      <div class="quick-links">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="#">Borrowing Rules</a></li>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Opening Hours</a></li>
+          <li><a href="#">Membership</a></li>
+        </ul>
+      </div>
+
+      <div class="contact-info">
+        <h3>Contact</h3>
+        <ul>
+          <li><span class="material-icons">email</span> library@mail.com</li>
+          <li><span class="material-icons">phone</span> (044) 123-4567</li>
+          <li><span class="material-icons">location_on</span> Kyiv, Book St. 1</li>
+        </ul>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Footer -->
+<div th:replace="~{layout/footer :: footer}"></div>
+
+<!-- JavaScript -->
+<script>
+  function applySort() {
+    const select = document.getElementById('sortSelect');
+    const sortValue = select.value;
+    const url = new URL(window.location.href);
+    url.searchParams.set('sortBy', sortValue);
+    url.searchParams.set('page', '0');
+    window.location.href = url.toString();
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    // Підсвічуємо активний пункт меню
+    const navLinks = document.querySelectorAll('.main-nav a');
+    navLinks.forEach(link => {
+      if (link.getAttribute('href') === '/catalog/upcoming-books') {
+        link.classList.add('active');
+      }
+    });
+  });
+</script>
+</body>
+</html>

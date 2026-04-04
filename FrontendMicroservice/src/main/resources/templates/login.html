@@ -136,6 +136,11 @@
             transform: translateY(1px);
         }
 
+        .btn-login:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+        }
+
         .login-footer {
             text-align: center;
             margin-top: 25px;
@@ -212,8 +217,8 @@
                 <span>Please login to continue to: <strong th:text="${redirect}">/books/123</strong></span>
             </div>
 
-            <!-- Форма логіну -->
-            <form id="loginForm" method="post" action="/login">
+            <!-- Форма логіну - тепер без action, використовуємо fetch -->
+            <form id="loginForm">
                 <div class="form-group">
                     <label for="username">
                         <span class="material-icons" style="font-size: 16px; vertical-align: middle;">person</span>
@@ -239,7 +244,7 @@
                            required>
                 </div>
 
-                <button type="submit" class="btn-login">
+                <button type="submit" class="btn-login" id="loginBtn">
                     <span class="material-icons" style="font-size: 18px; vertical-align: middle;">login</span>
                     Sign In
                 </button>
@@ -258,31 +263,78 @@
 <!-- Footer -->
 <div th:replace="~{layout/footer :: footer}"></div>
 
-<!-- JavaScript для обробки redirect -->
+<!-- JavaScript для відправки JSON -->
 <script>
-    document.getElementById('loginForm').addEventListener('submit', function(e) {
-        const redirect = document.getElementById('redirectUrl').value;
+    document.getElementById('loginForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
 
-        if (redirect && redirect !== 'null' && redirect !== '') {
-            const action = this.action + '?redirect=' + encodeURIComponent(redirect);
-            this.action = action;
-        }
-
-        // Можна додати валідацію перед сабмітом
+        const loginBtn = document.getElementById('loginBtn');
         const username = document.getElementById('username').value.trim();
         const password = document.getElementById('password').value.trim();
+        let redirect = document.getElementById('redirectUrl').value;
 
+        // Валідація
         if (!username || !password) {
-            e.preventDefault();
             alert('Please fill in all fields');
+            return;
+        }
+
+        // Блокуємо кнопку під час запиту
+        loginBtn.disabled = true;
+        loginBtn.textContent = 'Signing in...';
+
+        try {
+            // Формуємо тіло запиту
+            const requestBody = {
+                username: username,
+                password: password
+            };
+
+            // Додаємо redirect в тіло якщо він є
+            if (redirect && redirect !== 'null' && redirect !== '') {
+                requestBody.redirect = redirect;
+            }
+
+            console.log('Sending request to /login');
+            console.log('Request body:', requestBody);
+
+            // Відправляємо JSON на /login (без параметрів в URL)
+            const response = await fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(requestBody)
+            });
+
+            console.log('Response status:', response.status);
+            console.log('Response headers:', response.headers);
+
+            if (response.redirected) {
+                console.log('Redirecting to:', response.url);
+                window.location.href = response.url;
+            } else if (response.ok) {
+                // Якщо все добре, але немає redirect - йдемо на головну
+                window.location.href = redirect || '/home';
+            } else {
+                // Помилка
+                const errorText = await response.text();
+                console.error('Login failed:', errorText);
+                alert('Invalid username or password');
+
+                // Додаємо клас error до полів
+                document.getElementById('username').classList.add('error');
+                document.getElementById('password').classList.add('error');
+            }
+        } catch (error) {
+            console.error('Login error:', error);
+            alert('Network error. Please try again.');
+        } finally {
+            // Розблоковуємо кнопку
+            loginBtn.disabled = false;
+            loginBtn.textContent = 'Sign In';
         }
     });
-
-    // Додаємо клас error при невдалій спробі
-    <th:block th:if="${errorMessage}">
-        document.getElementById('username').classList.add('error');
-        document.getElementById('password').classList.add('error');
-    </th:block>
 </script>
 </body>
 </html>

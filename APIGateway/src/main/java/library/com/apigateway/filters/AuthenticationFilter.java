@@ -27,12 +27,18 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
 
     private final JwtUtil jwtUtil;
     private static final Set<String> PUBLIC_ROUTES = Set.of(
-            "auth/login",
-            "auth/registration",
-            "/book",
-            "/book/recently-added-at",
-            "/reset-password/",
-            "/user/create"
+            "/api/auth/login",
+            "/api/auth/registration",
+            "/api/book",
+            "/api/book/recently-added-at",
+            "/api/reset-password/",
+            "/api/user/create",
+            "/api/book/most-popular-books",
+            "/api/book/category",
+            "/api/expected-book/get-all",
+            "/api/expected-book"
+
+
 
     );
 

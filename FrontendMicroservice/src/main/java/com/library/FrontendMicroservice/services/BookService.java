@@ -1,19 +1,15 @@
 package com.library.FrontendMicroservice.services;
 
-import com.library.FrontendMicroservice.dto.BookDto;
+import com.library.FrontendMicroservice.dto.BookDtoWithTotalElements;
 import com.library.FrontendMicroservice.dto.CategoriesDto;
 import com.library.FrontendMicroservice.exceptions.BookException;
 import com.library.FrontendMicroservice.exceptions.CategoryException;
 import com.library.FrontendMicroservice.models.Book;
-import com.library.FrontendMicroservice.models.Category;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -27,29 +23,29 @@ public class BookService {
     }
 
 
-    public BookDto getMostPopularBooks(){
+    public BookDtoWithTotalElements getMostPopularBooks(){
         try {
-            BookDto books = publicRestTemplate.getForObject(
+            BookDtoWithTotalElements books = publicRestTemplate.getForObject(
                     "http://localhost:8080/api/book/most-popular-books",
-                    BookDto.class
+                    BookDtoWithTotalElements.class
             );
             return books;
         }catch (Exception e){
             throw new BookException(e.getMessage());
         }
     }
-    public BookDto getRecentlyAddedAt(){
+    public BookDtoWithTotalElements getRecentlyAddedAt(){
         try {
-            BookDto books = publicRestTemplate.getForObject(
+            BookDtoWithTotalElements books = publicRestTemplate.getForObject(
                     "http://localhost:8080/api/book/recently-added-at?booksPerPage=4",
-                    BookDto.class
+                    BookDtoWithTotalElements.class
             );
             return books;
         }catch (Exception e){
             throw new BookException(e.getMessage());
         }
     }
-    public BookDto getBooks(String sortBy, int page, String genre, String sortDir){
+    public BookDtoWithTotalElements getBooks(String sortBy, int page, String genre, String sortDir){
         try {
             UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/api/book")
                     .queryParam("page", page)
@@ -60,7 +56,7 @@ public class BookService {
             String url = builder.toUriString();
             return publicRestTemplate.getForObject(
                     url,
-                    BookDto.class
+                    BookDtoWithTotalElements.class
                     );
         }catch (Exception e){
             throw new BookException(e.getMessage());
@@ -78,29 +74,29 @@ public class BookService {
             throw new BookException(e.getMessage());
         }
     }
-    public BookDto getBooksByAuthor(String author){
+    public BookDtoWithTotalElements getBooksByAuthor(String author){
         try {
 
-            UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/api/book/" + author)
+            UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/api/book/author/" + author)
                     .queryParam("page", 0);
             String url = builder.toUriString();
             return publicRestTemplate.getForObject(
                     url,
-                    BookDto.class
+                    BookDtoWithTotalElements.class
             );
         }catch (Exception e){
             throw new BookException(e.getMessage());
         }
     }
-    public BookDto getBooksByGenre(String genre){
+    public BookDtoWithTotalElements getBooksByGenre(String genre){
         try {
 
-            UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/api/book/" + genre)
+            UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/api/book/genre/" + genre)
                     .queryParam("page", 0);
             String url = builder.toUriString();
             return publicRestTemplate.getForObject(
                     url,
-                    BookDto.class
+                    BookDtoWithTotalElements.class
             );
         }catch (Exception e){
             throw new BookException(e.getMessage());

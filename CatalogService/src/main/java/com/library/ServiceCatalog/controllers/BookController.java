@@ -45,7 +45,7 @@ public class BookController {
         BookDtoWithTotalElements books = bookService.findAll(PageRequest.of(page, booksPerPage, Sort.by(sortBy)));
         return new ResponseEntity<>(books, HttpStatus.OK);
     }
-    @GetMapping("/{bookAuthor}")
+    @GetMapping("/author/{bookAuthor}")
     public ResponseEntity<BookDtoWithTotalElements> getAllBooksByAuthor(
             @PathVariable String bookAuthor,
             @RequestParam(value = "page", defaultValue = "0", required = false) Integer page,
@@ -55,7 +55,7 @@ public class BookController {
         BookDtoWithTotalElements books = bookService.findAllByAuthor(bookAuthor, pageable);
         return new ResponseEntity<>(books, HttpStatus.OK);
     }
-    @GetMapping("/{bookGenre}")
+    @GetMapping("/genre/{bookGenre}")
     public ResponseEntity<BookDtoWithTotalElements> getAllBooksByGenre(
             @PathVariable String bookGenre,
             @RequestParam(value = "page", defaultValue = "0", required = false) Integer page,

@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - BookLibrary</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        /* Стилі для сторінки реєстрації */
+        .register-page {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: calc(100vh - 200px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .register-container {
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .register-box {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        .register-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .register-header .logo-icon {
+            font-size: 48px;
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .register-header h1 {
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .register-header p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .form-group label .required {
+            color: #e74c3c;
+            margin-left: 4px;
+        }
+
+        .form-group label .optional {
+            color: #95a5a6;
+            font-size: 12px;
+            font-weight: normal;
+            margin-left: 8px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            font-size: 15px;
+            transition: all 0.3s;
+            box-sizing: border-box;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-group input.error {
+            border-color: #e74c3c;
+        }
+
+        .form-group .error-message {
+            color: #e74c3c;
+            font-size: 12px;
+            margin-top: 5px;
+            display: block;
+        }
+
+        .form-group .hint {
+            color: #7f8c8d;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .alert {
+            padding: 12px 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .alert-error {
+            background: #fee;
+            color: #c0392b;
+            border: 1px solid #fcc;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert .material-icons {
+            font-size: 20px;
+        }
+
+        .btn-register {
+            width: 100%;
+            padding: 14px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 10px;
+        }
+
+        .btn-register:hover {
+            background: #5a67d8;
+        }
+
+        .btn-register:active {
+            transform: translateY(1px);
+        }
+
+        .register-footer {
+            text-align: center;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .register-footer a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .register-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .password-requirements {
+            font-size: 12px;
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
+
+        .redirect-info {
+            background: #e8f0fe;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .redirect-info .material-icons {
+            font-size: 18px;
+            color: #667eea;
+        }
+
+        /* Адаптивність */
+        @media (max-width: 480px) {
+            .register-box {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- Header -->
+<div th:replace="~{layout/header :: header}"></div>
+
+<div class="register-page">
+    <div class="register-container">
+        <div class="register-box">
+            <div class="register-header">
+                <span class="material-icons logo-icon">person_add</span>
+                <h1>Create Account</h1>
+                <p>Join BookLibrary and start your reading journey</p>
+            </div>
+
+            <!-- Повідомлення про помилку -->
+            <div th:if="${errorMessage}" class="alert alert-error">
+                <span class="material-icons">error</span>
+                <span th:text="${errorMessage}">Registration failed</span>
+            </div>
+
+            <!-- Інформація про redirect (якщо є) -->
+            <div th:if="${param.redirect != null and param.redirect != 'null'}" class="redirect-info">
+                <span class="material-icons">login</span>
+                <span>After registration you will be redirected to: <strong th:text="${param.redirect}">/books/123</strong></span>
+            </div>
+
+            <!-- Форма реєстрації -->
+            <form id="registerForm" method="post" action="/register" th:object="${registerRequest}">
+                <!-- Приховане поле для redirect -->
+                <input type="hidden" name="redirect" th:value="${param.redirect}" />
+
+                <!-- Username -->
+                <div class="form-group">
+                    <label for="username">
+                        Username
+                        <span class="required">*</span>
+                    </label>
+                    <input type="text"
+                           id="username"
+                           name="username"
+                           th:field="*{username}"
+                           placeholder="Choose a username"
+                           required
+                           autofocus>
+                    <div th:if="${#fields.hasErrors('username')}"
+                         class="error-message"
+                         th:errors="*{username}">Error</div>
+                </div>
+
+                <!-- Email -->
+                <div class="form-group">
+                    <label for="email">
+                        Email
+                        <span class="required">*</span>
+                    </label>
+                    <input type="email"
+                           id="email"
+                           name="email"
+                           th:field="*{email}"
+                           placeholder="Enter your email"
+                           required>
+                    <div th:if="${#fields.hasErrors('email')}"
+                         class="error-message"
+                         th:errors="*{email}">Error</div>
+                </div>
+
+                <!-- Password -->
+                <div class="form-group">
+                    <label for="password">
+                        Password
+                        <span class="required">*</span>
+                    </label>
+                    <input type="password"
+                           id="password"
+                           name="password"
+                           th:field="*{password}"
+                           placeholder="Create a password"
+                           required>
+                    <div class="password-requirements">
+                        Password must be at least 6 characters
+                    </div>
+                    <div th:if="${#fields.hasErrors('password')}"
+                         class="error-message"
+                         th:errors="*{password}">Error</div>
+                </div>
+
+                <!-- Confirm Password -->
+                <div class="form-group">
+                    <label for="confirmPassword">
+                        Confirm Password
+                        <span class="required">*</span>
+                    </label>
+                    <input type="password"
+                           id="confirmPassword"
+                           name="confirmPassword"
+                           th:field="*{confirmPassword}"
+                           placeholder="Confirm your password"
+                           required>
+                    <div th:if="${#fields.hasErrors('confirmPassword')}"
+                         class="error-message"
+                         th:errors="*{confirmPassword}">Error</div>
+                </div>
+
+                <!-- Library Code (optional) -->
+                <div class="form-group">
+                    <label for="libraryCode">
+                        Library Code
+                        <span class="optional">(optional)</span>
+                    </label>
+                    <input type="text"
+                           id="libraryCode"
+                           name="libraryCode"
+                           th:field="*{libraryCode}"
+                           placeholder="Enter your library code if you have one">
+                    <div class="hint">
+                        If you have a library membership code, enter it here
+                    </div>
+                    <div th:if="${#fields.hasErrors('libraryCode')}"
+                         class="error-message"
+                         th:errors="*{libraryCode}">Error</div>
+                </div>
+
+                <button type="submit" class="btn-register">
+                    <span class="material-icons" style="font-size: 18px; vertical-align: middle;">check_circle</span>
+                    Create Account
+                </button>
+            </form>
+
+            <div class="register-footer">
+                <p>Already have an account? <a href="/login">Sign in</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<div th:replace="~{layout/footer :: footer}"></div>
+
+<!-- JavaScript для валідації -->
+<script>
+    const form = document.getElementById('registerForm');
+    const password = document.getElementById('password');
+    const confirmPassword = document.getElementById('confirmPassword');
+
+    // Валідація співпадіння паролів
+    function validatePasswordMatch() {
+        if (password.value !== confirmPassword.value) {
+            confirmPassword.setCustomValidity('Passwords do not match');
+        } else {
+            confirmPassword.setCustomValidity('');
+        }
+    }
+
+    password.addEventListener('change', validatePasswordMatch);
+    confirmPassword.addEventListener('keyup', validatePasswordMatch);
+
+    // Додаткова валідація перед сабмітом
+    form.addEventListener('submit', function(e) {
+        if (password.value !== confirmPassword.value) {
+            e.preventDefault();
+            alert('Passwords do not match!');
+        }
+    });
+
+    // Валідація library code (макс. 20 символів)
+    const libraryCodeInput = document.getElementById('libraryCode');
+    libraryCodeInput.addEventListener('input', function() {
+        const value = this.value.trim();
+        if (value && value.length > 20) {
+            this.setCustomValidity('Library code must be at most 20 characters');
+        } else {
+            this.setCustomValidity('');
+        }
+    });
+
+    // Автоматичне очищення повідомлень про помилки при введенні
+    const inputs = document.querySelectorAll('input');
+    inputs.forEach(input => {
+        input.addEventListener('input', function() {
+            this.classList.remove('error');
+            const errorDiv = this.parentElement.querySelector('.error-message');
+            if (errorDiv && errorDiv.textContent.includes('Error')) {
+                errorDiv.remove();
+            }
+        });
+    });
+</script>
+</body>
+</html>

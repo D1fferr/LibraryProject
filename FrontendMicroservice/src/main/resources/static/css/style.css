@@ -1166,5 +1166,77 @@ body {
     color: #667eea;
     margin-bottom: 15px;
 }
+/* Profile link стилізований як Login кнопка */
+.profile-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    background: #e74c3c;
+    border-radius: 4px;
+    transition: background 0.3s;
+}
 
-/* ... інші стилі як в коді вище ... */
+.profile-link:hover {
+    background: #c0392b;
+}
+
+/* Logout кнопка без фону */
+.logout-btn {
+    display: flex;
+    align-items: center;
+    color: #ff7675;
+    text-decoration: none;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: background 0.3s;
+}
+
+.logout-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+/* Стилі для Profile кнопки (ідентичні Login) */
+.profile-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    background: #e74c3c;
+    border-radius: 4px;
+    transition: background 0.3s;
+}
+
+.profile-link:hover {
+    background: #c0392b;
+}
+
+/* Logout кнопка - залишаємо без фону */
+.logout-btn {
+    display: flex;
+    align-items: center;
+    color: #ff7675;
+    text-decoration: none;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: background 0.3s;
+}
+
+.logout-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}

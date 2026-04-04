@@ -1,9 +1,7 @@
 package com.library.FrontendMicroservice.testclasses;
 
-import com.library.FrontendMicroservice.dto.BookDto;
+import com.library.FrontendMicroservice.dto.BookDtoWithTotalElements;
 import com.library.FrontendMicroservice.dto.CategoriesDto;
-import com.library.FrontendMicroservice.exceptions.BookException;
-import com.library.FrontendMicroservice.exceptions.CategoryException;
 import com.library.FrontendMicroservice.models.Book;
 import com.library.FrontendMicroservice.models.Category;
 import org.springframework.stereotype.Component;
@@ -14,7 +12,7 @@ import java.util.UUID;
 
 @Component
 public class BookServiceTest {
-    public BookDto getMostPopularBooks(){
+    public BookDtoWithTotalElements getMostPopularBooks(){
         Book book1 = createBook(1);
         Book book2 = createBook(2);
         Book book3 = createBook(3);
@@ -24,13 +22,13 @@ public class BookServiceTest {
         books.add(book2);
         books.add(book3);
         books.add(book4);
-        BookDto bookDto = new BookDto();
-        bookDto.setBooks(books);
-        bookDto.setBookPages(2);
-        bookDto.setBookCount(10);
-        return bookDto;
+        BookDtoWithTotalElements bookDtoWithTotalElements = new BookDtoWithTotalElements();
+        bookDtoWithTotalElements.setBooks(books);
+        bookDtoWithTotalElements.setBookPages(2);
+        bookDtoWithTotalElements.setBookCount(10);
+        return bookDtoWithTotalElements;
     }
-    public BookDto getRecentlyAddedAt(){
+    public BookDtoWithTotalElements getRecentlyAddedAt(){
         Book book1 = createBook(5);
         Book book2 = createBook(6);
         Book book3 = createBook(7);
@@ -40,13 +38,13 @@ public class BookServiceTest {
         books.add(book2);
         books.add(book3);
         books.add(book4);
-        BookDto bookDto = new BookDto();
-        bookDto.setBooks(books);
-        bookDto.setBookPages(2);
-        bookDto.setBookCount(10);
-        return bookDto;
+        BookDtoWithTotalElements bookDtoWithTotalElements = new BookDtoWithTotalElements();
+        bookDtoWithTotalElements.setBooks(books);
+        bookDtoWithTotalElements.setBookPages(2);
+        bookDtoWithTotalElements.setBookCount(10);
+        return bookDtoWithTotalElements;
     }
-    public BookDto getBooks(String sortBy, int page, String genre, String sortDir){
+    public BookDtoWithTotalElements getBooks(String sortBy, int page, String genre, String sortDir){
         Book book1 = createBook(9);
         Book book2 = createBook(10);
         Book book3 = createBook(11);
@@ -56,11 +54,11 @@ public class BookServiceTest {
         books.add(book2);
         books.add(book3);
         books.add(book4);
-        BookDto bookDto = new BookDto();
-        bookDto.setBooks(books);
-        bookDto.setBookCount(56);
-        bookDto.setBookPages(12);
-        return bookDto;
+        BookDtoWithTotalElements bookDtoWithTotalElements = new BookDtoWithTotalElements();
+        bookDtoWithTotalElements.setBooks(books);
+        bookDtoWithTotalElements.setBookCount(56);
+        bookDtoWithTotalElements.setBookPages(12);
+        return bookDtoWithTotalElements;
     }
     public CategoriesDto getAllCategories(){
         Category category1 = createCategory(5);
@@ -84,7 +82,7 @@ public class BookServiceTest {
     public Book getBookById(UUID id){
         return createBook(1);
     }
-    public BookDto getBooksByAuthor(String author){
+    public BookDtoWithTotalElements getBooksByAuthor(String author){
         Book book1 = createBook(9);
         Book book2 = createBook(10);
         Book book3 = createBook(11);
@@ -94,13 +92,13 @@ public class BookServiceTest {
         books.add(book2);
         books.add(book3);
         books.add(book4);
-        BookDto bookDto = new BookDto();
-        bookDto.setBooks(books);
-        bookDto.setBookCount(56);
-        bookDto.setBookPages(12);
-        return bookDto;
+        BookDtoWithTotalElements bookDtoWithTotalElements = new BookDtoWithTotalElements();
+        bookDtoWithTotalElements.setBooks(books);
+        bookDtoWithTotalElements.setBookCount(56);
+        bookDtoWithTotalElements.setBookPages(12);
+        return bookDtoWithTotalElements;
     }
-    public BookDto getBooksByGenre(String genre){
+    public BookDtoWithTotalElements getBooksByGenre(String genre){
         Book book1 = createBook(9);
         Book book2 = createBook(10);
         Book book3 = createBook(11);
@@ -110,11 +108,11 @@ public class BookServiceTest {
         books.add(book2);
         books.add(book3);
         books.add(book4);
-        BookDto bookDto = new BookDto();
-        bookDto.setBooks(books);
-        bookDto.setBookCount(56);
-        bookDto.setBookPages(12);
-        return bookDto;
+        BookDtoWithTotalElements bookDtoWithTotalElements = new BookDtoWithTotalElements();
+        bookDtoWithTotalElements.setBooks(books);
+        bookDtoWithTotalElements.setBookCount(56);
+        bookDtoWithTotalElements.setBookPages(12);
+        return bookDtoWithTotalElements;
     }
 
 

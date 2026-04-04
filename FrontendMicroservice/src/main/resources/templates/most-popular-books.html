@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Most Popular Books - BookLibrary</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        /* Стилі для сторінки популярних книг */
+        .special-category {
+            font-weight: 600;
+            color: #e67e22 !important;
+        }
+
+        .special-category:hover {
+            color: #d35400 !important;
+            background-color: #fff3e0;
+        }
+
+        .special-category .material-icons {
+            font-size: 16px;
+            margin-right: 4px;
+            vertical-align: middle;
+        }
+
+        .special-category.active {
+            background-color: #fff3e0;
+            border-left: 3px solid #e67e22;
+            padding-left: 1rem;
+        }
+
+        .results-count {
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+<!-- Header -->
+<div th:replace="~{layout/header :: header}"></div>
+
+<!-- Main Content -->
+<div class="container">
+    <!-- Categories Sidebar -->
+    <aside class="sidebar">
+        <h3>Categories</h3>
+
+        <ul class="categories-list" th:if="${categories != null and !categories.isEmpty()}">
+            <!-- All Books -->
+            <li>
+                <a th:href="@{/catalog(page=0, sortBy=${sortBy != null ? sortBy : 'bookAddedAt'}, sortDir=${sortDir != null ? sortDir : 'desc'})}"
+                   th:class="${selectedGenre == null ? 'active' : ''}">
+                    All Books
+                </a>
+            </li>
+
+            <!-- Most Popular Books - активна сторінка -->
+            <li>
+                <a href="/catalog/most-popular-books"
+                   class="special-category active">
+                    <span class="material-icons">trending_up</span> Most Popular Books
+                </a>
+            </li>
+
+            <!-- Upcoming Books -->
+            <li>
+                <a href="/catalog/upcoming-books"
+                   class="special-category"
+                   th:classappend="${currentPage == 'upcoming' ? 'active' : ''}">
+                    <span class="material-icons">upcoming</span> Upcoming Books
+                </a>
+            </li>
+
+            <!-- Роздільник перед жанрами -->
+            <li class="category-divider"></li>
+
+            <!-- Жанри -->
+            <li th:each="category : ${categories}">
+                <a th:href="@{/catalog(genre=${category.name}, page=0, sortBy=${sortBy != null ? sortBy : 'bookAddedAt'}, sortDir=${sortDir != null ? sortDir : 'desc'})}"
+                   th:class="${selectedGenre == category.name ? 'active' : ''}"
+                   th:text="${category.name} + ' (' + ${category.count} + ')'">
+                    Fiction (98)
+                </a>
+            </li>
+        </ul>
+
+        <div th:if="${categories == null or categories.isEmpty()}" class="no-categories">
+            <p>No categories available</p>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+        <!-- Catalog Header -->
+        <div class="catalog-header">
+            <div class="breadcrumbs">
+                <a href="/">Home</a> /
+                <a href="/catalog">Catalog</a> /
+                <span>Most Popular Books</span>
+            </div>
+
+            <div class="catalog-controls">
+                <div class="results-count">
+                    Showing <span th:text="${books != null ? books.size() : 0}">0</span>
+                    of <span th:text="${totalBooks}">0</span> books
+                </div>
+
+                <div class="sort-selector">
+                    <select id="sortSelect" onchange="applySort()">
+                        <option value="bookAddedAt,desc" th:selected="${sortBy == 'bookAddedAt' and sortDir == 'desc'}">Newest First</option>
+                        <option value="bookAddedAt,asc" th:selected="${sortBy == 'bookAddedAt' and sortDir == 'asc'}">Oldest First</option>
+                        <option value="bookName,asc" th:selected="${sortBy == 'bookName' and sortDir == 'asc'}">Title A-Z</option>
+                        <option value="bookName,desc" th:selected="${sortBy == 'bookName' and sortDir == 'desc'}">Title Z-A</option>
+                        <option value="bookAuthor,asc" th:selected="${sortBy == 'bookAuthor' and sortDir == 'asc'}">Author A-Z</option>
+                        <option value="bookAuthor,desc" th:selected="${sortBy == 'bookAuthor' and sortDir == 'desc'}">Author Z-A</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Error Message -->
+        <div class="error-message" th:if="${error}" th:text="${error}">
+            Error loading catalog
+        </div>
+
+        <!-- Books Grid -->
+        <div class="books-section">
+            <div class="books-grid" id="booksGrid">
+                <div class="book-card" th:each="book : ${books}">
+                    <div class="book-cover">
+                        <img th:if="${book.bookImage != null and !book.bookImage.isEmpty()}"
+                             th:src="${book.bookImage}"
+                             th:alt="${book.bookName}"
+                             class="book-image"/>
+                        <div th:unless="${book.bookImage != null and !book.bookImage.isEmpty()}"
+                             class="no-image-placeholder">
+                            <span class="material-icons">book</span>
+                        </div>
+                    </div>
+                    <div class="book-info">
+                        <h3 class="book-title" th:text="${book.bookName}">Book Title</h3>
+                        <p class="book-author" th:text="${book.bookAuthor}">Author Name</p>
+                        <p class="book-year" th:text="${book.bookYear}">2024</p>
+                        <p class="book-genre" th:text="${book.bookGenre}">Fiction</p>
+                        <a th:href="@{'/books/' + ${book.bookId}}" class="btn-details">Details</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Empty State -->
+            <div class="empty-state" th:if="${books.empty}">
+                <span class="material-icons empty-icon">menu_book</span>
+                <h3>No books found</h3>
+                <p>Check back later for popular books</p>
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination-section" th:if="${totalPages > 1}">
+            <div class="pagination-info">
+                Showing page <span th:text="${currentPage + 1}">1</span>
+                of <span th:text="${totalPages}">10</span>
+                (<span th:text="${totalBooks}">98</span> books total)
+            </div>
+
+            <div class="pagination">
+                <!-- Previous button -->
+                <a th:if="${currentPage > 0}"
+                   th:href="@{/catalog/most-popular-books(page=${currentPage - 1}, size=${size}, sortBy=${sortBy != null ? sortBy : 'bookAddedAt'}, sortDir=${sortDir != null ? sortDir : 'desc'})}"
+                   class="page-link prev">
+                    <span class="material-icons">chevron_left</span>
+                </a>
+                <span th:unless="${currentPage > 0}" class="page-link disabled">
+                    <span class="material-icons">chevron_left</span>
+                </span>
+
+                <!-- Page numbers -->
+                <th:block th:each="i : ${#numbers.sequence(0, totalPages - 1)}">
+                    <th:block th:if="${i >= currentPage - 2 and i <= currentPage + 2}">
+                        <a th:if="${i == currentPage}" class="page-link active"
+                           th:text="${i + 1}">1</a>
+                        <a th:unless="${i == currentPage}"
+                           th:href="@{/catalog/most-popular-books(page=${i}, size=${size}, sortBy=${sortBy != null ? sortBy : 'bookAddedAt'}, sortDir=${sortDir != null ? sortDir : 'desc'})}"
+                           class="page-link" th:text="${i + 1}">2</a>
+                    </th:block>
+                </th:block>
+
+                <!-- Next button -->
+                <a th:if="${currentPage < totalPages - 1}"
+                   th:href="@{/catalog/most-popular-books(page=${currentPage + 1}, size=${size}, sortBy=${sortBy != null ? sortBy : 'bookAddedAt'}, sortDir=${sortDir != null ? sortDir : 'desc'})}"
+                   class="page-link next">
+                    <span class="material-icons">chevron_right</span>
+                </a>
+                <span th:unless="${currentPage < totalPages - 1}" class="page-link disabled">
+                    <span class="material-icons">chevron_right</span>
+                </span>
+            </div>
+        </div>
+
+        <!-- Quick Links and Contact -->
+        <div class="info-section">
+            <div class="quick-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">Borrowing Rules</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Opening Hours</a></li>
+                    <li><a href="#">Membership</a></li>
+                </ul>
+            </div>
+
+            <div class="contact-info">
+                <h3>Contact</h3>
+                <ul>
+                    <li><span class="material-icons">email</span> library@mail.com</li>
+                    <li><span class="material-icons">phone</span> (044) 123-4567</li>
+                    <li><span class="material-icons">location_on</span> Kyiv, Book St. 1</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- Footer -->
+<div th:replace="~{layout/footer :: footer}"></div>
+
+<!-- JavaScript -->
+<script>
+    function applySort() {
+        const select = document.getElementById('sortSelect');
+        const [sortBy, sortDir] = select.value.split(',');
+        const url = new URL(window.location.href);
+        url.searchParams.set('sortBy', sortBy);
+        url.searchParams.set('sortDir', sortDir);
+        url.searchParams.set('page', '0');
+        window.location.href = url.toString();
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // Підсвічуємо активний пункт меню
+        const navLinks = document.querySelectorAll('.main-nav a');
+        navLinks.forEach(link => {
+            if (link.getAttribute('href') === '/catalog/most-popular-books') {
+                link.classList.add('active');
+            }
+        });
+    });
+</script>
+</body>
+</html>

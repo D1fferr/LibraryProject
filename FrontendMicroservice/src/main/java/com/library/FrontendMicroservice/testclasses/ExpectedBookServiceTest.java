@@ -1,8 +1,6 @@
 package com.library.FrontendMicroservice.testclasses;
 
-import com.library.FrontendMicroservice.dto.ExpectedBookDto;
-import com.library.FrontendMicroservice.exceptions.ExpectedBookException;
-import com.library.FrontendMicroservice.models.Book;
+import com.library.FrontendMicroservice.dto.ExpectedBookDtoWithTotalElements;
 import com.library.FrontendMicroservice.models.ExpectedBook;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +10,7 @@ import java.util.UUID;
 
 @Component
 public class ExpectedBookServiceTest {
-    public ExpectedBookDto getExpectedBooks(){
+    public ExpectedBookDtoWithTotalElements getExpectedBooks(){
         ExpectedBook book1 = createBook(1);
         ExpectedBook book2 = createBook(2);
         ExpectedBook book3 = createBook(3);
@@ -22,11 +20,11 @@ public class ExpectedBookServiceTest {
         books.add(book2);
         books.add(book3);
         books.add(book4);
-        ExpectedBookDto expectedBookDto = new ExpectedBookDto();
-        expectedBookDto.setExpectedBooks(books);
-        expectedBookDto.setBookPage(2);
-        expectedBookDto.setBookCount(10);
-        return expectedBookDto;
+        ExpectedBookDtoWithTotalElements expectedBookDtoWithTotalElements = new ExpectedBookDtoWithTotalElements();
+        expectedBookDtoWithTotalElements.setExpectedBooks(books);
+        expectedBookDtoWithTotalElements.setBookPage(2);
+        expectedBookDtoWithTotalElements.setBookCount(10);
+        return expectedBookDtoWithTotalElements;
     }
     public ExpectedBook getBookById(UUID id){
         return createBook(1);

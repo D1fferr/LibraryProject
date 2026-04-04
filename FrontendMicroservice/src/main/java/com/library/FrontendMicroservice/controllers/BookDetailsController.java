@@ -1,6 +1,6 @@
 package com.library.FrontendMicroservice.controllers;
 
-import com.library.FrontendMicroservice.dto.BookDto;
+import com.library.FrontendMicroservice.dto.BookDtoWithTotalElements;
 import com.library.FrontendMicroservice.models.Book;
 import com.library.FrontendMicroservice.models.ExpectedBook;
 //import com.library.FrontendMicroservice.services.ReserveService;
@@ -8,8 +8,6 @@ import com.library.FrontendMicroservice.models.Reservation;
 import com.library.FrontendMicroservice.services.BookService;
 import com.library.FrontendMicroservice.services.ExpectedBookService;
 import com.library.FrontendMicroservice.services.ReserveService;
-import com.library.FrontendMicroservice.testclasses.BookServiceTest;
-import com.library.FrontendMicroservice.testclasses.ExpectedBookServiceTest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,8 +40,8 @@ public class BookDetailsController {
 
             Book book = bookService.getBookById(bookId);
 
-            BookDto booksByAuthor = bookService.getBooksByAuthor(book.getBookAuthor());
-            BookDto booksByGenre = bookService.getBooksByGenre(book.getBookGenre());
+            BookDtoWithTotalElements booksByAuthor = bookService.getBooksByAuthor(book.getBookAuthor());
+            BookDtoWithTotalElements booksByGenre = bookService.getBooksByGenre(book.getBookGenre());
             List<Book> authorBooks = booksByAuthor.getBooks();
             List<Book> similarBooks = booksByGenre.getBooks();
             if (jwtUtil.isAuthenticated()){
@@ -72,8 +70,8 @@ public class BookDetailsController {
 
             ExpectedBook book = expectedBookService.getBookById(bookId);
 
-            BookDto booksByAuthor = bookService.getBooksByAuthor(book.getExpectedBookAuthor());
-            BookDto booksByGenre = bookService.getBooksByGenre(book.getExpectedBookGenre());
+            BookDtoWithTotalElements booksByAuthor = bookService.getBooksByAuthor(book.getExpectedBookAuthor());
+            BookDtoWithTotalElements booksByGenre = bookService.getBooksByGenre(book.getExpectedBookGenre());
             List<Book> authorBooks = booksByAuthor.getBooks();
             List<Book> similarBooks = booksByGenre.getBooks();
             model.addAttribute("expectedBook", book);

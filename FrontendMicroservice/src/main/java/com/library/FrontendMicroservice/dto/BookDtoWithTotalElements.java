@@ -8,7 +8,7 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor
-public class BookDto {
+public class BookDtoWithTotalElements {
     private List<Book> books;
     private long bookCount;
     private int bookPages;

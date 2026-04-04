@@ -1,16 +1,13 @@
 package com.library.FrontendMicroservice.services;
 
-import com.library.FrontendMicroservice.dto.ExpectedBookDto;
+import com.library.FrontendMicroservice.dto.ExpectedBookDtoWithTotalElements;
 import com.library.FrontendMicroservice.exceptions.BookException;
 import com.library.FrontendMicroservice.exceptions.ExpectedBookException;
-import com.library.FrontendMicroservice.models.Book;
 import com.library.FrontendMicroservice.models.ExpectedBook;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -22,11 +19,11 @@ public class ExpectedBookService {
     }
 
 
-    public ExpectedBookDto getExpectedBooks(){
+    public ExpectedBookDtoWithTotalElements getExpectedBooks(){
         try {
-            ExpectedBookDto books = restTemplate.getForObject(
+            ExpectedBookDtoWithTotalElements books = restTemplate.getForObject(
                     "http://localhost:8080/api/expected-book/get-all",
-                    ExpectedBookDto.class
+                    ExpectedBookDtoWithTotalElements.class
             );
             return books;
         }catch (Exception e){
@@ -36,7 +33,7 @@ public class ExpectedBookService {
     public ExpectedBook getBookById(UUID id){
         try {
 
-            String url = "http://localhost:8080/api/eexpected-book/" + id;
+            String url = "http://localhost:8080/api/expected-book/" + id;
             return restTemplate.getForObject(
                     url,
                     ExpectedBook.class

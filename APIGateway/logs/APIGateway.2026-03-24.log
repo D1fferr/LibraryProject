@@ -1,0 +1,38 @@
+2026-03-24 15:17:15 | APIGateway | INFO  | o.h.validator.internal.util.Version | HV000001: Hibernate Validator 8.0.3.Final
+2026-03-24 15:17:15 | APIGateway | INFO  | l.c.apigateway.ApiGatewayApplication | Starting ApiGatewayApplication using Java 22 with PID 4896 (D:\Library\APIGateway\target\classes started by vasia in D:\Library\APIGateway)
+2026-03-24 15:17:15 | APIGateway | INFO  | l.c.apigateway.ApiGatewayApplication | No active profile set, falling back to 1 default profile: "default"
+2026-03-24 15:17:16 | APIGateway | INFO  | o.s.cloud.context.scope.GenericScope | BeanFactory id=75412cec-13ab-32f1-87e6-021d8240753f
+2026-03-24 15:17:17 | APIGateway | WARN  | o.s.c.g.c.GatewayClassPathWarningAutoConfiguration | 
+
+**********************************************************
+
+The artifact spring-cloud-gateway-server is deprecated. It will be removed in the next major release. Please add spring-cloud-gateway-server-webflux dependency.
+
+**********************************************************
+
+
+2026-03-24 15:17:17 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [After]
+2026-03-24 15:17:17 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Before]
+2026-03-24 15:17:17 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Between]
+2026-03-24 15:17:17 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Cookie]
+2026-03-24 15:17:17 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Header]
+2026-03-24 15:17:17 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Host]
+2026-03-24 15:17:17 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Method]
+2026-03-24 15:17:17 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Path]
+2026-03-24 15:17:17 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Query]
+2026-03-24 15:17:17 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [ReadBody]
+2026-03-24 15:17:17 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [RemoteAddr]
+2026-03-24 15:17:17 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [XForwardedRemoteAddr]
+2026-03-24 15:17:17 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Weight]
+2026-03-24 15:17:17 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [CloudFoundryRouteService]
+2026-03-24 15:17:17 | APIGateway | WARN  | o.s.c.g.s.w.s.StarterDeprecatedAutoConfiguration | 
+
+**********************************************************
+
+spring-cloud-starter-gateway is deprecated. It will be removed in the next major release. Please use spring-cloud-starter-gateway-server-webflux instead.
+
+**********************************************************
+
+
+2026-03-24 15:17:17 | APIGateway | INFO  | o.s.b.w.e.netty.NettyWebServer | Netty started on port 8080 (http)
+2026-03-24 15:17:17 | APIGateway | INFO  | l.c.apigateway.ApiGatewayApplication | Started ApiGatewayApplication in 3.333 seconds (process running for 4.213)

@@ -50,6 +50,7 @@ public class LoginController {
 
 
             if (redirect != null && !redirect.isEmpty() && !redirect.equals("null")) {
+                System.out.println("redirect: " + redirect);
                 return "redirect:" + redirect;
             }
 

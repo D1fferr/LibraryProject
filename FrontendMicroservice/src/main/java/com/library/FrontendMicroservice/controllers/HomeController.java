@@ -1,13 +1,11 @@
 package com.library.FrontendMicroservice.controllers;
 
-import com.library.FrontendMicroservice.dto.BookDto;
-import com.library.FrontendMicroservice.dto.ExpectedBookDto;
+import com.library.FrontendMicroservice.dto.BookDtoWithTotalElements;
+import com.library.FrontendMicroservice.dto.ExpectedBookDtoWithTotalElements;
 import com.library.FrontendMicroservice.models.Book;
 import com.library.FrontendMicroservice.models.ExpectedBook;
 import com.library.FrontendMicroservice.services.BookService;
 import com.library.FrontendMicroservice.services.ExpectedBookService;
-import com.library.FrontendMicroservice.testclasses.BookServiceTest;
-import com.library.FrontendMicroservice.testclasses.ExpectedBookServiceTest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,15 +29,15 @@ public class HomeController {
             Model model) {
         try {
 
-                    BookDto popularBooksDto = bookService.getMostPopularBooks();
+                    BookDtoWithTotalElements popularBooksDto = bookService.getMostPopularBooks();
                     List<Book> popularBooks = popularBooksDto.getBooks();
                     model.addAttribute("popularBooks", popularBooks);
 
-                    BookDto newArrivalsDto = bookService.getRecentlyAddedAt();
+                    BookDtoWithTotalElements newArrivalsDto = bookService.getRecentlyAddedAt();
                     List<Book> newArrivals = newArrivalsDto.getBooks();
                     model.addAttribute("newArrivals", newArrivals);
 
-                    ExpectedBookDto upcomingBooksDto = expectedBookService.getExpectedBooks();
+                    ExpectedBookDtoWithTotalElements upcomingBooksDto = expectedBookService.getExpectedBooks();
                     List<ExpectedBook> upcomingBooks = upcomingBooksDto.getExpectedBooks();
                     model.addAttribute("upcomingBooks", upcomingBooks);
 

@@ -38,6 +38,7 @@ public class AuthUserService {
         auth.setRole("USER");
         auth.setPassword(passwordEncoder.encode(auth.getPassword()));
         authUserRepository.save(auth);
+        crossServerRequestService.sendUser(userDTO, auth.getId());
         log.info("User saved. ID: '{}'", auth.getId());
         return auth;
     }
