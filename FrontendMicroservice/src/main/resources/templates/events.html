@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events - BookLibrary</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        .events-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 60px 0;
+            text-align: center;
+            color: white;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .events-hero .hero-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+
+        .events-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .events-hero p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .events-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .event-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        .event-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .event-image, .event-image-placeholder {
+            flex-shrink: 0;
+            width: 120px;
+            height: 120px;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: #f0f4ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .event-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .event-image-placeholder .material-icons {
+            font-size: 48px;
+            color: #667eea;
+        }
+
+        .event-content {
+            flex: 1;
+        }
+
+        .event-type {
+            display: inline-block;
+            padding: 4px 12px;
+            background: #e8f0fe;
+            color: #667eea;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .event-date {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+        }
+
+        .event-date .material-icons {
+            font-size: 18px;
+            color: #95a5a6;
+        }
+
+        .event-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .event-body {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .btn-learn-more {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+            transition: gap 0.3s;
+        }
+
+        .btn-learn-more:hover {
+            gap: 10px;
+            text-decoration: underline;
+        }
+
+        .pagination-section {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-top: 20px;
+        }
+
+        .pagination-info {
+            text-align: center;
+            color: #7f8c8d;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+
+        .page-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 36px;
+            height: 36px;
+            padding: 0 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .page-link.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .page-link.disabled {
+            color: #bdc3c7;
+            pointer-events: none;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            background: white;
+            border-radius: 8px;
+        }
+
+        .error-message {
+            background: #fee;
+            color: #c0392b;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .event-card {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .event-image, .event-image-placeholder {
+                width: 100%;
+                max-width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div th:replace="~{layout/header :: header}"></div>
+
+<div class="container">
+    <main class="main-content">
+        <div class="events-hero">
+            <span class="material-icons hero-icon">event</span>
+            <h1>Upcoming Events</h1>
+            <p>Join us for exciting events and activities</p>
+        </div>
+
+        <div class="error-message" th:if="${error}" th:text="${error}">
+            Error loading events
+        </div>
+
+        <!-- Контейнер списку (починається ТУТ) -->
+        <div class="events-list" th:if="${events != null and !events.isEmpty()}">
+
+            <!-- Цикл карток -->
+            <div class="event-card" th:each="event : ${events}">
+
+                <!-- Блок фото -->
+                <div class="event-image" th:if="${event.photo != null and !event.photo.isEmpty()}">
+                    <img th:src="${event.photo}" th:alt="${event.name}"
+                         onerror="this.onerror=null; this.parentElement.innerHTML='<span class=\"material-icons\">event</span>';">
+                </div>
+                <div class="event-image-placeholder" th:unless="${event.photo != null and !event.photo.isEmpty()}">
+                    <span class="material-icons">event</span>
+                </div>
+
+                <!-- Блок контенту -->
+                <div class="event-content">
+                    <span class="event-type" th:text="${event.type}">Workshop</span>
+                    <div class="event-date">
+                        <span class="material-icons">calendar_today</span>
+                        <span th:text="${#temporals.format(event.date, 'MMMM d, yyyy')}">April 15, 2026</span>
+                    </div>
+                    <h3 class="event-name" th:text="${event.name}">Event Name</h3>
+                    <p class="event-body" th:text="${event.body}">Event description...</p>
+                    <a th:href="@{'/events/' + ${event.id}}" class="btn-learn-more">
+                        Learn More <span class="material-icons">arrow_forward</span>
+                    </a>
+                </div>
+            </div> <!-- Кінець event-card -->
+
+        </div> <!-- Кінець events-list (тепер закриває ВСІ картки циклу) -->
+
+        <div class="empty-state" th:if="${events == null or events.isEmpty()}">
+            <span class="material-icons" style="font-size: 64px; color: #bdc3c7;">event_busy</span>
+            <h3>No events found</h3>
+            <p>Check back later for upcoming events</p>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination-section" th:if="${totalPages > 1}">
+            <div class="pagination-info">
+                Showing page <span th:text="${currentPage + 1}">1</span>
+                of <span th:text="${totalPages}">1</span>
+            </div>
+            <div class="pagination">
+                <a th:if="${currentPage > 0}" th:href="@{/events(page=${currentPage - 1})}" class="page-link">‹</a>
+                <span th:unless="${currentPage > 0}" class="page-link disabled">‹</span>
+
+                <th:block th:each="i : ${#numbers.sequence(0, totalPages - 1)}">
+                    <a th:if="${i == currentPage}" class="page-link active" th:text="${i + 1}">1</a>
+                    <a th:unless="${i == currentPage}" th:href="@{/events(page=${i})}" class="page-link" th:text="${i + 1}">2</a>
+                </th:block>
+
+                <a th:if="${currentPage < totalPages - 1}" th:href="@{/events(page=${currentPage + 1})}" class="page-link">›</a>
+                <span th:unless="${currentPage < totalPages - 1}" class="page-link disabled">›</span>
+            </div>
+        </div>
+    </main>
+</div>
+
+<div th:replace="~{layout/footer :: footer}"></div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const navLinks = document.querySelectorAll('.main-nav a');
+        navLinks.forEach(link => {
+            if (link.getAttribute('href') === '/events') {
+                link.classList.add('active');
+            }
+        });
+    });
+</script>
+</body>
+</html>

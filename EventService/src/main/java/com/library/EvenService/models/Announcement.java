@@ -36,8 +36,6 @@ public class Announcement {
     private LocalDate date;
     @Column(name = "announcement_photo")
     private String photo;
-    @Column(name = "add_event")
-    private Boolean addEvent;
     @Column(name = "announcement_created_date")
     private LocalDate createdDate;
 

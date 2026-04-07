@@ -2,6 +2,8 @@ package com.library.EvenService.services;
 
 
 import com.library.EvenService.dto.NewsDTO;
+import com.library.EvenService.dto.NewsDTOForGetRequest;
+import com.library.EvenService.dto.NewsDtoWithTotalElements;
 import com.library.EvenService.models.News;
 import com.library.EvenService.repositories.NewsRepository;
 import com.library.EvenService.utill.NewsNotFoundException;
@@ -29,17 +31,21 @@ public class NewsService {
     private final ImageService imageService;
 
     @Transactional(readOnly = true)
-    public List<NewsDTO> findAll(Pageable pageable){
+    public NewsDtoWithTotalElements findAll(Pageable pageable){
         Page<News> allNews = newsRepository.findAll(pageable);
         if (allNews.isEmpty()){
             log.warn("No news found");
             throw new NewsNotFoundException("No news found. ");
         }
         log.info("All news found");
-        return allNews.stream().map(this::toDTO).toList();
+        NewsDtoWithTotalElements dto = new NewsDtoWithTotalElements();
+        dto.setNews(allNews.stream().map(this::toDTO).toList());
+        dto.setNewsPages(allNews.getTotalPages());
+        dto.setNewsCount(allNews.getTotalElements());
+        return dto;
     }
     @Transactional(readOnly = true)
-    public NewsDTO findOneById(UUID id){
+    public NewsDTOForGetRequest findOneById(UUID id){
         Optional<News> optionalNews = newsRepository.findById(id);
         if (optionalNews.isEmpty()){
             log.warn("The news not found. ID: '{}'", id);
@@ -62,17 +68,17 @@ public class NewsService {
         log.info("The news saved. ID: '{}'", news.getId());
     }
     @Transactional
-    public void update(UUID id, NewsDTO newsDTO, MultipartFile image){
+    public NewsDTOForGetRequest update(UUID id, NewsDTO newsDTO, MultipartFile image) {
         Optional<News> optionalNews = newsRepository.findById(id);
-        if (optionalNews.isEmpty()){
+        if (optionalNews.isEmpty()) {
             log.warn("The news for update not found. ID: '{}'", id);
             throw new NewsNotFoundException("News not found");
         }
         log.info("Starting of updating the news. ID: '{}'", id);
         News news = optionalNews.get();
-        if (newsDTO.getBody()!=null)
+        if (newsDTO.getBody() != null)
             news.setBody(newsDTO.getBody());
-        if (newsDTO.getName()!=null)
+        if (newsDTO.getName() != null)
             news.setName(newsDTO.getName());
         if (image != null && !image.isEmpty()) {
             log.info("Processing cover image for news ID: {}", news.getId());
@@ -81,6 +87,8 @@ public class NewsService {
         }
         newsRepository.save(news);
         log.info("The news updated. ID: '{}'", id);
+        return toDTO(news);
+
     }
     @Transactional
     public void delete(UUID id){
@@ -94,8 +102,8 @@ public class NewsService {
         log.info("Mapping newsDTO to entity. Name: '{}'", newsDTO.getName());
         return modelMapper.map(newsDTO, News.class);
     }
-    public NewsDTO toDTO(News news){
+    public NewsDTOForGetRequest toDTO(News news){
         log.info("Mapping news to dto. ID: '{}'", news.getId());
-        return modelMapper.map(news, NewsDTO.class);
+        return modelMapper.map(news, NewsDTOForGetRequest.class);
     }
 }

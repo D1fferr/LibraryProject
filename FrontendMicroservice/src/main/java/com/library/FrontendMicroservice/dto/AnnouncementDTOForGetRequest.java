@@ -1,17 +1,16 @@
-package com.library.EvenService.dto;
+package com.library.FrontendMicroservice.dto;
 
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.Size;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.time.LocalDate;
-
-@Getter
-@Setter
+import java.util.UUID;
+@Data
 @NoArgsConstructor
-public class AnnouncementDTO {
+public class AnnouncementDTOForGetRequest {
+    private UUID id;
     @Size(min = 1, max = 1000, message = "The announcement must be between 1 and 1000 characters long.")
     private String body;
     @Size(min = 1, max = 100, message = "Announcement name must be between 1 and 100 characters long. ")
@@ -20,4 +19,5 @@ public class AnnouncementDTO {
     private String type;
     @FutureOrPresent(message = "The announcement date cannot be in the past.")
     private LocalDate date;
+    private String photo;
 }

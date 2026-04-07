@@ -14,7 +14,7 @@ import java.util.UUID;
 @Component
 public class JWTProvider {
 
-    @Value("${jwt_secret}")
+    @Value("${jwt.secret}")
     private String jwtSecretKey;
     private final Date expirationDate = Date.from(ZonedDateTime.now().plusMinutes(120).toInstant());
 

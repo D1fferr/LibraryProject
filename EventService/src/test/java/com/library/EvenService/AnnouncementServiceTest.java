@@ -47,7 +47,6 @@ public class AnnouncementServiceTest {
         dto.setDate(LocalDate.now());
         dto.setBody("Test");
         dto.setName("Test");
-        dto.setAddEvent(Boolean.TRUE);
         dto.setType("Test");
 
         Announcement announcement = new Announcement();
@@ -66,7 +65,6 @@ public class AnnouncementServiceTest {
         dto.setDate(LocalDate.now());
         dto.setBody("Test");
         dto.setName("Test");
-        dto.setAddEvent(Boolean.TRUE);
         dto.setType("Test");
 
         when(modelMapper.map(dto, Announcement.class)).thenReturn(new Announcement());
@@ -83,7 +81,6 @@ public class AnnouncementServiceTest {
         dto.setDate(LocalDate.now());
         dto.setBody("Test");
         dto.setName("Test");
-        dto.setAddEvent(Boolean.TRUE);
         dto.setType("Test");
 
         Announcement announcement = new Announcement();
@@ -105,7 +102,6 @@ public class AnnouncementServiceTest {
         dto.setDate(LocalDate.now());
         dto.setBody("Test");
         dto.setName("Test");
-        dto.setAddEvent(Boolean.TRUE);
         dto.setType("Test");
 
         Announcement announcement = new Announcement();
@@ -127,7 +123,6 @@ public class AnnouncementServiceTest {
         dto.setDate(LocalDate.now());
         dto.setBody("Test");
         dto.setName("Test");
-        dto.setAddEvent(Boolean.TRUE);
         dto.setType("Test");
 
 
@@ -146,7 +141,6 @@ public class AnnouncementServiceTest {
         dto.setDate(LocalDate.now());
         dto.setBody("Test");
         dto.setName("Test");
-        dto.setAddEvent(Boolean.TRUE);
         dto.setType("Test");
 
         Announcement announcement = new Announcement();

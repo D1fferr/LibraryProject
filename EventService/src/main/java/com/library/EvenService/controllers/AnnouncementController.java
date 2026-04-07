@@ -1,6 +1,8 @@
 package com.library.EvenService.controllers;
 
 import com.library.EvenService.dto.AnnouncementDTO;
+import com.library.EvenService.dto.AnnouncementDTOForGetRequest;
+import com.library.EvenService.dto.AnnouncementDTOWithTotalElements;
 import com.library.EvenService.services.AnnouncementService;
 import com.library.EvenService.utill.NewsNotCreatedException;
 import jakarta.validation.Valid;
@@ -27,16 +29,17 @@ public class AnnouncementController {
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<AnnouncementDTO> getOneAnnouncement(@PathVariable UUID id){
+    public ResponseEntity<AnnouncementDTOForGetRequest> getOneAnnouncement(@PathVariable UUID id){
         return new ResponseEntity<>(announcementService.findOneById(id), HttpStatus.OK);
     }
 
     @GetMapping("/get-all")
-    public ResponseEntity<List<AnnouncementDTO>> getAllAnnouncement(
+    public ResponseEntity<AnnouncementDTOWithTotalElements> getAllAnnouncement(
             @RequestParam(value = "page", defaultValue = "0") Integer page,
             @RequestParam(value = "announcementPerPage", defaultValue = "5") Integer announcementPerPage){
-        return new ResponseEntity<>(announcementService.findAll(
-                PageRequest.of(page, announcementPerPage)), HttpStatus.OK);
+
+        AnnouncementDTOWithTotalElements dto = announcementService.findAll(PageRequest.of(page, announcementPerPage));
+        return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
     @PostMapping("/auth/create")
@@ -49,14 +52,14 @@ public class AnnouncementController {
     }
 
     @PatchMapping("/auth/change/{id}")
-    public ResponseEntity<AnnouncementDTO> changeAnnouncement(
+    public ResponseEntity<AnnouncementDTOForGetRequest> changeAnnouncement(
             @PathVariable UUID id,
             @RequestPart("announcementData") @Valid AnnouncementDTO announcementDTO,
             @RequestPart(value = "coverImage", required = false) MultipartFile image,
             BindingResult bindingResult){
         checkAnnouncementErrors(bindingResult);
-        announcementService.update(id, announcementDTO, image);
-        return new ResponseEntity<>(announcementDTO, HttpStatus.OK);
+        AnnouncementDTOForGetRequest dto = announcementService.update(id, announcementDTO, image);
+        return new ResponseEntity<>(dto, HttpStatus.OK);
     }
     @DeleteMapping("/auth/delete/{id}")
     public ResponseEntity<HttpStatus> deleteAnnouncement(@PathVariable UUID id){

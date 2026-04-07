@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - BookLibrary</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        /* Додаткові стилі для сторінки About */
+        .about-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 60px 0;
+            text-align: center;
+            color: white;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .about-hero .hero-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+
+        .about-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .about-hero p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .mission-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .mission-card, .offer-card {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .mission-card h2, .offer-card h2, .history-section h2 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .mission-card .material-icons, .offer-card .material-icons {
+            color: #667eea;
+            font-size: 28px;
+        }
+
+        .mission-card p {
+            color: #555;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        .offer-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .offer-list li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 0;
+            color: #555;
+        }
+
+        .offer-list .material-icons {
+            color: #27ae60;
+            font-size: 20px;
+        }
+
+        .history-section {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 40px;
+        }
+
+        .history-section h2 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .history-section h2 .material-icons {
+            color: #667eea;
+            font-size: 28px;
+        }
+
+        .history-text {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 10px 0;
+            border-left: 3px solid #667eea;
+            padding-left: 20px;
+        }
+
+        .timeline-year {
+            font-weight: bold;
+            color: #667eea;
+            min-width: 80px;
+            font-size: 1.1rem;
+        }
+
+        .timeline-text {
+            color: #555;
+        }
+
+        .contact-section {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+
+        .contact-section h2 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .contact-section h2 .material-icons {
+            color: #667eea;
+            font-size: 28px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: #555;
+            font-size: 1rem;
+        }
+
+        .contact-item .material-icons {
+            color: #667eea;
+            font-size: 24px;
+        }
+
+        @media (max-width: 768px) {
+            .mission-section {
+                grid-template-columns: 1fr;
+            }
+
+            .about-hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .about-hero p {
+                font-size: 1rem;
+                padding: 0 20px;
+            }
+
+            .timeline-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- Header -->
+<div th:replace="~{layout/header :: header}"></div>
+
+<!-- Main Content -->
+<div class="container">
+    <main class="main-content">
+        <!-- About Hero Section -->
+        <div class="about-hero">
+            <span class="material-icons hero-icon">menu_book</span>
+            <h1>Welcome to BookLibrary</h1>
+            <p>Your gateway to unlimited knowledge and imagination</p>
+        </div>
+
+        <!-- Our Mission & What We Offer -->
+        <div class="mission-section">
+            <!-- Our Mission -->
+            <div class="mission-card">
+                <h2>
+                    <span class="material-icons">stars</span>
+                    Our Mission
+                </h2>
+                <p>
+                    To provide free and accessible library services to everyone in the community.
+                    We believe that knowledge should be available to all, regardless of background
+                    or circumstance. Our goal is to inspire lifelong learning and a love for reading.
+                </p>
+            </div>
+
+            <!-- What We Offer -->
+            <div class="offer-card">
+                <h2>
+                    <span class="material-icons">verified</span>
+                    What We Offer
+                </h2>
+                <ul class="offer-list">
+                    <li><span class="material-icons">check_circle</span> 10,000+ books</li>
+                    <li><span class="material-icons">check_circle</span> E-books & Audiobooks</li>
+                    <li><span class="material-icons">check_circle</span> Reading clubs</li>
+                    <li><span class="material-icons">check_circle</span> Events & workshops</li>
+                    <li><span class="material-icons">check_circle</span> Digital catalog</li>
+                    <li><span class="material-icons">check_circle</span> 24/7 online access</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Our History Section -->
+        <div class="history-section">
+            <h2>
+                <span class="material-icons">history</span>
+                Our History
+            </h2>
+            <div class="history-text">
+                <p>
+                    Founded in 2024, BookLibrary started as a small community project with a big dream -
+                    to make reading accessible to all. Today, we serve thousands of readers with an
+                    ever-growing collection of books across all genres.
+                </p>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <span class="timeline-year">📅 2024</span>
+                    <span class="timeline-text">Launch of BookLibrary</span>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-year">📅 2025</span>
+                    <span class="timeline-text">Reached 10,000 books</span>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-year">📅 2026</span>
+                    <span class="timeline-text">Launched digital platform</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Section -->
+        <div class="contact-section">
+            <h2>
+                <span class="material-icons">contact_mail</span>
+                Contact Us
+            </h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span class="material-icons">email</span>
+                    <span>library@mail.com</span>
+                </div>
+                <div class="contact-item">
+                    <span class="material-icons">phone</span>
+                    <span>(044) 123-4567</span>
+                </div>
+                <div class="contact-item">
+                    <span class="material-icons">location_on</span>
+                    <span>Kyiv, Book St. 1</span>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- Footer -->
+<div th:replace="~{layout/footer :: footer}"></div>
+
+<script>
+    // Підсвічуємо активний пункт меню
+    document.addEventListener('DOMContentLoaded', function() {
+        const navLinks = document.querySelectorAll('.main-nav a');
+        navLinks.forEach(link => {
+            if (link.getAttribute('href') === '/about') {
+                link.classList.add('active');
+            }
+        });
+    });
+</script>
+</body>
+</html>

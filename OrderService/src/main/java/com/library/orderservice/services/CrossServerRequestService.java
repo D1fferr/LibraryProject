@@ -20,13 +20,13 @@ public class CrossServerRequestService {
     public void checkAvailableDate(ReservationDTO reservationDTO){
         int booksAvailable = booksAvailable(reservationDTO.getReservationBook());
         log.info("Checking available date for user: '{}'", reservationDTO.getReservationUser());
-        if (reservationService.findReservationByBookId(reservationDTO.getReservationDate(), reservationDTO.getReservationBook()).size()>booksAvailable){
+        if (reservationService.findReservationByBookId(reservationDTO.getReservationDate(), reservationDTO.getReservationBook())>booksAvailable){
             log.warn("Reservations for the selected date are not available for user: '{}'", reservationDTO.getReservationUser());
             throw new ReservationNotAllowedException("Reservations for the selected date are not available.");
         }
         log.info("There is available date for user: '{}'", reservationDTO.getReservationUser());
         log.info("Checking available items for user: '{}'", reservationDTO.getReservationUser());
-        if (reservationService.findReservationUserId(reservationDTO.getReservationDate(), reservationDTO.getReservationUser()).size()>5){
+        if (reservationService.findReservationUserId(reservationDTO.getReservationDate(), reservationDTO.getReservationUser())>5){
             log.warn("You cannot reserve more than 5 books in 1 day. User: '{}'", reservationDTO.getReservationUser());
             throw new ReservationNotAllowedException("You cannot reserve more than 5 books in 1 day. ");
         }

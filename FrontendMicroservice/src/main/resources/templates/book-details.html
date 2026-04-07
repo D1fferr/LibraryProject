@@ -88,6 +88,11 @@
         .btn-confirm:hover {
             background-color: #2ecc71;
         }
+
+        /* Стиль для неактивних днів (опціонально) */
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -143,7 +148,6 @@
                 </div>
 
                 <div class="book-actions">
-                    <!-- Використовуємо data-* атрибут для безпечної передачі даних -->
                     <button class="btn-reserve" th:if="${book.bookItems > 0}"
                             th:data-book-id="${book.bookId}"
                             onclick="openReservationModal(this)">
@@ -289,6 +293,39 @@
         return dates;
     }
 
+    // Функція для блокування вихідних (Варіант 1)
+    function disableWeekends() {
+        const dateInput = document.getElementById('reservationDate');
+
+        // Видаляємо попередній обробник, якщо є
+        dateInput.removeEventListener('change', validateWeekend);
+
+        // Додаємо новий обробник
+        dateInput.addEventListener('change', validateWeekend);
+    }
+
+    function validateWeekend() {
+        const dateInput = document.getElementById('reservationDate');
+        const selectedDate = new Date(dateInput.value);
+        const dayOfWeek = selectedDate.getDay();
+
+        // Якщо вибрано суботу (6) або неділю (0)
+        if (dayOfWeek === 0 || dayOfWeek === 6) {
+            alert('Weekends are not available for reservation. Please select a business day.');
+
+            // Знаходимо наступний робочий день
+            const businessDays = getNextBusinessDays(5);
+            const formatDate = (date) => {
+                const year = date.getFullYear();
+                const month = String(date.getMonth() + 1).padStart(2, '0');
+                const day = String(date.getDate()).padStart(2, '0');
+                return `${year}-${month}-${day}`;
+            };
+
+            dateInput.value = formatDate(businessDays[0]);
+        }
+    }
+
     // Відкриття модального вікна
     function openReservationModal(button) {
         currentBookId = button.getAttribute('data-book-id');
@@ -319,6 +356,9 @@
         dateInput.max = formatDate(maxDate);
         dateInput.value = formatDate(minDate); // встановлюємо першу доступну
 
+        // Активуємо перевірку вихідних
+        disableWeekends();
+
         modal.style.display = 'block';
     }
 
@@ -336,6 +376,14 @@
             return;
         }
 
+        // Додаткова перевірка перед відправкою
+        const selectedDateObj = new Date(selectedDate);
+        const dayOfWeek = selectedDateObj.getDay();
+        if (dayOfWeek === 0 || dayOfWeek === 6) {
+            alert('Weekends are not available for reservation. Please select a business day.');
+            return;
+        }
+
         const userId = getCurrentUserId();
         if (!userId) {
             alert('User not authenticated.');
@@ -344,13 +392,13 @@
         }
 
         const reservationData = {
-            reservationDate: selectedDate, // формат YYYY-MM-DD, бекенд має розпарсити як LocalDate
+            reservationDate: selectedDate,
             reservationBook: currentBookId,
             reservationUser: userId,
-            reservationStatus: 'PENDING' // або інший статус, який очікує бекенд
+            reservationStatus: 'CREATED'
         };
 
-        fetch('/api/reserve', {
+        fetch('/books/reserve', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -361,7 +409,6 @@
                 if (response.ok) {
                     alert('Book reserved successfully!');
                     closeModal();
-                    // Можливо оновити сторінку або змінити статус
                 } else {
                     response.json().then(data => {
                         alert('Failed to reserve: ' + (data.message || 'Please try again.'));

@@ -16,5 +16,4 @@ import java.util.UUID;
 @Repository
 public interface AnnouncementRepository extends JpaRepository<Announcement, UUID> {
 
-    List<Announcement> findAllByAddEvent(Boolean addEvent, Pageable pageable);
 }

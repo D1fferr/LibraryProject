@@ -90,13 +90,13 @@ public class ReservationService {
     }
 
     @Transactional(readOnly = true)
-    public List<ReservationDTO> findReservationByBookId(LocalDate localDate, UUID reservationBook) {
+    public Integer findReservationByBookId(LocalDate localDate, UUID reservationBook) {
         List<Reservation> reservationList = reservationRepository.findReservationByReservationDateAndReservationBook(localDate, reservationBook);
         if (reservationList.isEmpty()) {
             log.warn("No reservations for check available items found");
-            throw new ReservationsNotFoundException("No reservations found");
+            return 0;
         }
-        return reservationList.stream().map(this::toDTO).toList();
+        return reservationList.size();
     }
 
     @Transactional(readOnly = true)
@@ -112,13 +112,13 @@ public class ReservationService {
     }
 
     @Transactional(readOnly = true)
-    public List<ReservationDTO> findReservationUserId(LocalDate localDate, UUID reservationUser) {
+    public Integer findReservationUserId(LocalDate localDate, UUID reservationUser) {
         List<Reservation> reservationList = reservationRepository.findReservationByReservationDateAndReservationBook(localDate, reservationUser);
         if (reservationList.isEmpty()) {
             log.warn("No reservations for check available date found");
-            throw new ReservationsNotFoundException("No reservations found");
+            return 0;
         }
-        return reservationList.stream().map(this::toDTO).toList();
+        return reservationList.size();
     }
 
     @Transactional(readOnly = true)

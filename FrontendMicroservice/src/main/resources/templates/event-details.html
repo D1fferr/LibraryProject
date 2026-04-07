@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${event.name} + ' - BookLibrary'">Event - BookLibrary</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        /* Додаткові стилі для сторінки деталей події */
+        .event-details-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px 0;
+            text-align: center;
+            color: white;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .event-details-hero .hero-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .event-details-hero h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .event-details-hero p {
+            font-size: 1rem;
+            opacity: 0.95;
+        }
+
+        .event-details-section {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 30px;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+
+        .event-image-large {
+            width: 100%;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: #f0f4ff;
+        }
+
+        .event-image-large img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            display: block;
+        }
+
+        .event-image-placeholder-large {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            background: #f0f4ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+        }
+
+        .event-image-placeholder-large .material-icons {
+            font-size: 80px;
+            color: #667eea;
+        }
+
+        .event-info-large {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .event-title-large {
+            font-size: 2rem;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .event-type-badge {
+            display: inline-block;
+            padding: 6px 14px;
+            background: #e8f0fe;
+            color: #667eea;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            width: fit-content;
+        }
+
+        .event-date-large {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #7f8c8d;
+            font-size: 1rem;
+            margin-top: 5px;
+        }
+
+        .event-date-large .material-icons {
+            color: #95a5a6;
+        }
+
+        .event-description-section {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+
+        .event-description-section h2 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .event-description-section h2 .material-icons {
+            color: #667eea;
+        }
+
+        .event-description-content {
+            color: #555;
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        .event-description-content p {
+            margin-bottom: 15px;
+        }
+
+        .event-description-content ul {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+
+        .event-description-content li {
+            margin-bottom: 8px;
+        }
+
+        .error-message {
+            background: #fee;
+            color: #c0392b;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Адаптивність */
+        @media (max-width: 768px) {
+            .event-details-section {
+                grid-template-columns: 1fr;
+            }
+
+            .event-details-hero h1 {
+                font-size: 1.5rem;
+            }
+
+            .event-title-large {
+                font-size: 1.5rem;
+            }
+
+            .event-image-large, .event-image-placeholder-large {
+                max-width: 250px;
+                margin: 0 auto;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- Header -->
+<div th:replace="~{layout/header :: header}"></div>
+
+<!-- Main Content -->
+<div class="container">
+    <main class="main-content">
+        <!-- Breadcrumbs -->
+        <div class="breadcrumbs">
+            <a href="/">Home</a> /
+            <a href="/events">Events</a> /
+            <span th:text="${event.name}">Event Name</span>
+        </div>
+
+        <!-- Error Message -->
+        <div class="error-message" th:if="${error}" th:text="${error}">
+            Error loading event
+        </div>
+
+        <!-- Event Details Section -->
+        <div class="event-details-section" th:if="${event != null}">
+            <!-- Left Column - Photo -->
+            <div th:if="${event.photo != null and !event.photo.isEmpty()}" class="event-image-large">
+                <img th:src="${event.photo}" th:alt="${event.name}"
+                     onerror="this.onerror=null; this.src='/images/default-event.jpg';">
+            </div>
+            <div th:unless="${event.photo != null and !event.photo.isEmpty()}" class="event-image-placeholder-large">
+                <span class="material-icons">event</span>
+            </div>
+
+            <!-- Right Column - Info -->
+            <div class="event-info-large">
+                <h1 class="event-title-large" th:text="${event.name}">Event Name</h1>
+                <span class="event-type-badge" th:text="${event.type}">Workshop</span>
+                <div class="event-date-large">
+                    <span class="material-icons">calendar_today</span>
+                    <span th:text="${#temporals.format(event.date, 'MMMM d, yyyy')}">April 15, 2026</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Event Description Section -->
+        <div class="event-description-section" th:if="${event != null}">
+            <h2>
+                <span class="material-icons">description</span>
+                About This Event
+            </h2>
+            <div class="event-description-content" th:utext="${event.body}">
+                Event description...
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- Footer -->
+<div th:replace="~{layout/footer :: footer}"></div>
+
+<script>
+    // Підсвічуємо активний пункт меню
+    document.addEventListener('DOMContentLoaded', function() {
+        const navLinks = document.querySelectorAll('.main-nav a');
+        navLinks.forEach(link => {
+            if (link.getAttribute('href') === '/events') {
+                link.classList.add('active');
+            }
+        });
+    });
+</script>
+</body>
+</html>

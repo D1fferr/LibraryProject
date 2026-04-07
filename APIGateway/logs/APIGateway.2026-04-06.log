@@ -1,0 +1,370 @@
+2026-04-06 14:59:29 | APIGateway | INFO  | o.h.validator.internal.util.Version | HV000001: Hibernate Validator 8.0.3.Final
+2026-04-06 14:59:29 | APIGateway | INFO  | l.c.apigateway.ApiGatewayApplication | Starting ApiGatewayApplication using Java 22 with PID 18660 (D:\Library\APIGateway\target\classes started by vasia in D:\Library\APIGateway)
+2026-04-06 14:59:29 | APIGateway | INFO  | l.c.apigateway.ApiGatewayApplication | No active profile set, falling back to 1 default profile: "default"
+2026-04-06 14:59:30 | APIGateway | INFO  | o.s.cloud.context.scope.GenericScope | BeanFactory id=75412cec-13ab-32f1-87e6-021d8240753f
+2026-04-06 14:59:30 | APIGateway | WARN  | o.s.c.g.c.GatewayClassPathWarningAutoConfiguration | 
+
+**********************************************************
+
+The artifact spring-cloud-gateway-server is deprecated. It will be removed in the next major release. Please add spring-cloud-gateway-server-webflux dependency.
+
+**********************************************************
+
+
+2026-04-06 14:59:30 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [After]
+2026-04-06 14:59:30 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Before]
+2026-04-06 14:59:30 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Between]
+2026-04-06 14:59:30 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Cookie]
+2026-04-06 14:59:30 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Header]
+2026-04-06 14:59:30 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Host]
+2026-04-06 14:59:30 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Method]
+2026-04-06 14:59:30 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Path]
+2026-04-06 14:59:30 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Query]
+2026-04-06 14:59:30 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [ReadBody]
+2026-04-06 14:59:30 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [RemoteAddr]
+2026-04-06 14:59:30 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [XForwardedRemoteAddr]
+2026-04-06 14:59:30 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Weight]
+2026-04-06 14:59:30 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [CloudFoundryRouteService]
+2026-04-06 14:59:31 | APIGateway | WARN  | o.s.c.g.s.w.s.StarterDeprecatedAutoConfiguration | 
+
+**********************************************************
+
+spring-cloud-starter-gateway is deprecated. It will be removed in the next major release. Please use spring-cloud-starter-gateway-server-webflux instead.
+
+**********************************************************
+
+
+2026-04-06 14:59:31 | APIGateway | INFO  | o.s.b.w.e.netty.NettyWebServer | Netty started on port 8080 (http)
+2026-04-06 14:59:31 | APIGateway | INFO  | l.c.apigateway.ApiGatewayApplication | Started ApiGatewayApplication in 2.923 seconds (process running for 8.628)
+2026-04-06 15:00:40 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:00:40 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/most-popular-books'
+2026-04-06 15:00:41 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:00:41 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/recently-added-at'
+2026-04-06 15:00:41 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:00:41 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/expected-book/get-all'
+2026-04-06 15:00:46 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:00:46 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/most-popular-books'
+2026-04-06 15:00:46 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:00:46 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/recently-added-at'
+2026-04-06 15:00:46 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:00:46 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/expected-book/get-all'
+2026-04-06 15:00:48 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:00:48 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/category'
+2026-04-06 15:00:48 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:00:48 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book'
+2026-04-06 15:00:50 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:00:50 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/c0a80064-99d8-1dee-8199-d890840b0001'
+2026-04-06 15:00:50 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:00:50 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/author/TestBookAuthor'
+2026-04-06 15:00:50 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:00:50 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/genre/TestBookGenre'
+2026-04-06 15:00:55 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:00:55 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/auth/login'
+2026-04-06 15:00:55 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:00:55 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/most-popular-books'
+2026-04-06 15:00:55 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:00:55 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/recently-added-at'
+2026-04-06 15:00:55 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:00:55 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/expected-book/get-all'
+2026-04-06 15:00:55 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:00:55 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/most-popular-books'
+2026-04-06 15:00:55 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:00:55 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/recently-added-at'
+2026-04-06 15:00:55 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:00:55 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/expected-book/get-all'
+2026-04-06 15:00:59 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:00:59 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/c0a80064-99d8-1dee-8199-d890840b0001'
+2026-04-06 15:00:59 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:00:59 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/author/TestBookAuthor'
+2026-04-06 15:00:59 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:00:59 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/genre/TestBookGenre'
+2026-04-06 15:02:52 | APIGateway | INFO  | o.s.b.w.e.netty.GracefulShutdown | Commencing graceful shutdown. Waiting for active requests to complete
+2026-04-06 15:02:52 | APIGateway | INFO  | o.s.b.w.e.netty.GracefulShutdown | Graceful shutdown complete
+2026-04-06 15:03:23 | APIGateway | INFO  | o.h.validator.internal.util.Version | HV000001: Hibernate Validator 8.0.3.Final
+2026-04-06 15:03:23 | APIGateway | INFO  | l.c.apigateway.ApiGatewayApplication | Starting ApiGatewayApplication using Java 22 with PID 21632 (D:\Library\APIGateway\target\classes started by vasia in D:\Library\APIGateway)
+2026-04-06 15:03:23 | APIGateway | INFO  | l.c.apigateway.ApiGatewayApplication | No active profile set, falling back to 1 default profile: "default"
+2026-04-06 15:03:24 | APIGateway | INFO  | o.s.cloud.context.scope.GenericScope | BeanFactory id=75412cec-13ab-32f1-87e6-021d8240753f
+2026-04-06 15:03:24 | APIGateway | WARN  | o.s.c.g.c.GatewayClassPathWarningAutoConfiguration | 
+
+**********************************************************
+
+The artifact spring-cloud-gateway-server is deprecated. It will be removed in the next major release. Please add spring-cloud-gateway-server-webflux dependency.
+
+**********************************************************
+
+
+2026-04-06 15:03:25 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [After]
+2026-04-06 15:03:25 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Before]
+2026-04-06 15:03:25 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Between]
+2026-04-06 15:03:25 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Cookie]
+2026-04-06 15:03:25 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Header]
+2026-04-06 15:03:25 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Host]
+2026-04-06 15:03:25 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Method]
+2026-04-06 15:03:25 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Path]
+2026-04-06 15:03:25 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Query]
+2026-04-06 15:03:25 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [ReadBody]
+2026-04-06 15:03:25 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [RemoteAddr]
+2026-04-06 15:03:25 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [XForwardedRemoteAddr]
+2026-04-06 15:03:25 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Weight]
+2026-04-06 15:03:25 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [CloudFoundryRouteService]
+2026-04-06 15:03:25 | APIGateway | WARN  | o.s.c.g.s.w.s.StarterDeprecatedAutoConfiguration | 
+
+**********************************************************
+
+spring-cloud-starter-gateway is deprecated. It will be removed in the next major release. Please use spring-cloud-starter-gateway-server-webflux instead.
+
+**********************************************************
+
+
+2026-04-06 15:03:25 | APIGateway | INFO  | o.s.b.w.e.netty.NettyWebServer | Netty started on port 8080 (http)
+2026-04-06 15:03:25 | APIGateway | INFO  | l.c.apigateway.ApiGatewayApplication | Started ApiGatewayApplication in 2.643 seconds (process running for 3.454)
+2026-04-06 15:03:43 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:03:43 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/c0a80064-99d8-1dee-8199-d890840b0001'
+2026-04-06 15:03:43 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:03:43 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/author/TestBookAuthor'
+2026-04-06 15:03:43 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:03:43 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/genre/TestBookGenre'
+2026-04-06 15:11:19 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:11:19 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/most-popular-books'
+2026-04-06 15:11:19 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:11:19 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/recently-added-at'
+2026-04-06 15:11:19 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:11:19 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/expected-book/get-all'
+2026-04-06 15:11:22 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:11:22 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/c0a80064-99d8-1dee-8199-d890840b0001'
+2026-04-06 15:11:22 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:11:22 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/author/TestBookAuthor'
+2026-04-06 15:11:22 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:11:22 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/genre/TestBookGenre'
+2026-04-06 15:11:24 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:11:24 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/create'
+2026-04-06 15:11:24 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-06 15:11:24 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Invalid jwt token
+2026-04-06 15:11:48 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:11:48 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/most-popular-books'
+2026-04-06 15:11:48 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:11:48 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/recently-added-at'
+2026-04-06 15:11:48 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:11:48 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/expected-book/get-all'
+2026-04-06 15:11:52 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:11:52 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/c0a80064-99d8-1dee-8199-d890840b0001'
+2026-04-06 15:11:52 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:11:52 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/author/TestBookAuthor'
+2026-04-06 15:11:52 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:11:52 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/genre/TestBookGenre'
+2026-04-06 15:11:55 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:11:55 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/auth/login'
+2026-04-06 15:11:55 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:11:55 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/most-popular-books'
+2026-04-06 15:11:55 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:11:55 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/recently-added-at'
+2026-04-06 15:11:55 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:11:55 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/expected-book/get-all'
+2026-04-06 15:11:55 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:11:55 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/most-popular-books'
+2026-04-06 15:11:55 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:11:55 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/recently-added-at'
+2026-04-06 15:11:55 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:11:55 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/expected-book/get-all'
+2026-04-06 15:11:56 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:11:56 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/c0a80064-99d8-1dee-8199-d890840b0001'
+2026-04-06 15:11:56 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:11:56 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/author/TestBookAuthor'
+2026-04-06 15:11:56 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:11:56 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/genre/TestBookGenre'
+2026-04-06 15:12:00 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:12:00 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/create'
+2026-04-06 15:12:00 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-06 15:12:00 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Invalid jwt token
+2026-04-06 15:15:20 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:15:20 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/most-popular-books'
+2026-04-06 15:15:20 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:15:20 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/recently-added-at'
+2026-04-06 15:15:20 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:15:20 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/expected-book/get-all'
+2026-04-06 15:15:21 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:15:21 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/c0a80064-99d8-1dee-8199-d890840b0001'
+2026-04-06 15:15:21 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:15:21 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/author/TestBookAuthor'
+2026-04-06 15:15:22 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:15:22 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/genre/TestBookGenre'
+2026-04-06 15:15:25 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:15:25 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/auth/login'
+2026-04-06 15:15:25 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:15:25 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/most-popular-books'
+2026-04-06 15:15:25 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:15:25 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/recently-added-at'
+2026-04-06 15:15:25 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:15:25 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/expected-book/get-all'
+2026-04-06 15:15:25 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:15:25 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/most-popular-books'
+2026-04-06 15:15:25 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:15:25 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/recently-added-at'
+2026-04-06 15:15:25 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:15:25 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/expected-book/get-all'
+2026-04-06 15:15:27 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:15:27 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/c0a80064-99d8-1dee-8199-d890840b0001'
+2026-04-06 15:15:27 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:15:27 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/author/TestBookAuthor'
+2026-04-06 15:15:27 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:15:27 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/genre/TestBookGenre'
+2026-04-06 15:15:30 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:15:30 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/create'
+2026-04-06 15:15:30 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-06 15:15:30 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-06 15:15:30 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-06 15:24:08 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:24:08 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/c0a80064-99d8-1dee-8199-d890840b0001'
+2026-04-06 15:24:08 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:24:08 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/author/TestBookAuthor'
+2026-04-06 15:24:08 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:24:08 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/genre/TestBookGenre'
+2026-04-06 15:24:12 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:24:12 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/create'
+2026-04-06 15:24:12 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-06 15:24:12 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-06 15:24:12 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-06 15:26:14 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:26:14 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/c0a80064-99d8-1dee-8199-d890840b0001'
+2026-04-06 15:26:14 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:26:14 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/author/TestBookAuthor'
+2026-04-06 15:26:14 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:26:14 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/genre/TestBookGenre'
+2026-04-06 15:26:17 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:26:17 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/create'
+2026-04-06 15:26:17 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-06 15:26:17 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-06 15:26:17 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-06 15:34:49 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:34:49 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/c0a80064-99d8-1dee-8199-d890840b0001'
+2026-04-06 15:34:50 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:34:50 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/author/TestBookAuthor'
+2026-04-06 15:34:50 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:34:50 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/genre/TestBookGenre'
+2026-04-06 15:34:54 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:34:54 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/create'
+2026-04-06 15:34:54 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-06 15:34:54 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-06 15:34:54 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-06 15:35:09 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:35:09 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/create'
+2026-04-06 15:35:09 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-06 15:35:09 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-06 15:35:09 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-06 15:35:12 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:35:12 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/create'
+2026-04-06 15:35:12 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-06 15:35:12 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-06 15:35:12 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-06 15:35:15 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:35:15 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/create'
+2026-04-06 15:35:15 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-06 15:35:15 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-06 15:35:15 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-06 15:35:17 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:35:17 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/create'
+2026-04-06 15:35:17 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-06 15:35:17 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-06 15:35:17 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-06 15:35:20 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:35:20 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/create'
+2026-04-06 15:35:20 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-06 15:35:20 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-06 15:35:20 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-06 15:35:23 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:35:23 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/create'
+2026-04-06 15:35:23 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-06 15:35:23 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-06 15:35:23 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-06 15:35:25 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:35:25 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/create'
+2026-04-06 15:35:25 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-06 15:35:25 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-06 15:35:25 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-06 15:35:27 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:35:27 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/create'
+2026-04-06 15:35:27 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-06 15:35:27 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-06 15:35:27 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-06 15:36:02 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:36:02 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/c0a80064-99d8-1dee-8199-d890840b0001'
+2026-04-06 15:36:02 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:36:02 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/author/TestBookAuthor'
+2026-04-06 15:36:02 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:36:02 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/genre/TestBookGenre'
+2026-04-06 15:36:06 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:36:06 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/create'
+2026-04-06 15:36:06 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-06 15:36:06 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-06 15:36:06 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-06 15:36:13 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:36:13 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/create'
+2026-04-06 15:36:13 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-06 15:36:13 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-06 15:36:13 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-06 15:38:30 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:38:30 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/most-popular-books'
+2026-04-06 15:38:30 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:38:30 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/recently-added-at'
+2026-04-06 15:38:30 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:38:30 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/expected-book/get-all'
+2026-04-06 15:38:35 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:38:35 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/category'
+2026-04-06 15:38:35 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:38:35 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book'
+2026-04-06 15:38:38 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:38:38 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/category'
+2026-04-06 15:38:38 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:38:38 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/most-popular-books'
+2026-04-06 15:38:39 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:38:39 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/category'
+2026-04-06 15:38:39 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:38:39 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/expected-book/get-all'
+2026-04-06 15:38:41 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:38:41 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/expected-book/c0a80064-99d8-1dee-8199-d890840b0001'
+2026-04-06 15:38:41 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:38:41 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/author/TestBookAuthor'
+2026-04-06 15:38:41 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:38:41 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/genre/TestBookGenre'
+2026-04-06 15:38:55 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:38:55 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/category'
+2026-04-06 15:38:55 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:38:55 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book'
+2026-04-06 15:45:08 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:45:08 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/most-popular-books'
+2026-04-06 15:45:09 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:45:09 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/recently-added-at'
+2026-04-06 15:45:09 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:45:09 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/expected-book/get-all'
+2026-04-06 15:46:50 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:46:50 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/most-popular-books'
+2026-04-06 15:46:50 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:46:50 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/recently-added-at'
+2026-04-06 15:46:50 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:46:50 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/expected-book/get-all'
+2026-04-06 15:52:12 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:52:12 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/most-popular-books'
+2026-04-06 15:52:12 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:52:12 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/recently-added-at'
+2026-04-06 15:52:12 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:52:12 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/expected-book/get-all'
+2026-04-06 15:54:59 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:54:59 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/most-popular-books'
+2026-04-06 15:54:59 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:54:59 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/recently-added-at'
+2026-04-06 15:54:59 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:54:59 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/expected-book/get-all'
+2026-04-06 15:55:05 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:55:05 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/c0a80064-99d8-1dee-8199-d890840b0001'
+2026-04-06 15:55:05 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:55:05 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/author/TestBookAuthor'
+2026-04-06 15:55:05 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:55:05 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/genre/TestBookGenre'
+2026-04-06 15:55:11 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:55:11 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/most-popular-books'
+2026-04-06 15:55:11 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:55:11 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/recently-added-at'
+2026-04-06 15:55:11 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-06 15:55:11 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/expected-book/get-all'
+2026-04-06 15:58:29 | APIGateway | INFO  | o.s.b.w.e.netty.GracefulShutdown | Commencing graceful shutdown. Waiting for active requests to complete
+2026-04-06 15:58:29 | APIGateway | INFO  | o.s.b.w.e.netty.GracefulShutdown | Graceful shutdown complete

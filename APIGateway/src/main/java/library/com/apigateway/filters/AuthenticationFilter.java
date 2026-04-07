@@ -36,7 +36,9 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
             "/api/book/most-popular-books",
             "/api/book/category",
             "/api/expected-book/get-all",
-            "/api/expected-book"
+            "/api/expected-book",
+            "/api/announcement/get-all",
+            "/api/announcement"
 
 
 
@@ -106,6 +108,8 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
         if (isPublicRoute(path)) {
             log.info("The route is public. Path: '{}'", path);
             return chain.filter(exchange);
+        }else{
+            log.info("The route is not public. Path: '{}'", path);
         }
         String authHeader = request.getHeaders().getFirst("Authorization");
         if (authHeader == null || !authHeader.startsWith("Bearer ")){
