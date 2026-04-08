@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News - BookLibrary</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        /* Стилі для сторінки News */
+        .news-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 60px 0;
+            text-align: center;
+            color: white;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .news-hero .hero-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+
+        .news-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .news-hero p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .news-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .news-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        .news-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .news-image, .news-image-placeholder {
+            flex-shrink: 0;
+            width: 120px;
+            height: 120px;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: #f0f4ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .news-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .news-image-placeholder .material-icons {
+            font-size: 48px;
+            color: #667eea;
+        }
+
+        .news-content {
+            flex: 1;
+        }
+
+        .news-date {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .news-date .material-icons {
+            font-size: 18px;
+            color: #95a5a6;
+        }
+
+        .news-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .news-body {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .btn-read-more {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+            transition: gap 0.3s;
+        }
+
+        .btn-read-more:hover {
+            gap: 10px;
+            text-decoration: underline;
+        }
+
+        .pagination-section {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-top: 20px;
+        }
+
+        .pagination-info {
+            text-align: center;
+            color: #7f8c8d;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+
+        .page-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 36px;
+            height: 36px;
+            padding: 0 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .page-link.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .page-link.disabled {
+            color: #bdc3c7;
+            pointer-events: none;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            background: white;
+            border-radius: 8px;
+        }
+
+        .error-message {
+            background: #fee;
+            color: #c0392b;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .news-card {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .news-image, .news-image-placeholder {
+                width: 100%;
+                max-width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div th:replace="~{layout/header :: header}"></div>
+
+<div class="container">
+    <main class="main-content">
+        <!-- Hero Section -->
+        <div class="news-hero">
+            <span class="material-icons hero-icon">newspaper</span>
+            <h1>Latest News</h1>
+            <p>Stay updated with library news and announcements</p>
+        </div>
+
+        <!-- Error Message -->
+        <div class="error-message" th:if="${error}" th:text="${error}">
+            Error loading news
+        </div>
+
+        <!-- News List -->
+        <div class="news-list" th:if="${news != null and !news.isEmpty()}">
+            <!-- Початок циклу картки -->
+            <div class="news-card" th:each="item : ${news}">
+
+                <!-- Блок зображення -->
+                <div th:if="${item.photo != null and !item.photo.isEmpty()}" class="news-image">
+                    <img th:src="${item.photo}" th:alt="${item.name}"
+                         onerror="this.onerror=null; this.parentElement.innerHTML='<span class=\"material-icons\">newspaper</span>';">
+                </div>
+                <div th:unless="${item.photo != null and !item.photo.isEmpty()}" class="news-image-placeholder">
+                    <span class="material-icons">newspaper</span>
+                </div>
+
+                <!-- Блок контенту -->
+                <div class="news-content">
+                    <div class="news-date">
+                        <span class="material-icons">calendar_today</span>
+                        <span th:text="${#temporals.format(item.date, 'MMMM d, yyyy')}">April 10, 2026</span>
+                    </div>
+                    <h3 class="news-name" th:text="${item.name}">News Title</h3>
+                    <p class="news-body" th:text="${item.body}">News description...</p>
+                    <a th:href="@{'/news/' + ${item.id}}" class="btn-read-more">
+                        Read More <span class="material-icons">arrow_forward</span>
+                    </a>
+                </div>
+            </div> <!-- Кінець news-card (ВАЖЛИВО: цей тег тепер на своєму місці) -->
+        </div> <!-- Кінець news-list -->
+
+        <!-- Empty State -->
+        <div class="empty-state" th:if="${news == null or news.isEmpty()}">
+            <span class="material-icons" style="font-size: 64px; color: #bdc3c7;">newspaper</span>
+            <h3>No news found</h3>
+            <p>Check back later for updates</p>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination-section" th:if="${totalPages > 1}">
+            <div class="pagination-info">
+                Showing page <span th:text="${currentPage + 1}">1</span>
+                of <span th:text="${totalPages}">1</span>
+                (<span th:text="${totalNews}">0</span> news total)
+            </div>
+            <div class="pagination">
+                <a th:if="${currentPage > 0}" th:href="@{/news(page=${currentPage - 1})}" class="page-link">‹</a>
+                <span th:unless="${currentPage > 0}" class="page-link disabled">‹</span>
+
+                <th:block th:each="i : ${#numbers.sequence(0, totalPages - 1)}">
+                    <th:block th:if="${i >= currentPage - 2 and i <= currentPage + 2}">
+                        <a th:if="${i == currentPage}" class="page-link active" th:text="${i + 1}">1</a>
+                        <a th:unless="${i == currentPage}" th:href="@{/news(page=${i})}" class="page-link" th:text="${i + 1}">2</a>
+                    </th:block>
+                </th:block>
+
+                <a th:if="${currentPage < totalPages - 1}" th:href="@{/news(page=${currentPage + 1})}" class="page-link">›</a>
+                <span th:unless="${currentPage < totalPages - 1}" class="page-link disabled">›</span>
+            </div>
+        </div>
+    </main>
+</div>
+
+<div th:replace="~{layout/footer :: footer}"></div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const navLinks = document.querySelectorAll('.main-nav a');
+        navLinks.forEach(link => {
+            if (link.getAttribute('href') === '/news') {
+                link.classList.add('active');
+            }
+        });
+    });
+</script>
+</body>
+</html>

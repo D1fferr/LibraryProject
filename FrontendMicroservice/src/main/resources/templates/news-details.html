@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title th:text="${news.name} + ' - BookLibrary'">News - BookLibrary</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    /* Додаткові стилі для детальної сторінки новини */
+    .news-details-hero {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      padding: 40px 0;
+      text-align: center;
+      color: white;
+      border-radius: 8px;
+      margin-bottom: 30px;
+    }
+
+    .news-details-hero .hero-icon {
+      font-size: 48px;
+      margin-bottom: 15px;
+    }
+
+    .news-details-hero h1 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .news-details-hero p {
+      font-size: 1rem;
+      opacity: 0.95;
+    }
+
+    .news-details-section {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 30px;
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      margin-bottom: 30px;
+    }
+
+    .news-image-large {
+      width: 100%;
+      border-radius: 8px;
+      overflow: hidden;
+      background-color: #f0f4ff;
+    }
+
+    .news-image-large img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      display: block;
+    }
+
+    .news-image-placeholder-large {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      background: #f0f4ff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+    }
+
+    .news-image-placeholder-large .material-icons {
+      font-size: 80px;
+      color: #667eea;
+    }
+
+    .news-info-large {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .news-title-large {
+      font-size: 2rem;
+      color: #2c3e50;
+      margin-bottom: 5px;
+    }
+
+    .news-date-large {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #7f8c8d;
+      font-size: 1rem;
+      margin-top: 5px;
+    }
+
+    .news-date-large .material-icons {
+      color: #95a5a6;
+    }
+
+    .news-content-section {
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      margin-bottom: 30px;
+    }
+
+    .news-content-section h2 {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #2c3e50;
+      margin-bottom: 20px;
+      font-size: 1.5rem;
+    }
+
+    .news-content-section h2 .material-icons {
+      color: #667eea;
+    }
+
+    .news-content {
+      color: #555;
+      line-height: 1.8;
+      font-size: 1rem;
+    }
+
+    .news-content p {
+      margin-bottom: 15px;
+    }
+
+    .news-content ul {
+      margin: 15px 0;
+      padding-left: 20px;
+    }
+
+    .news-content li {
+      margin-bottom: 8px;
+    }
+
+    .error-message {
+      background: #fee;
+      color: #c0392b;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Адаптивність */
+    @media (max-width: 768px) {
+      .news-details-section {
+        grid-template-columns: 1fr;
+      }
+
+      .news-details-hero h1 {
+        font-size: 1.5rem;
+      }
+
+      .news-title-large {
+        font-size: 1.5rem;
+      }
+
+      .news-image-large, .news-image-placeholder-large {
+        max-width: 250px;
+        margin: 0 auto;
+      }
+    }
+  </style>
+</head>
+<body>
+<!-- Header -->
+<div th:replace="~{layout/header :: header}"></div>
+
+<!-- Main Content -->
+<div class="container">
+  <main class="main-content">
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs">
+      <a href="/">Home</a> /
+      <a href="/news">News</a> /
+      <span th:text="${news.name}">News Title</span>
+    </div>
+
+    <!-- Error Message -->
+    <div class="error-message" th:if="${error}" th:text="${error}">
+      Error loading news
+    </div>
+
+    <!-- News Details Section -->
+    <div class="news-details-section" th:if="${news != null}">
+      <!-- Left Column - Photo -->
+      <div th:if="${news.photo != null and !news.photo.isEmpty()}" class="news-image-large">
+        <img th:src="${news.photo}" th:alt="${news.name}"
+             onerror="this.onerror=null; this.src='/images/default-news.jpg';">
+      </div>
+      <div th:unless="${news.photo != null and !news.photo.isEmpty()}" class="news-image-placeholder-large">
+        <span class="material-icons">newspaper</span>
+      </div>
+
+      <!-- Right Column - Info -->
+      <div class="news-info-large">
+        <h1 class="news-title-large" th:text="${news.name}">News Title</h1>
+        <div class="news-date-large">
+          <span class="material-icons">calendar_today</span>
+          <span th:text="${#temporals.format(news.date, 'MMMM d, yyyy')}">April 10, 2026</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- News Content Section -->
+    <div class="news-content-section" th:if="${news != null}">
+      <h2>
+        <span class="material-icons">description</span>
+        Full Story
+      </h2>
+      <div class="news-content" th:utext="${news.body}">
+        News content...
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Footer -->
+<div th:replace="~{layout/footer :: footer}"></div>
+
+<script>
+  // Підсвічуємо активний пункт меню
+  document.addEventListener('DOMContentLoaded', function() {
+    const navLinks = document.querySelectorAll('.main-nav a');
+    navLinks.forEach(link => {
+      if (link.getAttribute('href') === '/news') {
+        link.classList.add('active');
+      }
+    });
+  });
+</script>
+</body>
+</html>

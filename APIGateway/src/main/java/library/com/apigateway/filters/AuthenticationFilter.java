@@ -38,7 +38,9 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
             "/api/expected-book/get-all",
             "/api/expected-book",
             "/api/announcement/get-all",
-            "/api/announcement"
+            "/api/announcement",
+            "/api/news/get-all",
+            "/api/news/get-one"
 
 
 
