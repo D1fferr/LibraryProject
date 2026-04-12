@@ -65,7 +65,9 @@ public class GatewayConfig {
                 //auth service
                 .route("auth-service", r->r
                         .path("/api/auth/**")
-                        .filters(f->f.stripPrefix(1))
+                        .filters(f->f
+                                .stripPrefix(1).
+                                setRequestHeader("Allow", "PATCH, POST, GET, PUT, DELETE"))
                         .uri("http://localhost:8086"))
                 .route("auth-service", r->r
                 .path("/api/reset-password/**")

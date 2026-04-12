@@ -15,4 +15,12 @@ public class UserControllerAdvice {
     public boolean isAuthenticated() {
         return jwtUtil.isAuthenticated();
     }
+
+    @ModelAttribute("currentUsername")
+    public String getCurrentUsername() {
+        if(jwtUtil.isAuthenticated()){
+            return jwtUtil.getCurrentUsername();
+        }
+        return "Guest";
+    }
 }

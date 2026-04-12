@@ -73,8 +73,12 @@ public class UserService {
             throw new UserNotFoundException("The user not found");
         }
         User user = optionalUser.get();
-        user.setUsername(changeCredentialDTO.getUsername());
-        user.setEmail(changeCredentialDTO.getEmail());
+        if (changeCredentialDTO.getUsername()!=null)
+            user.setUsername(changeCredentialDTO.getUsername());
+        if (changeCredentialDTO.getEmail()!=null)
+            user.setEmail(changeCredentialDTO.getEmail());
+        if (changeCredentialDTO.getLibraryCode()!=null)
+            user.setLibraryCode(changeCredentialDTO.getLibraryCode());
         userRepository.save(user);
         log.info("The user updated. ID: '{}'", id);
     }

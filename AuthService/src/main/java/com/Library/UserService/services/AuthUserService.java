@@ -1,9 +1,6 @@
 package com.Library.UserService.services;
 
-import com.Library.UserService.dto.ChangeCredentialDTO;
-import com.Library.UserService.dto.DoAdminDTO;
-import com.Library.UserService.dto.LoginDTO;
-import com.Library.UserService.dto.UserDTO;
+import com.Library.UserService.dto.*;
 import com.Library.UserService.models.AuthUser;
 import com.Library.UserService.repositories.AuthUserRepository;
 import com.Library.UserService.exceptions.UserAlreadyExistException;
@@ -32,8 +29,12 @@ public class AuthUserService {
         Optional<AuthUser> authUser = authUserRepository.findFirstByUsername(userDTO.getUsername());
         if (authUser.isPresent()) {
             log.warn("A user with this username already exists. '{}'", userDTO.getUsername());
+            if (authUser.get().getEmail().equals(userDTO.getUserEmail())){
+                throw new UserAlreadyExistException("A user with this email already exists.");
+            }
             throw new UserAlreadyExistException("A user with this username already exists.");
         }
+
         AuthUser auth = toAuthUser(userDTO);
         auth.setRole("USER");
         auth.setPassword(passwordEncoder.encode(auth.getPassword()));
@@ -51,7 +52,6 @@ public class AuthUserService {
             throw new UserNotFoundException("User not found");
         }
         AuthUser auth = optionalAuthUser.get();
-        auth.setPassword(passwordEncoder.encode(authUser.getPassword()));
         authUserRepository.save(auth);
         log.info("User saved. ID: '{}'", auth.getId());
     }
@@ -94,15 +94,18 @@ public class AuthUserService {
             throw new UserNotFoundException("The user not found");
         }
          AuthUser authUser = optionalAuthUser.get();
-         if (changeCredentialDTO.getUsername()!=null)
+        if (!passwordEncoder.matches(changeCredentialDTO.getCurrentPassword(), authUser.getPassword())){
+            throw new BadCredentialsException("Incorrect password");
+        }
+        if (changeCredentialDTO.getUsername()!=null)
             authUser.setUsername(changeCredentialDTO.getUsername());
-         if (changeCredentialDTO.getPassword()!=null)
+        if (changeCredentialDTO.getPassword()!=null)
             authUser.setPassword(passwordEncoder.encode(changeCredentialDTO.getPassword()));
-         if (changeCredentialDTO.getEmail()!=null)
+        if (changeCredentialDTO.getEmail()!=null)
             authUser.setEmail(changeCredentialDTO.getEmail());
-         authUserRepository.save(authUser);
-         log.info("The user credentials updated. ID: '{}'", id);
-         crossServerRequestService.sendCredential(authUser, id);
+        authUserRepository.save(authUser);
+        crossServerRequestService.sendCredential(toDtoFoUserService(changeCredentialDTO), id);
+        log.info("The user credentials updated. ID: '{}'", id);
     }
     @Transactional(readOnly = true)
     public Optional<AuthUser> findByParam(String param){
@@ -131,9 +134,19 @@ public class AuthUserService {
     private AuthUser toAuthUser(UserDTO userDTO){
         log.info("Mapping userDTO to an auth user entity");
         AuthUser authUser = new AuthUser();
-        authUser.setUsername(userDTO.getUsername());
-        authUser.setPassword(userDTO.getUserPassword());
-        authUser.setEmail(userDTO.getUserEmail());
+        if (userDTO.getUsername()!=null)
+            authUser.setUsername(userDTO.getUsername());
+        if (userDTO.getUserEmail()!=null)
+            authUser.setEmail(userDTO.getUserEmail());
+        if (userDTO.getUserPassword()!=null)
+            authUser.setPassword(userDTO.getUserPassword());
         return authUser;
+    }
+    private UserDTOForUserService toDtoFoUserService(ChangeCredentialDTO dto){
+        UserDTOForUserService userDTO = new UserDTOForUserService();
+        userDTO.setUserEmail(dto.getEmail());
+        userDTO.setUserLibraryCode(dto.getLibraryCode());
+        userDTO.setUsername(dto.getUsername());
+        return userDTO;
     }
 }

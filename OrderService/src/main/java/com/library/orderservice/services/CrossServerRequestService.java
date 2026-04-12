@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import com.library.orderservice.dto.ReservationDTO;
 import com.library.orderservice.util.BookNotFoundException;
 import com.library.orderservice.util.ReservationNotAllowedException;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -41,7 +42,11 @@ public class CrossServerRequestService {
                     bookId
             );
             log.info("The connection is successful");
-            return items;
+            Integer orderedBooks = reservationService.findReservationByBookId(bookId, PageRequest.of(0, 5)).size();
+            int availableBooks = 0;
+            if (items!=null)
+                availableBooks = items - orderedBooks;
+            return availableBooks;
 
         } catch (Exception e) {
             log.warn("The connection failed. Error: '{}'", e.getMessage());

@@ -1,6 +1,7 @@
 package com.Library.UserService.services;
 
 import com.Library.UserService.dto.UserDTO;
+import com.Library.UserService.dto.UserDTOForUserService;
 import com.Library.UserService.models.AuthUser;
 import com.Library.UserService.exceptions.FailedToConnectWithUserServiceException;
 import lombok.RequiredArgsConstructor;
@@ -47,12 +48,13 @@ public class CrossServerRequestService {
             throw new FailedToConnectWithUserServiceException("Failed to connect with user service to delete user");
         }
     }
-    public void sendCredential(AuthUser authUser, UUID id){
+    public void sendCredential(UserDTOForUserService authUser, UUID id){
         String url = "http://localhost:8087/user/change-credentials/" + id;
 
         Map<String, String> requestBody = Map.of(
                 "username", authUser.getUsername(),
-                "email", authUser.getEmail()
+                "email", authUser.getUserEmail(),
+                "libraryCode", authUser.getUserLibraryCode()
         );
         try {
             log.info("Trying to connect with user service to send credentials. ID: '{}'", id);

@@ -9,5 +9,6 @@ public class ChangeCredentialDTO {
 
     private String email;
     private String username;
+    private String libraryCode;
 
 }

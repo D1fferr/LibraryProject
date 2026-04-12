@@ -1,11 +1,12 @@
-package com.Library.UserService.dto;
-
+package com.library.FrontendMicroservice.dto;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class ChangeCredentialDTO {
 
     private String username;

@@ -28,17 +28,20 @@ public class KafkaConsumerConfig {
         configKafkaConsumer.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         configKafkaConsumer.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
         configKafkaConsumer.put(JsonDeserializer.TYPE_MAPPINGS, "book:com.library.ServiceCatalog.dto.BookDTOForKafka");
-        configKafkaConsumer.put(JsonDeserializer.VALUE_DEFAULT_TYPE, Book.class);
+        configKafkaConsumer.put(JsonDeserializer.VALUE_DEFAULT_TYPE, BookDTOForKafka.class);
+        configKafkaConsumer.put(JsonDeserializer.TRUSTED_PACKAGES, "*");
         return new DefaultKafkaConsumerFactory<>(configKafkaConsumer);
     }
+
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, BookDTOForKafka> bookConcurrentKafkaListenerContainerFactory(){
+    public ConcurrentKafkaListenerContainerFactory<String, BookDTOForKafka> bookConcurrentKafkaListenerContainerFactory() {
         ConcurrentKafkaListenerContainerFactory<String, BookDTOForKafka> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(bookConsumerFactory());
         return factory;
     }
+
     @Bean
-    public ConsumerFactory<String, BookDTOForKafka> reservationConsumerFactory() {
+    public ConsumerFactory<String, String> reservationConsumerFactory() {
         Map<String, Object> configKafkaConsumer = new HashMap<>();
         configKafkaConsumer.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
         configKafkaConsumer.put(ConsumerConfig.GROUP_ID_CONFIG, "catalog-service");
@@ -46,10 +49,11 @@ public class KafkaConsumerConfig {
         configKafkaConsumer.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         return new DefaultKafkaConsumerFactory<>(configKafkaConsumer);
     }
+
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, BookDTOForKafka> reservationConcurrentKafkaListenerContainerFactory(){
-        ConcurrentKafkaListenerContainerFactory<String, BookDTOForKafka> factory = new ConcurrentKafkaListenerContainerFactory<>();
-        factory.setConsumerFactory(bookConsumerFactory());
+    public ConcurrentKafkaListenerContainerFactory<String, String> reservationConcurrentKafkaListenerContainerFactory() {
+        ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
+        factory.setConsumerFactory(reservationConsumerFactory()); // ✅ Виправлено: використовуємо правильну фабрику
         return factory;
     }
 

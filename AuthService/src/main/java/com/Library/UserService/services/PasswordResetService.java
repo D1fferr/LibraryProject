@@ -24,7 +24,6 @@ public class PasswordResetService {
     private final AuthUserService authUserService;
     private final StringRedisTemplate redisTemplate;
     private final EmailService emailService;
-    private final AuthUserRepository authUserRepository;
 
     private static final String RESET_CODE_PREFIX = "password_reset:";
     private final PasswordEncoder passwordEncoder;

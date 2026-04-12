@@ -40,7 +40,9 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
             "/api/announcement/get-all",
             "/api/announcement",
             "/api/news/get-all",
-            "/api/news/get-one"
+            "/api/news/get-one",
+            "/api/reset-password/send-code",
+            "api/reset-password/reset"
 
 
 

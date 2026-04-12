@@ -64,6 +64,7 @@ public class LoginController {
 
     @GetMapping("/logout")
     public String logout(HttpServletResponse response) {
+        authService.logout();
         cookieManager.clearJwtCookie(response);
         return "redirect:/home";
     }

@@ -68,7 +68,7 @@ public class AuthController {
         tokenBlackListService.blacklistToken(token);
         return ResponseEntity.ok("Logged out successfully");
     }
-    @PatchMapping("/change-credentials/{id}")
+    @PostMapping("/change-credentials/{id}")
     public ResponseEntity<HttpStatus> changeCredentials(@PathVariable UUID id,
                                                         @RequestBody @Valid ChangeCredentialDTO changeCredentialDTO,
                                                         BindingResult bindingResult){

@@ -12,20 +12,17 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 @Component
+@RequiredArgsConstructor
 public class AuthService {
 
     private final RestTemplate publicRestTemplate;
+    private final RestTemplate authorizedRestTemplate;
 
     private final String authServiceUrl = "http://localhost:8080/api/auth";
-
-    public AuthService(@Qualifier("publicRestTemplate") RestTemplate publicRestTemplate) {
-        this.publicRestTemplate = publicRestTemplate;
-    }
 
     public String login(AuthRequest authRequest) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        System.out.println("start");
 
         HttpEntity<AuthRequest> entity = new HttpEntity<>(authRequest, headers);
         ResponseEntity<AuthRequest> response = publicRestTemplate.exchange(
@@ -34,7 +31,6 @@ public class AuthService {
                 entity,
                 AuthRequest.class
         );
-        System.out.println("finish");
         return extractTokenFromHeaders(response.getHeaders());
 
     }
@@ -51,6 +47,16 @@ public class AuthService {
         );
 
         return extractTokenFromHeaders(response.getHeaders());
+
+    }
+    public void logout(){
+            String url = authServiceUrl + "/logout";
+            try {
+                authorizedRestTemplate.postForObject(url, null, Void.class);
+                System.out.println("logout");
+            }catch(Exception e){
+                System.out.println(e.getMessage());
+            }
 
     }
 
