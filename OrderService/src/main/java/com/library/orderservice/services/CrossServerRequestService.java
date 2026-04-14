@@ -42,7 +42,7 @@ public class CrossServerRequestService {
                     bookId
             );
             log.info("The connection is successful");
-            Integer orderedBooks = reservationService.findReservationByBookId(bookId, PageRequest.of(0, 5)).size();
+            Integer orderedBooks = reservationService.findReservationByBookId(bookId);
             int availableBooks = 0;
             if (items!=null)
                 availableBooks = items - orderedBooks;

@@ -23,4 +23,12 @@ public class UserControllerAdvice {
         }
         return "Guest";
     }
+    @ModelAttribute("hasRoleAdmin")
+    public boolean hasRoleAdmin() {
+        try {
+            return jwtUtil.hasRoleAdmin();
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }

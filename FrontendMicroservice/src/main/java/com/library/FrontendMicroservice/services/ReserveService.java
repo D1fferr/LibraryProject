@@ -1,11 +1,16 @@
 package com.library.FrontendMicroservice.services;
 
-import com.library.FrontendMicroservice.exceptions.ResrvationException;
+import com.library.FrontendMicroservice.dto.ReservationsPageDto;
+import com.library.FrontendMicroservice.exceptions.ReservationException;
+import com.library.FrontendMicroservice.exceptions.UserExeption;
 import com.library.FrontendMicroservice.models.Reservation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import java.util.UUID;
 
 @Component
 @RequiredArgsConstructor
@@ -22,7 +27,34 @@ public class ReserveService {
                         HttpStatus.class
                 );
             }catch (Exception e){
-                throw new ResrvationException(e.getMessage());
+                throw new ReservationException(e.getMessage());
+        }
+    }
+    public ReservationsPageDto getUserReservations(String id, int page, int pageSize){
+        try {
+            UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/api/reservation/auth/view_for_the_user/" + id)
+                    .queryParam("page", page)
+                    .queryParam("reservationPerPage", pageSize);
+
+            String url = builder.toUriString();
+            System.out.println("Start connecting");
+            return authorizedRestTemplate.getForObject(
+                    url,
+                    ReservationsPageDto.class
+            );
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            throw new ReservationException(e.getMessage());
+        }
+
+
+    }
+    public void cancelReservation(UUID id){
+        String url = "http://localhost:8080/api/reservation/auth/delete/" + id.toString();
+        try {
+            authorizedRestTemplate.delete(url);
+        }catch (Exception e){
+            throw new UserExeption(e.getMessage());
         }
     }
 }

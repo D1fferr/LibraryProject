@@ -93,6 +93,24 @@ public class JwtUtil {
             return null;
         }
     }
+    public boolean hasRoleAdmin() {
+        try {
+            String token = getJwtFromCookie();
+            if (token == null) return false;
+
+            String[] chunks = token.split("\\.");
+            String payload = new String(Base64.getUrlDecoder().decode(chunks[1]));
+            JsonNode jsonNode = objectMapper.readTree(payload);
+
+            if (jsonNode.has("role")) {
+                JsonNode roles = jsonNode.get("role");
+                return "ADMIN".equals(roles.asText());
+            }
+            return false;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 
     private String getJwtFromCookie() {
         ServletRequestAttributes attributes = (ServletRequestAttributes)

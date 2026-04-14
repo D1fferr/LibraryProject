@@ -1,6 +1,7 @@
 package com.library.ServiceCatalog.repositories;
 
 import com.library.ServiceCatalog.dto.BookDTO;
+import com.library.ServiceCatalog.dto.BookDTOForResponseGetBook;
 import com.library.ServiceCatalog.dto.CategoriesDTO;
 import com.library.ServiceCatalog.models.Book;
 import jakarta.validation.constraints.NotBlank;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Repository;
 
 import java.net.ContentHandler;
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -34,4 +36,6 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
     @Query("SELECT new com.library.ServiceCatalog.dto.CategoriesDTO(b.bookGenre, COUNT(b)) " +
             "from Book b GROUP BY b.bookGenre order by COUNT(b) DESC")
     List<CategoriesDTO> findAllCategories();
+
+    Page<Book> findAllByBookIdIn(Collection<UUID> bookIds, Pageable pageable);
 }

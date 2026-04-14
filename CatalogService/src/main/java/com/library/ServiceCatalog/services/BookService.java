@@ -272,6 +272,18 @@ public class BookService {
             throw new RedisConnectionFailureException(e.getMessage());
         }
     }
+    public BookDtoWithTotalElements getBooksById(List<UUID> uuids, int page, int booksPerPage){
+        Page<Book> dto = bookRepository.findAllByBookIdIn(uuids, PageRequest.of(page, booksPerPage));
+        if (dto.isEmpty()) {
+            log.warn("Books not found");
+            throw new BooksNotFoundException("Books not found");
+        }
+        BookDtoWithTotalElements bookDtoWithTotalElements = new BookDtoWithTotalElements();
+        bookDtoWithTotalElements.setBooks(dto.getContent().stream().map(this::toBookDTOForResponseGetBook).toList());
+        bookDtoWithTotalElements.setBookPages(dto.getTotalPages());
+        bookDtoWithTotalElements.setBookCount(dto.getTotalElements());
+        return bookDtoWithTotalElements;
+    }
 
 
     private BookDTO toDTO(Book book) {

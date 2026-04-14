@@ -1,5 +1,7 @@
 package com.library.orderservice.services;
 
+import com.library.orderservice.dto.ReservationForView;
+import com.library.orderservice.dto.ReservationsPageDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import com.library.orderservice.dto.ReservationDTO;
@@ -109,7 +111,19 @@ public class ReservationService {
         log.info("All reservations by book id found '{}'", reservationBook);
         return reservationList.stream().map(this::toDTO).toList();
 
+    }@Transactional(readOnly = true)
+    public Integer findReservationByBookId(UUID reservationBook) {
+        List<Reservation> reservationList = reservationRepository.findReservationsByReservationBookAndReservationDateAndReservationStatusNot(
+                reservationBook, LocalDate.now(),ReservationStatus.CANCELED);
+        if (reservationList.isEmpty()) {
+            log.warn("No reservations by book id found '{}'", reservationBook);
+            return 0;
+        }
+        log.info("All reservations by book id found '{}'", reservationBook);
+        return reservationList.stream().map(this::toDTO).toList().size();
+
     }
+
 
     @Transactional(readOnly = true)
     public Integer findReservationUserId(LocalDate localDate, UUID reservationUser) {
@@ -122,14 +136,18 @@ public class ReservationService {
     }
 
     @Transactional(readOnly = true)
-    public List<ReservationDTO> findReservationByUserId(UUID reservationUser, PageRequest pageRequest) {
-        List<Reservation> reservationList = reservationRepository.findReservationByReservationUser(reservationUser, pageRequest);
+    public ReservationsPageDto findReservationByUserId(UUID reservationUser, PageRequest pageRequest) {
+        Page<Reservation> reservationList = reservationRepository.findReservationByReservationUser(reservationUser, pageRequest);
         if (reservationList.isEmpty()) {
             log.warn("No reservations by user id found '{}'", reservationUser);
             throw new ReservationsNotFoundException("No reservations found");
         }
+        ReservationsPageDto dto = new ReservationsPageDto();
+        dto.setReservations(reservationList.get().map(this::toDTOForView).toList());
+        dto.setTotalPages(reservationList.getTotalPages());
+        dto.setTotalElements(reservationList.getTotalElements());
         log.info("All reservations by user id found '{}'", reservationUser);
-        return reservationList.stream().map(this::toDTO).toList();
+        return dto;
     }
 
     @Transactional(readOnly = true)
@@ -176,5 +194,10 @@ public class ReservationService {
     private Reservation toEntity(ReservationDTO reservationDTO) {
         log.info("Mapping reservationDTO to entity. User: '{}'", reservationDTO.getReservationBook());
         return modelMapper.map(reservationDTO, Reservation.class);
+    }
+
+    private ReservationForView toDTOForView(Reservation reservation) {
+        log.info("Mapping reservation entity to dto for response. ID: '{}'", reservation.getReservationId());
+        return modelMapper.map(reservation, ReservationForView.class);
     }
 }

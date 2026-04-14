@@ -2,11 +2,18 @@ package com.library.orderservice.repositories;
 
 
 import com.library.orderservice.models.Reservation;
+import com.library.orderservice.models.ReservationStatus;
+import jakarta.validation.constraints.Future;
+import jakarta.validation.constraints.NotNull;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -16,8 +23,10 @@ public interface ReservationRepository extends JpaRepository<Reservation, UUID> 
 
     Optional<Reservation> findByReservationId(UUID reservationId);
     List<Reservation> findReservationByReservationBook(UUID reservationBook, Pageable pageable);
-    List<Reservation> findReservationByReservationUser(UUID reservationUser, Pageable pageable);
+    Page<Reservation> findReservationByReservationUser(UUID reservationUser, Pageable pageable);
 
     Optional<Reservation> findReservationsByReservationId(UUID reservationId);
     List<Reservation> findReservationByReservationDateAndReservationBook(LocalDate reservationDate, UUID reservationBook);
+
+    List<Reservation> findReservationsByReservationBookAndReservationDateAndReservationStatusNot(@NotNull(message = "You must select an existing book.") UUID reservationBook, @Future(message = "You cannot select the booking date to be in the past or today.") LocalDate reservationDate, ReservationStatus reservationStatus);
 }

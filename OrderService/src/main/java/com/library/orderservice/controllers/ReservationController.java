@@ -1,5 +1,7 @@
 package com.library.orderservice.controllers;
 
+import com.library.orderservice.dto.ReservationForView;
+import com.library.orderservice.dto.ReservationsPageDto;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -32,10 +34,10 @@ public class ReservationController {
     private final CrossServerRequestService crossServerRequestService;
     private final KafkaSenderService kafkaSenderService;
     @GetMapping("/auth/view_for_the_user/{id}")
-    public ResponseEntity<List<ReservationDTO>> viewReservationForOneUser(@PathVariable UUID id,
-                                                                          @RequestParam(value = "page", defaultValue = "0") Integer page,
-                                                                          @RequestParam(value = "reservationPerPage", defaultValue = "5") Integer reservationPerPage){
-        List<ReservationDTO> reservationDTOS = reservationService
+    public ResponseEntity<ReservationsPageDto> viewReservationForOneUser(@PathVariable UUID id,
+                                                                         @RequestParam(value = "page", defaultValue = "0") Integer page,
+                                                                         @RequestParam(value = "reservationPerPage", defaultValue = "5") Integer reservationPerPage){
+        ReservationsPageDto reservationDTOS = reservationService
                 .findReservationByUserId(id, PageRequest.of(page, reservationPerPage));
         return new ResponseEntity<>(reservationDTOS, HttpStatus.OK);
     }

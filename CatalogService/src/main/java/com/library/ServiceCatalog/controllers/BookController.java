@@ -27,25 +27,32 @@ public class BookController {
 
     private final BookService bookService;
 
-    @GetMapping()
+    @GetMapping("/public")
     public ResponseEntity<BookDtoWithTotalElements> getAllBooks(@RequestParam(value = "page", defaultValue = "0") Integer page,
                                                        @RequestParam(value = "booksPerPage", defaultValue = "5", required = false) Integer booksPerPage,
                                                        @RequestParam(value = "sortBy", defaultValue = "bookAddedAt") String sortBy,
                                                        @RequestParam(value = "genre", required = false) String genre,
                                                        @RequestParam(value = "sortDir", defaultValue = "disc") String sortDir)
     {
-        System.out.println(sortBy);
-        System.out.println(genre);
         if (sortBy.equals("bookGenre") && genre !=null && !genre.isEmpty()){
             System.out.println("Book genre");
             BookDtoWithTotalElements books = bookService.findAllByGenre(genre, PageRequest.of(page, booksPerPage, Sort.by(Sort.Direction.fromString(sortDir), sortBy)));
             return new ResponseEntity<>(books, HttpStatus.OK);
         }
-        System.out.println("Other books");
         BookDtoWithTotalElements books = bookService.findAll(PageRequest.of(page, booksPerPage, Sort.by(sortBy)));
         return new ResponseEntity<>(books, HttpStatus.OK);
     }
-    @GetMapping("/author/{bookAuthor}")
+    @PostMapping("/auth/for-reservations")
+    public ResponseEntity<BookDtoWithTotalElements> getAllBooksForReservations(@RequestParam(value = "page", defaultValue = "0") Integer page,
+                                                                               @RequestParam(value = "booksPerPage", defaultValue = "5", required = false) Integer booksPerPage,
+                                                                               @RequestBody BookDtoForReservations uuids
+                                                                )
+    {
+        System.out.println("Start finding books");
+        BookDtoWithTotalElements books = bookService.getBooksById(uuids.getUuids(), page, booksPerPage);
+        return new ResponseEntity<>(books, HttpStatus.OK);
+    }
+    @GetMapping("/public/author/{bookAuthor}")
     public ResponseEntity<BookDtoWithTotalElements> getAllBooksByAuthor(
             @PathVariable String bookAuthor,
             @RequestParam(value = "page", defaultValue = "0", required = false) Integer page,
@@ -55,7 +62,7 @@ public class BookController {
         BookDtoWithTotalElements books = bookService.findAllByAuthor(bookAuthor, pageable);
         return new ResponseEntity<>(books, HttpStatus.OK);
     }
-    @GetMapping("/genre/{bookGenre}")
+    @GetMapping("/public/genre/{bookGenre}")
     public ResponseEntity<BookDtoWithTotalElements> getAllBooksByGenre(
             @PathVariable String bookGenre,
             @RequestParam(value = "page", defaultValue = "0", required = false) Integer page,
@@ -66,18 +73,20 @@ public class BookController {
         return new ResponseEntity<>(books, HttpStatus.OK);
     }
 
-    @GetMapping("/recently-added-at")
+    @GetMapping("/public/recently-added-at")
     public ResponseEntity<BookDtoWithTotalElements> getAllRecentlyAddedAtBooks(@RequestParam(value = "page", defaultValue = "0") Integer page,
                                      @RequestParam(value = "booksPerPage", defaultValue = "5") Integer booksPerPage)
     {
         BookDtoWithTotalElements books = bookService.findAllRecentlyAddedAt(page, booksPerPage);
         return new ResponseEntity<>(books, HttpStatus.OK);
     }
-    @GetMapping("/{book_id}")
+    @GetMapping("/public/{book_id}")
     public ResponseEntity<BookDTOForResponseGetBook> getBook(@PathVariable UUID book_id){
         return new ResponseEntity<>(bookService.findById(book_id), HttpStatus.OK);
     }
-    @GetMapping("/pieces/{book_id}")
+
+
+    @GetMapping("/public/pieces/{book_id}")
     public Integer getBookPieces(@PathVariable UUID book_id){
         return bookService.findById(book_id).getBookItems();
     }
@@ -104,14 +113,14 @@ public class BookController {
         BookDTOForResponseCreate bookDTOForResponseCreate = bookService.updateBook(bookDTO, id, coverImage);
         return new ResponseEntity<>(bookDTOForResponseCreate, HttpStatus.OK);
     }
-    @GetMapping("/most-popular-books")
+    @GetMapping("/public/most-popular-books")
     public ResponseEntity<BookDtoWithTotalElements> getMostPopularBooks(@RequestParam(value = "page", defaultValue = "0") Integer page) {
 
         BookDtoWithTotalElements books = bookService.getMostPopularBooks(page);
         return new ResponseEntity<>(books, HttpStatus.OK);
 
     }
-    @GetMapping("/category")
+    @GetMapping("/public/category")
     public ResponseEntity<CategoriesDtoForResponse> getCategories(){
         CategoriesDtoForResponse dto = new CategoriesDtoForResponse();
         dto.setCategories(bookService.findCategories());

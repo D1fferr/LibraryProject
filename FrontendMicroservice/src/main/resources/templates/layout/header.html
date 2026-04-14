@@ -135,9 +135,20 @@
             border-bottom: 2px solid #e74c3c;
         }
 
-        /* СТИЛІ МОДАЛЬНОГО ВІКНА З ВИПРАВЛЕНОЮ ПРОКРУТКОЮ */
+        /* Стиль для Admin Panel кнопки */
+        .admin-link {
+            color: #f39c12 !important;
+            font-weight: 600;
+        }
+
+        .admin-link:hover, .admin-link.active {
+            color: #e67e22 !important;
+            border-bottom-color: #e67e22 !important;
+        }
+
+        /* СТИЛІ МОДАЛЬНОГО ВІКНА */
         .profile-modal {
-            display: none; /* Приховано за замовчуванням */
+            display: none;
             position: fixed;
             z-index: 2000;
             left: 0;
@@ -146,20 +157,20 @@
             height: 100%;
             background-color: rgba(0,0,0,0.6);
             backdrop-filter: blur(3px);
-            overflow-y: auto; /* Дозволяє прокрутку фону, якщо вікно завелике */
+            overflow-y: auto;
         }
 
         .profile-modal-content {
             background-color: white;
-            margin: 5vh auto; /* 5% від висоти екрану */
+            margin: 5vh auto;
             border-radius: 12px;
             width: 420px;
             max-width: 90%;
             box-shadow: 0 15px 50px rgba(0,0,0,0.4);
             display: flex;
             flex-direction: column;
-            max-height: 90vh; /* Обмежуємо висоту вікна до 90% екрану */
-            overflow: hidden; /* Щоб бордери не перекривалися внутрішнім контентом */
+            max-height: 90vh;
+            overflow: hidden;
         }
 
         .profile-modal-header {
@@ -168,7 +179,7 @@
             align-items: center;
             padding: 1.2rem 1.5rem;
             border-bottom: 1px solid #eee;
-            flex-shrink: 0; /* Шапка не стискається */
+            flex-shrink: 0;
         }
 
         .profile-modal-header h3 {
@@ -190,7 +201,7 @@
         .profile-modal-body {
             padding: 2rem 1.5rem;
             text-align: center;
-            overflow-y: auto; /* Внутрішня прокрутка для кнопок */
+            overflow-y: auto;
             flex-grow: 1;
         }
 
@@ -320,6 +331,10 @@
                 <li><a th:href="@{/events}">Events</a></li>
                 <li><a th:href="@{/about}">About</a></li>
                 <li><a th:href="@{/contact}">Contact</a></li>
+                <!-- Admin Panel - доступно тільки для адмінів -->
+                <li th:if="${hasRoleAdmin}">
+                    <a th:href="@{/admin/dashboard}" class="admin-link">Admin Panel</a>
+                </li>
             </ul>
         </nav>
     </header>
@@ -374,7 +389,7 @@
             const modal = document.getElementById('profileModal');
             if (modal) {
                 modal.style.display = 'block';
-                document.body.style.overflow = 'hidden'; // Вимикаємо скрол основної сторінки
+                document.body.style.overflow = 'hidden';
             }
         };
 
@@ -382,11 +397,11 @@
             const modal = document.getElementById('profileModal');
             if (modal) {
                 modal.style.display = 'none';
-                document.body.style.overflow = 'auto'; // Повертаємо скрол
+                document.body.style.overflow = 'auto';
             }
         };
 
-        // Закриття при кліку на фон (темну область)
+        // Закриття при кліку на фон
         window.addEventListener('click', function(event) {
             const modal = document.getElementById('profileModal');
             if (event.target === modal) {
