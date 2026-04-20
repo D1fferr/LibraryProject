@@ -6,10 +6,7 @@ import com.library.FrontendMicroservice.dto.*;
 import com.library.FrontendMicroservice.models.AuthRequest;
 import com.library.FrontendMicroservice.models.Book;
 import com.library.FrontendMicroservice.models.Reservation;
-import com.library.FrontendMicroservice.services.AuthService;
-import com.library.FrontendMicroservice.services.BookService;
-import com.library.FrontendMicroservice.services.ReserveService;
-import com.library.FrontendMicroservice.services.UserService;
+import com.library.FrontendMicroservice.services.*;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,10 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -35,7 +29,8 @@ public class ProfileController {
     private final AuthService authService;
     private final ReserveService reservationService;
     private final BookService bookService;
-    private static final int PAGE_SIZE = 5;
+    private final DataPreparationService dataPreparationService;
+    private static final int PAGE_SIZE = 4;
 
     @GetMapping("/edit-credentials")
     public String editCredentialsPage(Model model) {
@@ -72,11 +67,9 @@ public class ProfileController {
     @GetMapping("/reservations")
     public String viewReservations(@RequestParam(defaultValue = "0") int page,
                                    Model model) {
-        System.out.println("start");
         try {
             String id = jwtUtil.getCurrentUserId();
             ReservationsPageDto reservationsPage = reservationService.getUserReservations(id, page, PAGE_SIZE);
-            System.out.println(reservationsPage.getTotalPages());
             List<ReservationDto> reservations = reservationsPage.getReservations();
             int totalPages = reservationsPage.getTotalPages();
             long totalReservations = reservationsPage.getTotalElements();
@@ -89,7 +82,6 @@ public class ProfileController {
 
 
         } catch (Exception e) {
-            System.out.println(e.getMessage());
             model.addAttribute("error", "Unable to load reservations");
             model.addAttribute("reservations", List.of());
             model.addAttribute("totalPages", 0);
@@ -101,18 +93,13 @@ public class ProfileController {
     }
 
     private List<ReservationDtoForView> getReservationsForView(List<ReservationDto> reservations) {
-        List<UUID> bookIds = reservations.stream()
-                .map(ReservationDto::getReservationBook)
-                .toList();
-        BookDtoForReservations bookDtoForReservations = new BookDtoForReservations();
-        bookDtoForReservations.setUuids(bookIds);
-        BookDtoWithTotalElements bookDtoWithTotalElements = bookService.getBooksByIds(bookDtoForReservations);
-        Map<UUID, Book> bookMap = bookDtoWithTotalElements.getBooks().stream()
-                .collect(Collectors.toMap(Book::getBookId, Function.identity()));
+
+
+        Map<UUID, Book> bookMap = dataPreparationService.findBookData(reservations);
+
         List<ReservationDtoForView> result = new ArrayList<>();
         for (ReservationDto reservation : reservations) {
-            UUID bookId = reservation.getReservationBook();
-            Book book = bookMap.get(bookId);
+            Book book = bookMap.get(reservation.getReservationBook());
             if (book != null) {
                 ReservationDtoForView dto = new ReservationDtoForView();
                 dto.setId(reservation.getReservationId());
@@ -125,7 +112,6 @@ public class ProfileController {
                 result.add(dto);
             }
         }
-
         return result;
     }
 
@@ -144,5 +130,28 @@ public class ProfileController {
             return ResponseEntity.badRequest().body(Map.of("message", e.getMessage()));
         }
     }
+    @GetMapping("/reservations/{id}/details")
+    public String viewCancelledReservationDetails(@PathVariable UUID id, Model model) {
+        try {
+
+            JoinDTOForCancelledReservations details = reservationService.getCancelledReservationDetails(id);
+            Book book = bookService.getBookById(details.getReservationBook());
+            CancelledReservationDetails reservationDetails = new CancelledReservationDetails();
+            reservationDetails.setCancelReason(details.getMessage());
+            reservationDetails.setReservationDate(details.getReservationDate());
+            reservationDetails.setStatus(details.getReservationStatus());
+            reservationDetails.setBookName(book.getBookName());
+            reservationDetails.setBookImage(book.getBookImage());
+            reservationDetails.setBookAuthor(book.getBookAuthor());
+            model.addAttribute("reservation", reservationDetails);
+
+
+        } catch (Exception e) {
+            model.addAttribute("error", "Unable to load reservation details");
+        }
+
+        return "profile/reservation-cancelled-details";
+    }
+
 
 }

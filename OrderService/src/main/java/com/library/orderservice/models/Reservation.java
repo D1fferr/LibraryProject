@@ -3,6 +3,7 @@ package com.library.orderservice.models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Future;
+import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,7 +26,7 @@ public class Reservation {
     @Column(name = "reservation_id")
     private UUID reservationId;
     @Column(name = "reservation_date")
-    @Future(message = "You cannot select the booking date to be in the past or today.")
+    @FutureOrPresent(message = "You cannot select the booking date to be in the past or today.")
     private LocalDate reservationDate;
     @Column(name = "created_at")
     private LocalDateTime createdAt;

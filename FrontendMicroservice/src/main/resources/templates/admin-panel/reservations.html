@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Reservations - BookLibrary</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        /* Базові стилі */
+        .reservations-hero {
+            background: linear-gradient(135deg, #2c3e50 0%, #1a252f 100%);
+            padding: 40px 0;
+            text-align: center;
+            color: white;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        .reservations-hero .hero-icon { font-size: 48px; margin-bottom: 15px; }
+        .reservations-hero h1 { font-size: 2.2rem; margin-bottom: 10px; }
+        .reservations-hero p { font-size: 1rem; opacity: 0.95; }
+
+        /* Пошук */
+        .search-section {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .search-box {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .search-box input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        .search-box input:focus {
+            outline: none;
+            border-color: #27ae60;
+        }
+        .search-box button {
+            padding: 12px 24px;
+            background: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+        .search-box button:hover {
+            background: #2ecc71;
+        }
+        .search-clear {
+            color: #e74c3c;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+        .search-clear:hover {
+            background: #fee;
+        }
+
+        /* Список резервацій */
+        .reservations-list { display: flex; flex-direction: column; gap: 15px; margin-bottom: 30px; }
+
+        .reservation-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .reservation-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .reservation-info { flex: 1; }
+        .reservation-book { font-size: 1.1rem; font-weight: 600; color: #2c3e50; margin-bottom: 5px; }
+        .reservation-author { color: #7f8c8d; font-size: 0.85rem; margin-bottom: 10px; }
+        .reservation-user { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+        .reservation-user .material-icons { color: #667eea; }
+        .reservation-user span { font-weight: 600; color: #2c3e50; }
+        .reservation-dates { display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 10px; }
+
+        .reservation-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        .status-CREATED { background: #e8f5e9; color: #2e7d32; }
+        .status-CONFIRMED { background: #e3f2fd; color: #1565c0; }
+        .status-CANCELLED { background: #ffebee; color: #c62828; }
+
+        /* Кнопки дій */
+        .reservation-actions { display: flex; gap: 12px; }
+        .btn-confirm, .btn-cancel, .btn-view {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            text-decoration: none;
+        }
+        .btn-confirm { background: #27ae60; color: white; }
+        .btn-confirm:hover:not(:disabled) { background: #219150; transform: translateY(-2px); }
+        .btn-confirm:disabled { background: #bdc3c7; cursor: not-allowed; }
+        .btn-cancel { background: #e74c3c; color: white; }
+        .btn-cancel:hover:not(:disabled) { background: #c0392b; transform: translateY(-2px); }
+        .btn-cancel:disabled { background: #bdc3c7; cursor: not-allowed; }
+        .btn-view { background: #3498db; color: white; }
+        .btn-view:hover { background: #2980b9; transform: translateY(-2px); }
+        .btn-confirm .material-icons, .btn-cancel .material-icons, .btn-view .material-icons { font-size: 22px; line-height: 1; }
+
+        .expired-message {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: #f8f9fa;
+            color: #7f8c8d;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            border: 1px dashed #cbd5e0;
+        }
+
+        /* Пагінація */
+        .pagination-section {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-top: 20px;
+        }
+        .pagination-info { text-align: center; color: #7f8c8d; margin-bottom: 15px; font-size: 14px; }
+        .pagination { display: flex; justify-content: center; gap: 5px; flex-wrap: wrap; }
+        .page-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 36px;
+            height: 36px;
+            padding: 0 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .reservation-date {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+
+        .reservation-date .material-icons {
+            font-size: 18px;
+            color: #95a5a6;
+        }
+        .page-link:hover { background: #f5f5f5; border-color: #27ae60; color: #27ae60; }
+        .page-link.active { background: #27ae60; border-color: #27ae60; color: white; }
+        .page-link.disabled { color: #bdc3c7; cursor: not-allowed; pointer-events: none; }
+
+        .empty-state { text-align: center; padding: 60px 20px; background: white; border-radius: 8px; }
+        .empty-icon { font-size: 64px !important; color: #bdc3c7; margin-bottom: 20px; }
+        .empty-state h3 { color: #2c3e50; margin-bottom: 10px; }
+
+        .alert { padding: 12px 15px; border-radius: 8px; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+        .alert-error { background: #fee; color: #c0392b; border: 1px solid #fcc; }
+        .alert-success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+
+        .breadcrumbs { margin-bottom: 20px; font-size: 0.9rem; color: #7f8c8d; }
+        .breadcrumbs a { color: #3498db; text-decoration: none; }
+        .breadcrumbs a:hover { text-decoration: underline; }
+
+        /* Модальне вікно */
+        .modal { position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); }
+        .modal-content { background-color: white; margin: 15% auto; padding: 30px; border-radius: 12px; width: 450px; max-width: 90%; }
+        .modal-content h3 { margin-top: 0; color: #2c3e50; }
+        .modal-content textarea { width: 100%; padding: 10px; margin: 15px 0; border-radius: 8px; border: 1px solid #ddd; box-sizing: border-box; resize: vertical; }
+        .modal-actions { display: flex; justify-content: flex-end; gap: 12px; }
+        .modal-actions button { padding: 10px 20px; border-radius: 6px; cursor: pointer; }
+
+        @media (max-width: 768px) {
+            .reservation-card { flex-direction: column; align-items: stretch; }
+            .reservation-actions { width: 100%; flex-wrap: wrap; }
+            .btn-confirm, .btn-cancel, .btn-view { flex: 1; }
+            .search-box { flex-direction: column; }
+            .search-box button, .search-clear { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+<!-- Header -->
+<div th:replace="~{layout/header :: header}"></div>
+
+<!-- Main Content -->
+<div class="container">
+    <main class="main-content">
+        <!-- Breadcrumbs -->
+        <div class="breadcrumbs">
+            <a href="/">Home</a> /
+            <a href="/admin/dashboard">Admin Panel</a> /
+            <span>All Reservations</span>
+        </div>
+
+        <!-- Hero Section -->
+        <div class="reservations-hero">
+            <span class="material-icons hero-icon">bookmark</span>
+            <h1>All Reservations</h1>
+            <p>Manage all book reservations across the library</p>
+        </div>
+
+        <!-- Search Section -->
+        <div class="search-section">
+            <form method="get" action="/admin/reservations" class="search-box">
+                <input type="text" name="search" th:value="${searchQuery}" placeholder="Search by Book ID or User ID...">
+                <button type="submit">
+                    <span class="material-icons">search</span>
+                    Search
+                </button>
+                <a th:href="@{/admin/reservations}" class="search-clear" th:if="${searchQuery != null and !searchQuery.isEmpty()}">
+                    <span class="material-icons">clear</span>
+                    Clear
+                </a>
+            </form>
+        </div>
+
+        <!-- Success/Error Messages -->
+        <div th:if="${success}" class="alert alert-success">
+            <span class="material-icons">check_circle</span>
+            <span th:text="${success}"></span>
+        </div>
+        <div th:if="${error}" class="alert alert-error">
+            <span class="material-icons">error</span>
+            <span th:text="${error}"></span>
+        </div>
+
+        <!-- Reservations List -->
+        <div class="reservations-list" th:if="${reservations != null and !reservations.isEmpty()}">
+            <div class="reservation-card" th:each="reservation : ${reservations}">
+                <th:block th:with="isPast=${reservation.reservationDate != null and reservation.reservationDate.isBefore(T(java.time.LocalDate).now())},
+                                   isCancelled=${reservation.status.toString() == 'CANCELLED'}">
+
+                    <div class="reservation-info">
+                        <div class="reservation-book" th:text="${reservation.bookName}">Book Title</div>
+                        <div class="reservation-author" th:text="'by ' + ${reservation.bookAuthor}">Author</div>
+                        <div class="reservation-user">
+                            <span class="material-icons">account_circle</span>
+                            <span th:text="${reservation.username}">Username</span>
+                        </div>
+                        <div class="reservation-date">
+                            <span class="material-icons">calendar_today</span>
+                            <span th:text="'Reservation Date: ' + ${#temporals.format(reservation.reservationDate, 'MMMM d, yyyy')}">Reservation Date</span>
+                        </div>
+                        <div class="reservation-status" th:classappend="'status-' + ${reservation.status.toString()}">
+                            <span class="material-icons" th:text="${isCancelled ? 'block' : (isPast ? 'history' : 'schedule')}"></span>
+                            <span th:text="${reservation.status.toString()}">STATUS</span>
+                        </div>
+                    </div>
+
+                    <div class="reservation-actions">
+                        <!-- Активні кнопки для не прострочених та не скасованих резервацій -->
+                        <th:block th:if="${!isPast and !isCancelled}">
+                            <button th:if="${reservation.status.toString() == 'CREATED'}"
+                                    class="btn-confirm"
+                                    th:data-reservation-id="${reservation.id}"
+                                    onclick="confirmReservation(this)">
+                                <span class="material-icons">check_circle</span>
+                                <span>Confirm</span>
+                            </button>
+                            <button th:if="${reservation.status.toString() == 'CREATED' or reservation.status.toString() == 'CONFIRMED'}"
+                                    class="btn-cancel"
+                                    th:data-reservation-id="${reservation.id}"
+                                    onclick="openCancelModal(this)">
+                                <span class="material-icons">cancel</span>
+                                <span>Cancel</span>
+                            </button>
+                        </th:block>
+
+                        <!-- Повідомлення про прострочення -->
+                        <div th:if="${isPast and !isCancelled}" class="expired-message">
+                            <span class="material-icons">event_busy</span>
+                            <span>Reservation Expired</span>
+                        </div>
+
+                        <!-- Для скасованих резервацій - кнопка View Details -->
+                        <div th:if="${isCancelled}" class="expired-message" style="display: flex; gap: 10px; background: none; border: none; padding: 0;">
+                            <span class="material-icons">block</span>
+                            <span>Cancelled</span>
+                            <a th:href="@{'/profile/reservations/' + ${reservation.id} + '/details'}"
+                               class="btn-view"
+                               style="margin-left: 10px;">
+                                <span class="material-icons">visibility</span>
+                                View Details
+                            </a>
+                        </div>
+                    </div>
+                </th:block>
+            </div>
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-state" th:if="${reservations == null or reservations.isEmpty()}">
+            <span class="material-icons empty-icon">bookmark_border</span>
+            <h3>No reservations found</h3>
+            <p th:if="${searchQuery}">No results for "<span th:text="${searchQuery}"></span>"</p>
+            <p th:unless="${searchQuery}">There are no reservations in the system yet</p>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination-section" th:if="${totalPages > 1}">
+            <div class="pagination-info">
+                Showing page <span th:text="${currentPage + 1}">1</span>
+                of <span th:text="${totalPages}">1</span>
+                (<span th:text="${totalReservations}">0</span> reservations total)
+            </div>
+            <div class="pagination">
+                <!-- Previous button -->
+                <a th:if="${currentPage > 0}"
+                   th:href="${searchQuery != null and !searchQuery.isEmpty()} ? @{/admin/reservations(page=${currentPage - 1}, search=${searchQuery})} : @{/admin/reservations(page=${currentPage - 1})}"
+                   class="page-link prev">‹</a>
+                <span th:unless="${currentPage > 0}" class="page-link disabled">‹</span>
+
+                <!-- Page numbers -->
+                <th:block th:each="i : ${#numbers.sequence(0, totalPages - 1)}">
+                    <th:block th:if="${i >= currentPage - 2 and i <= currentPage + 2}">
+                        <a th:if="${i == currentPage}" class="page-link active" th:text="${i + 1}">1</a>
+                        <a th:unless="${i == currentPage}"
+                           th:href="${searchQuery != null and !searchQuery.isEmpty()} ? @{/admin/reservations(page=${i}, search=${searchQuery})} : @{/admin/reservations(page=${i})}"
+                           class="page-link" th:text="${i + 1}">2</a>
+                    </th:block>
+                </th:block>
+
+                <!-- Next button -->
+                <a th:if="${currentPage < totalPages - 1}"
+                   th:href="${searchQuery != null and !searchQuery.isEmpty()} ? @{/admin/reservations(page=${currentPage + 1}, search=${searchQuery})} : @{/admin/reservations(page=${currentPage + 1})}"
+                   class="page-link next">›</a>
+                <span th:unless="${currentPage < totalPages - 1}" class="page-link disabled">›</span>
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- Cancel Modal -->
+<div id="cancelModal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <h3>Cancel Reservation</h3>
+        <p style="color: #666;">Please provide a reason for cancelling this reservation.</p>
+        <textarea id="cancelReason" rows="4" placeholder="Optional reason..."></textarea>
+        <div class="modal-actions">
+            <button style="padding: 10px 20px; border-radius: 6px; border: 1px solid #ccc; cursor: pointer;" onclick="closeCancelModal()">Back</button>
+            <button class="btn-cancel" style="padding: 10px 20px;" onclick="submitCancellation()">Confirm Cancel</button>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<div th:replace="~{layout/footer :: footer}"></div>
+
+<script>
+    let currentReservationId = null;
+
+    function confirmReservation(button) {
+        const id = button.getAttribute('data-reservation-id');
+        if (confirm('Are you sure you want to confirm this reservation?')) {
+            fetch(`/admin/reservations/${id}/confirm`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' }
+            })
+                .then(response => {
+                    if (response.ok) {
+                        alert('Reservation confirmed successfully');
+                        location.reload();
+                    } else {
+                        alert('Failed to confirm reservation');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Network error');
+                });
+        }
+    }
+
+    function openCancelModal(button) {
+        currentReservationId = button.getAttribute('data-reservation-id');
+        document.getElementById('cancelModal').style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeCancelModal() {
+        document.getElementById('cancelModal').style.display = 'none';
+        document.getElementById('cancelReason').value = '';
+        document.body.style.overflow = 'auto';
+    }
+
+    function submitCancellation() {
+        const reason = document.getElementById('cancelReason').value;
+        if (!reason.trim()) {
+            alert('Please provide a reason for cancellation');
+            return;
+        }
+
+        const cancellationData = {
+            reservationId: currentReservationId,
+            message: reason
+        };
+
+        fetch(`/admin/reservations/${currentReservationId}/cancel`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(cancellationData)
+        })
+            .then(response => {
+                if (response.ok) {
+                    alert('Reservation cancelled successfully');
+                    closeCancelModal();
+                    location.reload();
+                } else {
+                    alert('Failed to cancel reservation');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Network error');
+            });
+    }
+
+    window.onclick = function(event) {
+        const modal = document.getElementById('cancelModal');
+        if (event.target === modal) {
+            closeCancelModal();
+        }
+    }
+</script>
+</body>
+</html>

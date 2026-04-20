@@ -3,109 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title th:text="${book.bookName} + ' - BookLibrary'">Book Title - BookLibrary</title>
+    <title th:text="${book != null ? book.bookName + ' - BookLibrary' : 'Book Details - BookLibrary'}">Book Title - BookLibrary</title>
     <link rel="stylesheet" href="/css/style.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
         /* Стилі для модального вікна */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.5);
-        }
-        .modal-content {
-            background-color: white;
-            margin: 15% auto;
-            padding: 20px;
-            border-radius: 8px;
-            width: 300px;
-            max-width: 90%;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-        }
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-        .modal-header h3 {
-            margin: 0;
-            color: #2c3e50;
-        }
-        .close {
-            color: #aaa;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        .close:hover {
-            color: #333;
-        }
-        .modal-body {
-            margin-bottom: 20px;
-        }
-        .modal-body label {
-            display: block;
-            margin-bottom: 8px;
-            color: #2c3e50;
-        }
-        .modal-body input[type="date"] {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 16px;
-        }
-        .modal-footer {
-            display: flex;
-            justify-content: flex-end;
-            gap: 10px;
-        }
-        .btn-cancel {
-            background-color: #95a5a6;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        .btn-cancel:hover {
-            background-color: #7f8c8d;
-        }
-        .btn-confirm {
-            background-color: #27ae60;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        .btn-confirm:hover {
-            background-color: #2ecc71;
-        }
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); }
+        .modal-content { background-color: white; margin: 15% auto; padding: 20px; border-radius: 8px; width: 300px; max-width: 90%; box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .modal-header h3 { margin: 0; color: #2c3e50; }
+        .close { color: #aaa; font-size: 28px; font-weight: bold; cursor: pointer; }
+        .close:hover { color: #333; }
+        .modal-body { margin-bottom: 20px; }
+        .modal-body label { display: block; margin-bottom: 8px; color: #2c3e50; }
+        .modal-body input[type="date"] { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 16px; }
+        .modal-footer { display: flex; justify-content: flex-end; gap: 10px; }
+        .btn-cancel { background-color: #95a5a6; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; }
+        .btn-confirm { background-color: #27ae60; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; }
 
-        /* Стиль для неактивних днів (опціонально) */
-        input[type="date"]::-webkit-calendar-picker-indicator {
-            cursor: pointer;
+        /* Стиль для повідомлення "Не знайдено" */
+        .no-books-message {
+            background: #f8f9fa;
+            border: 1px dashed #dee2e6;
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            color: #6c757d;
+            margin: 1rem 0;
+        }
+        .no-books-message .material-icons {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #ced4da;
         }
     </style>
 </head>
 <body>
-<!-- Header -->
 <div th:replace="~{layout/header :: header}"></div>
 
-<!-- Прихований елемент з ID поточного користувача (якщо доступний) -->
 <div th:if="${currentUserId != null}" id="current-user-id" th:data-user-id="${currentUserId}" style="display: none;"></div>
 
-<!-- Main Content -->
 <div class="container">
-    <main class="main-content">
-        <!-- Breadcrumbs -->
+    <main class="main-content" th:if="${book != null}">
+
         <div class="breadcrumbs">
             <a href="/">Home</a> /
             <a href="/catalog">Catalog</a> /
@@ -114,17 +55,14 @@
             <span th:text="${book.bookName}">Book Title</span>
         </div>
 
-        <!-- Book Details Section -->
         <div class="book-details-section">
-            <!-- Left Column - Cover -->
             <div class="book-cover-large">
-                <img th:src="${book.bookImage != null ? book.bookImage : '/images/default-book-cover.jpg'}"
+                <img th:src="${book.bookImage != null and !book.bookImage.isEmpty() ? book.bookImage : '/images/default-book-cover.jpg'}"
                      th:alt="${book.bookName}"
                      onerror="this.onerror=null; this.src='/images/default-book-cover.jpg';"
                      class="book-image-large"/>
             </div>
 
-            <!-- Right Column - Info -->
             <div class="book-info-large">
                 <h1 class="book-title-large" th:text="${book.bookName}">Book Title</h1>
                 <h2 class="book-author-large" th:text="'by ' + ${book.bookAuthor}">by Author Name</h2>
@@ -135,37 +73,27 @@
                     <p><span class="metadata-label">Language:</span> <span th:text="${book.bookLanguage}">English</span></p>
                     <p><span class="metadata-label">Genre:</span>
                         <a th:href="@{/catalog(genre=${book.bookGenre}, page=0, sortBy='bookGenre', sortDir='asc')}"
-                           th:text="${book.bookGenre}" class="genre-link">
-                            Fiction
-                        </a>
+                           th:text="${book.bookGenre}" class="genre-link">Fiction</a>
                     </p>
                 </div>
 
                 <div class="book-availability" th:classappend="${book.bookItems > 0 ? 'in-stock' : 'out-of-stock'}">
                     <span class="material-icons" th:text="${book.bookItems > 0 ? 'check_circle' : 'cancel'}">check_circle</span>
-                    <span th:if="${book.bookItems > 0}" th:text="'In Stock (' + ${book.bookItems} + ' copies)'">In Stock (5 copies)</span>
+                    <span th:if="${book.bookItems > 0}" th:text="'In Stock (' + ${book.bookItems} + ' copies)'">In Stock</span>
                     <span th:unless="${book.bookItems > 0}">Out of Stock</span>
                 </div>
 
                 <div class="book-actions">
-                    <button class="btn-reserve" th:if="${book.bookItems > 0}"
-                            th:data-book-id="${book.bookId}"
-                            onclick="openReservationModal(this)">
-                        Reserve
-                    </button>
-                    <button class="btn-reserve disabled" th:unless="${book.bookItems > 0}" disabled>
-                        Unavailable
-                    </button>
+                    <button class="btn-reserve" th:if="${book.bookItems > 0}" th:data-book-id="${book.bookId}" onclick="openReservationModal(this)">Reserve</button>
+                    <button class="btn-reserve disabled" th:unless="${book.bookItems > 0}" disabled>Unavailable</button>
                 </div>
             </div>
         </div>
 
-        <!-- More by This Author Section -->
         <section class="books-section">
             <div class="section-header">
                 <h2>More by <span th:text="${book.bookAuthor}">Author Name</span></h2>
-                <a th:href="@{/catalog(author=${book.bookAuthor}, page=0, sortBy='bookAddedAt', sortDir='desc')}"
-                   class="view-all">
+                <a th:href="@{/catalog(author=${book.bookAuthor}, page=0, sortBy='bookAddedAt', sortDir='desc')}" class="view-all">
                     View All <span class="material-icons">arrow_forward</span>
                 </a>
             </div>
@@ -173,30 +101,26 @@
             <div class="books-grid" th:if="${authorBooks != null and !authorBooks.isEmpty()}">
                 <div class="book-card" th:each="authorBook : ${authorBooks}">
                     <div class="book-cover">
-                        <img th:src="${authorBook.bookImage != null ? authorBook.bookImage : '/images/default-book-cover.jpg'}"
-                             th:alt="${authorBook.bookName}"
-                             onerror="this.onerror=null; this.src='/images/default-book-cover.jpg';"
-                             class="book-image"/>
+                        <img th:src="${authorBook.bookImage != null and !authorBook.bookImage.isEmpty() ? authorBook.bookImage : '/images/default-book-cover.jpg'}"
+                             th:alt="${authorBook.bookName}" class="book-image"/>
                     </div>
                     <div class="book-info">
                         <h3 class="book-title" th:text="${authorBook.bookName}">Book Title</h3>
                         <p class="book-author" th:text="${authorBook.bookAuthor}">Author Name</p>
-                        <p class="book-year" th:text="${authorBook.bookYear}">2024</p>
                         <a th:href="@{'/books/' + ${authorBook.bookId}}" class="btn-details">Details</a>
                     </div>
                 </div>
             </div>
             <div th:unless="${authorBooks != null and !authorBooks.isEmpty()}" class="no-books-message">
-                <p>No other books by this author found</p>
+                <span class="material-icons">person_off</span>
+                <p>No other books by this author were found in our library.</p>
             </div>
         </section>
 
-        <!-- Similar Books Section -->
         <section class="books-section">
             <div class="section-header">
-                <h2>Similar Books <span class="genre-tag" th:text="'(' + ${book.bookGenre} + ')'">(Fiction)</span></h2>
-                <a th:href="@{/catalog(genre=${book.bookGenre}, page=0, sortBy='bookAddedAt', sortDir='desc')}"
-                   class="view-all">
+                <h2>Similar Books <span class="genre-tag" th:text="'(' + ${book.bookGenre} + ')'"></span></h2>
+                <a th:href="@{/catalog(genre=${book.bookGenre}, page=0, sortBy='bookAddedAt', sortDir='desc')}" class="view-all">
                     View All <span class="material-icons">arrow_forward</span>
                 </a>
             </div>
@@ -204,25 +128,22 @@
             <div class="books-grid" th:if="${similarBooks != null and !similarBooks.isEmpty()}">
                 <div class="book-card" th:each="similarBook : ${similarBooks}">
                     <div class="book-cover">
-                        <img th:src="${similarBook.bookImage != null ? similarBook.bookImage : '/images/default-book-cover.jpg'}"
-                             th:alt="${similarBook.bookName}"
-                             onerror="this.onerror=null; this.src='/images/default-book-cover.jpg';"
-                             class="book-image"/>
+                        <img th:src="${similarBook.bookImage != null and !similarBook.bookImage.isEmpty() ? similarBook.bookImage : '/images/default-book-cover.jpg'}"
+                             th:alt="${similarBook.bookName}" class="book-image"/>
                     </div>
                     <div class="book-info">
                         <h3 class="book-title" th:text="${similarBook.bookName}">Book Title</h3>
                         <p class="book-author" th:text="${similarBook.bookAuthor}">Author Name</p>
-                        <p class="book-year" th:text="${similarBook.bookYear}">2024</p>
                         <a th:href="@{'/books/' + ${similarBook.bookId}}" class="btn-details">Details</a>
                     </div>
                 </div>
             </div>
             <div th:unless="${similarBooks != null and !similarBooks.isEmpty()}" class="no-books-message">
-                <p>No similar books found in this genre</p>
+                <span class="material-icons">library_books</span>
+                <p>No other books found in the <span th:text="${book.bookGenre}"></span> genre.</p>
             </div>
         </section>
 
-        <!-- Quick Links and Contact Section -->
         <div class="info-section">
             <div class="quick-links">
                 <h3>Quick Links</h3>
@@ -230,23 +151,28 @@
                     <li><a href="#">Borrowing Rules</a></li>
                     <li><a href="#">FAQ</a></li>
                     <li><a href="#">Opening Hours</a></li>
-                    <li><a href="#">Membership</a></li>
                 </ul>
             </div>
-
             <div class="contact-info">
                 <h3>Contact</h3>
                 <ul>
                     <li><span class="material-icons">email</span> library@mail.com</li>
-                    <li><span class="material-icons">phone</span> (044) 123-4567</li>
                     <li><span class="material-icons">location_on</span> Kyiv, Book St. 1</li>
                 </ul>
             </div>
         </div>
     </main>
+
+    <main class="main-content" th:unless="${book != null}">
+        <div class="no-books-message">
+            <span class="material-icons" style="font-size: 5rem;">search_off</span>
+            <h2>Book not found</h2>
+            <p>The book you are looking for does not exist or has been removed.</p>
+            <a href="/catalog" class="btn-confirm" style="text-decoration: none; display: inline-block; margin-top: 20px;">Back to Catalog</a>
+        </div>
+    </main>
 </div>
 
-<!-- Modal for date selection -->
 <div id="reservationModal" class="modal">
     <div class="modal-content">
         <div class="modal-header">
@@ -255,7 +181,7 @@
         </div>
         <div class="modal-body">
             <label for="reservationDate">Choose a date (next 5 business days):</label>
-            <input type="date" id="reservationDate" min="" max="">
+            <input type="date" id="reservationDate">
         </div>
         <div class="modal-footer">
             <button class="btn-cancel" onclick="closeModal()">Cancel</button>
@@ -264,135 +190,60 @@
     </div>
 </div>
 
-<!-- Footer -->
 <div th:replace="~{layout/footer :: footer}"></div>
 
-<!-- JavaScript -->
 <script>
-    // Глобальні змінні
     let currentBookId = null;
 
-    // Отримання ID поточного користувача (якщо доступний)
     function getCurrentUserId() {
         const userElement = document.getElementById('current-user-id');
         return userElement ? userElement.dataset.userId : null;
     }
 
-    // Функція для розрахунку наступних 5 робочих днів (без вихідних)
     function getNextBusinessDays(count = 5) {
         const dates = [];
         let currentDate = new Date();
-        currentDate.setDate(currentDate.getDate() + 1); // починаємо з завтра
+        currentDate.setDate(currentDate.getDate() + 1);
         while (dates.length < count) {
-            const dayOfWeek = currentDate.getDay(); // 0 = неділя, 6 = субота
-            if (dayOfWeek !== 0 && dayOfWeek !== 6) {
-                dates.push(new Date(currentDate));
-            }
+            const dayOfWeek = currentDate.getDay();
+            if (dayOfWeek !== 0 && dayOfWeek !== 6) dates.push(new Date(currentDate));
             currentDate.setDate(currentDate.getDate() + 1);
         }
         return dates;
     }
 
-    // Функція для блокування вихідних (Варіант 1)
-    function disableWeekends() {
-        const dateInput = document.getElementById('reservationDate');
-
-        // Видаляємо попередній обробник, якщо є
-        dateInput.removeEventListener('change', validateWeekend);
-
-        // Додаємо новий обробник
-        dateInput.addEventListener('change', validateWeekend);
-    }
-
-    function validateWeekend() {
-        const dateInput = document.getElementById('reservationDate');
-        const selectedDate = new Date(dateInput.value);
-        const dayOfWeek = selectedDate.getDay();
-
-        // Якщо вибрано суботу (6) або неділю (0)
-        if (dayOfWeek === 0 || dayOfWeek === 6) {
-            alert('Weekends are not available for reservation. Please select a business day.');
-
-            // Знаходимо наступний робочий день
-            const businessDays = getNextBusinessDays(5);
-            const formatDate = (date) => {
-                const year = date.getFullYear();
-                const month = String(date.getMonth() + 1).padStart(2, '0');
-                const day = String(date.getDate()).padStart(2, '0');
-                return `${year}-${month}-${day}`;
-            };
-
-            dateInput.value = formatDate(businessDays[0]);
-        }
-    }
-
-    // Відкриття модального вікна
     function openReservationModal(button) {
         currentBookId = button.getAttribute('data-book-id');
         const userId = getCurrentUserId();
         if (!userId) {
-            alert('You must be logged in to reserve a book.');
+            alert('Please login to reserve books.');
             window.location.href = '/login';
             return;
         }
 
         const modal = document.getElementById('reservationModal');
         const dateInput = document.getElementById('reservationDate');
-
-        // Розраховуємо доступні дати
         const businessDays = getNextBusinessDays(5);
-        const minDate = businessDays[0];
-        const maxDate = businessDays[businessDays.length - 1];
 
-        // Форматуємо дати для input type="date" (YYYY-MM-DD)
-        const formatDate = (date) => {
-            const year = date.getFullYear();
-            const month = String(date.getMonth() + 1).padStart(2, '0');
-            const day = String(date.getDate()).padStart(2, '0');
-            return `${year}-${month}-${day}`;
-        };
+        const formatDate = (date) => date.toISOString().split('T')[0];
 
-        dateInput.min = formatDate(minDate);
-        dateInput.max = formatDate(maxDate);
-        dateInput.value = formatDate(minDate); // встановлюємо першу доступну
-
-        // Активуємо перевірку вихідних
-        disableWeekends();
+        dateInput.min = formatDate(businessDays[0]);
+        dateInput.max = formatDate(businessDays[businessDays.length - 1]);
+        dateInput.value = dateInput.min;
 
         modal.style.display = 'block';
     }
 
-    // Закриття модального вікна
     function closeModal() {
         document.getElementById('reservationModal').style.display = 'none';
     }
 
-    // Підтвердження резервування
     function confirmReservation() {
         const dateInput = document.getElementById('reservationDate');
-        const selectedDate = dateInput.value;
-        if (!selectedDate) {
-            alert('Please select a date.');
-            return;
-        }
-
-        // Додаткова перевірка перед відправкою
-        const selectedDateObj = new Date(selectedDate);
-        const dayOfWeek = selectedDateObj.getDay();
-        if (dayOfWeek === 0 || dayOfWeek === 6) {
-            alert('Weekends are not available for reservation. Please select a business day.');
-            return;
-        }
-
         const userId = getCurrentUserId();
-        if (!userId) {
-            alert('User not authenticated.');
-            window.location.href = '/login';
-            return;
-        }
 
         const reservationData = {
-            reservationDate: selectedDate,
+            reservationDate: dateInput.value,
             reservationBook: currentBookId,
             reservationUser: userId,
             reservationStatus: 'CREATED'
@@ -400,36 +251,19 @@
 
         fetch('/books/reserve', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(reservationData)
-        })
-            .then(response => {
-                if (response.ok) {
-                    alert('Book reserved successfully!');
-                    closeModal();
-                } else {
-                    response.json().then(data => {
-                        alert('Failed to reserve: ' + (data.message || 'Please try again.'));
-                    }).catch(() => {
-                        alert('Failed to reserve book. Please try again.');
-                    });
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('An error occurred. Please try again.');
-            });
+        }).then(response => {
+            if (response.ok) {
+                alert('Success!');
+                closeModal();
+            } else {
+                alert('Error processing reservation.');
+            }
+        });
     }
 
-    // Закриття модального вікна при кліку поза ним
-    window.onclick = function(event) {
-        const modal = document.getElementById('reservationModal');
-        if (event.target === modal) {
-            modal.style.display = 'none';
-        }
-    };
+    window.onclick = (e) => { if (e.target.classList.contains('modal')) closeModal(); };
 </script>
 </body>
 </html>

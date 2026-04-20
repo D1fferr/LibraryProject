@@ -85,7 +85,24 @@ public class BookService {
         Page<Book> booksPage = bookRepository.findAll(pageable);
         long bookCount = booksPage.getTotalElements();
         int bookPages = booksPage.getTotalPages();
-        System.out.println(booksPage.getTotalElements() + "pages");
+        List<Book> books = booksPage.getContent();
+        if (books.isEmpty()) {
+            log.warn("Books not found");
+            throw new BooksNotFoundException("Books not found");
+        }
+        List<BookDTOForResponseGetBook> bookDTOForResponseGetBooks = books.stream().map(this::toBookDTOForResponseGetBook).toList();
+        BookDtoWithTotalElements bookDtoWithTotalElements = new BookDtoWithTotalElements();
+        bookDtoWithTotalElements.setBooks(bookDTOForResponseGetBooks);
+        bookDtoWithTotalElements.setBookCount(bookCount);
+        bookDtoWithTotalElements.setBookPages(bookPages);
+        return bookDtoWithTotalElements;
+    }
+    @Transactional(readOnly = true)
+    public BookDtoWithTotalElements findAllByParam(String search, Pageable pageable) {
+        String searchPattern = "%" + search + "%";
+        Page<Book> booksPage = bookRepository.findAllByBookAuthorOrBookGenreOrBookPublicationOrBookName(searchPattern, searchPattern, searchPattern, searchPattern, pageable);
+        long bookCount = booksPage.getTotalElements();
+        int bookPages = booksPage.getTotalPages();
         List<Book> books = booksPage.getContent();
         if (books.isEmpty()) {
             log.warn("Books not found");
@@ -272,17 +289,19 @@ public class BookService {
             throw new RedisConnectionFailureException(e.getMessage());
         }
     }
-    public BookDtoWithTotalElements getBooksById(List<UUID> uuids, int page, int booksPerPage){
-        Page<Book> dto = bookRepository.findAllByBookIdIn(uuids, PageRequest.of(page, booksPerPage));
-        if (dto.isEmpty()) {
+    public BookDtoWithTotalElements getBooksById(List<UUID> uuids){
+        List<Book> books = bookRepository.findAllByBookIdIn(uuids);
+
+        if (books.isEmpty()) {
             log.warn("Books not found");
             throw new BooksNotFoundException("Books not found");
         }
-        BookDtoWithTotalElements bookDtoWithTotalElements = new BookDtoWithTotalElements();
-        bookDtoWithTotalElements.setBooks(dto.getContent().stream().map(this::toBookDTOForResponseGetBook).toList());
-        bookDtoWithTotalElements.setBookPages(dto.getTotalPages());
-        bookDtoWithTotalElements.setBookCount(dto.getTotalElements());
-        return bookDtoWithTotalElements;
+
+        BookDtoWithTotalElements result = new BookDtoWithTotalElements();
+        result.setBooks(books.stream().map(this::toBookDTOForResponseGetBook).toList());
+        result.setBookCount((long) books.size());
+        result.setBookPages(1);
+        return result;
     }
 
 

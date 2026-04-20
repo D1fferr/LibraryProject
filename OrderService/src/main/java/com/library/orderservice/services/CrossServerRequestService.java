@@ -37,7 +37,7 @@ public class CrossServerRequestService {
         try {
             log.info("Trying to connect to book service to get available items");
             Integer items = restTemplate.getForObject(
-                    "http://localhost:8081/book/pieces/{book_id}",
+                    "http://localhost:8081/book/public/pieces/{book_id}",
                     Integer.class,
                     bookId
             );

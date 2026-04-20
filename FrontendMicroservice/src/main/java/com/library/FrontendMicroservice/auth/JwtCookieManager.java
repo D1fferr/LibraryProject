@@ -12,13 +12,20 @@ public class JwtCookieManager {
     private static final int COOKIE_MAX_AGE = 24 * 60 * 60;
 
     public void setJwtCookie(HttpServletResponse response, String token) {
-        ResponseCookie cookie = ResponseCookie.from(JWT_COOKIE_NAME, token)
+        Cookie cookie = new Cookie(JWT_COOKIE_NAME, token);
+        cookie.setHttpOnly(true);
+        cookie.setPath("/");
+        cookie.setMaxAge((int) COOKIE_MAX_AGE);
+
+
+        ResponseCookie resCookie = ResponseCookie.from(JWT_COOKIE_NAME, token)
                 .httpOnly(true)
                 .path("/")
                 .maxAge(COOKIE_MAX_AGE)
-                .sameSite("Strict")
+                .sameSite("Lax")
                 .build();
-        response.addHeader("Set-Cookie", cookie.toString());
+
+        response.setHeader("Set-Cookie", resCookie.toString());
     }
 
     public void clearJwtCookie(HttpServletResponse response) {

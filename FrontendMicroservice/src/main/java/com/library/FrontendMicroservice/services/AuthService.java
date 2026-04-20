@@ -52,7 +52,7 @@ public class AuthService {
     public void logout(){
             String url = authServiceUrl + "/logout";
             try {
-                authorizedRestTemplate.postForObject(url, null, Void.class);
+                authorizedRestTemplate.postForObject(url, "Logout", String.class);
                 System.out.println("logout");
             }catch(Exception e){
                 System.out.println(e.getMessage());

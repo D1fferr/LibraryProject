@@ -14,7 +14,6 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 public class ReservationDTO {
-    @Future(message = "You cannot select the booking date to be in the past or today.")
     private LocalDate reservationDate;
     private UUID reservationBook;
     private UUID reservationUser;

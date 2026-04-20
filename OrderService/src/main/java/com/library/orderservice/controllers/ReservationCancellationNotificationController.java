@@ -25,11 +25,11 @@ public class ReservationCancellationNotificationController {
     private final ReservationCancellationNotificationService service;
     private final EmailSenderService emailSenderService;
 
-    @PostMapping("/cancel/{id}")
+    @PostMapping("/auth/cancel/{id}")
     public ResponseEntity<ReservationCancellationNotificationDTO> cancelReservation(
             @PathVariable UUID id,
             @RequestBody @Valid ReservationCancellationNotificationDTO dto,
-                                                                                    BindingResult bindingResult) {
+            BindingResult bindingResult) {
         checkErrorsReservation(bindingResult);
         service.save(dto, id);
         emailSenderService.send(dto, id);
@@ -41,6 +41,11 @@ public class ReservationCancellationNotificationController {
 
         List<JoinDTOForCancelledReservations> reservations = service.findAllReservationsForUser(id);
         return new ResponseEntity<>(reservations, HttpStatus.OK);
+    }
+    @GetMapping("/user/get-one/{id}")
+    public ResponseEntity<JoinDTOForCancelledReservations> getOneForUser(@PathVariable UUID id){
+        JoinDTOForCancelledReservations dto = service.findOneForUser(id);
+        return new ResponseEntity<>(dto, HttpStatus.OK);
     }
     private void checkErrorsReservation(BindingResult bindingResult) {
         if (bindingResult.hasErrors()){

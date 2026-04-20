@@ -4,6 +4,7 @@ import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 
 @Configuration
 public class GatewayConfig {
@@ -15,6 +16,8 @@ public class GatewayConfig {
                 // catalog service
                 .route("catalog-service", r->r
                         .path("/api/book/**")
+                        .and()
+                        .method(HttpMethod.GET, HttpMethod.POST, HttpMethod.PUT, HttpMethod.PATCH, HttpMethod.DELETE, HttpMethod.OPTIONS)
                         .filters(f->f.stripPrefix(1))
                         .uri("http://localhost:8081"))
 

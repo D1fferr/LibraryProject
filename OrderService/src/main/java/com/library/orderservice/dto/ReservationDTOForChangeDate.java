@@ -11,6 +11,5 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 public class ReservationDTOForChangeDate {
-    @Future(message = "You cannot select the booking date to be in the past or today.")
     private LocalDate reservationDate;
 }

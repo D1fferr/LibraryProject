@@ -175,6 +175,27 @@
             opacity: 0.6;
         }
 
+        /* Стилі для кнопки View */
+        .btn-view {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: background 0.3s;
+            margin-top: 10px;
+            margin-left: 10px;
+        }
+
+        .btn-view:hover {
+            background: #2980b9;
+        }
+
         .pagination-section {
             background: white;
             padding: 20px;
@@ -341,77 +362,85 @@
                     <span class="material-icons">book</span>
                 </div>
 
-            <!-- Reservation Info -->
-            <div class="reservation-content">
-                <h3 class="reservation-book-title" th:text="${reservation.bookName}">Book Title</h3>
-                <p class="reservation-book-author" th:text="${reservation.bookAuthor}">Author Name</p>
+                <!-- Reservation Info -->
+                <div class="reservation-content">
+                    <h3 class="reservation-book-title" th:text="${reservation.bookName}">Book Title</h3>
+                    <p class="reservation-book-author" th:text="${reservation.bookAuthor}">Author Name</p>
 
-                <div class="reservation-details">
-                    <div class="reservation-detail-item">
-                        <span class="material-icons">calendar_today</span>
-                        <span th:text="${#temporals.format(reservation.reservationDate, 'MMMM d, yyyy')}">April 15, 2026</span>
+                    <div class="reservation-details">
+                        <div class="reservation-detail-item">
+                            <span class="material-icons">calendar_today</span>
+                            <span th:text="${#temporals.format(reservation.reservationDate, 'MMMM d, yyyy')}">April 15, 2026</span>
+                        </div>
                     </div>
-                </div>
 
-                <!-- Status Badge -->
-                <div class="reservation-status" th:classappend="'status-' + ${reservation.status}">
-                    <span class="material-icons" th:text="${reservation.status == 'CREATED' ? 'schedule' : (reservation.status == 'CONFIRMED' ? 'check_circle' : 'cancel')}">schedule</span>
-                    <span th:text="${reservation.status}">CREATED</span>
-                </div>
+                    <!-- Status Badge -->
+                    <div class="reservation-status" th:classappend="'status-' + ${reservation.status.toString()}">
+                        <span class="material-icons" th:text="${reservation.status.toString() == 'CREATED' ? 'schedule' : (reservation.status == 'CONFIRMED' ? 'check_circle' : 'cancel')}">schedule</span>
+                        <span th:text="${reservation.status.toString()}">CREATED</span>
+                    </div>
 
-                <!-- Cancel Button (only for active reservations) -->
-                <button class="btn-cancel"
-                        th:if="${reservation.status.toString() == 'CREATED' or reservation.status.toString() == 'CONFIRMED'}"
-                        th:data-reservation-id="${reservation.id}"
-                        onclick="cancelReservation(this)">
-                    <span class="material-icons">close</span>
-                    Cancel Reservation
-                </button>
+                    <!-- Cancel Button (only for active reservations) -->
+                    <button class="btn-cancel"
+                            th:if="${reservation.status.toString() == 'CREATED' or reservation.status.toString() == 'CONFIRMED'}"
+                            th:data-reservation-id="${reservation.id}"
+                            onclick="cancelReservation(this)">
+                        <span class="material-icons">close</span>
+                        Cancel Reservation
+                    </button>
+
+                    <!-- View Button (only for cancelled reservations) -->
+                    <a th:href="@{'/profile/reservations/' + ${reservation.id} + '/details'}"
+                       class="btn-view"
+                       th:if="${reservation.status.toString() == 'CANCELLED'}">
+                        <span class="material-icons">visibility</span>
+                        View Details
+                    </a>
+                </div>
             </div>
         </div>
-</div>
 
-<!-- Empty State -->
-<div class="empty-state" th:if="${reservations == null or reservations.isEmpty()}">
-    <span class="material-icons empty-icon">bookmark_border</span>
-    <h3>No reservations found</h3>
-    <p>You haven't reserved any books yet</p>
-    <a href="/catalog" class="btn-details" style="display: inline-block; margin-top: 15px;">Browse Catalog</a>
-</div>
+        <!-- Empty State -->
+        <div class="empty-state" th:if="${reservations == null or reservations.isEmpty()}">
+            <span class="material-icons empty-icon">bookmark_border</span>
+            <h3>No reservations found</h3>
+            <p>You haven't reserved any books yet</p>
+            <a href="/catalog" class="btn-details" style="display: inline-block; margin-top: 15px;">Browse Catalog</a>
+        </div>
 
-<!-- Pagination -->
-<div class="pagination-section" th:if="${totalPages > 1}">
-    <div class="pagination-info">
-        Showing page <span th:text="${currentPage + 1}">1</span>
-        of <span th:text="${totalPages}">1</span>
-        (<span th:text="${totalReservations}">0</span> reservations total)
-    </div>
+        <!-- Pagination -->
+        <div class="pagination-section" th:if="${totalPages > 1}">
+            <div class="pagination-info">
+                Showing page <span th:text="${currentPage + 1}">1</span>
+                of <span th:text="${totalPages}">1</span>
+                (<span th:text="${totalReservations}">0</span> reservations total)
+            </div>
 
-    <div class="pagination">
-        <!-- Previous button -->
-        <a th:if="${currentPage > 0}"
-           th:href="@{/profile/reservations(page=${currentPage - 1})}"
-           class="page-link prev">‹</a>
-        <span th:unless="${currentPage > 0}" class="page-link disabled">‹</span>
+            <div class="pagination">
+                <!-- Previous button -->
+                <a th:if="${currentPage > 0}"
+                   th:href="@{/profile/reservations(page=${currentPage - 1})}"
+                   class="page-link prev">‹</a>
+                <span th:unless="${currentPage > 0}" class="page-link disabled">‹</span>
 
-        <!-- Page numbers -->
-        <th:block th:each="i : ${#numbers.sequence(0, totalPages - 1)}">
-            <th:block th:if="${i >= currentPage - 2 and i <= currentPage + 2}">
-                <a th:if="${i == currentPage}" class="page-link active" th:text="${i + 1}">1</a>
-                <a th:unless="${i == currentPage}"
-                   th:href="@{/profile/reservations(page=${i})}"
-                   class="page-link" th:text="${i + 1}">2</a>
-            </th:block>
-        </th:block>
+                <!-- Page numbers -->
+                <th:block th:each="i : ${#numbers.sequence(0, totalPages - 1)}">
+                    <th:block th:if="${i >= currentPage - 2 and i <= currentPage + 2}">
+                        <a th:if="${i == currentPage}" class="page-link active" th:text="${i + 1}">1</a>
+                        <a th:unless="${i == currentPage}"
+                           th:href="@{/profile/reservations(page=${i})}"
+                           class="page-link" th:text="${i + 1}">2</a>
+                    </th:block>
+                </th:block>
 
-        <!-- Next button -->
-        <a th:if="${currentPage < totalPages - 1}"
-           th:href="@{/profile/reservations(page=${currentPage + 1})}"
-           class="page-link next">›</a>
-        <span th:unless="${currentPage < totalPages - 1}" class="page-link disabled">›</span>
-    </div>
-</div>
-</main>
+                <!-- Next button -->
+                <a th:if="${currentPage < totalPages - 1}"
+                   th:href="@{/profile/reservations(page=${currentPage + 1})}"
+                   class="page-link next">›</a>
+                <span th:unless="${currentPage < totalPages - 1}" class="page-link disabled">›</span>
+            </div>
+        </div>
+    </main>
 </div>
 
 <!-- Footer -->

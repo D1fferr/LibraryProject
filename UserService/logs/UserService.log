@@ -1,21 +1,21 @@
-2026-04-14 15:19:46 | UserService | INFO  | o.h.validator.internal.util.Version | HV000001: Hibernate Validator 9.0.1.Final
-2026-04-14 15:19:46 | UserService | INFO  | l.c.u.UserServiceApplication | Starting UserServiceApplication using Java 22.0.1 with PID 24928 (D:\Library\UserService\target\classes started by vasia in D:\Library\UserService)
-2026-04-14 15:19:46 | UserService | INFO  | l.c.u.UserServiceApplication | No active profile set, falling back to 1 default profile: "default"
-2026-04-14 15:19:47 | UserService | INFO  | o.s.d.r.c.RepositoryConfigurationDelegate | Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-04-14 15:19:47 | UserService | INFO  | o.s.d.r.c.RepositoryConfigurationDelegate | Finished Spring Data repository scanning in 91 ms. Found 1 JPA repository interface.
-2026-04-14 15:19:48 | UserService | INFO  | o.s.boot.tomcat.TomcatWebServer | Tomcat initialized with port 8087 (http)
-2026-04-14 15:19:48 | UserService | INFO  | o.a.coyote.http11.Http11NioProtocol | Initializing ProtocolHandler ["http-nio-8087"]
-2026-04-14 15:19:48 | UserService | INFO  | o.a.catalina.core.StandardService | Starting service [Tomcat]
-2026-04-14 15:19:48 | UserService | INFO  | o.a.catalina.core.StandardEngine | Starting Servlet engine: [Apache Tomcat/11.0.20]
-2026-04-14 15:19:48 | UserService | INFO  | o.s.b.w.c.s.WebApplicationContextInitializer | Root WebApplicationContext: initialization completed in 2083 ms
-2026-04-14 15:19:49 | UserService | INFO  | com.zaxxer.hikari.HikariDataSource | HikariPool-1 - Starting...
-2026-04-14 15:19:49 | UserService | INFO  | com.zaxxer.hikari.pool.HikariPool | HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@4b87074a
-2026-04-14 15:19:49 | UserService | INFO  | com.zaxxer.hikari.HikariDataSource | HikariPool-1 - Start completed.
-2026-04-14 15:19:49 | UserService | INFO  | org.hibernate.orm.jpa | HHH008540: Processing PersistenceUnitInfo [name: default]
-2026-04-14 15:19:50 | UserService | INFO  | org.hibernate.orm.core | HHH000001: Hibernate ORM core version 7.2.7.Final
-2026-04-14 15:19:51 | UserService | INFO  | o.s.o.j.p.SpringPersistenceUnitInfo | No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-04-14 15:19:52 | UserService | WARN  | org.hibernate.orm.deprecation | HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-04-14 15:19:52 | UserService | INFO  | o.hibernate.orm.connections.pooling | HHH10001005: Database info:
+2026-04-20 14:12:43 | UserService | INFO  | o.h.validator.internal.util.Version | HV000001: Hibernate Validator 9.0.1.Final
+2026-04-20 14:12:43 | UserService | INFO  | l.c.u.UserServiceApplication | Starting UserServiceApplication using Java 22.0.1 with PID 31188 (D:\Library\UserService\target\classes started by vasia in D:\Library\UserService)
+2026-04-20 14:12:43 | UserService | INFO  | l.c.u.UserServiceApplication | No active profile set, falling back to 1 default profile: "default"
+2026-04-20 14:12:44 | UserService | INFO  | o.s.d.r.c.RepositoryConfigurationDelegate | Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-20 14:12:44 | UserService | INFO  | o.s.d.r.c.RepositoryConfigurationDelegate | Finished Spring Data repository scanning in 51 ms. Found 1 JPA repository interface.
+2026-04-20 14:12:44 | UserService | INFO  | o.s.boot.tomcat.TomcatWebServer | Tomcat initialized with port 8087 (http)
+2026-04-20 14:12:44 | UserService | INFO  | o.a.coyote.http11.Http11NioProtocol | Initializing ProtocolHandler ["http-nio-8087"]
+2026-04-20 14:12:44 | UserService | INFO  | o.a.catalina.core.StandardService | Starting service [Tomcat]
+2026-04-20 14:12:44 | UserService | INFO  | o.a.catalina.core.StandardEngine | Starting Servlet engine: [Apache Tomcat/11.0.20]
+2026-04-20 14:12:44 | UserService | INFO  | o.s.b.w.c.s.WebApplicationContextInitializer | Root WebApplicationContext: initialization completed in 1431 ms
+2026-04-20 14:12:44 | UserService | INFO  | com.zaxxer.hikari.HikariDataSource | HikariPool-1 - Starting...
+2026-04-20 14:12:45 | UserService | INFO  | com.zaxxer.hikari.pool.HikariPool | HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@5e9bbd9d
+2026-04-20 14:12:45 | UserService | INFO  | com.zaxxer.hikari.HikariDataSource | HikariPool-1 - Start completed.
+2026-04-20 14:12:45 | UserService | INFO  | org.hibernate.orm.jpa | HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-04-20 14:12:45 | UserService | INFO  | org.hibernate.orm.core | HHH000001: Hibernate ORM core version 7.2.7.Final
+2026-04-20 14:12:46 | UserService | INFO  | o.s.o.j.p.SpringPersistenceUnitInfo | No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-20 14:12:46 | UserService | WARN  | org.hibernate.orm.deprecation | HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-04-20 14:12:46 | UserService | INFO  | o.hibernate.orm.connections.pooling | HHH10001005: Database info:
 	Database JDBC URL [jdbc:postgresql://localhost:5432/library_db]
 	Database driver: PostgreSQL JDBC Driver
 	Database dialect: PostgreSQLDialect
@@ -27,21 +27,322 @@
 	Pool: DataSourceConnectionProvider
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-2026-04-14 15:19:56 | UserService | INFO  | org.hibernate.orm.core | HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-04-14 15:19:56 | UserService | INFO  | o.s.o.j.LocalContainerEntityManagerFactoryBean | Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-04-14 15:19:56 | UserService | INFO  | o.s.d.j.r.q.QueryEnhancerFactories | Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-04-14 15:19:59 | UserService | WARN  | o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration | spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-04-14 15:20:00 | UserService | INFO  | o.a.coyote.http11.Http11NioProtocol | Starting ProtocolHandler ["http-nio-8087"]
-2026-04-14 15:20:00 | UserService | INFO  | o.s.boot.tomcat.TomcatWebServer | Tomcat started on port 8087 (http) with context path '/'
-2026-04-14 15:20:00 | UserService | INFO  | l.c.u.UserServiceApplication | Started UserServiceApplication in 15.009 seconds (process running for 22.685)
-2026-04-14 16:37:38 | UserService | INFO  | o.a.c.c.C.[Tomcat].[localhost].[/] | Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-04-14 16:37:38 | UserService | INFO  | o.s.web.servlet.DispatcherServlet | Initializing Servlet 'dispatcherServlet'
-2026-04-14 16:37:38 | UserService | INFO  | o.s.web.servlet.DispatcherServlet | Completed initialization in 3 ms
-2026-04-14 16:37:38 | UserService | INFO  | l.c.userservice.services.UserService | The user deleted. ID: 'c0a80065-9d87-1135-819d-872206a00000'
-2026-04-14 16:50:38 | UserService | INFO  | l.c.userservice.services.UserService | Mapping the userDTO to entity
-2026-04-14 16:50:38 | UserService | INFO  | l.c.userservice.services.UserService | User saved. ID: 'c0a80065-9d8b-1f41-819d-8c4222d30000'
-2026-04-14 16:55:11 | UserService | INFO  | o.s.boot.tomcat.GracefulShutdown | Commencing graceful shutdown. Waiting for active requests to complete
-2026-04-14 16:55:11 | UserService | INFO  | o.s.boot.tomcat.GracefulShutdown | Graceful shutdown complete
-2026-04-14 16:55:11 | UserService | INFO  | o.s.o.j.LocalContainerEntityManagerFactoryBean | Closing JPA EntityManagerFactory for persistence unit 'default'
-2026-04-14 16:55:11 | UserService | INFO  | com.zaxxer.hikari.HikariDataSource | HikariPool-1 - Shutdown initiated...
-2026-04-14 16:55:12 | UserService | INFO  | com.zaxxer.hikari.HikariDataSource | HikariPool-1 - Shutdown completed.
+2026-04-20 14:12:47 | UserService | INFO  | org.hibernate.orm.core | HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-20 14:12:47 | UserService | INFO  | o.s.o.j.LocalContainerEntityManagerFactoryBean | Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-20 14:12:47 | UserService | INFO  | o.s.d.j.r.q.QueryEnhancerFactories | Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-04-20 14:12:47 | UserService | WARN  | o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration | spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-20 14:12:48 | UserService | INFO  | o.a.coyote.http11.Http11NioProtocol | Starting ProtocolHandler ["http-nio-8087"]
+2026-04-20 14:12:48 | UserService | INFO  | o.s.boot.tomcat.TomcatWebServer | Tomcat started on port 8087 (http) with context path '/'
+2026-04-20 14:12:48 | UserService | INFO  | l.c.u.UserServiceApplication | Started UserServiceApplication in 5.71 seconds (process running for 12.377)
+2026-04-20 14:25:21 | UserService | INFO  | o.a.c.c.C.[Tomcat].[localhost].[/] | Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-04-20 14:25:21 | UserService | INFO  | o.s.web.servlet.DispatcherServlet | Initializing Servlet 'dispatcherServlet'
+2026-04-20 14:25:21 | UserService | INFO  | o.s.web.servlet.DispatcherServlet | Completed initialization in 8 ms
+2026-04-20 14:42:04 | UserService | INFO  | l.c.userservice.services.UserService | The user found. ID: 'c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-20 14:42:04 | UserService | INFO  | l.c.userservice.services.UserService | Mapping the user entity to userDTO for view
+2026-04-20 14:58:59 | UserService | INFO  | o.s.boot.tomcat.GracefulShutdown | Commencing graceful shutdown. Waiting for active requests to complete
+2026-04-20 14:58:59 | UserService | INFO  | o.s.boot.tomcat.GracefulShutdown | Graceful shutdown complete
+2026-04-20 14:58:59 | UserService | INFO  | o.s.o.j.LocalContainerEntityManagerFactoryBean | Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-20 14:58:59 | UserService | INFO  | com.zaxxer.hikari.HikariDataSource | HikariPool-1 - Shutdown initiated...
+2026-04-20 14:58:59 | UserService | INFO  | com.zaxxer.hikari.HikariDataSource | HikariPool-1 - Shutdown completed.
+2026-04-20 15:09:56 | UserService | INFO  | o.h.validator.internal.util.Version | HV000001: Hibernate Validator 9.0.1.Final
+2026-04-20 15:09:56 | UserService | INFO  | l.c.u.UserServiceApplication | Starting UserServiceApplication using Java 22.0.1 with PID 24900 (D:\Library\UserService\target\classes started by vasia in D:\Library\UserService)
+2026-04-20 15:09:56 | UserService | INFO  | l.c.u.UserServiceApplication | No active profile set, falling back to 1 default profile: "default"
+2026-04-20 15:09:57 | UserService | INFO  | o.s.d.r.c.RepositoryConfigurationDelegate | Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-20 15:09:57 | UserService | INFO  | o.s.d.r.c.RepositoryConfigurationDelegate | Finished Spring Data repository scanning in 50 ms. Found 1 JPA repository interface.
+2026-04-20 15:09:57 | UserService | INFO  | o.s.boot.tomcat.TomcatWebServer | Tomcat initialized with port 8087 (http)
+2026-04-20 15:09:57 | UserService | INFO  | o.a.coyote.http11.Http11NioProtocol | Initializing ProtocolHandler ["http-nio-8087"]
+2026-04-20 15:09:57 | UserService | INFO  | o.a.catalina.core.StandardService | Starting service [Tomcat]
+2026-04-20 15:09:57 | UserService | INFO  | o.a.catalina.core.StandardEngine | Starting Servlet engine: [Apache Tomcat/11.0.20]
+2026-04-20 15:09:57 | UserService | INFO  | o.s.b.w.c.s.WebApplicationContextInitializer | Root WebApplicationContext: initialization completed in 1447 ms
+2026-04-20 15:09:57 | UserService | INFO  | com.zaxxer.hikari.HikariDataSource | HikariPool-1 - Starting...
+2026-04-20 15:09:58 | UserService | INFO  | com.zaxxer.hikari.pool.HikariPool | HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@49cd946c
+2026-04-20 15:09:58 | UserService | INFO  | com.zaxxer.hikari.HikariDataSource | HikariPool-1 - Start completed.
+2026-04-20 15:09:58 | UserService | INFO  | org.hibernate.orm.jpa | HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-04-20 15:09:58 | UserService | INFO  | org.hibernate.orm.core | HHH000001: Hibernate ORM core version 7.2.7.Final
+2026-04-20 15:09:58 | UserService | INFO  | o.s.o.j.p.SpringPersistenceUnitInfo | No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-20 15:09:59 | UserService | WARN  | org.hibernate.orm.deprecation | HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-04-20 15:09:59 | UserService | INFO  | o.hibernate.orm.connections.pooling | HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/library_db]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 17.2
+	Default catalog/schema: library_db/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-20 15:10:00 | UserService | INFO  | org.hibernate.orm.core | HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-20 15:10:00 | UserService | INFO  | o.s.o.j.LocalContainerEntityManagerFactoryBean | Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-20 15:10:00 | UserService | INFO  | o.s.d.j.r.q.QueryEnhancerFactories | Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-04-20 15:10:00 | UserService | WARN  | o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration | spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-20 15:10:00 | UserService | WARN  | o.s.b.w.s.s.c.AnnotationConfigServletWebServerApplicationContext | Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'requestMappingHandlerMapping' defined in class path resource [org/springframework/boot/webmvc/autoconfigure/WebMvcAutoConfiguration$EnableWebMvcConfiguration.class]: Invalid mapping on handler class [library.com.userservice.controllers.UserController]: public org.springframework.http.ResponseEntity library.com.userservice.controllers.UserController.getUserBy(int,int,java.lang.String)
+2026-04-20 15:10:00 | UserService | INFO  | o.s.o.j.LocalContainerEntityManagerFactoryBean | Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-20 15:10:00 | UserService | INFO  | com.zaxxer.hikari.HikariDataSource | HikariPool-1 - Shutdown initiated...
+2026-04-20 15:10:00 | UserService | INFO  | com.zaxxer.hikari.HikariDataSource | HikariPool-1 - Shutdown completed.
+2026-04-20 15:10:00 | UserService | INFO  | o.a.catalina.core.StandardService | Stopping service [Tomcat]
+2026-04-20 15:10:00 | UserService | INFO  | o.s.b.a.l.ConditionEvaluationReportLogger | 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-04-20 15:10:00 | UserService | ERROR | o.s.b.d.LoggingFailureAnalysisReporter | 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Invalid mapping pattern detected:
+/get-all}
+        ^
+Missing preceding open capture character before variable name{
+
+Action:
+
+Fix this pattern in your application or switch to the legacy parser implementation with 'spring.mvc.pathmatch.matching-strategy=ant_path_matcher'.
+
+2026-04-20 15:20:15 | UserService | INFO  | o.h.validator.internal.util.Version | HV000001: Hibernate Validator 9.0.1.Final
+2026-04-20 15:20:15 | UserService | INFO  | l.c.u.UserServiceApplication | Starting UserServiceApplication using Java 22.0.1 with PID 5024 (D:\Library\UserService\target\classes started by vasia in D:\Library\UserService)
+2026-04-20 15:20:15 | UserService | INFO  | l.c.u.UserServiceApplication | No active profile set, falling back to 1 default profile: "default"
+2026-04-20 15:20:15 | UserService | INFO  | o.s.d.r.c.RepositoryConfigurationDelegate | Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-20 15:20:15 | UserService | INFO  | o.s.d.r.c.RepositoryConfigurationDelegate | Finished Spring Data repository scanning in 53 ms. Found 1 JPA repository interface.
+2026-04-20 15:20:16 | UserService | INFO  | o.s.boot.tomcat.TomcatWebServer | Tomcat initialized with port 8087 (http)
+2026-04-20 15:20:16 | UserService | INFO  | o.a.coyote.http11.Http11NioProtocol | Initializing ProtocolHandler ["http-nio-8087"]
+2026-04-20 15:20:16 | UserService | INFO  | o.a.catalina.core.StandardService | Starting service [Tomcat]
+2026-04-20 15:20:16 | UserService | INFO  | o.a.catalina.core.StandardEngine | Starting Servlet engine: [Apache Tomcat/11.0.20]
+2026-04-20 15:20:16 | UserService | INFO  | o.s.b.w.c.s.WebApplicationContextInitializer | Root WebApplicationContext: initialization completed in 1425 ms
+2026-04-20 15:20:16 | UserService | INFO  | com.zaxxer.hikari.HikariDataSource | HikariPool-1 - Starting...
+2026-04-20 15:20:17 | UserService | INFO  | com.zaxxer.hikari.pool.HikariPool | HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@5cfed0ba
+2026-04-20 15:20:17 | UserService | INFO  | com.zaxxer.hikari.HikariDataSource | HikariPool-1 - Start completed.
+2026-04-20 15:20:17 | UserService | INFO  | org.hibernate.orm.jpa | HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-04-20 15:20:17 | UserService | INFO  | org.hibernate.orm.core | HHH000001: Hibernate ORM core version 7.2.7.Final
+2026-04-20 15:20:17 | UserService | INFO  | o.s.o.j.p.SpringPersistenceUnitInfo | No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-20 15:20:17 | UserService | WARN  | org.hibernate.orm.deprecation | HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-04-20 15:20:17 | UserService | INFO  | o.hibernate.orm.connections.pooling | HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/library_db]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 17.2
+	Default catalog/schema: library_db/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-20 15:20:19 | UserService | INFO  | org.hibernate.orm.core | HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-20 15:20:19 | UserService | INFO  | o.s.o.j.LocalContainerEntityManagerFactoryBean | Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-20 15:20:19 | UserService | INFO  | o.s.d.j.r.q.QueryEnhancerFactories | Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-04-20 15:20:19 | UserService | WARN  | o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration | spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-20 15:20:19 | UserService | WARN  | o.s.b.w.s.s.c.AnnotationConfigServletWebServerApplicationContext | Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'requestMappingHandlerMapping' defined in class path resource [org/springframework/boot/webmvc/autoconfigure/WebMvcAutoConfiguration$EnableWebMvcConfiguration.class]: Invalid mapping on handler class [library.com.userservice.controllers.UserController]: public org.springframework.http.ResponseEntity library.com.userservice.controllers.UserController.getUserBy(int,int,java.lang.String)
+2026-04-20 15:20:19 | UserService | INFO  | o.s.o.j.LocalContainerEntityManagerFactoryBean | Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-20 15:20:19 | UserService | INFO  | com.zaxxer.hikari.HikariDataSource | HikariPool-1 - Shutdown initiated...
+2026-04-20 15:20:19 | UserService | INFO  | com.zaxxer.hikari.HikariDataSource | HikariPool-1 - Shutdown completed.
+2026-04-20 15:20:19 | UserService | INFO  | o.a.catalina.core.StandardService | Stopping service [Tomcat]
+2026-04-20 15:20:19 | UserService | INFO  | o.s.b.a.l.ConditionEvaluationReportLogger | 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-04-20 15:20:19 | UserService | ERROR | o.s.b.d.LoggingFailureAnalysisReporter | 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Invalid mapping pattern detected:
+/get-all}
+        ^
+Missing preceding open capture character before variable name{
+
+Action:
+
+Fix this pattern in your application or switch to the legacy parser implementation with 'spring.mvc.pathmatch.matching-strategy=ant_path_matcher'.
+
+2026-04-20 15:21:01 | UserService | INFO  | o.h.validator.internal.util.Version | HV000001: Hibernate Validator 9.0.1.Final
+2026-04-20 15:21:01 | UserService | INFO  | l.c.u.UserServiceApplication | Starting UserServiceApplication using Java 22.0.1 with PID 580 (D:\Library\UserService\target\classes started by vasia in D:\Library\UserService)
+2026-04-20 15:21:01 | UserService | INFO  | l.c.u.UserServiceApplication | No active profile set, falling back to 1 default profile: "default"
+2026-04-20 15:21:02 | UserService | INFO  | o.s.d.r.c.RepositoryConfigurationDelegate | Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-20 15:21:02 | UserService | INFO  | o.s.d.r.c.RepositoryConfigurationDelegate | Finished Spring Data repository scanning in 48 ms. Found 1 JPA repository interface.
+2026-04-20 15:21:02 | UserService | INFO  | o.s.boot.tomcat.TomcatWebServer | Tomcat initialized with port 8087 (http)
+2026-04-20 15:21:02 | UserService | INFO  | o.a.coyote.http11.Http11NioProtocol | Initializing ProtocolHandler ["http-nio-8087"]
+2026-04-20 15:21:02 | UserService | INFO  | o.a.catalina.core.StandardService | Starting service [Tomcat]
+2026-04-20 15:21:02 | UserService | INFO  | o.a.catalina.core.StandardEngine | Starting Servlet engine: [Apache Tomcat/11.0.20]
+2026-04-20 15:21:02 | UserService | INFO  | o.s.b.w.c.s.WebApplicationContextInitializer | Root WebApplicationContext: initialization completed in 1202 ms
+2026-04-20 15:21:03 | UserService | INFO  | com.zaxxer.hikari.HikariDataSource | HikariPool-1 - Starting...
+2026-04-20 15:21:03 | UserService | INFO  | com.zaxxer.hikari.pool.HikariPool | HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@1a1c21b4
+2026-04-20 15:21:03 | UserService | INFO  | com.zaxxer.hikari.HikariDataSource | HikariPool-1 - Start completed.
+2026-04-20 15:21:03 | UserService | INFO  | org.hibernate.orm.jpa | HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-04-20 15:21:03 | UserService | INFO  | org.hibernate.orm.core | HHH000001: Hibernate ORM core version 7.2.7.Final
+2026-04-20 15:21:03 | UserService | INFO  | o.s.o.j.p.SpringPersistenceUnitInfo | No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-20 15:21:03 | UserService | WARN  | org.hibernate.orm.deprecation | HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-04-20 15:21:03 | UserService | INFO  | o.hibernate.orm.connections.pooling | HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/library_db]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 17.2
+	Default catalog/schema: library_db/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-20 15:21:04 | UserService | INFO  | org.hibernate.orm.core | HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-20 15:21:04 | UserService | INFO  | o.s.o.j.LocalContainerEntityManagerFactoryBean | Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-20 15:21:04 | UserService | INFO  | o.s.d.j.r.q.QueryEnhancerFactories | Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-04-20 15:21:05 | UserService | WARN  | o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration | spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-20 15:21:05 | UserService | INFO  | o.a.coyote.http11.Http11NioProtocol | Starting ProtocolHandler ["http-nio-8087"]
+2026-04-20 15:21:05 | UserService | INFO  | o.s.boot.tomcat.TomcatWebServer | Tomcat started on port 8087 (http) with context path '/'
+2026-04-20 15:21:05 | UserService | INFO  | l.c.u.UserServiceApplication | Started UserServiceApplication in 4.989 seconds (process running for 5.956)
+2026-04-20 15:21:06 | UserService | INFO  | o.a.c.c.C.[Tomcat].[localhost].[/] | Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-04-20 15:21:06 | UserService | INFO  | o.s.web.servlet.DispatcherServlet | Initializing Servlet 'dispatcherServlet'
+2026-04-20 15:21:06 | UserService | INFO  | o.s.web.servlet.DispatcherServlet | Completed initialization in 1 ms
+2026-04-20 15:21:20 | UserService | INFO  | l.c.userservice.services.UserService | Mapping the userDTO for changing profile to entity. ID: 'c0a80067-9a73-1900-819a-7359572a0000'
+2026-04-20 15:21:20 | UserService | INFO  | l.c.userservice.services.UserService | Profile updated. ID: 'c0a80067-9a73-1900-819a-7359572a0000'
+2026-04-20 15:30:32 | UserService | ERROR | o.a.c.c.C.[.[.[.[dispatcherServlet] | Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: java.lang.IllegalArgumentException: Invalid UUID string: ansdfnuncemen5sdfs3dsfs] with root cause
+java.lang.IllegalArgumentException: Invalid UUID string: ansdfnuncemen5sdfs3dsfs
+	at java.base/java.util.UUID.fromString1(UUID.java:286)
+	at java.base/java.util.UUID.fromString(UUID.java:264)
+	at library.com.userservice.services.UserService.findUser(UserService.java:61)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:158)
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:133)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:371)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:130)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:719)
+	at library.com.userservice.services.UserService$$SpringCGLIB$$0.findUser(<generated>)
+	at library.com.userservice.controllers.UserController.getUserBy(UserController.java:81)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:252)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:184)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1000)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:892)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:128)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:492)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1779)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57)
+	at java.base/java.lang.Thread.run(Thread.java:1570)
+2026-04-20 15:31:07 | UserService | INFO  | o.s.boot.tomcat.GracefulShutdown | Commencing graceful shutdown. Waiting for active requests to complete
+2026-04-20 15:31:07 | UserService | INFO  | o.s.boot.tomcat.GracefulShutdown | Graceful shutdown complete
+2026-04-20 15:31:07 | UserService | INFO  | o.s.o.j.LocalContainerEntityManagerFactoryBean | Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-20 15:31:07 | UserService | INFO  | com.zaxxer.hikari.HikariDataSource | HikariPool-1 - Shutdown initiated...
+2026-04-20 15:31:07 | UserService | INFO  | com.zaxxer.hikari.HikariDataSource | HikariPool-1 - Shutdown completed.
+2026-04-20 15:40:52 | UserService | INFO  | o.h.validator.internal.util.Version | HV000001: Hibernate Validator 9.0.1.Final
+2026-04-20 15:40:52 | UserService | INFO  | l.c.u.UserServiceApplication | Starting UserServiceApplication using Java 22.0.1 with PID 3680 (D:\Library\UserService\target\classes started by vasia in D:\Library\UserService)
+2026-04-20 15:40:52 | UserService | INFO  | l.c.u.UserServiceApplication | No active profile set, falling back to 1 default profile: "default"
+2026-04-20 15:40:53 | UserService | INFO  | o.s.d.r.c.RepositoryConfigurationDelegate | Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-20 15:40:53 | UserService | INFO  | o.s.d.r.c.RepositoryConfigurationDelegate | Finished Spring Data repository scanning in 57 ms. Found 1 JPA repository interface.
+2026-04-20 15:40:53 | UserService | INFO  | o.s.boot.tomcat.TomcatWebServer | Tomcat initialized with port 8087 (http)
+2026-04-20 15:40:53 | UserService | INFO  | o.a.coyote.http11.Http11NioProtocol | Initializing ProtocolHandler ["http-nio-8087"]
+2026-04-20 15:40:53 | UserService | INFO  | o.a.catalina.core.StandardService | Starting service [Tomcat]
+2026-04-20 15:40:53 | UserService | INFO  | o.a.catalina.core.StandardEngine | Starting Servlet engine: [Apache Tomcat/11.0.20]
+2026-04-20 15:40:53 | UserService | INFO  | o.s.b.w.c.s.WebApplicationContextInitializer | Root WebApplicationContext: initialization completed in 1662 ms
+2026-04-20 15:40:54 | UserService | INFO  | com.zaxxer.hikari.HikariDataSource | HikariPool-1 - Starting...
+2026-04-20 15:40:54 | UserService | INFO  | com.zaxxer.hikari.pool.HikariPool | HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@7455dacb
+2026-04-20 15:40:54 | UserService | INFO  | com.zaxxer.hikari.HikariDataSource | HikariPool-1 - Start completed.
+2026-04-20 15:40:54 | UserService | INFO  | org.hibernate.orm.jpa | HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-04-20 15:40:54 | UserService | INFO  | org.hibernate.orm.core | HHH000001: Hibernate ORM core version 7.2.7.Final
+2026-04-20 15:40:55 | UserService | INFO  | o.s.o.j.p.SpringPersistenceUnitInfo | No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-20 15:40:55 | UserService | WARN  | org.hibernate.orm.deprecation | HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-04-20 15:40:55 | UserService | INFO  | o.hibernate.orm.connections.pooling | HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/library_db]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 17.2
+	Default catalog/schema: library_db/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-20 15:40:56 | UserService | INFO  | org.hibernate.orm.core | HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-20 15:40:56 | UserService | INFO  | o.s.o.j.LocalContainerEntityManagerFactoryBean | Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-20 15:40:57 | UserService | INFO  | o.s.d.j.r.q.QueryEnhancerFactories | Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-04-20 15:40:58 | UserService | WARN  | o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration | spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-20 15:40:58 | UserService | INFO  | o.a.coyote.http11.Http11NioProtocol | Starting ProtocolHandler ["http-nio-8087"]
+2026-04-20 15:40:58 | UserService | INFO  | o.s.boot.tomcat.TomcatWebServer | Tomcat started on port 8087 (http) with context path '/'
+2026-04-20 15:40:58 | UserService | INFO  | l.c.u.UserServiceApplication | Started UserServiceApplication in 7.562 seconds (process running for 8.7)
+2026-04-20 15:40:59 | UserService | INFO  | o.a.c.c.C.[Tomcat].[localhost].[/] | Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-04-20 15:40:59 | UserService | INFO  | o.s.web.servlet.DispatcherServlet | Initializing Servlet 'dispatcherServlet'
+2026-04-20 15:40:59 | UserService | INFO  | o.s.web.servlet.DispatcherServlet | Completed initialization in 1 ms
+2026-04-20 15:44:51 | UserService | INFO  | l.c.userservice.services.UserService | Mapping the userDTO for changing profile to entity. ID: 'c0a80065-9d58-1d7d-819d-58a817260003'
+2026-04-20 15:44:51 | UserService | INFO  | l.c.userservice.services.UserService | Profile updated. ID: 'c0a80065-9d58-1d7d-819d-58a817260003'
+2026-04-20 16:10:01 | UserService | INFO  | l.c.userservice.services.UserService | The user found. ID: 'c0a80067-9a73-1900-819a-7359572a0000'
+2026-04-20 16:10:01 | UserService | INFO  | l.c.userservice.services.UserService | Mapping the user entity to userDTO for view
+2026-04-20 16:10:10 | UserService | INFO  | l.c.userservice.services.UserService | The user found. ID: 'c0a80065-9d3f-168f-819d-3f0734b20000'
+2026-04-20 16:10:10 | UserService | INFO  | l.c.userservice.services.UserService | Mapping the user entity to userDTO for view
+2026-04-20 16:10:17 | UserService | INFO  | l.c.userservice.services.UserService | The user found. ID: 'c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-20 16:10:17 | UserService | INFO  | l.c.userservice.services.UserService | Mapping the user entity to userDTO for view
+2026-04-20 16:10:34 | UserService | INFO  | l.c.userservice.services.UserService | The user found. ID: 'c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-20 16:10:34 | UserService | INFO  | l.c.userservice.services.UserService | Mapping the user entity to userDTO for view
+2026-04-20 16:10:36 | UserService | INFO  | l.c.userservice.services.UserService | The user found. ID: 'c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-20 16:10:36 | UserService | INFO  | l.c.userservice.services.UserService | Mapping the user entity to userDTO for view
+2026-04-20 16:12:02 | UserService | INFO  | l.c.userservice.services.UserService | The user found. ID: 'c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-20 16:12:02 | UserService | INFO  | l.c.userservice.services.UserService | Mapping the user entity to userDTO for view
+2026-04-20 16:12:15 | UserService | INFO  | l.c.userservice.services.UserService | The user found. ID: 'c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-20 16:12:15 | UserService | INFO  | l.c.userservice.services.UserService | Mapping the user entity to userDTO for view
+2026-04-20 16:14:52 | UserService | INFO  | l.c.userservice.services.UserService | The user found. ID: 'c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-20 16:14:52 | UserService | INFO  | l.c.userservice.services.UserService | Mapping the user entity to userDTO for view
+2026-04-20 16:14:54 | UserService | INFO  | l.c.userservice.services.UserService | The user found. ID: 'c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-20 16:14:54 | UserService | INFO  | l.c.userservice.services.UserService | Mapping the user entity to userDTO for view
+2026-04-20 16:15:02 | UserService | INFO  | l.c.userservice.services.UserService | The user found. ID: 'c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-20 16:15:02 | UserService | INFO  | l.c.userservice.services.UserService | Mapping the user entity to userDTO for view
+2026-04-20 16:15:04 | UserService | INFO  | l.c.userservice.services.UserService | The user found. ID: 'c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-20 16:15:04 | UserService | INFO  | l.c.userservice.services.UserService | Mapping the user entity to userDTO for view
+2026-04-20 16:19:37 | UserService | INFO  | l.c.userservice.services.UserService | The user found. ID: 'c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-20 16:19:37 | UserService | INFO  | l.c.userservice.services.UserService | Mapping the user entity to userDTO for view
+2026-04-20 16:19:44 | UserService | INFO  | l.c.userservice.services.UserService | The user found. ID: 'c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-20 16:19:44 | UserService | INFO  | l.c.userservice.services.UserService | Mapping the user entity to userDTO for view
+2026-04-20 16:19:46 | UserService | INFO  | l.c.userservice.services.UserService | The user found. ID: 'c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-20 16:19:46 | UserService | INFO  | l.c.userservice.services.UserService | Mapping the user entity to userDTO for view
+2026-04-20 16:34:53 | UserService | INFO  | l.c.userservice.services.UserService | The user found. ID: 'c0a80065-9d3f-168f-819d-3f0734b20000'
+2026-04-20 16:34:53 | UserService | INFO  | l.c.userservice.services.UserService | Mapping the user entity to userDTO for view
+2026-04-20 16:34:59 | UserService | INFO  | l.c.userservice.services.UserService | The user found. ID: 'c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-20 16:34:59 | UserService | INFO  | l.c.userservice.services.UserService | Mapping the user entity to userDTO for view
+2026-04-20 16:35:05 | UserService | INFO  | l.c.userservice.services.UserService | The user found. ID: 'c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-20 16:35:05 | UserService | INFO  | l.c.userservice.services.UserService | Mapping the user entity to userDTO for view
+2026-04-20 16:58:24 | UserService | INFO  | o.s.boot.tomcat.GracefulShutdown | Commencing graceful shutdown. Waiting for active requests to complete
+2026-04-20 16:58:24 | UserService | INFO  | o.s.boot.tomcat.GracefulShutdown | Graceful shutdown complete
+2026-04-20 16:58:24 | UserService | INFO  | o.s.o.j.LocalContainerEntityManagerFactoryBean | Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-20 16:58:24 | UserService | INFO  | com.zaxxer.hikari.HikariDataSource | HikariPool-1 - Shutdown initiated...
+2026-04-20 16:58:24 | UserService | INFO  | com.zaxxer.hikari.HikariDataSource | HikariPool-1 - Shutdown completed.

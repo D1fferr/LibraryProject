@@ -35,21 +35,32 @@ public class BookController {
                                                        @RequestParam(value = "sortDir", defaultValue = "disc") String sortDir)
     {
         if (sortBy.equals("bookGenre") && genre !=null && !genre.isEmpty()){
-            System.out.println("Book genre");
             BookDtoWithTotalElements books = bookService.findAllByGenre(genre, PageRequest.of(page, booksPerPage, Sort.by(Sort.Direction.fromString(sortDir), sortBy)));
             return new ResponseEntity<>(books, HttpStatus.OK);
         }
         BookDtoWithTotalElements books = bookService.findAll(PageRequest.of(page, booksPerPage, Sort.by(sortBy)));
         return new ResponseEntity<>(books, HttpStatus.OK);
     }
+    @GetMapping("/auth")
+    public ResponseEntity<BookDtoWithTotalElements> getAllBooksForAdmin(@RequestParam(defaultValue = "0") int page,
+                                                                        @RequestParam(required = false) String search,
+                                                                        @RequestParam(value = "sortBy", defaultValue = "bookAddedAt") String sort,
+                                                                        @RequestParam(value = "sortDir", defaultValue = "disc") String sortDir)
+    {
+        if (search!=null){
+            BookDtoWithTotalElements books = bookService.findAllByParam(search ,PageRequest.of(page, 12, Sort.by(sortDir, sort)));
+            return new ResponseEntity<>(books, HttpStatus.OK);
+        }
+        BookDtoWithTotalElements books = bookService.findAll(PageRequest.of(page, 12, Sort.by(sortDir, sort)));
+        return new ResponseEntity<>(books, HttpStatus.OK);
+    }
     @PostMapping("/auth/for-reservations")
     public ResponseEntity<BookDtoWithTotalElements> getAllBooksForReservations(@RequestParam(value = "page", defaultValue = "0") Integer page,
-                                                                               @RequestParam(value = "booksPerPage", defaultValue = "5", required = false) Integer booksPerPage,
+                                                                               @RequestParam(value = "booksPerPage", defaultValue = "4", required = false) Integer booksPerPage,
                                                                                @RequestBody BookDtoForReservations uuids
                                                                 )
     {
-        System.out.println("Start finding books");
-        BookDtoWithTotalElements books = bookService.getBooksById(uuids.getUuids(), page, booksPerPage);
+        BookDtoWithTotalElements books = bookService.getBooksById(uuids.getUuids());
         return new ResponseEntity<>(books, HttpStatus.OK);
     }
     @GetMapping("/public/author/{bookAuthor}")
@@ -92,12 +103,13 @@ public class BookController {
     }
 
     @PostMapping("/auth/create")
-    public ResponseEntity<BookDTOForResponseCreate> createBook(@RequestPart("bookData") @Valid BookDTOForCreate bookDTO,
+    public ResponseEntity<HttpStatus> createBook(@RequestPart("bookData") @Valid BookDTOForCreate bookDTO,
                                                                @RequestPart(value = "coverImage", required = false) MultipartFile coverImage,
                                                                BindingResult bindingResult){
         validateBookFields(bindingResult);
+        System.out.println(coverImage.getOriginalFilename());
         BookDTOForResponseCreate bookDTOForResponseCreate = bookService.save(bookDTO, coverImage);
-        return new ResponseEntity<>(bookDTOForResponseCreate, HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
     @DeleteMapping("/auth/delete/{book_id}")
     public ResponseEntity<HttpStatus> deleteBook(@PathVariable UUID book_id){
@@ -105,13 +117,13 @@ public class BookController {
         return ResponseEntity.ok(HttpStatus.NO_CONTENT);
     }
     @PatchMapping("/auth/change-book/{id}")
-    public ResponseEntity<BookDTOForResponseCreate> changeBook(@PathVariable UUID id,
+    public ResponseEntity<HttpStatus> changeBook(@PathVariable UUID id,
                                                                @RequestPart("bookData") @Valid BookDTO bookDTO,
                                                                @RequestPart(value = "coverImage", required = false) MultipartFile coverImage,
                                                                BindingResult bindingResult){
         validateBookFields(bindingResult);
         BookDTOForResponseCreate bookDTOForResponseCreate = bookService.updateBook(bookDTO, id, coverImage);
-        return new ResponseEntity<>(bookDTOForResponseCreate, HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
     @GetMapping("/public/most-popular-books")
     public ResponseEntity<BookDtoWithTotalElements> getMostPopularBooks(@RequestParam(value = "page", defaultValue = "0") Integer page) {

@@ -1,11 +1,8 @@
 package com.library.orderservice.services;
 
-import com.library.orderservice.dto.ReservationForView;
-import com.library.orderservice.dto.ReservationsPageDto;
+import com.library.orderservice.dto.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import com.library.orderservice.dto.ReservationDTO;
-import com.library.orderservice.dto.ReservationDTOForChangeDate;
 import com.library.orderservice.models.Reservation;
 import com.library.orderservice.models.ReservationStatus;
 import com.library.orderservice.repositories.ReservationRepository;
@@ -14,6 +11,7 @@ import com.library.orderservice.util.ReservationsNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -80,7 +78,7 @@ public class ReservationService {
             throw new ReservationNotFoundException("No reservations found");
         }
         Reservation reservation = optionalReservation.get();
-        reservation.setReservationStatus(ReservationStatus.CANCELED);
+        reservation.setReservationStatus(ReservationStatus.CANCELLED);
         reservationRepository.save(reservation);
         log.info("The reservations status changed to canceled. ID: '{}'", id);
     }
@@ -102,19 +100,24 @@ public class ReservationService {
     }
 
     @Transactional(readOnly = true)
-    public List<ReservationDTO> findReservationByBookId(UUID reservationBook, PageRequest pageRequest) {
-        List<Reservation> reservationList = reservationRepository.findReservationByReservationBook(reservationBook, pageRequest);
+    public ReservationsPageDto findReservationByBookId(UUID reservationBook, PageRequest pageRequest) {
+        Page<Reservation> reservationList = reservationRepository.findReservationByReservationBook(reservationBook, pageRequest);
         if (reservationList.isEmpty()) {
             log.warn("No reservations by book id found '{}'", reservationBook);
             throw new ReservationsNotFoundException("No reservations found");
         }
+
+        ReservationsPageDto dto = new ReservationsPageDto();
+        dto.setReservations(reservationList.get().map(this::toDTOForView).toList());
+        dto.setTotalPages(reservationList.getTotalPages());
+        dto.setTotalElements(reservationList.getTotalElements());
         log.info("All reservations by book id found '{}'", reservationBook);
-        return reservationList.stream().map(this::toDTO).toList();
+        return dto;
 
     }@Transactional(readOnly = true)
     public Integer findReservationByBookId(UUID reservationBook) {
         List<Reservation> reservationList = reservationRepository.findReservationsByReservationBookAndReservationDateAndReservationStatusNot(
-                reservationBook, LocalDate.now(),ReservationStatus.CANCELED);
+                reservationBook, LocalDate.now(),ReservationStatus.CANCELLED);
         if (reservationList.isEmpty()) {
             log.warn("No reservations by book id found '{}'", reservationBook);
             return 0;
@@ -151,14 +154,19 @@ public class ReservationService {
     }
 
     @Transactional(readOnly = true)
-    public List<ReservationDTO> findAllReservation(PageRequest pageRequest) {
-        Page<Reservation> reservationList = reservationRepository.findAll(pageRequest);
+    public ReservationsPageDto findAllReservation(PageRequest pageRequest) {
+        Page<Reservation> reservationList = reservationRepository.findAllByReservationBookIsNotNullAndReservationUserIsNotNull(pageRequest);
         if (reservationList.isEmpty()) {
             log.warn("No reservations found");
             throw new ReservationsNotFoundException("No reservations found");
         }
         log.info("All reservations found");
-        return reservationList.stream().map(this::toDTO).toList();
+        ReservationsPageDto dto = new ReservationsPageDto();
+        dto.setReservations(reservationList.stream().map(this::toDTOForView).toList());
+        dto.setTotalElements(reservationList.getTotalElements());
+        dto.setTotalPages(reservationList.getTotalPages());
+
+        return dto;
     }
 
     @Transactional(readOnly = true)
@@ -182,7 +190,21 @@ public class ReservationService {
         log.info("The reservation found. ID: '{}'", id);
         return optionalReservation.get();
     }
+    @Transactional(readOnly = true)
+    public ReservationsPageDto findAllReservationByParam(String search, Pageable pageable) {
+        Page<Reservation> reservationList = reservationRepository.findAllByReservationBookOrReservationUser(UUID.fromString(search), UUID.fromString(search), pageable);
+        if (reservationList.isEmpty()) {
+            log.warn("No reservations found");
+            throw new ReservationsNotFoundException("No reservations found");
+        }
+        log.info("All reservations found");
+        ReservationsPageDto dto = new ReservationsPageDto();
+        dto.setReservations(reservationList.stream().map(this::toDTOForView).toList());
+        dto.setTotalElements(reservationList.getTotalElements());
+        dto.setTotalPages(reservationList.getTotalPages());
+        return dto;
 
+    }
 
 
 

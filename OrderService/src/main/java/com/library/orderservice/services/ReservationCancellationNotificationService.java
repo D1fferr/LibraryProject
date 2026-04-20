@@ -1,5 +1,7 @@
 package com.library.orderservice.services;
 
+import com.library.orderservice.dto.ReservationDTO;
+import com.library.orderservice.models.Reservation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import com.library.orderservice.dto.JoinDTOForCancelledReservations;
@@ -11,6 +13,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Slf4j
@@ -41,6 +44,22 @@ public class ReservationCancellationNotificationService {
         }
         log.info("All canceled reservations found");
         return reservations;
+    }
+    @Transactional(readOnly = true)
+    public JoinDTOForCancelledReservations findOneForUser(UUID id){
+        Optional<ReservationCancellationNotification> optionalReservation = repository.findByReservationId(id);
+        if (optionalReservation.isEmpty()) {
+            log.warn("The reservation by id not found. ID: '{}'", id);
+            throw new ReservationNotFoundException("The reservation not found");
+        }
+        log.info("The reservation by id found. ID: '{}'", id);
+        JoinDTOForCancelledReservations dto = new JoinDTOForCancelledReservations();
+        ReservationDTO reservationDTO = reservationService.findById(optionalReservation.get().getReservationId());
+        dto.setReservationBook(reservationDTO.getReservationBook());
+        dto.setReservationDate(reservationDTO.getReservationDate());
+        dto.setReservationStatus(reservationDTO.getReservationStatus());
+        dto.setMessage(optionalReservation.get().getMessage());
+        return dto;
     }
 
     private ReservationCancellationNotification toEntity(ReservationCancellationNotificationDTO dto){

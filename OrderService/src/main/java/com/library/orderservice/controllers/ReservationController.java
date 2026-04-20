@@ -1,12 +1,9 @@
 package com.library.orderservice.controllers;
 
-import com.library.orderservice.dto.ReservationForView;
-import com.library.orderservice.dto.ReservationsPageDto;
+import com.library.orderservice.dto.*;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import com.library.orderservice.dto.ReservationDTO;
-import com.library.orderservice.dto.ReservationDTOForChangeDate;
 import com.library.orderservice.models.Reservation;
 import com.library.orderservice.services.CrossServerRequestService;
 import com.library.orderservice.services.KafkaSenderService;
@@ -42,18 +39,25 @@ public class ReservationController {
         return new ResponseEntity<>(reservationDTOS, HttpStatus.OK);
     }
     @GetMapping("/auth/view_for_the_book/{id}")
-    public ResponseEntity<List<ReservationDTO>> viewReservationForOneBook(@PathVariable UUID id,
+    public ResponseEntity<ReservationsPageDto> viewReservationForOneBook(@PathVariable UUID id,
                                                                           @RequestParam(value = "page", defaultValue = "0") Integer page,
                                                                           @RequestParam(value = "reservationPerPage", defaultValue = "5") Integer reservationPerPage){
-        List<ReservationDTO> reservationDTOS = reservationService
+        ReservationsPageDto reservationDTOS = reservationService
                 .findReservationByBookId(id, PageRequest.of(page, reservationPerPage));
         return new ResponseEntity<>(reservationDTOS, HttpStatus.OK);
     }
     @GetMapping("/auth/view_all")
-    public ResponseEntity<List<ReservationDTO>> viewAllReservation(@RequestParam(value = "page", defaultValue = "0") Integer page,
-                                                                   @RequestParam(value = "reservationPerPage", defaultValue = "5") Integer reservationPerPage,
-                                                                   @RequestParam(value = "sortBy", defaultValue = "reservationDate") String sortBy){
-        List<ReservationDTO> reservationDTOS = reservationService
+    public ResponseEntity<ReservationsPageDto> viewAllReservation(@RequestParam(value = "page", defaultValue = "0") Integer page,
+                                                                              @RequestParam(value = "reservationPerPage", defaultValue = "5") Integer reservationPerPage,
+                                                                              @RequestParam(value = "sortBy", defaultValue = "reservationDate") String sortBy,
+                                                                              @RequestParam(value = "search", required = false) String search){
+
+        if (search!=null){
+            ReservationsPageDto reservationDTOS = reservationService
+                    .findAllReservationByParam(search, PageRequest.of(page, reservationPerPage, Sort.by(sortBy)));
+            return new ResponseEntity<>(reservationDTOS, HttpStatus.OK);
+        }
+        ReservationsPageDto reservationDTOS = reservationService
                 .findAllReservation(PageRequest.of(page, reservationPerPage, Sort.by(sortBy)));
         return new ResponseEntity<>(reservationDTOS, HttpStatus.OK);
     }
@@ -71,7 +75,7 @@ public class ReservationController {
         crossServerRequestService.checkAvailableDate(reservationDTO);
 
         Reservation reservation = reservationService.save(reservationDTO);
-        kafkaSenderService.send(reservation.getReservationId().toString());
+        kafkaSenderService.send(reservation.getReservationBook().toString());
         return ResponseEntity.ok(HttpStatus.CREATED);
     }
     @PatchMapping("/auth/change_date/{id}")

@@ -85,7 +85,7 @@ public class EmailSenderService {
     private String textPrep(String username, String id) {
         return "Hello dear " + username +
                 "." + " The book you wanted to review is now available. You can reserve it at the link:" +
-                "http://localhost:8081/book/" +
+                "http://localhost:8080/book/" +
                 id +
                 " We will be glad to see you again";
 

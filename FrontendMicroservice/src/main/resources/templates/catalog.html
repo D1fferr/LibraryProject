@@ -29,6 +29,26 @@
       margin-right: 4px;
       vertical-align: middle;
     }
+
+    /* Стилі для повідомлення про відсутність книг */
+    .no-books-message {
+      text-align: center;
+      padding: 60px 20px;
+      background: white;
+      border-radius: 8px;
+      color: #7f8c8d;
+    }
+
+    .no-books-message .material-icons {
+      font-size: 64px;
+      color: #bdc3c7;
+      margin-bottom: 20px;
+    }
+
+    .no-books-message h3 {
+      color: #2c3e50;
+      margin-bottom: 10px;
+    }
   </style>
 </head>
 <body>
@@ -128,38 +148,41 @@
 
     <!-- Books Grid -->
     <div class="books-section">
-      <div class="books-grid" id="booksGrid">
-        <div class="book-card" th:each="book : ${books}">
-          <div class="book-cover">
-            <img th:if="${book.bookImage != null and !book.bookImage.isEmpty()}"
-                 th:src="${book.bookImage}"
-                 th:alt="${book.bookName}"
-                 class="book-image"/>
-            <div th:unless="${book.bookImage != null and !book.bookImage.isEmpty()}"
-                 class="no-image-placeholder">
-              <span class="material-icons">book</span>
+      <!-- Перевірка на наявність книг -->
+      <div th:if="${books != null and !books.isEmpty()}">
+        <div class="books-grid" id="booksGrid">
+          <div class="book-card" th:each="book : ${books}">
+            <div class="book-cover">
+              <img th:if="${book.bookImage != null and !book.bookImage.isEmpty()}"
+                   th:src="${book.bookImage}"
+                   th:alt="${book.bookName}"
+                   class="book-image"/>
+              <div th:unless="${book.bookImage != null and !book.bookImage.isEmpty()}"
+                   class="no-image-placeholder">
+                <span class="material-icons">book</span>
+              </div>
             </div>
-          </div>
-          <div class="book-info">
-            <h3 class="book-title" th:text="${book.bookName}">Book Title</h3>
-            <p class="book-author" th:text="${book.bookAuthor}">Author Name</p>
-            <p class="book-year" th:text="${book.bookYear}">2024</p>
-            <p class="book-genre" th:text="${book.bookGenre}">Fiction</p>
-            <a th:href="@{'/books/' + ${book.bookId}}" class="btn-details">Details</a>
+            <div class="book-info">
+              <h3 class="book-title" th:text="${book.bookName}">Book Title</h3>
+              <p class="book-author" th:text="${book.bookAuthor}">Author Name</p>
+              <p class="book-year" th:text="${book.bookYear}">2024</p>
+              <p class="book-genre" th:text="${book.bookGenre}">Fiction</p>
+              <a th:href="@{'/books/' + ${book.bookId}}" class="btn-details">Details</a>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- Empty State -->
-      <div class="empty-state" th:if="${books.empty}">
-        <span class="material-icons empty-icon">menu_book</span>
-        <h3>No books found</h3>
-        <p>Try selecting a different category</p>
+      <!-- Повідомлення про відсутність книг -->
+      <div th:if="${books == null or books.isEmpty()}" class="no-books-message">
+        <span class="material-icons">menu_book</span>
+        <h3>Books not found</h3>
+        <p>No books available in this category</p>
       </div>
     </div>
 
-    <!-- Pagination -->
-    <div class="pagination-section" th:if="${totalPages > 1}">
+    <!-- Pagination - показуємо тільки якщо є книги -->
+    <div class="pagination-section" th:if="${totalPages > 1 and books != null and !books.isEmpty()}">
       <div class="pagination-info">
         Showing page <span th:text="${currentPage + 1}">1</span>
         of <span th:text="${totalPages}">10</span>
@@ -244,32 +267,36 @@
     const viewButtons = document.querySelectorAll('.view-btn');
     const booksGrid = document.getElementById('booksGrid');
 
-    viewButtons.forEach(btn => {
-      btn.addEventListener('click', function() {
-        viewButtons.forEach(b => b.classList.remove('active'));
-        this.classList.add('active');
+    if (booksGrid) {
+      viewButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+          viewButtons.forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
 
-        const view = this.dataset.view;
-        if (view === 'list') {
-          booksGrid.classList.add('list-view');
-        } else {
-          booksGrid.classList.remove('list-view');
-        }
+          const view = this.dataset.view;
+          if (view === 'list') {
+            booksGrid.classList.add('list-view');
+          } else {
+            booksGrid.classList.remove('list-view');
+          }
 
-        localStorage.setItem('catalogView', view);
+          localStorage.setItem('catalogView', view);
+        });
       });
-    });
 
-    const savedView = localStorage.getItem('catalogView');
-    if (savedView === 'list') {
-      document.querySelector('[data-view="list"]').click();
+      const savedView = localStorage.getItem('catalogView');
+      if (savedView === 'list') {
+        const listBtn = document.querySelector('[data-view="list"]');
+        if (listBtn) listBtn.click();
+      }
     }
 
     // Додаткова перевірка URL при завантаженні сторінки
     const urlParams = new URLSearchParams(window.location.search);
     const sortByParam = urlParams.get('sortBy');
     if (!sortByParam) {
-      document.getElementById('sortSelect').value = 'bookAddedAt,desc';
+      const sortSelect = document.getElementById('sortSelect');
+      if (sortSelect) sortSelect.value = 'bookAddedAt,desc';
     }
   });
 </script>

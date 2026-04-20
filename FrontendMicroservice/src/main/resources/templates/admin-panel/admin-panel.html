@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - BookLibrary</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        .admin-hero {
+            background: linear-gradient(135deg, #2c3e50 0%, #1a252f 100%);
+            padding: 40px 0;
+            text-align: center;
+            color: white;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .admin-hero .hero-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .admin-hero h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .admin-hero p {
+            font-size: 1rem;
+            opacity: 0.95;
+        }
+
+        .admin-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .admin-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .admin-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+        }
+
+        .admin-card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .admin-card-header .material-icons {
+            font-size: 32px;
+            color: #667eea;
+        }
+
+        .admin-card-header h2 {
+            font-size: 1.3rem;
+            color: #2c3e50;
+            margin: 0;
+        }
+
+        .admin-card-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .admin-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 16px;
+            background: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.3s;
+            color: #333;
+        }
+
+        .admin-btn:hover {
+            background: #e8f0fe;
+            border-color: #667eea;
+            transform: translateX(5px);
+        }
+
+        .admin-btn .material-icons {
+            font-size: 20px;
+            color: #667eea;
+        }
+
+        .admin-btn .btn-text {
+            flex: 1;
+            font-weight: 500;
+        }
+
+        .admin-btn-warning .material-icons {
+            color: #e74c3c;
+        }
+
+        .admin-btn-warning:hover {
+            background: #fee;
+            border-color: #e74c3c;
+        }
+
+        .breadcrumbs {
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            color: #7f8c8d;
+        }
+
+        .breadcrumbs a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .admin-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .admin-hero h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- Header -->
+<div th:replace="~{layout/header :: header}"></div>
+
+<!-- Main Content -->
+<div class="container">
+    <main class="main-content">
+        <!-- Breadcrumbs -->
+        <div class="breadcrumbs">
+            <a href="/">Home</a> /
+            <span>Admin Panel</span>
+        </div>
+
+        <!-- Admin Hero -->
+        <div class="admin-hero">
+            <span class="material-icons hero-icon">admin_panel_settings</span>
+            <h1>Admin Panel</h1>
+            <p>Welcome, <span th:text="${currentUsername}">Administrator</span>! Manage your library from one place</p>
+        </div>
+
+        <!-- Admin Grid -->
+        <div class="admin-grid">
+            <!-- Books Section -->
+            <div class="admin-card">
+                <div class="admin-card-header">
+                    <span class="material-icons">menu_book</span>
+                    <h2>Books</h2>
+                </div>
+                <div class="admin-card-buttons">
+                    <a href="/admin/books/create" class="admin-btn">
+                        <span class="material-icons">add</span>
+                        <span class="btn-text">Create Book</span>
+                        <span class="material-icons">chevron_right</span>
+                    </a>
+                    <a href="/admin/books" class="admin-btn">
+                        <span class="material-icons">visibility</span>
+                        <span class="btn-text">View All Books</span>
+                        <span class="material-icons">chevron_right</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Expected Books Section -->
+            <div class="admin-card">
+                <div class="admin-card-header">
+                    <span class="material-icons">event_available</span>
+                    <h2>Expected Books</h2>
+                </div>
+                <div class="admin-card-buttons">
+                    <a href="/admin/expected-books/create" class="admin-btn">
+                        <span class="material-icons">add</span>
+                        <span class="btn-text">Create Expected Book</span>
+                        <span class="material-icons">chevron_right</span>
+                    </a>
+                    <a href="/admin/expected-books" class="admin-btn">
+                        <span class="material-icons">visibility</span>
+                        <span class="btn-text">View All Expected Books</span>
+                        <span class="material-icons">chevron_right</span>
+                    </a>
+                    <a href="/admin/expected-books/report-error" class="admin-btn admin-btn-warning">
+                        <span class="material-icons">report_problem</span>
+                        <span class="btn-text">Report Availability Error</span>
+                        <span class="material-icons">chevron_right</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- News Section -->
+            <div class="admin-card">
+                <div class="admin-card-header">
+                    <span class="material-icons">newspaper</span>
+                    <h2>News</h2>
+                </div>
+                <div class="admin-card-buttons">
+                    <a href="/admin/news/create" class="admin-btn">
+                        <span class="material-icons">add</span>
+                        <span class="btn-text">Create News</span>
+                        <span class="material-icons">chevron_right</span>
+                    </a>
+                    <a href="/admin/news" class="admin-btn">
+                        <span class="material-icons">visibility</span>
+                        <span class="btn-text">View All News</span>
+                        <span class="material-icons">chevron_right</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Events Section -->
+            <div class="admin-card">
+                <div class="admin-card-header">
+                    <span class="material-icons">celebration</span>
+                    <h2>Events</h2>
+                </div>
+                <div class="admin-card-buttons">
+                    <a href="/admin/events/create" class="admin-btn">
+                        <span class="material-icons">add</span>
+                        <span class="btn-text">Create Event</span>
+                        <span class="material-icons">chevron_right</span>
+                    </a>
+                    <a href="/admin/events" class="admin-btn">
+                        <span class="material-icons">visibility</span>
+                        <span class="btn-text">View All Events</span>
+                        <span class="material-icons">chevron_right</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Users Section -->
+            <div class="admin-card">
+                <div class="admin-card-header">
+                    <span class="material-icons">people</span>
+                    <h2>Users</h2>
+                </div>
+                <div class="admin-card-buttons">
+                    <a href="/admin/users" class="admin-btn">
+                        <span class="material-icons">visibility</span>
+                        <span class="btn-text">View All Users</span>
+                        <span class="material-icons">chevron_right</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Reservations Section -->
+            <div class="admin-card">
+                <div class="admin-card-header">
+                    <span class="material-icons">bookmark</span>
+                    <h2>Reservations</h2>
+                </div>
+                <div class="admin-card-buttons">
+                    <a href="/admin/reservations" class="admin-btn">
+                        <span class="material-icons">visibility</span>
+                        <span class="btn-text">View All Reservations</span>
+                        <span class="material-icons">chevron_right</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- Footer -->
+<div th:replace="~{layout/footer :: footer}"></div>
+
+<script>
+    // Підсвічуємо активний пункт меню
+    document.addEventListener('DOMContentLoaded', function() {
+        const navLinks = document.querySelectorAll('.main-nav a');
+        navLinks.forEach(link => {
+            if (link.getAttribute('href') === '/admin/dashboard') {
+                link.classList.add('active');
+            }
+        });
+    });
+</script>
+</body>
+</html>

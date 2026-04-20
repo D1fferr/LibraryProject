@@ -22,11 +22,15 @@ import java.util.UUID;
 public interface ReservationRepository extends JpaRepository<Reservation, UUID> {
 
     Optional<Reservation> findByReservationId(UUID reservationId);
-    List<Reservation> findReservationByReservationBook(UUID reservationBook, Pageable pageable);
+    Page<Reservation> findReservationByReservationBook(UUID reservationBook, Pageable pageable);
     Page<Reservation> findReservationByReservationUser(UUID reservationUser, Pageable pageable);
 
     Optional<Reservation> findReservationsByReservationId(UUID reservationId);
     List<Reservation> findReservationByReservationDateAndReservationBook(LocalDate reservationDate, UUID reservationBook);
 
     List<Reservation> findReservationsByReservationBookAndReservationDateAndReservationStatusNot(@NotNull(message = "You must select an existing book.") UUID reservationBook, @Future(message = "You cannot select the booking date to be in the past or today.") LocalDate reservationDate, ReservationStatus reservationStatus);
+
+    Page<Reservation> findAllByReservationBookOrReservationUser(@NotNull(message = "You must select an existing book.") UUID reservationBook, @NotNull(message = "You must select an existing account.") UUID reservationUser, Pageable pageable);
+
+    Page<Reservation> findAllByReservationBookIsNotNullAndReservationUserIsNotNull(Pageable pageable);
 }

@@ -18,9 +18,9 @@ public class MostPopularBooksCounterService {
 
 
     @Transactional
-    public void update(String id){
+    public synchronized void update(String id){
 
-        Optional<MostPopularBooksCounter> booksCounter = mostPopularBooksCounterRepository.findById(UUID.fromString(id));
+        Optional<MostPopularBooksCounter> booksCounter = mostPopularBooksCounterRepository.findByBookId(UUID.fromString(id));
         if (booksCounter.isEmpty()){
             MostPopularBooksCounter mostPopularBooksCounter = new MostPopularBooksCounter();
             mostPopularBooksCounter.setBookId(UUID.fromString(id));

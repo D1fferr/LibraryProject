@@ -1,0 +1,1432 @@
+2026-04-19 14:28:34 | APIGateway | INFO  | o.h.validator.internal.util.Version | HV000001: Hibernate Validator 8.0.3.Final
+2026-04-19 14:28:34 | APIGateway | INFO  | l.c.apigateway.ApiGatewayApplication | Starting ApiGatewayApplication using Java 22 with PID 26696 (D:\Library\APIGateway\target\classes started by vasia in D:\Library\APIGateway)
+2026-04-19 14:28:34 | APIGateway | INFO  | l.c.apigateway.ApiGatewayApplication | No active profile set, falling back to 1 default profile: "default"
+2026-04-19 14:28:35 | APIGateway | INFO  | o.s.cloud.context.scope.GenericScope | BeanFactory id=75412cec-13ab-32f1-87e6-021d8240753f
+2026-04-19 14:28:35 | APIGateway | WARN  | o.s.c.g.c.GatewayClassPathWarningAutoConfiguration | 
+
+**********************************************************
+
+The artifact spring-cloud-gateway-server is deprecated. It will be removed in the next major release. Please add spring-cloud-gateway-server-webflux dependency.
+
+**********************************************************
+
+
+2026-04-19 14:28:36 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [After]
+2026-04-19 14:28:36 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Before]
+2026-04-19 14:28:36 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Between]
+2026-04-19 14:28:36 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Cookie]
+2026-04-19 14:28:36 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Header]
+2026-04-19 14:28:36 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Host]
+2026-04-19 14:28:36 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Method]
+2026-04-19 14:28:36 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Path]
+2026-04-19 14:28:36 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Query]
+2026-04-19 14:28:36 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [ReadBody]
+2026-04-19 14:28:36 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [RemoteAddr]
+2026-04-19 14:28:36 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [XForwardedRemoteAddr]
+2026-04-19 14:28:36 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Weight]
+2026-04-19 14:28:36 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [CloudFoundryRouteService]
+2026-04-19 14:28:36 | APIGateway | WARN  | o.s.c.g.s.w.s.StarterDeprecatedAutoConfiguration | 
+
+**********************************************************
+
+spring-cloud-starter-gateway is deprecated. It will be removed in the next major release. Please use spring-cloud-starter-gateway-server-webflux instead.
+
+**********************************************************
+
+
+2026-04-19 14:28:36 | APIGateway | INFO  | o.s.b.w.e.netty.NettyWebServer | Netty started on port 8080 (http)
+2026-04-19 14:28:36 | APIGateway | INFO  | l.c.apigateway.ApiGatewayApplication | Started ApiGatewayApplication in 2.689 seconds (process running for 8.428)
+2026-04-19 14:34:43 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 14:34:43 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/auth/logout'
+2026-04-19 14:34:43 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Missing jwt token for authorized request. Path: '/api/auth/logout'
+2026-04-19 14:34:43 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 14:34:43 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/most-popular-books'
+2026-04-19 14:34:47 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 14:34:47 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/auth/login'
+2026-04-19 14:34:48 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 14:34:48 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/most-popular-books'
+2026-04-19 14:34:48 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 14:34:48 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/most-popular-books'
+2026-04-19 14:34:51 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 14:34:51 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public'
+2026-04-19 14:34:54 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 14:34:54 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-19 14:34:54 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 14:34:54 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_book/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-19 14:34:54 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 14:34:54 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 14:34:54 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 14:34:54 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 14:34:54 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/user/for-reservations'
+2026-04-19 14:34:54 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 14:34:54 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 14:34:54 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 14:51:33 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 14:51:33 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-19 14:51:33 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 14:51:33 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_book/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-19 14:51:33 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 14:51:33 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 14:51:33 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 14:51:33 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 14:51:33 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/user/for-reservations'
+2026-04-19 14:51:33 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 14:51:33 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 14:51:33 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 14:51:37 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 14:51:37 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/auth/change_status/c0a80067-9d91-1c4a-819d-913199550001'
+2026-04-19 14:51:37 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 14:51:37 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 14:51:37 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 14:52:13 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 14:52:13 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-19 14:52:13 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 14:52:13 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_book/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-19 14:52:13 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 14:52:13 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 14:52:13 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 14:52:13 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 14:52:13 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/user/for-reservations'
+2026-04-19 14:52:13 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 14:52:13 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 14:52:13 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 14:52:16 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 14:52:16 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/change_status/c0a80067-9d91-1c4a-819d-913199550001'
+2026-04-19 14:52:16 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 14:52:16 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 14:52:16 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 14:59:31 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 14:59:31 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-19 14:59:31 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 14:59:31 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_book/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-19 14:59:31 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 14:59:31 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 14:59:31 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 14:59:31 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 14:59:31 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/user/for-reservations'
+2026-04-19 14:59:31 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 14:59:31 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 14:59:31 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 14:59:34 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 14:59:34 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-19 14:59:34 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 14:59:34 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_book/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-19 14:59:34 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 14:59:34 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 14:59:34 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 14:59:34 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 14:59:34 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/user/for-reservations'
+2026-04-19 14:59:34 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 14:59:34 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 14:59:34 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 14:59:44 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 14:59:44 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/cancel-reservation/auth/cancel/c0a80067-9d91-1c4a-819d-913199550001'
+2026-04-19 14:59:44 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 14:59:44 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 14:59:44 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:00:37 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:00:37 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-19 15:00:37 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:00:37 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_book/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-19 15:00:37 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:00:37 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:00:37 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:00:37 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:00:37 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/user/for-reservations'
+2026-04-19 15:00:37 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:00:37 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:00:37 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:00:41 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:00:41 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/auth/logout'
+2026-04-19 15:00:41 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:00:41 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:00:41 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:00:41 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:00:41 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/most-popular-books'
+2026-04-19 15:00:43 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:00:43 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/auth/login'
+2026-04-19 15:00:43 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:00:43 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/most-popular-books'
+2026-04-19 15:00:43 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:00:43 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/most-popular-books'
+2026-04-19 15:00:45 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:00:45 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public'
+2026-04-19 15:00:47 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:00:47 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-19 15:00:47 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:00:47 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_book/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-19 15:00:47 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:00:47 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:00:47 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:00:47 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:00:47 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/user/for-reservations'
+2026-04-19 15:00:47 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:00:47 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:00:47 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:02:56 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:02:56 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-19 15:02:56 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:02:56 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_book/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-19 15:02:56 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:02:56 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:02:56 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:02:56 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:02:56 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/user/for-reservations'
+2026-04-19 15:02:56 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:02:56 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:02:56 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:02:58 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:02:58 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-19 15:02:58 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:02:58 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_book/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-19 15:02:58 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:02:58 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:02:58 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:02:58 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:02:58 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/user/for-reservations'
+2026-04-19 15:02:58 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:02:58 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:02:58 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:03:00 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:03:00 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-19 15:03:00 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:03:00 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_book/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-19 15:03:00 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:03:00 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:03:00 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:03:00 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:03:00 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/user/for-reservations'
+2026-04-19 15:03:00 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:03:00 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:03:00 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:10:03 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:10:03 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-19 15:10:04 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:10:04 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_book/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-19 15:10:04 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:10:04 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:10:04 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:10:04 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:10:04 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/user/for-reservations'
+2026-04-19 15:10:04 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:10:04 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:10:04 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:10:06 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:10:06 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-19 15:10:06 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:10:06 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_book/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-19 15:10:06 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:10:06 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:10:06 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:10:06 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:10:06 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/user/for-reservations'
+2026-04-19 15:10:06 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:10:06 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:10:06 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:11:58 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:11:58 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-19 15:11:58 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:11:58 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_book/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-19 15:11:58 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:11:58 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:11:58 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:11:58 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:11:58 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/user/for-reservations'
+2026-04-19 15:11:58 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:11:58 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:11:58 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:12:00 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:12:00 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-19 15:12:00 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:12:00 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_book/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-19 15:12:00 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:12:00 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:12:00 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:12:00 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:12:00 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/user/for-reservations'
+2026-04-19 15:12:00 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:12:00 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:12:00 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:12:04 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:12:04 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public'
+2026-04-19 15:12:06 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:12:06 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-19 15:12:06 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:12:06 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_book/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-19 15:12:06 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:12:06 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:12:06 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:12:06 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:12:06 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/user/for-reservations'
+2026-04-19 15:12:06 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:12:06 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:12:06 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:15:34 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:15:34 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-19 15:15:34 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:15:34 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_book/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-19 15:15:34 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:15:34 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:15:34 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:15:34 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:15:34 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/user/for-reservations'
+2026-04-19 15:15:34 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:15:34 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:15:34 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:15:37 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:15:37 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-19 15:15:37 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:15:37 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_book/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-19 15:15:37 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:15:37 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:15:37 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:15:37 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:15:37 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/user/for-reservations'
+2026-04-19 15:15:37 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:15:37 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:15:37 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:15:38 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:15:38 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-19 15:15:38 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:15:38 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_book/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-19 15:15:38 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:15:38 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:15:38 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:15:38 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:15:38 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/user/for-reservations'
+2026-04-19 15:15:38 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:15:38 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:15:38 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:16:00 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:16:00 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-19 15:16:00 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:16:00 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_book/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-19 15:16:00 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Missing jwt token for authorized request. Path: '/api/reservation/auth/view_for_the_book/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-19 15:16:13 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:16:13 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/auth/login'
+2026-04-19 15:16:13 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:16:13 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/most-popular-books'
+2026-04-19 15:16:13 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:16:13 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/most-popular-books'
+2026-04-19 15:16:18 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:16:18 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public'
+2026-04-19 15:16:19 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:16:19 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-19 15:16:19 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:16:19 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_book/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-19 15:16:19 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:16:19 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:16:19 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:16:19 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:16:19 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/user/for-reservations'
+2026-04-19 15:16:19 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:16:19 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:16:19 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:18:14 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:18:14 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-19 15:18:14 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:18:14 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_book/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-19 15:18:14 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:18:14 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:18:14 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:18:14 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:18:14 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/user/for-reservations'
+2026-04-19 15:18:14 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:18:14 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:18:14 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:23:04 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:23:04 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-19 15:23:04 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:23:04 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_book/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-19 15:23:04 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:23:04 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:23:04 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:23:04 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:23:04 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/user/for-reservations'
+2026-04-19 15:23:04 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:23:04 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:23:04 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:23:22 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:23:22 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-19 15:23:22 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:23:22 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_book/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-19 15:23:22 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:23:22 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:23:22 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:23:22 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:23:22 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/user/for-reservations'
+2026-04-19 15:23:22 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:23:22 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:23:22 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:25:02 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:25:02 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-19 15:25:02 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:25:02 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_book/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-19 15:25:02 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:25:02 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:25:02 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:25:02 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:25:02 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/user/for-reservations'
+2026-04-19 15:25:02 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:25:02 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:25:02 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:25:07 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:25:07 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-19 15:25:07 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:25:07 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_book/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-19 15:25:07 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:25:07 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:25:07 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:25:07 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:25:07 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/user/for-reservations'
+2026-04-19 15:25:07 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:25:07 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:25:07 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:25:42 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:25:42 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-19 15:25:42 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:25:42 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_book/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-19 15:25:42 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:25:42 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:25:42 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:25:42 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:25:42 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/user/for-reservations'
+2026-04-19 15:25:42 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:25:42 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:25:42 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:25:50 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:25:50 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-19 15:25:50 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:25:50 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_book/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-19 15:25:50 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:25:50 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:25:50 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:25:51 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:25:51 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/user/for-reservations'
+2026-04-19 15:25:51 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:25:51 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:25:51 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:25:55 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:25:55 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-19 15:25:55 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:25:55 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_book/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-19 15:25:55 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:25:55 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:25:55 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:25:55 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:25:55 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/user/for-reservations'
+2026-04-19 15:25:55 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:25:55 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:25:55 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:25:58 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:25:58 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public'
+2026-04-19 15:26:02 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:26:02 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80066-9a82-1577-819a-82f5beb60000'
+2026-04-19 15:26:02 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:26:02 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_book/c0a80066-9a82-1577-819a-82f5beb60000'
+2026-04-19 15:26:02 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:26:02 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:26:02 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:26:02 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:26:02 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/user/for-reservations'
+2026-04-19 15:26:02 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:26:02 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:26:02 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:26:25 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:26:25 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80066-9a82-1577-819a-82f5beb60000'
+2026-04-19 15:26:25 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:26:25 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_book/c0a80066-9a82-1577-819a-82f5beb60000'
+2026-04-19 15:26:25 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:26:25 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:26:25 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:26:25 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:26:25 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/user/for-reservations'
+2026-04-19 15:26:25 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:26:25 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:26:25 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:26:32 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:26:32 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/change_status/c0a80067-9d9b-19cb-819d-9bbef62f0000'
+2026-04-19 15:26:32 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:26:32 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:26:32 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:26:33 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:26:33 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80066-9a82-1577-819a-82f5beb60000'
+2026-04-19 15:26:33 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:26:33 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_book/c0a80066-9a82-1577-819a-82f5beb60000'
+2026-04-19 15:26:33 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:26:33 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:26:33 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:26:33 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:26:33 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/user/for-reservations'
+2026-04-19 15:26:33 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:26:33 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:26:33 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:26:43 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:26:43 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/cancel-reservation/auth/cancel/c0a80067-9d9b-19cb-819d-9bbf123b0002'
+2026-04-19 15:26:43 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:26:43 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:26:43 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:26:46 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:26:46 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80066-9a82-1577-819a-82f5beb60000'
+2026-04-19 15:26:46 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:26:46 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_book/c0a80066-9a82-1577-819a-82f5beb60000'
+2026-04-19 15:26:46 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:26:46 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:26:46 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:26:46 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:26:46 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/user/for-reservations'
+2026-04-19 15:26:46 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:26:46 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:26:46 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:32:00 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:32:00 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80066-9a82-1577-819a-82f5beb60000'
+2026-04-19 15:32:00 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:32:00 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_book/c0a80066-9a82-1577-819a-82f5beb60000'
+2026-04-19 15:32:00 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:32:00 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:32:00 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:32:00 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:32:00 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/user/for-reservations'
+2026-04-19 15:32:00 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:32:00 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:32:00 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:32:04 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:32:04 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public'
+2026-04-19 15:32:06 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:32:06 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-19 15:32:06 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:32:06 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_book/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-19 15:32:06 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:32:06 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:32:06 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:32:06 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:32:06 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/user/for-reservations'
+2026-04-19 15:32:06 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:32:06 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:32:06 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:32:18 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:32:18 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_user/c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-19 15:32:18 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:32:18 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:32:18 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:32:18 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:32:18 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/book/auth/for-reservations'
+2026-04-19 15:32:18 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:32:18 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:32:18 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:32:24 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:32:24 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/cancel-reservation/user/get-one/c0a80067-9d91-1dfc-819d-913e38ed0000'
+2026-04-19 15:32:24 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:32:24 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:32:24 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:32:24 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:32:24 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80066-9a82-1577-819a-82f5beb60000'
+2026-04-19 15:32:31 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:32:31 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_user/c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-19 15:32:31 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:32:31 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:32:31 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:32:31 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:32:31 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/book/auth/for-reservations'
+2026-04-19 15:32:31 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:32:31 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:32:31 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:32:40 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:32:40 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public'
+2026-04-19 15:32:42 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:32:42 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-19 15:32:42 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:32:42 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_book/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-19 15:32:42 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:32:42 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:32:42 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:32:42 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:32:42 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/user/for-reservations'
+2026-04-19 15:32:42 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:32:42 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:32:42 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:32:46 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:32:46 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80066-9a82-1577-819a-82f5beb60000'
+2026-04-19 15:32:46 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:32:46 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_book/c0a80066-9a82-1577-819a-82f5beb60000'
+2026-04-19 15:32:46 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:32:46 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:32:46 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:32:46 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:32:46 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/user/for-reservations'
+2026-04-19 15:32:46 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:32:46 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:32:46 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:33:55 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:33:55 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80066-9a82-1577-819a-82f5beb60000'
+2026-04-19 15:33:55 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:33:55 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_book/c0a80066-9a82-1577-819a-82f5beb60000'
+2026-04-19 15:33:55 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:33:55 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:33:55 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:33:55 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:33:55 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/user/for-reservations'
+2026-04-19 15:33:55 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:33:55 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:33:55 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:34:09 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:34:09 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public'
+2026-04-19 15:34:11 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:34:11 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-19 15:34:11 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:34:11 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_book/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-19 15:34:11 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:34:11 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:34:11 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:34:11 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:34:11 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/user/for-reservations'
+2026-04-19 15:34:11 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:34:11 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:34:11 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:34:19 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:34:19 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public'
+2026-04-19 15:34:20 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:34:20 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80066-9a82-1577-819a-82f5beb60000'
+2026-04-19 15:34:20 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:34:20 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_book/c0a80066-9a82-1577-819a-82f5beb60000'
+2026-04-19 15:34:20 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:34:20 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:34:20 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:34:20 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:34:20 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/user/for-reservations'
+2026-04-19 15:34:20 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:34:20 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:34:20 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:36:26 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:36:26 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80066-9a82-1577-819a-82f5beb60000'
+2026-04-19 15:36:26 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:36:26 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_book/c0a80066-9a82-1577-819a-82f5beb60000'
+2026-04-19 15:36:26 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:36:26 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:36:26 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:36:27 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:36:27 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/user/for-reservations'
+2026-04-19 15:36:27 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:36:27 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:36:27 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:36:32 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:36:32 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/category'
+2026-04-19 15:36:32 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:36:32 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public'
+2026-04-19 15:36:37 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:36:37 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/most-popular-books'
+2026-04-19 15:36:44 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:36:44 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_user/c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-19 15:36:44 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:36:44 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:36:44 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:36:44 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:36:44 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/book/auth/for-reservations'
+2026-04-19 15:36:44 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:36:44 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:36:44 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:36:50 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:36:50 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public'
+2026-04-19 15:36:52 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:36:52 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80066-9a82-1577-819a-82f5beb60000'
+2026-04-19 15:36:52 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:36:52 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_book/c0a80066-9a82-1577-819a-82f5beb60000'
+2026-04-19 15:36:52 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:36:52 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:36:52 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:36:52 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:36:52 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/user/for-reservations'
+2026-04-19 15:36:52 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:36:52 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:36:52 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:38:12 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:38:12 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80066-9a82-1577-819a-82f5beb60000'
+2026-04-19 15:38:12 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:38:12 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_book/c0a80066-9a82-1577-819a-82f5beb60000'
+2026-04-19 15:38:12 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:38:12 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:38:12 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:38:13 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:38:13 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/user/for-reservations'
+2026-04-19 15:38:13 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:38:13 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:38:13 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:38:42 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:38:42 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/category'
+2026-04-19 15:38:42 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:38:42 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public'
+2026-04-19 15:38:44 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:38:44 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80067-9d96-1406-819d-965c73520000'
+2026-04-19 15:38:44 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:38:44 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/author/Joanne%20Rowling'
+2026-04-19 15:38:44 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:38:44 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/genre/Fantasy'
+2026-04-19 15:38:49 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:38:49 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/create'
+2026-04-19 15:38:49 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:38:49 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:38:49 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:38:49 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:38:49 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/create'
+2026-04-19 15:38:49 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:38:49 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:38:49 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:38:56 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:38:56 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/create'
+2026-04-19 15:38:56 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:38:56 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:38:56 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:39:00 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:39:00 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/create'
+2026-04-19 15:39:00 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:39:00 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:39:00 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:39:05 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:39:05 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/create'
+2026-04-19 15:39:05 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:39:05 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:39:05 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:39:10 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:39:10 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_user/c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-19 15:39:10 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:39:10 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:39:10 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:39:10 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:39:10 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/book/auth/for-reservations'
+2026-04-19 15:39:10 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:39:10 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:39:10 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:39:13 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:39:13 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_user/c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-19 15:39:13 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:39:13 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:39:13 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:39:13 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:39:13 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/book/auth/for-reservations'
+2026-04-19 15:39:13 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:39:13 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:39:13 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:41:39 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:41:39 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_user/c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-19 15:41:39 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:41:39 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:41:39 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:41:39 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:41:39 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/book/auth/for-reservations'
+2026-04-19 15:41:39 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:41:39 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:41:39 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:41:44 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:41:44 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_user/c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-19 15:41:44 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:41:44 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:41:44 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:41:44 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:41:44 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/book/auth/for-reservations'
+2026-04-19 15:41:44 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:41:44 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:41:44 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:43:04 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:43:04 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_user/c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-19 15:43:04 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:43:04 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:43:04 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:43:05 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:43:05 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/book/auth/for-reservations'
+2026-04-19 15:43:05 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:43:05 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:43:05 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:43:05 | APIGateway | ERROR | o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler | [2704b0f9-184]  500 Server Error for HTTP POST "/api/book/auth/for-reservations?page=0"
+io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: getsockopt: localhost/127.0.0.1:8081
+	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
+Error has been observed at the following site(s):
+	*__checkpoint ⇢ org.springframework.cloud.gateway.filter.WeightCalculatorWebFilter [DefaultWebFilterChain]
+	*__checkpoint ⇢ HTTP POST "/api/book/auth/for-reservations?page=0" [ExceptionHandlingWebHandler]
+Original Stack Trace:
+Caused by: java.net.ConnectException: Connection refused: getsockopt
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:682)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:1060)
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:336)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:339)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:784)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:732)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:658)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:998)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:1570)
+2026-04-19 15:43:08 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:43:08 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_user/c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-19 15:43:08 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:43:08 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:43:08 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:43:08 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:43:08 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/book/auth/for-reservations'
+2026-04-19 15:43:08 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:43:08 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:43:08 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:43:12 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:43:12 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_user/c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-19 15:43:12 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:43:12 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:43:12 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:43:12 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:43:12 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/book/auth/for-reservations'
+2026-04-19 15:43:12 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:43:12 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:43:12 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:44:20 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:44:20 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_user/c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-19 15:44:20 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:44:20 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:44:20 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:44:20 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:44:20 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/book/auth/for-reservations'
+2026-04-19 15:44:20 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:44:20 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:44:20 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:44:20 | APIGateway | ERROR | o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler | [ed957735-190]  500 Server Error for HTTP POST "/api/book/auth/for-reservations?page=1"
+io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: getsockopt: localhost/127.0.0.1:8081
+	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
+Error has been observed at the following site(s):
+	*__checkpoint ⇢ org.springframework.cloud.gateway.filter.WeightCalculatorWebFilter [DefaultWebFilterChain]
+	*__checkpoint ⇢ HTTP POST "/api/book/auth/for-reservations?page=1" [ExceptionHandlingWebHandler]
+Original Stack Trace:
+Caused by: java.net.ConnectException: Connection refused: getsockopt
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:682)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:1060)
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:336)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:339)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:784)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:732)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:658)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:998)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:1570)
+2026-04-19 15:44:22 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:44:22 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_user/c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-19 15:44:22 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:44:22 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:44:22 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:44:22 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:44:22 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/book/auth/for-reservations'
+2026-04-19 15:44:22 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:44:22 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:44:22 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:44:22 | APIGateway | ERROR | o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler | [ed957735-192]  500 Server Error for HTTP POST "/api/book/auth/for-reservations?page=0"
+io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: getsockopt: localhost/127.0.0.1:8081
+	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
+Error has been observed at the following site(s):
+	*__checkpoint ⇢ org.springframework.cloud.gateway.filter.WeightCalculatorWebFilter [DefaultWebFilterChain]
+	*__checkpoint ⇢ HTTP POST "/api/book/auth/for-reservations?page=0" [ExceptionHandlingWebHandler]
+Original Stack Trace:
+Caused by: java.net.ConnectException: Connection refused: getsockopt
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:682)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:1060)
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:336)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:339)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:784)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:732)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:658)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:998)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:1570)
+2026-04-19 15:44:23 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:44:23 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_user/c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-19 15:44:23 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:44:23 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:44:23 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:44:23 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:44:23 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/book/auth/for-reservations'
+2026-04-19 15:44:23 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:44:23 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:44:23 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:44:23 | APIGateway | ERROR | o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler | [ed957735-194]  500 Server Error for HTTP POST "/api/book/auth/for-reservations?page=0"
+io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: getsockopt: localhost/127.0.0.1:8081
+	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
+Error has been observed at the following site(s):
+	*__checkpoint ⇢ org.springframework.cloud.gateway.filter.WeightCalculatorWebFilter [DefaultWebFilterChain]
+	*__checkpoint ⇢ HTTP POST "/api/book/auth/for-reservations?page=0" [ExceptionHandlingWebHandler]
+Original Stack Trace:
+Caused by: java.net.ConnectException: Connection refused: getsockopt
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:682)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:1060)
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:336)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:339)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:784)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:732)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:658)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:998)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:1570)
+2026-04-19 15:44:24 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:44:24 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_user/c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-19 15:44:24 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:44:24 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:44:24 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:44:24 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:44:24 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/book/auth/for-reservations'
+2026-04-19 15:44:24 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:44:24 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:44:24 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:44:26 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:44:26 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_user/c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-19 15:44:26 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:44:26 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:44:26 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:44:26 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:44:26 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/book/auth/for-reservations'
+2026-04-19 15:44:26 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:44:26 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:44:26 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:44:28 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:44:28 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_user/c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-19 15:44:28 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:44:28 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:44:28 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:44:28 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:44:28 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/book/auth/for-reservations'
+2026-04-19 15:44:28 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:44:28 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:44:28 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:56:01 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:56:01 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_user/c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-19 15:56:01 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:56:01 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:56:01 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:56:01 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:56:01 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/book/auth/for-reservations'
+2026-04-19 15:56:01 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:56:01 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:56:01 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:56:02 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:56:02 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_user/c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-19 15:56:02 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:56:02 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:56:02 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:56:02 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:56:02 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/book/auth/for-reservations'
+2026-04-19 15:56:02 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:56:02 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:56:02 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:56:05 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:56:05 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_user/c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-19 15:56:05 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:56:05 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:56:05 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:56:05 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:56:05 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/book/auth/for-reservations'
+2026-04-19 15:56:05 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:56:05 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:56:05 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:56:08 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:56:08 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_user/c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-19 15:56:08 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:56:08 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:56:08 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:56:08 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:56:08 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/book/auth/for-reservations'
+2026-04-19 15:56:08 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:56:08 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:56:08 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:56:10 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:56:10 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_user/c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-19 15:56:10 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:56:10 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:56:10 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:56:10 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:56:10 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/book/auth/for-reservations'
+2026-04-19 15:56:10 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:56:10 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:56:10 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:56:16 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:56:16 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_user/c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-19 15:56:16 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:56:16 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:56:16 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:56:16 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:56:16 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/book/auth/for-reservations'
+2026-04-19 15:56:16 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:56:16 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:56:16 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:56:18 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:56:18 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_user/c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-19 15:56:18 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:56:18 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:56:18 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:56:18 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:56:18 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/book/auth/for-reservations'
+2026-04-19 15:56:18 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:56:18 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:56:18 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:58:56 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:58:56 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_user/c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-19 15:58:56 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:58:56 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:58:56 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:58:56 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:58:56 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/book/auth/for-reservations'
+2026-04-19 15:58:56 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:58:56 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:58:56 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:58:59 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:58:59 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_user/c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-19 15:58:59 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:58:59 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:58:59 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:58:59 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:58:59 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/book/auth/for-reservations'
+2026-04-19 15:58:59 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:58:59 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:58:59 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:59:02 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:59:02 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_user/c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-19 15:59:02 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:59:02 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:59:02 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:59:02 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:59:02 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/book/auth/for-reservations'
+2026-04-19 15:59:02 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:59:02 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:59:02 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:59:04 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:59:04 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_user/c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-19 15:59:04 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:59:04 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:59:04 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:59:04 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:59:04 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/book/auth/for-reservations'
+2026-04-19 15:59:04 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:59:04 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:59:04 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:59:17 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:59:17 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_user/c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-19 15:59:17 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:59:17 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:59:17 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:59:17 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:59:17 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/book/auth/for-reservations'
+2026-04-19 15:59:17 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:59:17 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:59:17 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:59:21 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:59:21 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_user/c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-19 15:59:21 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:59:21 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:59:21 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:59:21 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:59:21 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/book/auth/for-reservations'
+2026-04-19 15:59:21 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:59:21 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:59:21 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:59:24 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:59:24 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_user/c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-19 15:59:24 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:59:24 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:59:24 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 15:59:24 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 15:59:24 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/book/auth/for-reservations'
+2026-04-19 15:59:24 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:59:24 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 15:59:24 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 16:00:37 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:00:37 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_user/c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-19 16:00:37 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:00:37 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:00:37 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 16:00:37 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:00:37 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/book/auth/for-reservations'
+2026-04-19 16:00:37 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:00:37 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:00:37 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 16:00:39 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:00:39 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_user/c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-19 16:00:39 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:00:39 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:00:39 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 16:00:39 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:00:39 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/book/auth/for-reservations'
+2026-04-19 16:00:39 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:00:39 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:00:39 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 16:03:47 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:03:47 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_user/c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-19 16:03:47 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:03:47 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:03:47 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 16:03:47 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:03:47 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/book/auth/for-reservations'
+2026-04-19 16:03:47 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:03:47 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:03:47 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 16:03:47 | APIGateway | ERROR | o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler | [25124293-234]  500 Server Error for HTTP POST "/api/book/auth/for-reservations?page=0"
+io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: getsockopt: localhost/127.0.0.1:8081
+	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
+Error has been observed at the following site(s):
+	*__checkpoint ⇢ org.springframework.cloud.gateway.filter.WeightCalculatorWebFilter [DefaultWebFilterChain]
+	*__checkpoint ⇢ HTTP POST "/api/book/auth/for-reservations?page=0" [ExceptionHandlingWebHandler]
+Original Stack Trace:
+Caused by: java.net.ConnectException: Connection refused: getsockopt
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:682)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:1060)
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:336)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:339)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:784)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:732)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:658)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:998)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:1570)
+2026-04-19 16:03:53 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:03:53 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_user/c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-19 16:03:53 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:03:53 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:03:53 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 16:03:53 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:03:53 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/book/auth/for-reservations'
+2026-04-19 16:03:53 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:03:53 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:03:53 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 16:03:56 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:03:56 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_user/c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-19 16:03:56 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:03:56 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:03:56 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 16:03:56 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:03:56 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/book/auth/for-reservations'
+2026-04-19 16:03:56 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:03:56 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:03:56 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 16:03:59 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:03:59 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_user/c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-19 16:03:59 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:03:59 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:03:59 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 16:03:59 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:03:59 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/book/auth/for-reservations'
+2026-04-19 16:03:59 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:03:59 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:03:59 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 16:07:18 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:07:18 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_user/c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-19 16:07:18 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:07:18 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:07:18 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 16:07:18 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:07:18 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/book/auth/for-reservations'
+2026-04-19 16:07:18 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:07:18 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:07:18 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 16:07:22 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:07:22 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_user/c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-19 16:07:22 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:07:22 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:07:22 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 16:07:22 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:07:22 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/book/auth/for-reservations'
+2026-04-19 16:07:22 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:07:22 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:07:22 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 16:07:24 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:07:24 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_user/c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-19 16:07:24 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:07:24 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:07:24 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 16:07:24 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:07:24 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/book/auth/for-reservations'
+2026-04-19 16:07:24 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:07:24 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:07:24 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 16:09:24 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:09:24 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_user/c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-19 16:09:24 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:09:24 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:09:24 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 16:09:24 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:09:24 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/book/auth/for-reservations'
+2026-04-19 16:09:24 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:09:24 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:09:24 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 16:09:26 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:09:26 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_user/c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-19 16:09:26 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:09:26 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:09:26 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 16:09:26 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:09:26 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/book/auth/for-reservations'
+2026-04-19 16:09:26 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:09:26 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:09:26 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 16:09:28 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:09:28 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_user/c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-19 16:09:28 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:09:28 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:09:28 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 16:09:28 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:09:28 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/book/auth/for-reservations'
+2026-04-19 16:09:28 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:09:28 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:09:28 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 16:09:32 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:09:32 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_user/c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-19 16:09:32 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:09:32 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:09:32 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 16:09:32 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:09:32 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/book/auth/for-reservations'
+2026-04-19 16:09:32 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:09:32 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:09:32 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 16:09:35 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:09:35 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_user/c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-19 16:09:35 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:09:35 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:09:35 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 16:09:35 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:09:35 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/book/auth/for-reservations'
+2026-04-19 16:09:35 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:09:35 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:09:35 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 16:09:40 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:09:40 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_user/c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-19 16:09:40 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:09:40 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:09:40 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 16:09:40 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:09:40 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/book/auth/for-reservations'
+2026-04-19 16:09:40 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:09:40 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:09:40 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 16:09:45 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:09:45 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public'
+2026-04-19 16:09:48 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:09:48 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80067-9d96-1406-819d-965c73520000'
+2026-04-19 16:09:48 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:09:48 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_book/c0a80067-9d96-1406-819d-965c73520000'
+2026-04-19 16:09:48 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:09:48 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:09:48 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 16:09:48 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:09:48 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/user/for-reservations'
+2026-04-19 16:09:48 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:09:48 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:09:48 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 16:09:53 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:09:53 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/change_status/c0a80066-9da5-1357-819d-a5c0311c0002'
+2026-04-19 16:09:53 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:09:53 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:09:53 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 16:09:53 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:09:53 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80067-9d96-1406-819d-965c73520000'
+2026-04-19 16:09:53 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:09:53 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_book/c0a80067-9d96-1406-819d-965c73520000'
+2026-04-19 16:09:53 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:09:53 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:09:53 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 16:09:53 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:09:53 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/user/for-reservations'
+2026-04-19 16:09:53 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:09:53 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:09:53 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 16:10:01 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:10:01 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80067-9d96-1406-819d-965c73520000'
+2026-04-19 16:10:01 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:10:01 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_book/c0a80067-9d96-1406-819d-965c73520000'
+2026-04-19 16:10:01 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:10:01 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:10:01 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 16:10:01 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:10:01 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/user/for-reservations'
+2026-04-19 16:10:01 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:10:01 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:10:01 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 16:10:02 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:10:02 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80067-9d96-1406-819d-965c73520000'
+2026-04-19 16:10:02 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:10:02 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_book/c0a80067-9d96-1406-819d-965c73520000'
+2026-04-19 16:10:02 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:10:02 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:10:02 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 16:10:02 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:10:02 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/user/for-reservations'
+2026-04-19 16:10:02 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:10:02 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:10:02 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 16:10:03 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:10:03 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80067-9d96-1406-819d-965c73520000'
+2026-04-19 16:10:03 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:10:03 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_book/c0a80067-9d96-1406-819d-965c73520000'
+2026-04-19 16:10:03 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:10:03 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:10:03 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 16:10:03 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:10:03 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/user/for-reservations'
+2026-04-19 16:10:03 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:10:03 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:10:03 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 16:10:40 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:10:40 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80067-9d96-1406-819d-965c73520000'
+2026-04-19 16:10:40 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:10:40 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_book/c0a80067-9d96-1406-819d-965c73520000'
+2026-04-19 16:10:40 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:10:40 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:10:40 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 16:10:40 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:10:40 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/user/for-reservations'
+2026-04-19 16:10:40 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:10:40 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:10:40 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 16:10:42 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:10:42 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public'
+2026-04-19 16:10:44 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:10:44 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80067-9d96-1406-819d-965c73520000'
+2026-04-19 16:10:44 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:10:44 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_book/c0a80067-9d96-1406-819d-965c73520000'
+2026-04-19 16:10:44 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:10:44 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:10:44 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 16:10:44 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:10:44 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/user/for-reservations'
+2026-04-19 16:10:44 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:10:44 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:10:44 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 16:10:46 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:10:46 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/change_status/c0a80066-9da5-1357-819d-a5c04bb10004'
+2026-04-19 16:10:46 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:10:46 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:10:46 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 16:10:46 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:10:46 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80067-9d96-1406-819d-965c73520000'
+2026-04-19 16:10:46 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:10:46 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_book/c0a80067-9d96-1406-819d-965c73520000'
+2026-04-19 16:10:46 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:10:46 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:10:46 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 16:10:46 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:10:46 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/user/for-reservations'
+2026-04-19 16:10:46 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:10:46 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:10:46 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 16:10:58 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:10:58 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/change_status/c0a80066-9da5-1357-819d-a5c06ec60006'
+2026-04-19 16:10:58 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:10:58 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:10:58 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 16:10:58 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:10:58 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80067-9d96-1406-819d-965c73520000'
+2026-04-19 16:10:58 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:10:58 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_book/c0a80067-9d96-1406-819d-965c73520000'
+2026-04-19 16:10:58 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:10:58 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:10:58 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 16:10:58 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:10:58 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/user/for-reservations'
+2026-04-19 16:10:58 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:10:58 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:10:58 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 16:11:17 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:11:17 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/cancel-reservation/auth/cancel/c0a80066-9da5-1357-819d-a5c05ca30005'
+2026-04-19 16:11:17 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:11:17 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:11:17 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 16:11:18 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:11:18 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80067-9d96-1406-819d-965c73520000'
+2026-04-19 16:11:18 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:11:18 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_book/c0a80067-9d96-1406-819d-965c73520000'
+2026-04-19 16:11:18 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:11:18 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:11:18 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 16:11:18 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:11:18 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/user/for-reservations'
+2026-04-19 16:11:18 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:11:18 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:11:18 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 16:11:44 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:11:44 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_user/c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-19 16:11:44 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:11:44 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:11:44 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 16:11:44 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:11:44 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/book/auth/for-reservations'
+2026-04-19 16:11:44 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:11:44 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:11:44 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 16:11:46 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:11:46 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_user/c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-19 16:11:46 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:11:46 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:11:46 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 16:11:46 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:11:46 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/book/auth/for-reservations'
+2026-04-19 16:11:46 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:11:46 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:11:46 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 16:11:51 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:11:51 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_user/c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-19 16:11:51 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:11:51 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:11:51 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 16:11:51 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:11:51 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/book/auth/for-reservations'
+2026-04-19 16:11:51 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:11:51 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:11:51 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 16:11:53 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:11:53 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/cancel-reservation/user/get-one/c0a80066-9da5-1357-819d-a5c05ca30005'
+2026-04-19 16:11:53 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:11:53 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:11:53 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 16:11:53 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:11:53 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80067-9d96-1406-819d-965c73520000'
+2026-04-19 16:16:49 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:16:49 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public'
+2026-04-19 16:16:54 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:16:54 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/book/auth/delete/c0a80067-9d96-1d6b-819d-965d81450000'
+2026-04-19 16:16:54 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:16:54 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:16:54 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 16:16:55 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:16:55 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public'
+2026-04-19 16:16:58 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:16:58 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public'
+2026-04-19 16:17:02 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:17:02 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public'
+2026-04-19 16:17:04 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:17:04 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public'
+2026-04-19 16:17:08 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:17:08 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/book/auth/delete/c0a80067-9d96-1d6b-819d-965ee6580001'
+2026-04-19 16:17:08 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:17:08 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:17:08 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 16:17:09 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:17:09 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public'
+2026-04-19 16:18:26 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:18:26 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public'
+2026-04-19 16:18:28 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:18:28 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80066-9a82-1577-819a-82f5beb60000'
+2026-04-19 16:18:28 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:18:28 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_book/c0a80066-9a82-1577-819a-82f5beb60000'
+2026-04-19 16:18:28 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:18:28 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:18:28 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 16:18:28 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-19 16:18:28 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/user/for-reservations'
+2026-04-19 16:18:28 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:18:28 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-19 16:18:28 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-19 17:06:13 | APIGateway | INFO  | o.s.b.w.e.netty.GracefulShutdown | Commencing graceful shutdown. Waiting for active requests to complete
+2026-04-19 17:06:13 | APIGateway | INFO  | o.s.b.w.e.netty.GracefulShutdown | Graceful shutdown complete

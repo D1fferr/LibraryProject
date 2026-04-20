@@ -37,5 +37,7 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
             "from Book b GROUP BY b.bookGenre order by COUNT(b) DESC")
     List<CategoriesDTO> findAllCategories();
 
-    Page<Book> findAllByBookIdIn(Collection<UUID> bookIds, Pageable pageable);
+    List<Book> findAllByBookIdIn(Collection<UUID> bookIds);
+
+    Page<Book> findAllByBookAuthorOrBookGenreOrBookPublicationOrBookName(String bookAuthor, String bookGenre, String bookPublication, String bookName, Pageable pageable);
 }

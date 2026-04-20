@@ -30,7 +30,6 @@ public class GlobalExceptionHandler {
             // Очищаємо прострочений токен
             cookieManager.clearJwtCookie(response);
 
-            // Зберігаємо URL для повернення після логіну
             redirectAttributes.addAttribute("redirect", request.getRequestURI());
             redirectAttributes.addAttribute("expired", "true");
 

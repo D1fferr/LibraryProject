@@ -1,10 +1,7 @@
 package library.com.userservice.controllers;
 
 import jakarta.validation.Valid;
-import library.com.userservice.dtos.ChangeCredentialDTO;
-import library.com.userservice.dtos.UserDTO;
-import library.com.userservice.dtos.UserDTOForChangeProfile;
-import library.com.userservice.dtos.UserDTOForView;
+import library.com.userservice.dtos.*;
 import library.com.userservice.exceptions.UserNotChangedException;
 import library.com.userservice.exceptions.UserNotCreatedException;
 import library.com.userservice.models.User;
@@ -45,7 +42,7 @@ public class UserController {
         userService.save(userDTO);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
-    @PatchMapping("/change-profile/{id}")
+    @PutMapping("/change-profile/{id}")
     public ResponseEntity<UserDTOForChangeProfile> changeProfile(@PathVariable UUID id,
                                                                  @RequestBody UserDTOForChangeProfile userDTO){
         userService.updateProfile(id, userDTO);
@@ -69,8 +66,20 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
     }
-    @GetMapping("/get-user-by/{param}")
-    public ResponseEntity<List<User>> getUserBy(@PathVariable String param){
-        return new ResponseEntity<>(userService.findUser(param), HttpStatus.OK);
+    @PostMapping("/for-reservations")
+    public ResponseEntity<UserDtoWithListUsers> getOne(@RequestBody UserDtoForReservations dto,
+                                                       @RequestParam(value = "page", defaultValue = "0") Integer page,
+                                                       @RequestParam(value = "usersForPage", defaultValue = "5", required = false) Integer usersForPage){
+        return new ResponseEntity<>(userService.findUsersByIds(dto.getUserDTOForViews(), page, usersForPage), HttpStatus.OK);
+    }
+    @GetMapping("/get-all")
+    public ResponseEntity<UserPageDto> getUserBy(@RequestParam(value = "page", defaultValue = "0") int page,
+                                                @RequestParam(value = "pageSize", defaultValue = "0") int pageSize,
+                                                @RequestParam(required = false) String search){
+
+        if (search!=null){
+            return new ResponseEntity<>(userService.findUser(page, pageSize, search), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(userService.findUser(page, pageSize), HttpStatus.OK);
     }
 }

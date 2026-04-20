@@ -1,14 +1,14 @@
 package library.com.userservice.services;
 
-import library.com.userservice.dtos.ChangeCredentialDTO;
-import library.com.userservice.dtos.UserDTO;
-import library.com.userservice.dtos.UserDTOForChangeProfile;
-import library.com.userservice.dtos.UserDTOForView;
+import library.com.userservice.dtos.*;
 import library.com.userservice.exceptions.UserNotFoundException;
 import library.com.userservice.models.User;
 import library.com.userservice.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -56,14 +56,31 @@ public class UserService {
         log.info("The user deleted. ID: '{}'", id);
     }
     @Transactional(readOnly = true)
-    public List<User> findUser(String param){
-        List<User> users = userRepository.findUserByEmailOrLibraryCodeOrUsername(param, param, param);
+    public UserPageDto findUser(int page, int pageSize, String search){
+        String searchPattern = "%" + search + "%";
+        Page<User> users = userRepository.searchEverywhere(searchPattern, PageRequest.of(page, pageSize));
         if (users.isEmpty()) {
             log.warn("Users not found");
             throw new UserNotFoundException("Users not found");
         }
-        log.info("Users found");
-        return users;
+        UserPageDto dto = new UserPageDto();
+        dto.setUsers(users.stream().map(this::toUserDtoWithId).toList());
+        dto.setTotalPages(users.getTotalPages());
+        dto.setTotalElements(users.getTotalElements());
+        return dto;
+    }
+    @Transactional(readOnly = true)
+    public UserPageDto findUser(int page, int pageSize){
+        Page<User> users = userRepository.findAll(PageRequest.of(page, pageSize));
+        if (users.isEmpty()) {
+            log.warn("Users not found");
+            throw new UserNotFoundException("Users not found");
+        }
+        UserPageDto dto = new UserPageDto();
+        dto.setUsers(users.stream().map(this::toUserDtoWithId).toList());
+        dto.setTotalPages(users.getTotalPages());
+        dto.setTotalElements(users.getTotalElements());
+        return dto;
     }
     @Transactional
     public void updateCredential(UUID id, ChangeCredentialDTO changeCredentialDTO){
@@ -81,6 +98,17 @@ public class UserService {
             user.setLibraryCode(changeCredentialDTO.getLibraryCode());
         userRepository.save(user);
         log.info("The user updated. ID: '{}'", id);
+    }
+
+    public UserDtoWithListUsers findUsersByIds(List<UUID> uuids, int page, int usersPerPage){
+        Page<User> dto = userRepository.findAllByIdIn(uuids, PageRequest.of(page, usersPerPage));
+        if (dto.isEmpty()) {
+            log.warn("Users not found");
+            throw new UserNotFoundException("Users not found");
+        }
+        UserDtoWithListUsers users = new UserDtoWithListUsers();
+        users.setUserDTOForViewList(dto.getContent().stream().map(this::toUserDtoWithId).toList());
+        return users;
     }
 
     private UserDTOForView userToUserDTOForView(User user){
@@ -109,5 +137,13 @@ public class UserService {
         user.setUsername(userDTO.getUsername());
         user.setLibraryCode(userDTO.getLibraryCode());
         return user;
+    }
+    private UserDtoWithId toUserDtoWithId(User user){
+        UserDtoWithId dto = new UserDtoWithId();
+        dto.setId(user.getId());
+        dto.setLibraryCode(user.getLibraryCode());
+        dto.setUsername(user.getUsername());
+        dto.setEmail(user.getEmail());
+        return dto;
     }
 }
