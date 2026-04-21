@@ -16,6 +16,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -33,6 +35,10 @@ public class NewsService {
     @Transactional(readOnly = true)
     public NewsDtoWithTotalElements findAll(Pageable pageable){
         Page<News> allNews = newsRepository.findAll(pageable);
+        return getNewsDtoWithTotalElements(allNews);
+    }
+
+    private NewsDtoWithTotalElements getNewsDtoWithTotalElements(Page<News> allNews) {
         if (allNews.isEmpty()){
             log.warn("No news found");
             throw new NewsNotFoundException("No news found. ");
@@ -43,6 +49,15 @@ public class NewsService {
         dto.setNewsPages(allNews.getTotalPages());
         dto.setNewsCount(allNews.getTotalElements());
         return dto;
+    }
+
+    @Transactional(readOnly = true)
+    public NewsDtoWithTotalElements findAll(String search, Pageable pageable){
+        String decodedSearch = URLDecoder.decode(search, StandardCharsets.UTF_8);
+        String searchPattern = "%" + decodedSearch.trim().replaceAll("\\s+", "%") + "%";
+        System.out.println(searchPattern);
+        Page<News> allNews = newsRepository.findAllByParam(searchPattern, pageable);
+        return getNewsDtoWithTotalElements(allNews);
     }
     @Transactional(readOnly = true)
     public NewsDTOForGetRequest findOneById(UUID id){

@@ -25,7 +25,7 @@ public class HomeController {
     public String home(
             @RequestParam(value = "genre", required = false) String genre,
             @RequestParam(value = "sortBy", defaultValue = "bookAddedAt", required = false) String sort,
-            @RequestParam(value = "sortDir", defaultValue = "disc", required = false) String sortDir,
+            @RequestParam(value = "sortDir", defaultValue = "desc", required = false) String sortDir,
             Model model) {
         try {
 

@@ -36,8 +36,14 @@ public class AnnouncementController {
     @GetMapping("/get-all")
     public ResponseEntity<AnnouncementDTOWithTotalElements> getAllAnnouncement(
             @RequestParam(value = "page", defaultValue = "0") Integer page,
-            @RequestParam(value = "announcementPerPage", defaultValue = "5") Integer announcementPerPage){
+            @RequestParam(value = "announcementPerPage", defaultValue = "5") Integer announcementPerPage,
+            @RequestParam(value = "search", required = false) String search
 
+    ){
+    if (search!=null){
+        AnnouncementDTOWithTotalElements dto = announcementService.findAll(search, PageRequest.of(page, announcementPerPage));
+        return new ResponseEntity<>(dto, HttpStatus.OK);
+    }
         AnnouncementDTOWithTotalElements dto = announcementService.findAll(PageRequest.of(page, announcementPerPage));
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }

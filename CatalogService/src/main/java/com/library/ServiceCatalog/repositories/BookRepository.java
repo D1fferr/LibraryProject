@@ -21,7 +21,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public interface BookRepository extends JpaRepository<Book, Integer> {
+public interface BookRepository extends JpaRepository<Book, UUID> {
     Optional<Book> findByBookId(UUID bookId);
 
     Page<Book> findAllByOrderByBookAddedAtDesc(Pageable pageable);
@@ -39,5 +39,10 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
 
     List<Book> findAllByBookIdIn(Collection<UUID> bookIds);
 
-    Page<Book> findAllByBookAuthorOrBookGenreOrBookPublicationOrBookName(String bookAuthor, String bookGenre, String bookPublication, String bookName, Pageable pageable);
+    @Query("SELECT b FROM Book b WHERE " +
+            "b.bookAuthor LIKE :search OR " +
+            "b.bookGenre LIKE :search OR " +
+            "b.bookPublication LIKE :search OR " +
+            "b.bookName LIKE :search")
+    Page<Book> findBooks(String search, Pageable pageable);
 }

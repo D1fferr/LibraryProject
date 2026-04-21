@@ -65,12 +65,10 @@ public class BookAdminController {
     @GetMapping
     public String listBooks(@RequestParam(defaultValue = "0") int page,
                             @RequestParam(required = false) String search,
-                            @RequestParam(value = "sortBy", defaultValue = "bookAddedAt") String sort,
-                            @RequestParam(value = "sortDir", defaultValue = "disc") String sortDir,
                             Model model) {
         try {
 
-            BookDtoWithTotalElements booksDto = bookService.getBooksForAdmin(sort, page, sortDir, search);
+            BookDtoWithTotalElements booksDto = bookService.getBooksForAdmin(page, search);
             long totalBooks = booksDto.getBookCount();
             int totalPages = booksDto.getBookPages();
 

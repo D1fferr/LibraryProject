@@ -31,7 +31,7 @@ public class CatalogController {
             @RequestParam(value = "genre", required = false) String genre,
             @RequestParam(value = "page", defaultValue = "0") int page,
             @RequestParam(value = "sortBy", defaultValue = "bookAddedAt") String sort,
-            @RequestParam(value = "sortDir", defaultValue = "disc") String sortDir,
+            @RequestParam(value = "sortDir", defaultValue = "desc") String sortDir,
             Model model) {
         try {
             CategoriesDto categoriesDto = bookService.getAllCategories();

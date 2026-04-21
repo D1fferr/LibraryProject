@@ -32,7 +32,7 @@ public class BookController {
                                                        @RequestParam(value = "booksPerPage", defaultValue = "5", required = false) Integer booksPerPage,
                                                        @RequestParam(value = "sortBy", defaultValue = "bookAddedAt") String sortBy,
                                                        @RequestParam(value = "genre", required = false) String genre,
-                                                       @RequestParam(value = "sortDir", defaultValue = "disc") String sortDir)
+                                                       @RequestParam(value = "sortDir", defaultValue = "desc") String sortDir)
     {
         if (sortBy.equals("bookGenre") && genre !=null && !genre.isEmpty()){
             BookDtoWithTotalElements books = bookService.findAllByGenre(genre, PageRequest.of(page, booksPerPage, Sort.by(Sort.Direction.fromString(sortDir), sortBy)));
@@ -43,15 +43,13 @@ public class BookController {
     }
     @GetMapping("/auth")
     public ResponseEntity<BookDtoWithTotalElements> getAllBooksForAdmin(@RequestParam(defaultValue = "0") int page,
-                                                                        @RequestParam(required = false) String search,
-                                                                        @RequestParam(value = "sortBy", defaultValue = "bookAddedAt") String sort,
-                                                                        @RequestParam(value = "sortDir", defaultValue = "disc") String sortDir)
+                                                                        @RequestParam(required = false) String search)
     {
         if (search!=null){
-            BookDtoWithTotalElements books = bookService.findAllByParam(search ,PageRequest.of(page, 12, Sort.by(sortDir, sort)));
+            BookDtoWithTotalElements books = bookService.findAllByParam(search ,PageRequest.of(page, 12));
             return new ResponseEntity<>(books, HttpStatus.OK);
         }
-        BookDtoWithTotalElements books = bookService.findAll(PageRequest.of(page, 12, Sort.by(sortDir, sort)));
+        BookDtoWithTotalElements books = bookService.findAll(PageRequest.of(page, 12));
         return new ResponseEntity<>(books, HttpStatus.OK);
     }
     @PostMapping("/auth/for-reservations")

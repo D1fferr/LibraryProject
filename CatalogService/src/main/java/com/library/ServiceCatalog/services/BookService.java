@@ -22,6 +22,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -99,8 +101,9 @@ public class BookService {
     }
     @Transactional(readOnly = true)
     public BookDtoWithTotalElements findAllByParam(String search, Pageable pageable) {
-        String searchPattern = "%" + search + "%";
-        Page<Book> booksPage = bookRepository.findAllByBookAuthorOrBookGenreOrBookPublicationOrBookName(searchPattern, searchPattern, searchPattern, searchPattern, pageable);
+        String decodedSearch = URLDecoder.decode(search, StandardCharsets.UTF_8);
+        String searchPattern = "%" + decodedSearch.trim().replaceAll("\\s+", "%") + "%";
+        Page<Book> booksPage = bookRepository.findBooks(searchPattern, pageable);
         long bookCount = booksPage.getTotalElements();
         int bookPages = booksPage.getTotalPages();
         List<Book> books = booksPage.getContent();

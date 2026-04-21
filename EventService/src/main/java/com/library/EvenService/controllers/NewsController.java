@@ -30,8 +30,14 @@ public class NewsController {
 
     @GetMapping("/get-all")
     public ResponseEntity<NewsDtoWithTotalElements> getAllNews(@RequestParam(value = "page", defaultValue = "0") Integer page,
-                                                               @RequestParam(value = "newsPerPage", defaultValue = "5") Integer newsPerPage){
-
+                                                               @RequestParam(value = "newsPerPage", defaultValue = "5") Integer newsPerPage,
+                                                               @RequestParam(value = "search", required = false) String search
+    ){
+        if (search!=null){
+            System.out.println(search);
+            NewsDtoWithTotalElements dto = newsService.findAll(search, PageRequest.of(page, newsPerPage));
+            return new ResponseEntity<>(dto, HttpStatus.OK);
+        }
         NewsDtoWithTotalElements dto = newsService.findAll(PageRequest.of(page, newsPerPage));
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
@@ -50,13 +56,13 @@ public class NewsController {
 
     }
     @PatchMapping("/auth/change/{id}")
-    public ResponseEntity<NewsDTOForGetRequest> changeNews(@PathVariable UUID id,
+    public ResponseEntity<HttpStatus> changeNews(@PathVariable UUID id,
                                               @RequestPart("newsData") @Valid NewsDTO newsDTO,
                                               @RequestPart(value = "coverImage", required = false) MultipartFile image,
                                               BindingResult bindingResult){
         checkNewsErrors(bindingResult);
         NewsDTOForGetRequest dto = newsService.update(id, newsDTO, image);
-        return new ResponseEntity<>(dto, HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
     @DeleteMapping("/auth/delete/{id}")
     public ResponseEntity<HttpStatus> deleteNews(@PathVariable UUID id){

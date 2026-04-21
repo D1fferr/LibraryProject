@@ -17,6 +17,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -44,6 +46,17 @@ public class AnnouncementService {
     @Transactional(readOnly = true)
     public AnnouncementDTOWithTotalElements findAll(Pageable pageable){
         Page<Announcement> allAnnouncement = announcementRepository.findAll(pageable);
+        return getAnnouncementDTOWithTotalElements(allAnnouncement);
+    }
+    @Transactional(readOnly = true)
+    public AnnouncementDTOWithTotalElements findAll(String search, Pageable pageable){
+        String decodedSearch = URLDecoder.decode(search, StandardCharsets.UTF_8);
+        String searchPattern = "%" + decodedSearch.trim().replaceAll("\\s+", "%") + "%";
+        Page<Announcement> allAnnouncement = announcementRepository.findAllByNameOrBodyOrType(searchPattern, pageable);
+        return getAnnouncementDTOWithTotalElements(allAnnouncement);
+    }
+
+    private AnnouncementDTOWithTotalElements getAnnouncementDTOWithTotalElements(Page<Announcement> allAnnouncement) {
         if (allAnnouncement.isEmpty()){
             log.warn("Announcements not found");
             throw new AnnouncementsNotFoundException("Announcements not found");
@@ -54,6 +67,7 @@ public class AnnouncementService {
         dto.setAnnouncementCount(allAnnouncement.getTotalElements());
         return dto;
     }
+
     @Transactional
     public void save(AnnouncementDTO announcementDTO, MultipartFile image){
 

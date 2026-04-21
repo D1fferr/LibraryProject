@@ -70,33 +70,30 @@ public class BookService {
             throw new BookException(e.getMessage());
         }
     }
-    public BookDtoWithTotalElements getBooksForAdmin(String sortBy, int page, String sortDir, String search){
+    public BookDtoWithTotalElements getBooksForAdmin(int page, String search){
         try {
             UriComponentsBuilder builder;
             if (search!=null){
                 builder = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/api/book/auth")
                         .queryParam("page", page)
-                        .queryParam("search", search)
-                        .queryParam("sortBy", sortBy)
-                        .queryParam("sortDir", sortDir);
+                        .queryParam("search", search);
                 String url = builder.toUriString();
                 return authorizedRestTemplate.getForObject(
                         url,
                         BookDtoWithTotalElements.class
                 );
             }else {
-                builder = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/api/book/public")
-                        .queryParam("page", page)
-                        .queryParam("sortBy", sortBy)
-                        .queryParam("sortDir", sortDir);
+                builder = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/api/book/auth")
+                        .queryParam("page", page);
                 String url = builder.toUriString();
-                return publicRestTemplate.getForObject(
+                return authorizedRestTemplate.getForObject(
                         url,
                         BookDtoWithTotalElements.class
                 );
             }
 
         }catch (Exception e){
+            System.out.println(e.getMessage());
             throw new BookException(e.getMessage());
         }
 

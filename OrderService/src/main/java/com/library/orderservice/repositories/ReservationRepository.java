@@ -29,8 +29,10 @@ public interface ReservationRepository extends JpaRepository<Reservation, UUID> 
     List<Reservation> findReservationByReservationDateAndReservationBook(LocalDate reservationDate, UUID reservationBook);
 
     List<Reservation> findReservationsByReservationBookAndReservationDateAndReservationStatusNot(@NotNull(message = "You must select an existing book.") UUID reservationBook, @Future(message = "You cannot select the booking date to be in the past or today.") LocalDate reservationDate, ReservationStatus reservationStatus);
-
-    Page<Reservation> findAllByReservationBookOrReservationUser(@NotNull(message = "You must select an existing book.") UUID reservationBook, @NotNull(message = "You must select an existing account.") UUID reservationUser, Pageable pageable);
+    @Query("SELECT r FROM Reservation r WHERE " +
+            "str(r.reservationBook) LIKE :search OR " +
+            "str(r.reservationUser) LIKE :search")
+    Page<Reservation> findByParam(String search, Pageable pageable);
 
     Page<Reservation> findAllByReservationBookIsNotNullAndReservationUserIsNotNull(Pageable pageable);
 }

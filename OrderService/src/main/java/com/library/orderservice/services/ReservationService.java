@@ -15,6 +15,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -192,7 +194,9 @@ public class ReservationService {
     }
     @Transactional(readOnly = true)
     public ReservationsPageDto findAllReservationByParam(String search, Pageable pageable) {
-        Page<Reservation> reservationList = reservationRepository.findAllByReservationBookOrReservationUser(UUID.fromString(search), UUID.fromString(search), pageable);
+        String decodedSearch = URLDecoder.decode(search, StandardCharsets.UTF_8);
+        String searchPattern = "%" + decodedSearch.trim().replaceAll("\\s+", "%") + "%";
+        Page<Reservation> reservationList = reservationRepository.findByParam(searchPattern, pageable);
         if (reservationList.isEmpty()) {
             log.warn("No reservations found");
             throw new ReservationsNotFoundException("No reservations found");

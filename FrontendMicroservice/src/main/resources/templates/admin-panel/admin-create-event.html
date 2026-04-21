@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Event - BookLibrary</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        .create-hero {
+            background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);
+            padding: 40px 0;
+            text-align: center;
+            color: white;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .create-hero .hero-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .create-hero h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .create-hero p {
+            font-size: 1rem;
+            opacity: 0.95;
+        }
+
+        .create-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+
+        .create-form {
+            padding: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #2c3e50;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .form-group label .required {
+            color: #e74c3c;
+            margin-left: 4px;
+        }
+
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            box-sizing: border-box;
+            font-family: inherit;
+        }
+
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+            outline: none;
+            border-color: #9b59b6;
+            box-shadow: 0 0 0 3px rgba(155, 89, 182, 0.1);
+        }
+
+        .form-group .hint {
+            color: #7f8c8d;
+            font-size: 0.75rem;
+            margin-top: 5px;
+        }
+
+        .field-error {
+            color: #e74c3c;
+            font-size: 0.75rem;
+            margin-top: 5px;
+        }
+
+        .has-error input, .has-error textarea, .has-error select {
+            border-color: #e74c3c;
+        }
+
+        .image-upload {
+            border: 2px dashed #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 20px;
+        }
+
+        .image-upload:hover {
+            border-color: #9b59b6;
+            background: #f8f9fa;
+        }
+
+        .image-upload .upload-icon {
+            font-size: 48px;
+            color: #bdc3c7;
+            margin-bottom: 10px;
+        }
+
+        .image-upload .upload-text {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+
+        .image-preview {
+            margin-top: 15px;
+            display: none;
+        }
+
+        .image-preview img {
+            max-width: 150px;
+            max-height: 150px;
+            border-radius: 8px;
+            border: 2px solid #e0e0e0;
+        }
+
+        .image-preview .remove-image {
+            display: inline-block;
+            margin-top: 8px;
+            color: #e74c3c;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        .alert {
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .alert-error {
+            background: #fee;
+            color: #c0392b;
+            border: 1px solid #fcc;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .btn-cancel {
+            flex: 1;
+            padding: 12px;
+            background: #95a5a6;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            transition: background 0.3s;
+        }
+
+        .btn-cancel:hover {
+            background: #7f8c8d;
+        }
+
+        .btn-submit {
+            flex: 1;
+            padding: 12px;
+            background: #9b59b6;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn-submit:hover {
+            background: #8e44ad;
+        }
+
+        .btn-submit:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+        }
+
+        .breadcrumbs {
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            color: #7f8c8d;
+        }
+
+        .breadcrumbs a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .create-hero h1 {
+                font-size: 1.5rem;
+            }
+
+            .form-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- Header -->
+<div th:replace="~{layout/header :: header}"></div>
+
+<!-- Main Content -->
+<div class="container">
+    <main class="main-content">
+        <!-- Breadcrumbs -->
+        <div class="breadcrumbs">
+            <a href="/">Home</a> /
+            <a href="/admin/dashboard">Admin Panel</a> /
+            <a href="/admin/events">Events</a> /
+            <span>Create Event</span>
+        </div>
+
+        <!-- Page Header -->
+        <div class="create-hero">
+            <span class="material-icons hero-icon">add_circle</span>
+            <h1>Create Event</h1>
+            <p>Add a new event to the library</p>
+        </div>
+
+        <!-- Form Container -->
+        <div class="create-container">
+            <div class="create-form">
+                <!-- Error Message from RedirectAttributes -->
+                <div th:if="${error}" class="alert alert-error">
+                    <span class="material-icons">error</span>
+                    <span th:text="${error}"></span>
+                </div>
+
+                <!-- Validation Errors from BindingResult -->
+                <div th:if="${errors}" class="alert alert-error">
+                    <span class="material-icons">error</span>
+                    <ul>
+                        <li th:each="error : ${errors}" th:text="${error.defaultMessage}"></li>
+                    </ul>
+                </div>
+
+                <!-- Success Message -->
+                <div th:if="${success}" class="alert alert-success">
+                    <span class="material-icons">check_circle</span>
+                    <span th:text="${success}"></span>
+                </div>
+
+                <form id="createEventForm" enctype="multipart/form-data" method="post" action="/admin/events/create">
+                    <!-- Image Upload -->
+                    <div class="image-upload" onclick="document.getElementById('coverImage').click()">
+                        <div class="upload-icon">
+                            <span class="material-icons">cloud_upload</span>
+                        </div>
+                        <div class="upload-text">Click to upload event image</div>
+                        <div class="upload-text">Supported formats: JPG, PNG (max 5MB)</div>
+                        <input type="file" id="coverImage" name="coverImage" accept="image/jpeg,image/png" style="display: none;" onchange="previewImage(this)">
+                    </div>
+
+                    <div id="imagePreview" class="image-preview">
+                        <img id="previewImg" src="#" alt="Preview">
+                        <div class="remove-image" onclick="removeImage()">Remove</div>
+                    </div>
+
+                    <!-- Event Name -->
+                    <div class="form-group">
+                        <label for="name">Event Title <span class="required">*</span></label>
+                        <input type="text" id="name" name="name" placeholder="Enter event title" required maxlength="100">
+                        <div class="hint">Maximum 100 characters</div>
+                    </div>
+
+                    <!-- Event Type -->
+                    <div class="form-group">
+                        <label for="type">Event Type <span class="required">*</span></label>
+                        <select id="type" name="type" required>
+                            <option value="">Select event type</option>
+                            <option value="Workshop">Workshop</option>
+                            <option value="Lecture">Lecture</option>
+                            <option value="Book Club">Book Club</option>
+                            <option value="Exhibition">Exhibition</option>
+                            <option value="Reading Session">Reading Session</option>
+                            <option value="Conference">Conference</option>
+                            <option value="Webinar">Webinar</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <!-- Event Date -->
+                    <div class="form-group">
+                        <label for="date">Event Date <span class="required">*</span></label>
+                        <input type="date" id="date" name="date" required>
+                        <div class="hint">Cannot be in the past</div>
+                    </div>
+
+                    <!-- Event Body -->
+                    <div class="form-group">
+                        <label for="body">Description <span class="required">*</span></label>
+                        <textarea id="body" name="body" rows="10" placeholder="Enter event description..." required maxlength="1000"></textarea>
+                        <div class="hint">Maximum 1000 characters</div>
+                    </div>
+
+                    <!-- Form Actions -->
+                    <div class="form-actions">
+                        <a href="/admin/events" class="btn-cancel">Cancel</a>
+                        <button type="submit" class="btn-submit">Create Event</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- Footer -->
+<div th:replace="~{layout/footer :: footer}"></div>
+
+<script>
+    let currentImageFile = null;
+
+    // Image preview
+    function previewImage(input) {
+        const preview = document.getElementById('imagePreview');
+        const previewImg = document.getElementById('previewImg');
+
+        if (input.files && input.files[0]) {
+            currentImageFile = input.files[0];
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                previewImg.src = e.target.result;
+                preview.style.display = 'block';
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    function removeImage() {
+        const fileInput = document.getElementById('coverImage');
+        const preview = document.getElementById('imagePreview');
+        fileInput.value = '';
+        currentImageFile = null;
+        preview.style.display = 'none';
+        previewImg.src = '#';
+    }
+
+    // Form submission
+    document.getElementById('createEventForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        const formData = new FormData();
+
+        // Додаємо кожне поле окремо
+        formData.append('name', document.getElementById('name').value);
+        formData.append('type', document.getElementById('type').value);
+        formData.append('date', document.getElementById('date').value);
+        formData.append('body', document.getElementById('body').value);
+
+        // Додаємо зображення
+        const coverImage = document.getElementById('coverImage').files[0];
+        if (coverImage) {
+            formData.append('coverImage', coverImage);
+        }
+
+        try {
+            const response = await fetch('/admin/events/create', {
+                method: 'POST',
+                body: formData
+            });
+
+            if (response.redirected) {
+                window.location.href = response.url;
+            } else if (response.ok) {
+                window.location.href = '/admin/events';
+            } else {
+                const errorText = await response.text();
+                alert('Failed to create event. Check console for details.');
+                console.error(errorText);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Network error.');
+        }
+    });
+</script>
+</body>
+</html>

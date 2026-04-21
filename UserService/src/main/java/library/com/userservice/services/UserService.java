@@ -12,6 +12,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -57,7 +59,8 @@ public class UserService {
     }
     @Transactional(readOnly = true)
     public UserPageDto findUser(int page, int pageSize, String search){
-        String searchPattern = "%" + search + "%";
+        String decodedSearch = URLDecoder.decode(search, StandardCharsets.UTF_8);
+        String searchPattern = "%" + decodedSearch.trim().replaceAll("\\s+", "%") + "%";
         Page<User> users = userRepository.searchEverywhere(searchPattern, PageRequest.of(page, pageSize));
         if (users.isEmpty()) {
             log.warn("Users not found");
