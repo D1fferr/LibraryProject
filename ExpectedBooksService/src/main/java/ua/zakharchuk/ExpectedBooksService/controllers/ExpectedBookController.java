@@ -37,17 +37,21 @@ public class ExpectedBookController {
     @GetMapping("/get-all")
     public ResponseEntity<ExpectedBookDtoWithTotalElements> getAll(
             @RequestParam(value = "page", defaultValue = "0") Integer page,
-            @RequestParam(value = "bookPerPage", defaultValue = "5")
-            Integer bookPerPage){
+            @RequestParam(value = "bookPerPage", defaultValue = "5") Integer bookPerPage,
+            @RequestParam(value = "search", required = false) String search)
+    {
+        if (search!=null){
+            return new ResponseEntity<>(expectedBookService.findAll(search, PageRequest.of(page, bookPerPage)), HttpStatus.OK);
+        }
         return new ResponseEntity<>(expectedBookService.findAll(PageRequest.of(page, bookPerPage)), HttpStatus.OK);
     }
     @PostMapping("/auth/create")
-    public ResponseEntity<ExpectedBookDTO> createExpectedBook(@RequestPart("bookData") @Valid ExpectedBookDTOCreate bookDTO,
+    public ResponseEntity<HttpStatus> createExpectedBook(@RequestPart("bookData") @Valid ExpectedBookDTOCreate bookDTO,
                                                               @RequestPart(value = "coverImage", required = false) MultipartFile coverImage,
                                                               BindingResult bindingResult){
         checkBookErrors(bindingResult);
         ExpectedBookDTO expectedBookDTO = expectedBookService.save(bookDTO, coverImage);
-        return new ResponseEntity<>(expectedBookDTO, HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
     @PatchMapping("/auth/change/{id}")
     public ResponseEntity<ExpectedBookDTO> changeExpectedBook(@PathVariable UUID id,
@@ -67,6 +71,7 @@ public class ExpectedBookController {
     @GetMapping("/auth/add-to-current-books/{id}")
     public ResponseEntity<HttpStatus> addToCurrentBooks(@PathVariable UUID id){
         kafkaSenderService.send(id);
+        expectedBookService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

@@ -64,13 +64,12 @@ public class BookService {
 
     @Transactional
     public void saveExpectedBookToCurrentBook(BookDTOForKafka book) {
-        BookForKafka entity = toEntityForKafka(book);
-        entity.setBookAddedAt(LocalDateTime.now());
-        bookForKafkaRepository.save(entity);
-        if (bookRepository.existsBookByBookId(entity.getBookId())){
-            log.warn("The expected book is not saved to the current books. The same book already exists. ID: {}", entity.getBookId());
+        if (bookRepository.findByBookId(book.getBookId()).isPresent()){
+            log.warn("The expected book is not saved to the current books. The same book already exists. ID: {}", book.getBookId());
             throw new BookAlreadyExistException("Book already exist");
         }
+        BookForKafka entity = toEntityForKafka(book);
+        entity.setBookAddedAt(LocalDateTime.now());
         bookForKafkaRepository.save(entity);
         log.info("The expected book saved to the current books. ID: '{}'", entity.getBookId());
 

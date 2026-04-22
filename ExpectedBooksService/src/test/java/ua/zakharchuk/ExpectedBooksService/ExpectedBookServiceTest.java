@@ -54,7 +54,7 @@ public class ExpectedBookServiceTest {
         bookDTO.setExpectedBookLanguage("Test");
         bookDTO.setExpectedBookGenre("Test");
         bookDTO.setExpectedBookName("Test");
-        bookDTO.setExpectedBookPieces(1);
+        bookDTO.setExpectedBookItems(1);
         bookDTO.setExpectedBookYear(1999);
         bookDTO.setExpectedBookPublication("Test");
         ExpectedBook book = new ExpectedBook();
@@ -73,7 +73,7 @@ public class ExpectedBookServiceTest {
         bookDTO.setExpectedBookLanguage("Test");
         bookDTO.setExpectedBookGenre("Test");
         bookDTO.setExpectedBookName("Test");
-        bookDTO.setExpectedBookPieces(1);
+        bookDTO.setExpectedBookItems(1);
         bookDTO.setExpectedBookYear(1999);
         bookDTO.setExpectedBookPublication("Test");
         when(modelMapper.map(bookDTO, ExpectedBook.class)).thenReturn(new ExpectedBook());
@@ -91,7 +91,7 @@ public class ExpectedBookServiceTest {
         bookDTO.setExpectedBookLanguage("Test");
         bookDTO.setExpectedBookGenre("Test");
         bookDTO.setExpectedBookName("Test");
-        bookDTO.setExpectedBookPieces(1);
+        bookDTO.setExpectedBookItems(1);
         bookDTO.setExpectedBookYear(1999);
         bookDTO.setExpectedBookPublication("Test");
 
@@ -144,7 +144,7 @@ public class ExpectedBookServiceTest {
         bookDTO.setExpectedBookLanguage("Test");
         bookDTO.setExpectedBookGenre("Test");
         bookDTO.setExpectedBookName("Test");
-        bookDTO.setExpectedBookPieces(1);
+        bookDTO.setExpectedBookItems(1);
         bookDTO.setExpectedBookYear(1999);
         bookDTO.setExpectedBookPublication("Test");
 
@@ -168,7 +168,7 @@ public class ExpectedBookServiceTest {
         bookDTO.setExpectedBookLanguage("Test");
         bookDTO.setExpectedBookGenre("Test");
         bookDTO.setExpectedBookName("Test");
-        bookDTO.setExpectedBookPieces(1);
+        bookDTO.setExpectedBookItems(1);
         bookDTO.setExpectedBookYear(1999);
         bookDTO.setExpectedBookPublication("Test");
 
@@ -189,7 +189,7 @@ public class ExpectedBookServiceTest {
         bookDTO.setExpectedBookLanguage("Test");
         bookDTO.setExpectedBookGenre("Test");
         bookDTO.setExpectedBookName("Test");
-        bookDTO.setExpectedBookPieces(1);
+        bookDTO.setExpectedBookItems(1);
         bookDTO.setExpectedBookYear(1999);
         bookDTO.setExpectedBookPublication("Test");
         ExpectedBook existingBook = new ExpectedBook();

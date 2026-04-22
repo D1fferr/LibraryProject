@@ -43,7 +43,7 @@ public class ExpectedBook {
         private String expectedBookLanguage;
 
         @Column(name = "expected_book_pieces")
-        private int expectedBookPieces;
+        private int expectedBookItems;
 
         @Column(name = "expected_book_image")
         private String expectedBookImage;

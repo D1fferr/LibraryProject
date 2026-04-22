@@ -10,7 +10,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Base64;
+import java.util.Date;
 
 @Service
 public class JwtUtil {
@@ -130,8 +135,44 @@ public class JwtUtil {
         }
         return null;
     }
-
     public boolean isAuthenticated() {
-        return getJwtFromCookie() != null;
+        String token = getJwtFromCookie();
+        if (token == null) {
+            return false;
+        }
+
+        LocalDateTime expirationDateTime = getExpirationDateTimeFromToken(token);
+        if (expirationDateTime != null && expirationDateTime.isBefore(LocalDateTime.now())) {
+            return false;
+        }
+
+        return true;
+    }
+
+    private LocalDateTime getExpirationDateTimeFromToken(String token) {
+        try {
+            String[] chunks = token.split("\\.");
+            if (chunks.length < 2) {
+                return null;
+            }
+
+            String payload = new String(Base64.getUrlDecoder().decode(chunks[1]));
+
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode jsonNode = mapper.readTree(payload);
+
+            if (jsonNode.has("exp")) {
+                long expSeconds = jsonNode.get("exp").asLong();
+                // Конвертуємо секунди в LocalDateTime
+                return LocalDateTime.ofInstant(
+                        Instant.ofEpochSecond(expSeconds),
+                        ZoneId.systemDefault()
+                );
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error parsing token: " + e.getMessage());
+        }
+        return null;
     }
 }

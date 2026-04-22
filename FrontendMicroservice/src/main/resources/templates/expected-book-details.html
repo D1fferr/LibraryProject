@@ -6,10 +6,73 @@
     <title th:text="${expectedBook.expectedBookName} + ' - BookLibrary (Expected)'">Expected Book - BookLibrary</title>
     <link rel="stylesheet" href="/css/style.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        /* Додаткові стилі для кнопки Notify Me */
+        .btn-notify {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 24px;
+            background: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-top: 10px;
+        }
+
+        .btn-notify:hover {
+            background: #2ecc71;
+            transform: translateY(-2px);
+        }
+
+        .btn-notify:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .notification-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .notification-error {
+            background: #fee;
+            color: #c0392b;
+            border: 1px solid #fcc;
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-notify-section {
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
 <!-- Header -->
 <div th:replace="~{layout/header :: header}"></div>
+
+<!-- Прихований елемент з ID поточного користувача та email -->
+<div th:if="${currentUserId != null}" id="current-user-id" th:data-user-id="${currentUserId}" style="display: none;"></div>
+<div th:if="${currentUserEmail != null}" id="current-user-email" th:data-user-email="${currentUserEmail}" style="display: none;"></div>
+<div th:if="${currentUsername != null}" id="current-username" th:data-username="${currentUsername}" style="display: none;"></div>
 
 <!-- Main Content -->
 <div class="container">
@@ -57,7 +120,13 @@
                     <span>Expected Release</span>
                 </div>
 
-                <!-- No Reserve Button for Expected Book -->
+                <!-- Notify Me Button -->
+                <div class="btn-notify-section">
+                    <button class="btn-notify" id="notifyBtn" onclick="sendNotification()">
+                        <span class="material-icons">notifications</span>
+                        Notify Me When Available
+                    </button>
+                </div>
             </div>
         </div>
 
@@ -149,5 +218,104 @@
 
 <!-- Footer -->
 <div th:replace="~{layout/footer :: footer}"></div>
+
+<script th:inline="javascript">
+    // Отримання даних користувача
+    function getCurrentUserId() {
+        const userElement = document.getElementById('current-user-id');
+        return userElement ? userElement.dataset.userId : null;
+    }
+
+    function getCurrentUserEmail() {
+        const emailElement = document.getElementById('current-user-email');
+        return emailElement ? emailElement.dataset.userEmail : null;
+    }
+
+    function getCurrentUsername() {
+        const usernameElement = document.getElementById('current-username');
+        return usernameElement ? usernameElement.dataset.username : null;
+    }
+
+    // Відправка повідомлення про наявність
+    function sendNotification() {
+        const userId = getCurrentUserId();
+
+        // Якщо користувач не залогінений - перенаправляємо на логін
+        if (!userId) {
+            const currentUrl = window.location.pathname;
+            window.location.href = '/login?redirect=' + encodeURIComponent(currentUrl);
+            return;
+        }
+
+        // Отримуємо bookId з моделі Thymeleaf
+        const bookId = /*[[${expectedBook.expectedBookId}]]*/ null;
+        const userEmail = getCurrentUserEmail();
+        const username = getCurrentUsername();
+
+        const requestBody = {
+            userId: userId,
+            expectedBookId: bookId,
+            userEmail: userEmail,
+            username: username
+        };
+
+        const notifyBtn = document.getElementById('notifyBtn');
+        const originalText = notifyBtn.innerHTML;
+
+        // Блокуємо кнопку та показуємо стан завантаження
+        notifyBtn.disabled = true;
+        notifyBtn.innerHTML = '<span class="material-icons">hourglass_empty</span> Sending...';
+
+        fetch('/expected-books/notify', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(requestBody)
+        })
+            .then(response => {
+                if (response.ok) {
+                    notifyBtn.innerHTML = '<span class="material-icons">check_circle</span> Notification Requested';
+                    notifyBtn.style.background = '#27ae60';
+                    showMessage('You will be notified when this book becomes available!', 'success');
+                } else {
+                    notifyBtn.disabled = false;
+                    notifyBtn.innerHTML = originalText;
+                    response.json().then(data => {
+                        showMessage('Failed to send notification: ' + (data.message || 'Please try again.'), 'error');
+                    }).catch(() => {
+                        showMessage('Failed to send notification. Please try again.', 'error');
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                notifyBtn.disabled = false;
+                notifyBtn.innerHTML = originalText;
+                showMessage('Network error. Please try again.', 'error');
+            });
+    }
+
+    function showMessage(message, type) {
+        // Видаляємо попереднє повідомлення, якщо воно є
+        const existingMessage = document.querySelector('.notification-success, .notification-error');
+        if (existingMessage) {
+            existingMessage.remove();
+        }
+
+        const btnSection = document.querySelector('.btn-notify-section');
+        const messageDiv = document.createElement('div');
+        messageDiv.className = type === 'success' ? 'notification-success' : 'notification-error';
+        messageDiv.innerHTML = '<span class="material-icons">' + (type === 'success' ? 'check_circle' : 'error') + '</span><span>' + message + '</span>';
+        btnSection.appendChild(messageDiv);
+
+        // Автоматичне видалення повідомлення через 5 секунд
+        setTimeout(() => {
+            if (messageDiv.parentNode) {
+                messageDiv.remove();
+            }
+        }, 5000);
+    }
+</script>
 </body>
 </html>

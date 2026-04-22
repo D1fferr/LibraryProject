@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import ua.zakharchuk.ExpectedBooksService.dtos.PageReportAvailabilityErrorDTO;
 import ua.zakharchuk.ExpectedBooksService.dtos.ReportAvailabilityErrorDTOBookId;
 import ua.zakharchuk.ExpectedBooksService.dtos.ReportAvailabilityErrorDTO;
 import ua.zakharchuk.ExpectedBooksService.exceptions.ReportAvailabilityErrorBadRequestException;
@@ -27,7 +28,7 @@ public class ReportAvailabilityErrorController {
     private final EmailSenderService emailSenderService;
 
     @GetMapping("/get-all")
-    public ResponseEntity<List<ReportAvailabilityErrorDTO>> getAll(
+    public ResponseEntity<PageReportAvailabilityErrorDTO> getAll(
             @RequestParam(value = "page", defaultValue = "0") Integer page,
             @RequestParam(value = "items-per-page", defaultValue = "5")
             Integer itemsPerPage){

@@ -29,6 +29,7 @@ public class ReportAvailabilityService {
     public void save(ReportAvailabilityDTO reportAvailabilityDTO){
         ReportAvailability reportAvailability = toEntity(reportAvailabilityDTO);
         reportAvailability.setStatus(Status.CREATED);
+        System.out.println(reportAvailability.getExpectedBookId());
         reportAvailabilityRepository.save(reportAvailability);
         log.info("Saved report availability. ID: '{}'", reportAvailability.getId());
     }

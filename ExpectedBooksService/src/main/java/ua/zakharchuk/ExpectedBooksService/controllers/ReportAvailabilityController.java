@@ -29,11 +29,13 @@ public class ReportAvailabilityController {
     private final ReportAvailabilityService reportAvailabilityService;
 
     @PostMapping("/auth/add")
-    public ResponseEntity<ReportAvailabilityDTO> addReportAvailability(@RequestBody @Valid ReportAvailabilityDTO reportAvailabilityDTO,
+    public ResponseEntity<HttpStatus> addReportAvailability(@RequestBody @Valid ReportAvailabilityDTO reportAvailabilityDTO,
                                                                        BindingResult bindingResult) {
+        System.out.println("Start");
         checkReportAvailabilityErrors(bindingResult);
+        System.out.println(reportAvailabilityDTO.getUserId());
         reportAvailabilityService.save(reportAvailabilityDTO);
-        return new ResponseEntity<>(reportAvailabilityDTO, HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
     @DeleteMapping("/auth/delete/{id}")
     public ResponseEntity<HttpStatus> deleteReportAvailability(@PathVariable UUID id){

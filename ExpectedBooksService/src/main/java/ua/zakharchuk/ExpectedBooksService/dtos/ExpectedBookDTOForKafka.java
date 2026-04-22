@@ -25,7 +25,7 @@ public class ExpectedBookDTOForKafka {
     private String expectedBookPublication;
     @NotEmpty(message = "The language of the book cannot be empty.")
     private String expectedBookLanguage;
-    private int expectedBookPieces;
+    private int expectedBookItems;
     private String expectedBookImage;
     @NotEmpty(message = "Book genre cannot be empty.")
     private String expectedBookGenre;

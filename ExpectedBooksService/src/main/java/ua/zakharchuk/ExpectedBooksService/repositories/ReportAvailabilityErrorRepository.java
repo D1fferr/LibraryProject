@@ -1,5 +1,6 @@
 package ua.zakharchuk.ExpectedBooksService.repositories;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import ua.zakharchuk.ExpectedBooksService.models.ReportAvailabilityError;
@@ -11,5 +12,5 @@ import java.util.UUID;
 
 public interface ReportAvailabilityErrorRepository extends JpaRepository<ReportAvailabilityError, UUID> {
 
-    List<ReportAvailabilityError> findAllByStatus(Status status, Pageable pageable);
+    Page<ReportAvailabilityError> findAllByStatus(Status status, Pageable pageable);
 }

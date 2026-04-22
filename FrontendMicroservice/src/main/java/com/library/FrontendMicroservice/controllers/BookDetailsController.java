@@ -1,13 +1,15 @@
 package com.library.FrontendMicroservice.controllers;
 
 import com.library.FrontendMicroservice.dto.BookDtoWithTotalElements;
+import com.library.FrontendMicroservice.dto.ReportAvailabilityDTO;
+import com.library.FrontendMicroservice.dto.UserDTO;
+import com.library.FrontendMicroservice.dto.UserDTOForView;
 import com.library.FrontendMicroservice.models.Book;
 import com.library.FrontendMicroservice.models.ExpectedBook;
 //import com.library.FrontendMicroservice.services.ReserveService;
 import com.library.FrontendMicroservice.models.Reservation;
-import com.library.FrontendMicroservice.services.BookService;
-import com.library.FrontendMicroservice.services.ExpectedBookService;
-import com.library.FrontendMicroservice.services.ReserveService;
+import com.library.FrontendMicroservice.services.*;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @Controller
@@ -31,7 +34,8 @@ public class BookDetailsController {
     private final ExpectedBookService expectedBookService;
     private final JwtUtil jwtUtil;
     private final ReserveService reserveService;
-
+    private final ReportAvailabilityErrorService notificationService;
+    private final UserService userService;
 
 
     @GetMapping("/books/{bookId}")
@@ -74,6 +78,17 @@ public class BookDetailsController {
             BookDtoWithTotalElements booksByGenre = bookService.getBooksByGenre(book.getExpectedBookGenre());
             List<Book> authorBooks = booksByAuthor.getBooks();
             List<Book> similarBooks = booksByGenre.getBooks();
+
+            if (jwtUtil.isAuthenticated()) {
+                System.out.println("Auth");
+                String currentUserId = jwtUtil.getCurrentUserId();
+                UserDTOForView user = userService.getUserById(UUID.fromString(currentUserId));
+                String currentUserEmail = user.getEmail();
+                String currentUsername = user.getUsername();
+                model.addAttribute("currentUserEmail", currentUserEmail);
+                model.addAttribute("currentUsername", currentUsername);
+                model.addAttribute("currentUserId", currentUserId);
+            }
             model.addAttribute("expectedBook", book);
             model.addAttribute("authorBooks", authorBooks);
             model.addAttribute("similarBooks", similarBooks);
@@ -84,6 +99,19 @@ public class BookDetailsController {
         }
 
         return "expected-book-details";
+    }
+
+    @PostMapping("/expected-books/notify")
+    public ResponseEntity<?> sendNotification(@Valid @RequestBody ReportAvailabilityDTO request) {
+        try {
+            notificationService.sendAvailabilityNotification(request);
+
+            return ResponseEntity.ok().build();
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return ResponseEntity.badRequest().body(Map.of("message", e.getMessage()));
+        }
     }
 
 

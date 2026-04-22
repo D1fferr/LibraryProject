@@ -1,17 +1,14 @@
-package ua.zakharchuk.ExpectedBooksService.dtos;
+package com.library.FrontendMicroservice.dto;
 
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import java.util.UUID;
-
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
-@AllArgsConstructor
-public class ExpectedBookDTO {
-    private UUID expectedBookId;
+public class ExpectedBookDTOCreate {
     @Size(min = 1, message = "Book name must not be empty.")
     private String expectedBookName;
     @Size(min = 1, message = "Author name must not be empty.")
@@ -22,7 +19,6 @@ public class ExpectedBookDTO {
     @Size(min = 1, message = "The language of the book cannot be empty.")
     private String expectedBookLanguage;
     private int expectedBookItems;
-    private String expectedBookImage;
     @Size(min = 1, message = "Book genre cannot be empty.")
     private String expectedBookGenre;
 }

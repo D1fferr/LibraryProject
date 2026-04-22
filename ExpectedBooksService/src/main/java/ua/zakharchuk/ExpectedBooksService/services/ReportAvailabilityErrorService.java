@@ -3,9 +3,11 @@ package ua.zakharchuk.ExpectedBooksService.services;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ua.zakharchuk.ExpectedBooksService.dtos.PageReportAvailabilityErrorDTO;
 import ua.zakharchuk.ExpectedBooksService.dtos.ReportAvailabilityErrorDTO;
 import ua.zakharchuk.ExpectedBooksService.exceptions.ExpectedBooksNotFoundException;
 import ua.zakharchuk.ExpectedBooksService.models.ReportAvailabilityError;
@@ -28,14 +30,18 @@ public class ReportAvailabilityErrorService {
     }
 
     @Transactional(readOnly = true)
-    public List<ReportAvailabilityErrorDTO> findAll(Pageable pageable) {
-        List<ReportAvailabilityErrorDTO> reportAvailabilityErrorDTOS = errorRepository
-                .findAllByStatus(Status.CREATED, pageable).stream().map(this::toDTO).toList();
+    public PageReportAvailabilityErrorDTO findAll(Pageable pageable) {
+        Page<ReportAvailabilityError> reportAvailabilityErrorDTOS = errorRepository
+                .findAllByStatus(Status.CREATED, pageable);
         if (reportAvailabilityErrorDTOS.isEmpty()){
             log.warn("Failed to find all report availability errors. The selected record not found");
             throw new ExpectedBooksNotFoundException("The selected record not found.");
         }
-        return reportAvailabilityErrorDTOS;
+        PageReportAvailabilityErrorDTO dto = new PageReportAvailabilityErrorDTO();
+        dto.setDtoList(reportAvailabilityErrorDTOS.stream().map(this::toDTO).toList());
+        dto.setTotalPages(reportAvailabilityErrorDTOS.getTotalPages());
+        dto.setTotalElements(reportAvailabilityErrorDTOS.getNumberOfElements());
+        return dto;
     }
 
     private ReportAvailabilityErrorDTO toDTO(ReportAvailabilityError reportAvailabilityError){

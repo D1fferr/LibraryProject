@@ -16,7 +16,7 @@ public class ExpectedBookDTOCreate {
     private String expectedBookPublication;
     @Size(min = 1, message = "The language of the book cannot be empty.")
     private String expectedBookLanguage;
-    private int expectedBookPieces;
+    private int expectedBookItems;
     @Size(min = 1, message = "Book genre cannot be empty.")
     private String expectedBookGenre;
 }

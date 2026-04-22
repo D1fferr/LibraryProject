@@ -18,8 +18,9 @@ import ua.zakharchuk.ExpectedBooksService.exceptions.ExpectedBooksNotFoundExcept
 import ua.zakharchuk.ExpectedBooksService.models.ExpectedBook;
 import ua.zakharchuk.ExpectedBooksService.repositories.ExpectedBookRepository;
 
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -72,8 +73,8 @@ public class ExpectedBookService {
             expectedBook.setExpectedBookPublication(expectedBookDTO.getExpectedBookPublication());
         if (expectedBookDTO.getExpectedBookLanguage() != null)
             expectedBook.setExpectedBookLanguage(expectedBookDTO.getExpectedBookLanguage());
-        if (expectedBookDTO.getExpectedBookPieces() != 0)
-            expectedBook.setExpectedBookPieces(expectedBookDTO.getExpectedBookPieces());
+        if (expectedBookDTO.getExpectedBookItems() != 0)
+            expectedBook.setExpectedBookItems(expectedBookDTO.getExpectedBookItems());
         if (coverImage != null && !coverImage.isEmpty()) {
             String imageUrl = imageService.storeImage(coverImage, expectedBook.getExpectedBookId());
             expectedBook.setExpectedBookImage(imageUrl);
@@ -111,6 +112,20 @@ public class ExpectedBookService {
     public ExpectedBookDtoWithTotalElements findAll(Pageable pageable) {
         Page<ExpectedBook> expectedBook = expectedBookRepository.findAll(pageable);
 
+        ExpectedBookDtoWithTotalElements expectedBookDtoWithTotalElements = getExpectedBookDtoWithTotalElements(expectedBook);
+        return expectedBookDtoWithTotalElements;
+    }
+    @Transactional(readOnly = true)
+    public ExpectedBookDtoWithTotalElements findAll(String search, Pageable pageable) {
+        String decodedSearch = URLDecoder.decode(search, StandardCharsets.UTF_8);
+        String searchPattern = "%" + decodedSearch.trim().replaceAll("\\s+", "%") + "%";
+        Page<ExpectedBook> expectedBook = expectedBookRepository.findBooks(searchPattern, pageable);
+
+        ExpectedBookDtoWithTotalElements expectedBookDtoWithTotalElements = getExpectedBookDtoWithTotalElements(expectedBook);
+        return expectedBookDtoWithTotalElements;
+    }
+
+    private ExpectedBookDtoWithTotalElements getExpectedBookDtoWithTotalElements(Page<ExpectedBook> expectedBook) {
         if (expectedBook.getContent().isEmpty()){
             log.warn("Expected books not found");
             throw new ExpectedBooksNotFoundException("The selected books were not found.");
