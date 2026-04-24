@@ -49,8 +49,24 @@ public class EmailSenderService {
         }
     }
 
-    public void send(UUID id) {
+    public void sendForKafka(UUID id) {
         List<ReportAvailability> reportAvailabilityList = reportAvailabilityService.findAllByBookId(id);
+        List<ReportAvailability> listWithErrors = new ArrayList<>();
+        if (!reportAvailabilityList.isEmpty()) {
+            for (ReportAvailability reportAvailability : reportAvailabilityList) {
+                try {
+                    sendEmail(reportAvailability);
+                } catch (Exception e) {
+                    listWithErrors.add(reportAvailability);
+                }
+            }
+            if (!listWithErrors.isEmpty())
+                retrySendingEmail(listWithErrors);
+        }
+    }
+    public void sendForErrors(UUID id) {
+        ReportAvailabilityError reportAvailabilityError  = errorService.findById(id);
+        List<ReportAvailability> reportAvailabilityList = reportAvailabilityService.findAllByBookId(reportAvailabilityError.getExpectedBookId());
         List<ReportAvailability> listWithErrors = new ArrayList<>();
         for (ReportAvailability reportAvailability : reportAvailabilityList) {
             try {

@@ -16,6 +16,7 @@ import ua.zakharchuk.ExpectedBooksService.dtos.ExpectedBookDtoWithTotalElements;
 import ua.zakharchuk.ExpectedBooksService.exceptions.ExpectedBookNotFoundException;
 import ua.zakharchuk.ExpectedBooksService.exceptions.ExpectedBooksNotFoundException;
 import ua.zakharchuk.ExpectedBooksService.models.ExpectedBook;
+import ua.zakharchuk.ExpectedBooksService.models.ExpectedBookStatus;
 import ua.zakharchuk.ExpectedBooksService.repositories.ExpectedBookRepository;
 
 import java.net.URLDecoder;
@@ -36,6 +37,7 @@ public class ExpectedBookService {
     public ExpectedBookDTO save(ExpectedBookDTOCreate expectedBookDTO, MultipartFile coverImage) {
         ExpectedBook expectedBook = toExpectedBookEntityCreate(expectedBookDTO);
         expectedBook.setExpectedBookAddedAt(LocalDateTime.now());
+        expectedBook.setStatus(ExpectedBookStatus.CREATED);
         expectedBookRepository.save(expectedBook);
         if (coverImage != null && !coverImage.isEmpty()) {
             log.info("Processing cover image for book ID: {}", expectedBook.getExpectedBookId());
@@ -56,7 +58,7 @@ public class ExpectedBookService {
     @Transactional
     public ExpectedBookDTO update(UUID id, ExpectedBookDTOCreate expectedBookDTO, MultipartFile coverImage) {
         log.info("Trying to find a book for updates. ID '{}'", id);
-        Optional<ExpectedBook> optionalExpectedBook = expectedBookRepository.findByExpectedBookId(id);
+        Optional<ExpectedBook> optionalExpectedBook = expectedBookRepository.findByExpectedBookIdAndStatusNot(id, ExpectedBookStatus.ADDED);
         if (optionalExpectedBook.isEmpty()){
             log.info("The book not found. ID: '{}'", id);
             throw new ExpectedBookNotFoundException("The selected book was not found.");
@@ -88,7 +90,7 @@ public class ExpectedBookService {
 
     @Transactional(readOnly = true)
     public ExpectedBookDTO findById(UUID id) {
-        Optional<ExpectedBook> optionalExpectedBook = expectedBookRepository.findByExpectedBookId(id);
+        Optional<ExpectedBook> optionalExpectedBook = expectedBookRepository.findByExpectedBookIdAndStatusNot(id, ExpectedBookStatus.CREATED);
         if (optionalExpectedBook.isEmpty()){
             log.warn("The expected book not found. ID: '{}'", id);
             throw new ExpectedBookNotFoundException("The selected book was not found.");
@@ -110,21 +112,30 @@ public class ExpectedBookService {
 
     @Transactional(readOnly = true)
     public ExpectedBookDtoWithTotalElements findAll(Pageable pageable) {
-        Page<ExpectedBook> expectedBook = expectedBookRepository.findAll(pageable);
+        Page<ExpectedBook> expectedBook = expectedBookRepository.findAllByStatus(ExpectedBookStatus.CREATED, pageable);
 
-        ExpectedBookDtoWithTotalElements expectedBookDtoWithTotalElements = getExpectedBookDtoWithTotalElements(expectedBook);
-        return expectedBookDtoWithTotalElements;
+        return getExpectedBookDtoWithTotalElements(expectedBook);
     }
     @Transactional(readOnly = true)
     public ExpectedBookDtoWithTotalElements findAll(String search, Pageable pageable) {
         String decodedSearch = URLDecoder.decode(search, StandardCharsets.UTF_8);
         String searchPattern = "%" + decodedSearch.trim().replaceAll("\\s+", "%") + "%";
-        Page<ExpectedBook> expectedBook = expectedBookRepository.findBooks(searchPattern, pageable);
+        Page<ExpectedBook> expectedBook = expectedBookRepository.findBooks(searchPattern, ExpectedBookStatus.CREATED, pageable);
 
-        ExpectedBookDtoWithTotalElements expectedBookDtoWithTotalElements = getExpectedBookDtoWithTotalElements(expectedBook);
-        return expectedBookDtoWithTotalElements;
+        return getExpectedBookDtoWithTotalElements(expectedBook);
     }
-
+    @Transactional
+    public void changeStatusToADDED(UUID id) {
+        Optional<ExpectedBook> optionalExpectedBook = expectedBookRepository.findByExpectedBookIdAndStatusNot(id, ExpectedBookStatus.ADDED);
+        if (optionalExpectedBook.isEmpty()){
+            log.warn("The expected book not found. ID: '{}'", id);
+            throw new ExpectedBookNotFoundException("The selected book was not found.");
+        }
+        log.info("The book were found. ID: '{}'", id);
+        ExpectedBook expectedBook = optionalExpectedBook.get();
+        expectedBook.setStatus(ExpectedBookStatus.ADDED);
+        expectedBookRepository.save(expectedBook);
+    }
     private ExpectedBookDtoWithTotalElements getExpectedBookDtoWithTotalElements(Page<ExpectedBook> expectedBook) {
         if (expectedBook.getContent().isEmpty()){
             log.warn("Expected books not found");

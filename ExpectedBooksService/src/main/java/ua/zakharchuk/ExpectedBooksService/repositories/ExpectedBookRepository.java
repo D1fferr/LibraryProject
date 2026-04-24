@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import ua.zakharchuk.ExpectedBooksService.models.ExpectedBook;
+import ua.zakharchuk.ExpectedBooksService.models.ExpectedBookStatus;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -21,7 +22,11 @@ public interface ExpectedBookRepository extends JpaRepository<ExpectedBook, UUID
             "b.expectedBookAuthor LIKE :search OR " +
             "b.expectedBookGenre LIKE :search OR " +
             "b.expectedBookPublication LIKE :search OR " +
-            "b.expectedBookName LIKE :search")
-    Page<ExpectedBook> findBooks(String search, Pageable pageable);
+            "b.expectedBookName LIKE :search AND " +
+            "b.status = :status")
+    Page<ExpectedBook> findBooks(String search, ExpectedBookStatus status, Pageable pageable);
 
+    Page<ExpectedBook> findAllByStatus(ExpectedBookStatus status, Pageable pageable);
+
+    Optional<ExpectedBook> findByExpectedBookIdAndStatusNot(UUID expectedBookId, ExpectedBookStatus status);
 }

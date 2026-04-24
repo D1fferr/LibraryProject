@@ -99,6 +99,13 @@
         .reservation-user .material-icons { color: #667eea; }
         .reservation-user span { font-weight: 600; color: #2c3e50; }
         .reservation-dates { display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 10px; }
+        .reservation-id {
+            font-size: 0.7rem;
+            color: #95a5a6;
+            margin-top: 8px;
+            font-family: monospace;
+            word-break: break-all;
+        }
 
         .reservation-status {
             display: inline-flex;
@@ -285,6 +292,7 @@
                             <span class="material-icons">calendar_today</span>
                             <span th:text="'Reservation Date: ' + ${#temporals.format(reservation.reservationDate, 'MMMM d, yyyy')}">Reservation Date</span>
                         </div>
+                        <div class="reservation-id" th:text="'ID: ' + ${reservation.id}">ID: 123e4567-e89b-12d3-a456-426614174000</div>
                         <div class="reservation-status" th:classappend="'status-' + ${reservation.status.toString()}">
                             <span class="material-icons" th:text="${isCancelled ? 'block' : (isPast ? 'history' : 'schedule')}"></span>
                             <span th:text="${reservation.status.toString()}">STATUS</span>

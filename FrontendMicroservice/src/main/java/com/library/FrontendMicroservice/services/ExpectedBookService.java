@@ -78,6 +78,36 @@ public class ExpectedBookService {
         }
 
     }
+    public ExpectedBookDtoWithTotalElements getAllExpectedBooks(int page, String sort, String search){
+        try {
+            UriComponentsBuilder builder;
+            if (search!=null){
+                builder = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/api/expected-book/get-all")
+                        .queryParam("page", page)
+                        .queryParam("sort", sort)
+                        .queryParam("search", search);
+                String url = builder.toUriString();
+                return authorizedRestTemplate.getForObject(
+                        url,
+                        ExpectedBookDtoWithTotalElements.class
+                );
+            }else {
+                builder = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/api/expected-book/get-all")
+                        .queryParam("page", page)
+                        .queryParam("sort", sort);
+                String url = builder.toUriString();
+                return authorizedRestTemplate.getForObject(
+                        url,
+                        ExpectedBookDtoWithTotalElements.class
+                );
+            }
+
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            throw new ExpectedBookException(e.getMessage());
+        }
+
+    }
     public void addToCurrentBooks(UUID id){
         try {
 

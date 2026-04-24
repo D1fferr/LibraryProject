@@ -1,4 +1,4 @@
-package ua.zakharchuk.ExpectedBooksService.dtos;
+package com.library.FrontendMicroservice.dto;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -12,7 +12,7 @@ import java.util.UUID;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ReportAvailabilityErrorDTOBookId {
+public class ReportAvailabilityErrorDTOWithId {
     @NotNull(message = "Field book id must not be empty")
-    private UUID expectedBookId;
+    private UUID errorId;
 }

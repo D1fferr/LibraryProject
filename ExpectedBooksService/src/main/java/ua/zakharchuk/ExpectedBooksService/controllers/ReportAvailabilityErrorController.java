@@ -3,20 +3,16 @@ package ua.zakharchuk.ExpectedBooksService.controllers;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import lombok.extern.slf4j.XSlf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ua.zakharchuk.ExpectedBooksService.dtos.PageReportAvailabilityErrorDTO;
-import ua.zakharchuk.ExpectedBooksService.dtos.ReportAvailabilityErrorDTOBookId;
-import ua.zakharchuk.ExpectedBooksService.dtos.ReportAvailabilityErrorDTO;
+import ua.zakharchuk.ExpectedBooksService.dtos.ReportAvailabilityErrorDTOWithId;
 import ua.zakharchuk.ExpectedBooksService.exceptions.ReportAvailabilityErrorBadRequestException;
 import ua.zakharchuk.ExpectedBooksService.services.EmailSenderService;
 import ua.zakharchuk.ExpectedBooksService.services.ReportAvailabilityErrorService;
-
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -34,17 +30,17 @@ public class ReportAvailabilityErrorController {
             Integer itemsPerPage){
         return new ResponseEntity<>(errorService.findAll(PageRequest.of(page, itemsPerPage)), HttpStatus.OK);
     }
-    @GetMapping("/send")
+    @PostMapping("/send")
     public ResponseEntity<HttpStatus> sendEmail(
-            @RequestBody @Valid ReportAvailabilityErrorDTOBookId reportAvailabilityErrorDTOBookId,
+            @RequestBody @Valid ReportAvailabilityErrorDTOWithId dto,
                                                 BindingResult bindingResult){
         if (bindingResult.hasErrors()){
             String errors = bindingResult.getFieldErrors().toString();
             log.info("Errors found in entity fields. Errors: '{}'", errors);
             throw new ReportAvailabilityErrorBadRequestException(errors);
         }
-        emailSenderService.send(reportAvailabilityErrorDTOBookId.getExpectedBookId());
-
+        emailSenderService.sendForErrors(dto.getErrorId());
+        errorService.changeStatus(dto.getErrorId());
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

@@ -12,7 +12,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ReportAvailabilityErrorDTO {
-
+    private UUID id;
     private UUID userId;
     private UUID expectedBookId;
     private String userEmail;

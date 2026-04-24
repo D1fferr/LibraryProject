@@ -203,6 +203,14 @@
             margin-top: 8px;
         }
 
+        .book-id {
+            font-size: 0.7rem;
+            color: #95a5a6;
+            margin-top: 8px;
+            font-family: monospace;
+            word-break: break-all;
+        }
+
         .book-actions {
             display: flex;
             gap: 8px;
@@ -463,6 +471,7 @@
                     <p class="book-publisher" th:text="'Publisher: ' + ${book.expectedBookPublication}">Publisher</p>
                     <p class="book-language" th:text="'Language: ' + ${book.expectedBookLanguage}">Language</p>
                     <span class="book-genre" th:text="${book.expectedBookGenre}">Genre</span>
+                    <div class="book-id" th:text="'ID: ' + ${book.expectedBookId}">ID: 123e4567-e89b-12d3-a456-426614174000</div>
                 </div>
                 <div class="book-actions">
                     <a th:href="@{'/admin/expected-books/' + ${book.expectedBookId} + '/edit'}" class="btn-edit">

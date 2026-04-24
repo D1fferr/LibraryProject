@@ -53,11 +53,13 @@ public class BookService {
             throw new BookException(e.getMessage());
         }
     }
-    public BookDtoWithTotalElements getBooks(String sortBy, int page, String genre, String sortDir){
+    public BookDtoWithTotalElements getBooks(String search, String sortBy, int page, String genre, String sortDir){
         try {
+            if (search!=null){
             UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/api/book/public")
                     .queryParam("page", page)
                     .queryParam("sortBy", sortBy)
+                    .queryParam("search", search)
                     .queryParam("genre", genre)
                     .queryParam("sortDir", sortDir);
 
@@ -66,6 +68,19 @@ public class BookService {
                     url,
                     BookDtoWithTotalElements.class
                     );
+            }else {
+                UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/api/book/public")
+                        .queryParam("page", page)
+                        .queryParam("sortBy", sortBy)
+                        .queryParam("genre", genre)
+                        .queryParam("sortDir", sortDir);
+
+                String url = builder.toUriString();
+                return publicRestTemplate.getForObject(
+                        url,
+                        BookDtoWithTotalElements.class
+                );
+            }
         }catch (Exception e){
             throw new BookException(e.getMessage());
         }

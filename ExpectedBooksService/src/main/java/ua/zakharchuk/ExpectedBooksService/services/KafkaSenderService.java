@@ -28,6 +28,6 @@ public class KafkaSenderService {
             throw new KafkaException(e.getMessage());
         }
 
-        emailSenderService.send(id);
+        emailSenderService.sendForKafka(id);
     }
 }

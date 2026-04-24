@@ -188,6 +188,14 @@
             color: #e74c3c;
         }
 
+        .book-id {
+            font-size: 0.7rem;
+            color: #95a5a6;
+            margin-top: 8px;
+            font-family: monospace;
+            word-break: break-all;
+        }
+
         .book-actions {
             display: flex;
             gap: 8px;
@@ -448,6 +456,7 @@
                               th:classappend="${book.bookItems == 0 ? 'out-of-stock' : (book.bookItems < 5 ? 'low-stock' : '')}"
                               th:text="${book.bookItems + ' copies'}">5 copies</span>
                     </div>
+                    <div class="book-id" th:text="'ID: ' + ${book.bookId}">ID: 123e4567-e89b-12d3-a456-426614174000</div>
                 </div>
                 <div class="book-actions">
                     <a th:href="@{'/admin/books/' + ${book.bookId} + '/edit'}" class="btn-edit">
@@ -475,7 +484,6 @@
             <a href="/admin/books/create" class="btn-create" style="display: inline-block; margin-top: 15px;">Create Book</a>
         </div>
 
-        <!-- Pagination -->
         <!-- Pagination -->
         <div class="pagination-section" th:if="${totalPages > 1}">
             <div class="pagination-info">

@@ -335,8 +335,8 @@
 
                 <!-- Send Button (always active for FAILED reports) -->
                 <button class="btn-send"
+                        th:data-error-id="${report.id}"
                         th:data-book-id="${report.expectedBookId}"
-                        th:data-user-id="${report.userId}"
                         onclick="sendNotification(this)">
                     <span class="material-icons">send</span>
                     Send Notification
@@ -391,11 +391,10 @@
 
 <script>
     function sendNotification(button) {
-        const bookId = button.getAttribute('data-book-id');
-        const userId = button.getAttribute('data-user-id');
+        const errorId = button.getAttribute('data-error-id');
 
         const requestBody = {
-            expectedBookId: bookId
+            errorId: errorId
         };
 
         if (confirm('Are you sure you want to send notification to this user?')) {

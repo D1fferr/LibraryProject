@@ -163,7 +163,6 @@ public class JwtUtil {
 
             if (jsonNode.has("exp")) {
                 long expSeconds = jsonNode.get("exp").asLong();
-                // Конвертуємо секунди в LocalDateTime
                 return LocalDateTime.ofInstant(
                         Instant.ofEpochSecond(expSeconds),
                         ZoneId.systemDefault()

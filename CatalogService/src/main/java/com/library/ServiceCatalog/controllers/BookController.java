@@ -31,6 +31,7 @@ public class BookController {
     public ResponseEntity<BookDtoWithTotalElements> getAllBooks(@RequestParam(value = "page", defaultValue = "0") Integer page,
                                                        @RequestParam(value = "booksPerPage", defaultValue = "5", required = false) Integer booksPerPage,
                                                        @RequestParam(value = "sortBy", defaultValue = "bookAddedAt") String sortBy,
+                                                       @RequestParam(value = "search", required = false) String search,
                                                        @RequestParam(value = "genre", required = false) String genre,
                                                        @RequestParam(value = "sortDir", defaultValue = "desc") String sortDir)
     {
@@ -38,6 +39,11 @@ public class BookController {
             BookDtoWithTotalElements books = bookService.findAllByGenre(genre, PageRequest.of(page, booksPerPage, Sort.by(Sort.Direction.fromString(sortDir), sortBy)));
             return new ResponseEntity<>(books, HttpStatus.OK);
         }
+        if (search!=null){
+            BookDtoWithTotalElements books = bookService.findAllByParam(search ,PageRequest.of(page, booksPerPage, Sort.by(Sort.Direction.fromString(sortDir), sortBy)));
+            return new ResponseEntity<>(books, HttpStatus.OK);
+    }
+
         BookDtoWithTotalElements books = bookService.findAll(PageRequest.of(page, booksPerPage, Sort.by(sortBy)));
         return new ResponseEntity<>(books, HttpStatus.OK);
     }

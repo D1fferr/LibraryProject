@@ -174,7 +174,7 @@ public class AdminExpectedBookController {
 
     @PostMapping("/report-error/send")
     @ResponseBody
-    public ResponseEntity<?> sendNotification(@Valid @RequestBody ReportAvailabilityErrorDTOBookId request) {
+    public ResponseEntity<?> sendNotification(@Valid @RequestBody ReportAvailabilityErrorDTOWithId request) {
         try {
             reportAvailabilityErrorService.sendNotification(request);
             return ResponseEntity.ok().build();

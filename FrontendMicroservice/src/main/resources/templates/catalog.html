@@ -30,6 +30,59 @@
       vertical-align: middle;
     }
 
+    /* Стилі для пошуку */
+    .search-section {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 25px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+    .search-box {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .search-box input {
+      flex: 1;
+      padding: 12px 16px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: all 0.3s;
+    }
+    .search-box input:focus {
+      outline: none;
+      border-color: #27ae60;
+    }
+    .search-box button {
+      padding: 12px 24px;
+      background: #27ae60;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 1rem;
+      transition: background 0.3s;
+    }
+    .search-box button:hover {
+      background: #2ecc71;
+    }
+    .search-clear {
+      color: #e74c3c;
+      text-decoration: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      transition: background 0.3s;
+    }
+    .search-clear:hover {
+      background: #fee;
+    }
+
     /* Стилі для повідомлення про відсутність книг */
     .no-books-message {
       text-align: center;
@@ -141,6 +194,21 @@
       </div>
     </div>
 
+    <!-- Search Section -->
+    <div class="search-section">
+      <form method="get" action="/catalog" class="search-box">
+        <input type="text" name="search" th:value="${searchQuery}" placeholder="Search by title or author...">
+        <button type="submit">
+          <span class="material-icons">search</span>
+          Search
+        </button>
+        <a th:href="@{/catalog}" class="search-clear" th:if="${searchQuery != null and !searchQuery.isEmpty()}">
+          <span class="material-icons">clear</span>
+          Clear
+        </a>
+      </form>
+    </div>
+
     <!-- Error Message -->
     <div class="error-message" th:if="${error}" th:text="${error}">
       Error loading catalog
@@ -176,8 +244,9 @@
       <!-- Повідомлення про відсутність книг -->
       <div th:if="${books == null or books.isEmpty()}" class="no-books-message">
         <span class="material-icons">menu_book</span>
-        <h3>Books not found</h3>
-        <p>No books available in this category</p>
+        <h3>No books found</h3>
+        <p th:if="${searchQuery}">No results for "<span th:text="${searchQuery}"></span>"</p>
+        <p th:unless="${searchQuery}">Try selecting a different category</p>
       </div>
     </div>
 
@@ -190,36 +259,38 @@
       </div>
 
       <div class="pagination">
-        <!-- Previous button -->
-        <a th:if="${currentPage > 0}"
-           th:href="@{/catalog(page=${currentPage - 1}, genre=${selectedGenre}, sortBy=${sortBy != null ? sortBy : 'bookAddedAt'}, sortDir=${sortDir != null ? sortDir : 'desc'})}"
-           class="page-link prev">
-          <span class="material-icons">chevron_left</span>
-        </a>
-        <span th:unless="${currentPage > 0}" class="page-link disabled">
-          <span class="material-icons">chevron_left</span>
-        </span>
+        <th:block th:with="hasSearch=${searchQuery != null and !searchQuery.isEmpty()}">
+          <!-- Previous button -->
+          <a th:if="${currentPage > 0}"
+             th:href="@{/catalog(page=${currentPage - 1}, genre=${selectedGenre}, sortBy=${sortBy != null ? sortBy : 'bookAddedAt'}, sortDir=${sortDir != null ? sortDir : 'desc'}, search=${hasSearch ? searchQuery : null})}"
+             class="page-link prev">
+            <span class="material-icons">chevron_left</span>
+          </a>
+          <span th:unless="${currentPage > 0}" class="page-link disabled">
+                        <span class="material-icons">chevron_left</span>
+                    </span>
 
-        <!-- Page numbers -->
-        <th:block th:each="i : ${#numbers.sequence(0, totalPages - 1)}">
-          <th:block th:if="${i >= currentPage - 2 and i <= currentPage + 2}">
-            <a th:if="${i == currentPage}" class="page-link active"
-               th:text="${i + 1}">1</a>
-            <a th:unless="${i == currentPage}"
-               th:href="@{/catalog(page=${i}, genre=${selectedGenre}, sortBy=${sortBy != null ? sortBy : 'bookAddedAt'}, sortDir=${sortDir != null ? sortDir : 'desc'})}"
-               class="page-link" th:text="${i + 1}">2</a>
+          <!-- Page numbers -->
+          <th:block th:each="i : ${#numbers.sequence(0, totalPages - 1)}">
+            <th:block th:if="${i >= currentPage - 2 and i <= currentPage + 2}">
+              <a th:if="${i == currentPage}" class="page-link active"
+                 th:text="${i + 1}">1</a>
+              <a th:unless="${i == currentPage}"
+                 th:href="@{/catalog(page=${i}, genre=${selectedGenre}, sortBy=${sortBy != null ? sortBy : 'bookAddedAt'}, sortDir=${sortDir != null ? sortDir : 'desc'}, search=${hasSearch ? searchQuery : null})}"
+                 class="page-link" th:text="${i + 1}">2</a>
+            </th:block>
           </th:block>
-        </th:block>
 
-        <!-- Next button -->
-        <a th:if="${currentPage < totalPages - 1}"
-           th:href="@{/catalog(page=${currentPage + 1}, genre=${selectedGenre}, sortBy=${sortBy != null ? sortBy : 'bookAddedAt'}, sortDir=${sortDir != null ? sortDir : 'desc'})}"
-           class="page-link next">
-          <span class="material-icons">chevron_right</span>
-        </a>
-        <span th:unless="${currentPage < totalPages - 1}" class="page-link disabled">
-          <span class="material-icons">chevron_right</span>
-        </span>
+          <!-- Next button -->
+          <a th:if="${currentPage < totalPages - 1}"
+             th:href="@{/catalog(page=${currentPage + 1}, genre=${selectedGenre}, sortBy=${sortBy != null ? sortBy : 'bookAddedAt'}, sortDir=${sortDir != null ? sortDir : 'desc'}, search=${hasSearch ? searchQuery : null})}"
+             class="page-link next">
+            <span class="material-icons">chevron_right</span>
+          </a>
+          <span th:unless="${currentPage < totalPages - 1}" class="page-link disabled">
+                        <span class="material-icons">chevron_right</span>
+                    </span>
+        </th:block>
       </div>
     </div>
 

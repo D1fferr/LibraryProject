@@ -1,9 +1,8 @@
 package com.library.FrontendMicroservice.services;
 
-import com.library.FrontendMicroservice.dto.ExpectedBookDtoWithTotalElements;
 import com.library.FrontendMicroservice.dto.PageReportAvailabilityErrorDTO;
 import com.library.FrontendMicroservice.dto.ReportAvailabilityDTO;
-import com.library.FrontendMicroservice.dto.ReportAvailabilityErrorDTOBookId;
+import com.library.FrontendMicroservice.dto.ReportAvailabilityErrorDTOWithId;
 import com.library.FrontendMicroservice.exceptions.ExpectedBookException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -31,10 +30,10 @@ public class ReportAvailabilityErrorService {
         }
     }
 
-    public void sendNotification(ReportAvailabilityErrorDTOBookId dtoBookId){
+    public void sendNotification(ReportAvailabilityErrorDTOWithId id){
         String url = "http://localhost:8080/api/report-availability-error/auth/send";
         try {
-            authorizedRestTemplate.postForObject(url, dtoBookId, String.class);
+            authorizedRestTemplate.postForObject(url, id, String.class);
         }catch(Exception e){
             System.out.println(e.getMessage());
         }

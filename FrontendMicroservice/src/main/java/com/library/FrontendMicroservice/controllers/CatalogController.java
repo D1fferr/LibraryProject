@@ -30,13 +30,14 @@ public class CatalogController {
     public String viewCatalog(
             @RequestParam(value = "genre", required = false) String genre,
             @RequestParam(value = "page", defaultValue = "0") int page,
+            @RequestParam(value = "search", required = false) String search,
             @RequestParam(value = "sortBy", defaultValue = "bookAddedAt") String sort,
             @RequestParam(value = "sortDir", defaultValue = "desc") String sortDir,
             Model model) {
         try {
             CategoriesDto categoriesDto = bookService.getAllCategories();
             List<Category> categories = categoriesDto.getCategories();
-            BookDtoWithTotalElements booksDto = bookService.getBooks(sort, page, genre, sortDir);
+            BookDtoWithTotalElements booksDto = bookService.getBooks(search, sort, page, genre, sortDir);
             long totalBooks = booksDto.getBookCount();
             int totalPages = booksDto.getBookPages();
             List<Book> books = booksDto.getBooks();
@@ -98,12 +99,13 @@ public class CatalogController {
     @GetMapping("/upcoming-books")
     public String viewUpcomingBooks(
             @RequestParam(value = "page", defaultValue = "0") int page,
-            @RequestParam(value = "sortBy", defaultValue = "bookAddedAt") String sort,
+            @RequestParam(value = "sortBy", defaultValue = "expectedBookAddedAt") String sort,
+            @RequestParam(value = "search", required = false) String search,
             Model model) {
         try {
             CategoriesDto categoriesDto = bookService.getAllCategories();
             List<Category> categories = categoriesDto.getCategories();
-            ExpectedBookDtoWithTotalElements booksDto = expectedBookService.getExpectedBooks();
+            ExpectedBookDtoWithTotalElements booksDto = expectedBookService.getAllExpectedBooks(page, sort, search);
             long totalBooks = booksDto.getBookCount();
             int totalPages = booksDto.getBookPage();
             List<ExpectedBook> books = booksDto.getExpectedBooks();
