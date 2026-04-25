@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -34,7 +35,6 @@ public class AdminNewsController {
                              BindingResult bindingResult,
                              @RequestParam(value = "coverImage", required = false) MultipartFile image,
                              RedirectAttributes redirectAttributes) {
-        System.out.println(newsDTO.getName() + " / " + newsDTO.getBody());
         if (bindingResult.hasErrors()) {
 
             StringBuilder errorMessage = new StringBuilder("Validation failed: ");
@@ -52,8 +52,7 @@ public class AdminNewsController {
             redirectAttributes.addFlashAttribute("success", "News created successfully!");
             return "redirect:/admin/news";
 
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        } catch (IOException e) {
             redirectAttributes.addFlashAttribute("error", "Failed to create news: " + e.getMessage());
             redirectAttributes.addFlashAttribute("newsData", newsDTO);
             return "redirect:/admin/news/create";
@@ -63,8 +62,6 @@ public class AdminNewsController {
     public String listNews(@RequestParam(defaultValue = "0") int page,
                            @RequestParam(required = false) String search,
                            Model model) {
-        try {
-
             NewsDtoWithTotalElements newsPage = adminNewsService.getAllNewsForAdmin(page, PAGE_SIZE, search);
 
             List<NewsDTOForGetRequest> news = newsPage.getNews();
@@ -77,37 +74,23 @@ public class AdminNewsController {
             model.addAttribute("totalNews", totalNews);
             model.addAttribute("searchQuery", search);
 
-
-        } catch (Exception e) {
-            model.addAttribute("error", "Unable to load news");
-            model.addAttribute("news", List.of());
-            model.addAttribute("totalPages", 0);
-            model.addAttribute("totalNews", 0);
-            model.addAttribute("currentPage", 0);
-        }
-
         return "admin-panel/admin-news";
     }
 
     @PostMapping("/{id}/delete")
     @ResponseBody
     public ResponseEntity<?> deleteNews(@PathVariable UUID id) {
-        try {
+
             adminNewsService.deleteNews(id);
             return ResponseEntity.ok().build();
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(Map.of("message", e.getMessage()));
-        }
+
     }
     @GetMapping("/{id}/edit")
     public String editNewsPage(@PathVariable UUID id, Model model) {
-        try {
             NewsDTOForGetRequest news = adminNewsService.getNewsById(id);
             model.addAttribute("news", news);
             return "admin-panel/admin-edit-news";
-        } catch (Exception e) {
-            return "redirect:/admin/news";
-        }
+
     }
 
     @PostMapping(value = "/{id}/edit")
@@ -127,8 +110,7 @@ public class AdminNewsController {
             redirectAttributes.addFlashAttribute("success", "News updated successfully!");
             return "redirect:/admin/news";
 
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        } catch (IOException e) {
             redirectAttributes.addFlashAttribute("error", "Failed to update news: " + e.getMessage());
             return "redirect:/admin/news/" + id + "/edit";
         }

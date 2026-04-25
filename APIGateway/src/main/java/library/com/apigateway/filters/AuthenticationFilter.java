@@ -1,5 +1,6 @@
 package library.com.apigateway.filters;
 
+import library.com.apigateway.security.JwtBlacklistHandler;
 import library.com.apigateway.security.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,6 +27,7 @@ import java.util.Set;
 public class AuthenticationFilter implements GlobalFilter, Ordered {
 
     private final JwtUtil jwtUtil;
+    private final JwtBlacklistHandler blacklistHandler;
     private static final Set<String> PUBLIC_ROUTES = Set.of(
             "/api/auth/login",
             "/api/auth/registration",
@@ -123,12 +125,21 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
             log.info("Invalid jwt token");
             return unauthorized(exchange, "Invalid JWT token");
         }
-        if (!hasRequiredRole(token, path)) {
-            log.info("The role is forbidden for this route");
-            return forbidden(exchange, "Insufficient permissions");
-        }
-        log.info("The filter is completed");
-        return chain.filter(exchange.mutate().request(request).build());
+        return blacklistHandler.isTokenBlacklisted(token)
+                .flatMap(isBlacklisted -> {
+                    if (isBlacklisted) {
+                        log.info("Token is blacklisted: '{}'", token);
+                        return unauthorized(exchange, "Token has been revoked (logout)");
+                    }
+
+                    if (!hasRequiredRole(token, path)) {
+                        log.info("The role is forbidden for this route");
+                        return forbidden(exchange, "Insufficient permissions");
+                    }
+
+                    log.info("The filter is completed");
+                    return chain.filter(exchange);
+                });
     }
 
     private boolean isPublicRoute(String path) {

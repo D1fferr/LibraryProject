@@ -6,15 +6,17 @@ import com.library.FrontendMicroservice.exceptions.ReservationException;
 import com.library.FrontendMicroservice.exceptions.UserExeption;
 import com.library.FrontendMicroservice.models.Reservation;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.UUID;
-
-@Component
+@Slf4j
+@Service
 @RequiredArgsConstructor
 public class ReserveService {
 
@@ -29,7 +31,9 @@ public class ReserveService {
                         HttpStatus.class
                 );
             }catch (Exception e){
-                throw new ReservationException(e.getMessage());
+                log.info(e.getClass().getName());
+                log.info("Failed to reserve a book  {}", e.getMessage());
+                throw e;
             }
     }
 
@@ -58,7 +62,8 @@ public class ReserveService {
             }
 
         }catch (Exception e){
-            throw new ReservationException(e.getMessage());
+            log.info("Failed to get all reservations  {}", e.getMessage());
+            throw e;
         }
     }
     public ReservationsPageDto getUserReservations(String id, int page, int pageSize){
@@ -74,7 +79,8 @@ public class ReserveService {
                     ReservationsPageDto.class
             );
         }catch (Exception e){
-            throw new ReservationException(e.getMessage());
+            log.info("Failed to get user reservations  {}", e.getMessage());
+            throw e;
         }
     }
     public ReservationsPageDto getReservationsByBook(UUID id, int page, int pageSize){
@@ -89,8 +95,8 @@ public class ReserveService {
                     ReservationsPageDto.class
             );
         }catch (Exception e){
-            System.out.println(e.getMessage());
-            throw new ReservationException(e.getMessage());
+            log.info("Failed to get book reservations  {}", e.getMessage());
+            throw e;
         }
     }
 
@@ -99,7 +105,8 @@ public class ReserveService {
         try {
             authorizedRestTemplate.delete(url);
         }catch (Exception e){
-            throw new UserExeption(e.getMessage());
+            log.info("Failed to cancel a reservation  {}", e.getMessage());
+            throw e;
         }
     }
     public JoinDTOForCancelledReservations getCancelledReservationDetails(UUID id){
@@ -109,7 +116,8 @@ public class ReserveService {
                     JoinDTOForCancelledReservations.class
             );
         }catch (Exception e){
-            throw new ReservationException(e.getMessage());
+            log.info("Failed to get all cancelled reservations details  {}", e.getMessage());
+            throw e;
         }
     }
 
@@ -125,8 +133,8 @@ public class ReserveService {
                     String.class
             );
         }catch (Exception e){
-            System.out.println(e.getMessage());
-            throw new ReservationException(e.getMessage());
+            log.info("Failed to confirm  reservation {}", e.getMessage());
+            throw e;
         }
     }
     public void cancelReservationForBook(UUID id, ReservationCancellationNotificationDTO dto){
@@ -140,8 +148,8 @@ public class ReserveService {
                     ReservationCancellationNotificationDTO.class
             );
         }catch (Exception e){
-            System.out.println(e.getMessage());
-            throw new ReservationException(e.getMessage());
+            log.info("Failed to cancel a reservation for book  {}", e.getMessage());
+            throw e;
         }
     }
 

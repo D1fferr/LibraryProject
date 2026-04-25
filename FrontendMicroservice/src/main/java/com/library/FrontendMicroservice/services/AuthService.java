@@ -6,11 +6,12 @@ import com.library.FrontendMicroservice.models.AuthRequest;
 import com.library.FrontendMicroservice.models.RegisterRequest;
 import jakarta.security.auth.message.AuthException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
-
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class AuthService {
@@ -53,9 +54,10 @@ public class AuthService {
             String url = authServiceUrl + "/logout";
             try {
                 authorizedRestTemplate.postForObject(url, "Logout", String.class);
-                System.out.println("logout");
+                log.info("Logout successful");
             }catch(Exception e){
-                System.out.println(e.getMessage());
+                log.info("Failed to logout {}", e.getMessage());
+                throw e;
             }
 
     }

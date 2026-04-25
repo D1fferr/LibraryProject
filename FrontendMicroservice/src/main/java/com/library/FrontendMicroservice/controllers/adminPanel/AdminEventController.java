@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -78,7 +79,6 @@ public class AdminEventController {
                               @RequestParam(value = "coverImage", required = false) MultipartFile image,
                               RedirectAttributes redirectAttributes) {
 
-        System.out.println(announcementDTO.getName() + " / " + announcementDTO.getType() + " / " + announcementDTO.getDate() + " / " + announcementDTO.getBody());
 
         if (bindingResult.hasErrors()) {
             StringBuilder errorMessage = new StringBuilder("Validation failed: ");
@@ -95,7 +95,6 @@ public class AdminEventController {
             redirectAttributes.addFlashAttribute("success", "Event created successfully!");
             return "redirect:/admin/events";
         } catch (Exception e) {
-            System.out.println(e.getMessage());
             redirectAttributes.addFlashAttribute("error", "Failed to create event: " + e.getMessage());
             redirectAttributes.addFlashAttribute("eventData", announcementDTO);
             return "redirect:/admin/events/create";
@@ -129,8 +128,7 @@ public class AdminEventController {
             redirectAttributes.addFlashAttribute("success", "Event updated successfully!");
             return "redirect:/admin/events";
 
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        } catch (IOException e) {
             redirectAttributes.addFlashAttribute("error", "Failed to update event: " + e.getMessage());
             return "redirect:/admin/events/" + id + "/edit";
         }

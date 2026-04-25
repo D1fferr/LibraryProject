@@ -22,9 +22,7 @@ public class NewsController {
     @GetMapping
     public String news(@RequestParam(defaultValue = "0") int page,
                        Model model) {
-        try {
-
-            NewsDtoWithTotalElements newsPage = newsService.getAllNews(page);
+         NewsDtoWithTotalElements newsPage = newsService.getAllNews(page);
 
             List<NewsDTOForGetRequest> news = newsPage.getNews();
             int totalPages = newsPage.getNewsPages();
@@ -35,25 +33,14 @@ public class NewsController {
             model.addAttribute("totalPages", totalPages);
             model.addAttribute("totalNews", totalNews);
 
-        } catch (Exception e) {
-            model.addAttribute("error", "Unable to load news");
-            model.addAttribute("news", List.of());
-            model.addAttribute("totalPages", 0);
-            model.addAttribute("totalNews", 0);
-            model.addAttribute("currentPage", 0);
-        }
-
         return "news";
     }
 
     @GetMapping("/{id}")
     public String newsDetails(@PathVariable UUID id, Model model) {
-        try {
             NewsDTOForGetRequest news = newsService.getNewsById(id);
             model.addAttribute("news", news);
-        } catch (Exception e) {
-            model.addAttribute("error", "Unable to load news details");
-        }
+
         return "news-details";
     }
 

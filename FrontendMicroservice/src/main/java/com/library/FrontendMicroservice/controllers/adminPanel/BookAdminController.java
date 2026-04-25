@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -66,7 +67,7 @@ public class BookAdminController {
     public String listBooks(@RequestParam(defaultValue = "0") int page,
                             @RequestParam(required = false) String search,
                             Model model) {
-        try {
+
 
             BookDtoWithTotalElements booksDto = bookService.getBooksForAdmin(page, search);
             long totalBooks = booksDto.getBookCount();
@@ -79,37 +80,25 @@ public class BookAdminController {
             model.addAttribute("searchQuery", search);
 
 
-        } catch (Exception e) {
-            model.addAttribute("error", "Unable to load books");
-            model.addAttribute("books", List.of());
-            model.addAttribute("totalPages", 0);
-            model.addAttribute("totalBooks", 0);
-            model.addAttribute("currentPage", 0);
-        }
-
         return "admin-panel/admin-books";
     }
 
     @PostMapping("/{id}/delete")
     @ResponseBody
     public ResponseEntity<?> deleteBook(@PathVariable UUID id) {
-        try {
+
             bookService.deleteBook(id);
             return ResponseEntity.ok().build();
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(Map.of("message", e.getMessage()));
-        }
+
     }
     @GetMapping("/{id}/edit")
     public String editBookPage(@PathVariable UUID id, Model model) {
-        try {
+
             Book book = bookService.getBookById(id);
 
             model.addAttribute("book", book);
             return "admin-panel/edit-book";
-        } catch (Exception e) {
-            return "redirect:/admin/books";
-        }
+
     }
 
     @PostMapping(value = "/{id}/edit")
@@ -118,19 +107,17 @@ public class BookAdminController {
                            BindingResult bindingResult,
                            @RequestParam(value = "coverImage", required = false) MultipartFile coverImage,
                            RedirectAttributes redirectAttributes) {
-        System.out.println("Start");
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
             redirectAttributes.addFlashAttribute("bookData", bookDTO);
             return "redirect:/admin/books/" + id + "/edit";
         }
 
-        try {
+       try {
             bookService.updateBook(id, bookDTO, coverImage);
             redirectAttributes.addFlashAttribute("success", "Book updated successfully!");
             return "redirect:/admin/books";
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        } catch (IOException e) {
             redirectAttributes.addFlashAttribute("error", "Failed to update book: " + e.getMessage());
             return "redirect:/admin/books/" + id + "/edit";
         }
@@ -139,7 +126,6 @@ public class BookAdminController {
     public String bookReservations(@PathVariable UUID id,
                                    @RequestParam(defaultValue = "0") int page,
                                    Model model) {
-        try {
 
             Book book = bookService.getBookById(id);
 
@@ -158,14 +144,6 @@ public class BookAdminController {
             model.addAttribute("totalPages", totalPages);
             model.addAttribute("totalReservations", totalReservations);
 
-
-        } catch (Exception e) {
-            model.addAttribute("error", "Unable to load reservations");
-            model.addAttribute("reservations", List.of());
-            model.addAttribute("totalPages", 0);
-            model.addAttribute("totalReservations", 0);
-            model.addAttribute("currentPage", 0);
-        }
 
         return "admin-panel/book-reservations";
     }

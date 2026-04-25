@@ -2,13 +2,14 @@ package com.library.FrontendMicroservice.services;
 
 import com.library.FrontendMicroservice.exceptions.UserExeption;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.UnknownServiceException;
 import java.util.Map;
 import java.util.UUID;
-
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class PasswordResetService {
@@ -25,7 +26,8 @@ public class PasswordResetService {
         try {
             publicRestTemplate.postForObject(url, requestBody, Void.class);
         }catch (Exception e){
-            throw new UserExeption(e.getMessage());
+            log.info("Failed to send a reset code {}", e.getMessage());
+            throw e;
         }
     }
     public void resetPassword(String param, String code, String newPasssword){
@@ -41,7 +43,8 @@ public class PasswordResetService {
         try {
             publicRestTemplate.postForObject(url, requestBody, Void.class);
         }catch (Exception e){
-            throw new UserExeption(e.getMessage());
+            log.info("Failed to reset a password {}", e.getMessage());
+            throw e;
         }
     }
 

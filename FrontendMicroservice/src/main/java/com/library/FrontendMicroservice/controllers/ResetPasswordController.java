@@ -25,7 +25,6 @@ public class ResetPasswordController {
     @ResponseBody
     public ResponseEntity<?> requestReset(@RequestBody Map<String, String> request,
                                           HttpSession session) {
-        try {
 
             String param = request.get("param");
             System.out.println(param);
@@ -33,10 +32,7 @@ public class ResetPasswordController {
             passwordResetService.sendResetCode(param);
 
             return ResponseEntity.ok().build();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return ResponseEntity.badRequest().body(Map.of("message", e.getMessage()));
-        }
+
     }
 
     @GetMapping("/reset-password/verify")
@@ -53,7 +49,6 @@ public class ResetPasswordController {
     @ResponseBody
     public ResponseEntity<?> verifyAndReset(@RequestBody Map<String, String> request,
                                             HttpSession session) {
-        try {
             String param = (String) session.getAttribute("resetParam");
             String code = request.get("code");
             String newPassword = request.get("newPassword");
@@ -62,17 +57,12 @@ public class ResetPasswordController {
                 return ResponseEntity.badRequest().body(Map.of("message", "Session expired. Please start over."));
             }
 
-            // Викликаємо сервіс для скидання пароля
             passwordResetService.resetPassword(param, code, newPassword);
 
-            // Очищаємо сесію
             session.removeAttribute("resetParam");
 
             return ResponseEntity.ok().build();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return ResponseEntity.badRequest().body(Map.of("message", e.getMessage()));
-        }
+
     }
 
     @GetMapping("/reset-password/success")

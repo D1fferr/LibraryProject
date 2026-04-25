@@ -5,10 +5,11 @@ import com.library.FrontendMicroservice.dto.ReportAvailabilityDTO;
 import com.library.FrontendMicroservice.dto.ReportAvailabilityErrorDTOWithId;
 import com.library.FrontendMicroservice.exceptions.ExpectedBookException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
-
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class ReportAvailabilityErrorService {
@@ -26,7 +27,8 @@ public class ReportAvailabilityErrorService {
                         PageReportAvailabilityErrorDTO.class
                 );
         }catch (Exception e){
-            throw new ExpectedBookException(e.getMessage());
+            log.info("Failed to get errors {}", e.getMessage());
+            throw e;
         }
     }
 
@@ -35,7 +37,8 @@ public class ReportAvailabilityErrorService {
         try {
             authorizedRestTemplate.postForObject(url, id, String.class);
         }catch(Exception e){
-            System.out.println(e.getMessage());
+            log.info("Failed to send a notification  {}", e.getMessage());
+            throw e;
         }
 
     }
@@ -44,7 +47,8 @@ public class ReportAvailabilityErrorService {
         try {
             authorizedRestTemplate.postForObject(url, dto, String.class);
         }catch(Exception e){
-            System.out.println(e.getMessage());
+            log.info("Failed to add a notification  {}", e.getMessage());
+            throw e;
         }
 
     }

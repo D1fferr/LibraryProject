@@ -5,6 +5,7 @@ import com.library.FrontendMicroservice.exceptions.AnnouncementException;
 import com.library.FrontendMicroservice.exceptions.BookException;
 import com.library.FrontendMicroservice.exceptions.NewsException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.IOException;
 import java.util.UUID;
-
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class NewsService {
@@ -34,7 +35,8 @@ public class NewsService {
                     NewsDtoWithTotalElements.class
             );
         }catch (Exception e){
-            throw new NewsException(e.getMessage());
+            log.info("Failed to get all news  {}", e.getMessage());
+            throw e;
         }
     }
     public NewsDtoWithTotalElements getAllNewsForAdmin(int page, int pageSize, String search){
@@ -61,7 +63,8 @@ public class NewsService {
                 );
             }
         }catch (Exception e){
-            throw new NewsException(e.getMessage());
+            log.info("Failed to get all news for admin {}", e.getMessage());
+            throw e;
         }
     }
 
@@ -74,7 +77,8 @@ public class NewsService {
                     NewsDTOForGetRequest.class
             );
         }catch (Exception e){
-            throw new AnnouncementException(e.getMessage());
+            log.info("Failed to get a news  {}", e.getMessage());
+            throw e;
         }
     }
 
@@ -83,7 +87,8 @@ public class NewsService {
         try {
             authorizedRestTemplate.delete(url);
         }catch (Exception e){
-            throw new BookException(e.getMessage());
+            log.info("Failed to delete a news {}", e.getMessage());
+            throw e;
         }
     }
 

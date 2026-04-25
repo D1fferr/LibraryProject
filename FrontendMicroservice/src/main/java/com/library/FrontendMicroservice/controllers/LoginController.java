@@ -43,7 +43,7 @@ public class LoginController {
                         @RequestParam(required = false) String redirect,
                         HttpServletResponse response) {
 
-        try {
+
             String token = authService.login(authRequest);
 
             cookieManager.setJwtCookie(response, token);
@@ -56,10 +56,6 @@ public class LoginController {
 
             return "redirect:/home";
 
-        } catch (Exception e) {
-            String redirectParam = (redirect != null && !redirect.isEmpty()) ? "&redirect=" + redirect : "";
-            return "redirect:/login?error=true" + redirectParam;
-        }
     }
 
     @GetMapping("/logout")

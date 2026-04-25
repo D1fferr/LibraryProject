@@ -40,8 +40,6 @@ public class BookDetailsController {
 
     @GetMapping("/books/{bookId}")
     public String bookDetails(@PathVariable UUID bookId, Model model) {
-        try {
-
             Book book = bookService.getBookById(bookId);
 
             BookDtoWithTotalElements booksByAuthor = bookService.getBooksByAuthor(book.getBookAuthor());
@@ -56,11 +54,6 @@ public class BookDetailsController {
             model.addAttribute("authorBooks", authorBooks);
             model.addAttribute("similarBooks", similarBooks);
 
-
-        } catch (Exception e) {
-            model.addAttribute("error", "Unable to load book details");
-        }
-
         return "book-details";
     }
     @PostMapping("/books/reserve")
@@ -70,8 +63,6 @@ public class BookDetailsController {
     }
     @GetMapping("/expected-books/{bookId}")
     public String expectedBookDetails(@PathVariable UUID bookId, Model model) {
-        try {
-
             ExpectedBook book = expectedBookService.getBookById(bookId);
 
             BookDtoWithTotalElements booksByAuthor = bookService.getBooksByAuthor(book.getExpectedBookAuthor());
@@ -93,25 +84,16 @@ public class BookDetailsController {
             model.addAttribute("authorBooks", authorBooks);
             model.addAttribute("similarBooks", similarBooks);
 
-
-        } catch (Exception e) {
-            model.addAttribute("error", "Unable to load book details");
-        }
-
         return "expected-book-details";
     }
 
     @PostMapping("/expected-books/notify")
     public ResponseEntity<?> sendNotification(@Valid @RequestBody ReportAvailabilityDTO request) {
-        try {
+
             notificationService.sendAvailabilityNotification(request);
 
             return ResponseEntity.ok().build();
 
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return ResponseEntity.badRequest().body(Map.of("message", e.getMessage()));
-        }
     }
 
 

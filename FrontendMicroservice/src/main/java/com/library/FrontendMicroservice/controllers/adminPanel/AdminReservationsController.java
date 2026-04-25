@@ -34,8 +34,6 @@ public class AdminReservationsController {
     public String allReservations(@RequestParam(defaultValue = "0") int page,
                                   @RequestParam(required = false) String search,
                                   Model model) {
-        try {
-
             ReservationsPageDto reservationsPage = adminReservationService.getAllReservations(page, PAGE_SIZE, search);
 
             List<ReservationDto> dtos = reservationsPage.getReservations();
@@ -51,15 +49,6 @@ public class AdminReservationsController {
             model.addAttribute("totalReservations", totalReservations);
             model.addAttribute("searchQuery", search);
 
-
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            model.addAttribute("error", "Unable to load reservations");
-            model.addAttribute("reservations", List.of());
-            model.addAttribute("totalPages", 0);
-            model.addAttribute("totalReservations", 0);
-            model.addAttribute("currentPage", 0);
-        }
 
         return "admin-panel/reservations";
     }

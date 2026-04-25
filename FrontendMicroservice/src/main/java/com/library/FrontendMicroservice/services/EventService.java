@@ -4,6 +4,7 @@ import com.library.FrontendMicroservice.dto.*;
 import com.library.FrontendMicroservice.exceptions.AnnouncementException;
 import com.library.FrontendMicroservice.exceptions.BookException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -18,7 +19,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.IOException;
 import java.util.UUID;
-
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class EventService {
@@ -36,7 +37,8 @@ public class EventService {
                     AnnouncementDTOWithTotalElements.class
             );
         }catch (Exception e){
-            throw new AnnouncementException(e.getMessage());
+            log.info("Failed to get all events {}", e.getMessage());
+            throw e;
         }
 
     }
@@ -64,7 +66,8 @@ public class EventService {
                 );
             }
         }catch (Exception e){
-            throw new AnnouncementException(e.getMessage());
+            log.info("Failed to get all events for admin {}", e.getMessage());
+            throw e;
         }
 
     }
@@ -74,7 +77,8 @@ public class EventService {
         try {
             authorizedRestTemplate.delete(url);
         }catch (Exception e){
-            throw new BookException(e.getMessage());
+            log.info("Failed to delete the event {}", e.getMessage());
+            throw e;
         }
     }
     public AnnouncementDTOForGetRequest getEventById(UUID id){
@@ -86,7 +90,8 @@ public class EventService {
                     AnnouncementDTOForGetRequest.class
             );
         }catch (Exception e){
-            throw new AnnouncementException(e.getMessage());
+            log.info("Failed to get an event {}", e.getMessage());
+            throw e;
         }
     }
     public void createEvent(AnnouncementDTO dto, MultipartFile coverImage) throws IOException {

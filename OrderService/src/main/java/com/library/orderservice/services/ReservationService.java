@@ -132,7 +132,7 @@ public class ReservationService {
 
     @Transactional(readOnly = true)
     public Integer findReservationUserId(LocalDate localDate, UUID reservationUser) {
-        List<Reservation> reservationList = reservationRepository.findReservationByReservationDateAndReservationBook(localDate, reservationUser);
+        List<Reservation> reservationList = reservationRepository.findReservationByReservationDateAndReservationUser(localDate, reservationUser);
         if (reservationList.isEmpty()) {
             log.warn("No reservations for check available date found");
             return 0;

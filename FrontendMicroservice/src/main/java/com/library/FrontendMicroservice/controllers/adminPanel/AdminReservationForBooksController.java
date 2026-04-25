@@ -17,22 +17,16 @@ public class AdminReservationForBooksController {
 
     @PostMapping("/{id}/confirm")
     public ResponseEntity<?> confirmReservation(@PathVariable UUID id) {
-        try {
+
             adminReservationService.confirmReservation(id);
             return ResponseEntity.ok().build();
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(Map.of("message", e.getMessage()));
-        }
     }
 
     @PostMapping("/{id}/cancel")
     public ResponseEntity<?> cancelReservation(@PathVariable UUID id,
                                                @RequestBody ReservationCancellationNotificationDTO request) {
-        try {
             adminReservationService.cancelReservationForBook(id, request);
             return ResponseEntity.ok().build();
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(Map.of("message", e.getMessage()));
-        }
+
     }
 }

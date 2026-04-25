@@ -34,16 +34,14 @@ public class ProfileController {
 
     @GetMapping("/edit-credentials")
     public String editCredentialsPage(Model model) {
-        try {
+
             UUID currentUserId = UUID.fromString(jwtUtil.getCurrentUserId());
             UserDTOForView userDTOForView = userService.getUserById(currentUserId);
 
             model.addAttribute("currentUsername", userDTOForView.getUsername());
             model.addAttribute("currentEmail", userDTOForView.getEmail());
             model.addAttribute("currentLibraryCode", userDTOForView.getLibraryCode());
-        } catch (Exception e) {
-            model.addAttribute("errorMessage", "Unable to load page");
-        }
+
 
         return "profile/edit-credentials";
     }
@@ -51,23 +49,20 @@ public class ProfileController {
     @PostMapping("/edit-credentials")
     public String updateCredentials(@RequestBody ChangeCredentialDTO request,
                                     HttpServletResponse response) {
-        try {
+
             String currentUserId = jwtUtil.getCurrentUserId();
             userService.updateCredentials(currentUserId, request);
             authService.logout();
             jwtCookieManager.clearJwtCookie(response);
             return "redirect:/login";
 
-        } catch (Exception e) {
-            return "redirect:/profile/edit-credentials?error=true";
-        }
     }
 
 
     @GetMapping("/reservations")
     public String viewReservations(@RequestParam(defaultValue = "0") int page,
                                    Model model) {
-        try {
+
             String id = jwtUtil.getCurrentUserId();
             ReservationsPageDto reservationsPage = reservationService.getUserReservations(id, page, PAGE_SIZE);
             List<ReservationDto> reservations = reservationsPage.getReservations();
@@ -79,16 +74,6 @@ public class ProfileController {
             model.addAttribute("currentPage", page);
             model.addAttribute("totalPages", totalPages);
             model.addAttribute("totalReservations", totalReservations);
-
-
-        } catch (Exception e) {
-            model.addAttribute("error", "Unable to load reservations");
-            model.addAttribute("reservations", List.of());
-            model.addAttribute("totalPages", 0);
-            model.addAttribute("totalReservations", 0);
-            model.addAttribute("currentPage", 0);
-        }
-
         return "profile/reservations";
     }
 
@@ -118,21 +103,15 @@ public class ProfileController {
     @PostMapping("/reservations/{id}/cancel")
     @ResponseBody
     public ResponseEntity<?> cancelReservation(@PathVariable UUID id) {
-        System.out.println("Starting cancelling");
-        try {
             System.out.println("Starting cancelling");
             reservationService.cancelReservation(id);
 
             return ResponseEntity.ok().build();
 
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return ResponseEntity.badRequest().body(Map.of("message", e.getMessage()));
-        }
+
     }
     @GetMapping("/reservations/{id}/details")
     public String viewCancelledReservationDetails(@PathVariable UUID id, Model model) {
-        try {
 
             JoinDTOForCancelledReservations details = reservationService.getCancelledReservationDetails(id);
             Book book = bookService.getBookById(details.getReservationBook());
@@ -146,9 +125,7 @@ public class ProfileController {
             model.addAttribute("reservation", reservationDetails);
 
 
-        } catch (Exception e) {
-            model.addAttribute("error", "Unable to load reservation details");
-        }
+
 
         return "profile/reservation-cancelled-details";
     }

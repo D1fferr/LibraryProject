@@ -25,7 +25,6 @@ import java.util.stream.Collectors;
 public class AdminUserController {
     private final UserService adminUserService;
     private final ReserveService adminReservationService;
-    private final BookService bookService;
     private final DataPreparationService dataPreparationService;
     private static final int PAGE_SIZE = 10;
 
@@ -77,7 +76,6 @@ public class AdminUserController {
     public String userReservations(@PathVariable String id,
                                    @RequestParam(defaultValue = "0") int page,
                                    Model model) {
-        try {
 
             UserDTOForView user = adminUserService.getUserById(UUID.fromString(id));
 
@@ -94,15 +92,6 @@ public class AdminUserController {
             model.addAttribute("totalPages", totalPages);
             model.addAttribute("totalReservations", totalReservations);
 
-
-
-        } catch (Exception e) {
-            model.addAttribute("error", "Unable to load reservations");
-            model.addAttribute("reservations", List.of());
-            model.addAttribute("totalPages", 0);
-            model.addAttribute("totalReservations", 0);
-            model.addAttribute("currentPage", 0);
-        }
 
         return "admin-panel/user-reservations";
     }

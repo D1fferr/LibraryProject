@@ -27,7 +27,6 @@ public class HomeController {
             @RequestParam(value = "sortBy", defaultValue = "bookAddedAt", required = false) String sort,
             @RequestParam(value = "sortDir", defaultValue = "desc", required = false) String sortDir,
             Model model) {
-        try {
 
                     BookDtoWithTotalElements popularBooksDto = bookService.getMostPopularBooks();
                     List<Book> popularBooks = popularBooksDto.getBooks();
@@ -45,9 +44,5 @@ public class HomeController {
                             "All Books", "Fiction", "Non-Fiction", "Children's", "New Arrivals"
                     ));
                     return "home";
-    }catch (Exception e){
-            System.out.println(e.getMessage() + e.getCause());
-            return null;
-        }
     }
 }

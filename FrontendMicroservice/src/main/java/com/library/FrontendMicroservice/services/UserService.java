@@ -6,13 +6,14 @@ import com.library.FrontendMicroservice.exceptions.ReservationException;
 import com.library.FrontendMicroservice.exceptions.UserExeption;
 import com.library.FrontendMicroservice.models.AuthRequest;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.UUID;
-
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -27,7 +28,8 @@ public class UserService {
                     UserDTOForView.class
             );
         }catch (Exception e){
-            throw new UserExeption(e.getMessage());
+            log.info("Failed to get an user {}", e.getMessage());
+            throw e;
         }
     }
     public void updateCredentials(String id, ChangeCredentialDTO dto){
@@ -45,8 +47,8 @@ public class UserService {
                     Void.class
             );
         }catch (Exception e){
-            System.out.println(e.getMessage());
-            throw new UserExeption(e.getMessage());
+            log.info("Failed to update credentials {}", e.getMessage());
+            throw e;
         }
     }
 
@@ -61,7 +63,8 @@ public class UserService {
                     UserDtoWithListUsers.class
             );
         }catch (Exception e){
-            throw new BookException(e.getMessage());
+            log.info("Failed to get users by IDs {}", e.getMessage());
+            throw e;
         }
 
     }
@@ -90,7 +93,8 @@ public class UserService {
             }
 
         }catch (Exception e){
-            throw new UserExeption(e.getMessage());
+            log.info("Failed to get all users {}", e.getMessage());
+            throw e;
         }
 
 
@@ -111,8 +115,8 @@ public class UserService {
                     String.class
             );
         }catch (Exception e){
-            System.out.println(e.getMessage());
-            throw new UserExeption(e.getMessage());
+            log.info("Failed to update a library code {}", e.getMessage());
+            throw e;
         }
     }
 }

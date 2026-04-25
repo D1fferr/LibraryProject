@@ -4,6 +4,7 @@ package com.library.orderservice.repositories;
 import com.library.orderservice.models.Reservation;
 import com.library.orderservice.models.ReservationStatus;
 import jakarta.validation.constraints.Future;
+import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -35,4 +36,6 @@ public interface ReservationRepository extends JpaRepository<Reservation, UUID> 
     Page<Reservation> findByParam(String search, Pageable pageable);
 
     Page<Reservation> findAllByReservationBookIsNotNullAndReservationUserIsNotNull(Pageable pageable);
+
+    List<Reservation> findReservationByReservationDateAndReservationUser(@FutureOrPresent(message = "You cannot select the booking date to be in the past or today.") LocalDate reservationDate, @NotNull(message = "You must select an existing account.") UUID reservationUser);
 }

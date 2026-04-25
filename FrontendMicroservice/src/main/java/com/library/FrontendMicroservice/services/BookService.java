@@ -7,6 +7,7 @@ import com.library.FrontendMicroservice.exceptions.ReservationException;
 import com.library.FrontendMicroservice.exceptions.UserExeption;
 import com.library.FrontendMicroservice.models.Book;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.*;
@@ -21,6 +22,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.io.IOException;
 import java.util.UUID;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class BookService {
@@ -39,7 +41,8 @@ public class BookService {
             );
             return books;
         }catch (Exception e){
-            throw new BookException(e.getMessage());
+            log.info("Failed to get most popular books {}", e.getMessage());
+            throw e;
         }
     }
     public BookDtoWithTotalElements getRecentlyAddedAt(){
@@ -50,7 +53,8 @@ public class BookService {
             );
             return books;
         }catch (Exception e){
-            throw new BookException(e.getMessage());
+            log.info("Failed to get recently added books {}", e.getMessage());
+            throw e;
         }
     }
     public BookDtoWithTotalElements getBooks(String search, String sortBy, int page, String genre, String sortDir){
@@ -82,7 +86,8 @@ public class BookService {
                 );
             }
         }catch (Exception e){
-            throw new BookException(e.getMessage());
+            log.info("Failed to get all books {}", e.getMessage());
+            throw e;
         }
     }
     public BookDtoWithTotalElements getBooksForAdmin(int page, String search){
@@ -108,8 +113,8 @@ public class BookService {
             }
 
         }catch (Exception e){
-            System.out.println(e.getMessage());
-            throw new BookException(e.getMessage());
+            log.info("Failed to get all books for admin {}", e.getMessage());
+            throw e;
         }
 
     }
@@ -119,7 +124,8 @@ public class BookService {
         try {
             authorizedRestTemplate.delete(url);
         }catch (Exception e){
-            throw new BookException(e.getMessage());
+            log.info("Failed to delete the book {}", e.getMessage());
+            throw e;
         }
     }
     public Book getBookById(UUID id){
@@ -131,7 +137,8 @@ public class BookService {
                     Book.class
             );
         }catch (Exception e){
-            throw new BookException(e.getMessage());
+            log.info("failed to get a book {}", e.getMessage());
+            throw e;
         }
     }
     public BookDtoWithTotalElements getBooksByAuthor(String author){
@@ -145,7 +152,8 @@ public class BookService {
                     BookDtoWithTotalElements.class
             );
         }catch (Exception e){
-            throw new BookException(e.getMessage());
+            log.info("Failed to get books by author{}", e.getMessage());
+            throw e;
         }
     }
     public BookDtoWithTotalElements getBooksByGenre(String genre){
@@ -161,7 +169,8 @@ public class BookService {
                     BookDtoWithTotalElements.class
             );
         }catch (Exception e){
-            throw new BookException(e.getMessage());
+            log.info("Failed to get books by genre{}", e.getMessage());
+            throw e;
         }
     }
     public CategoriesDto getAllCategories(){
@@ -172,7 +181,8 @@ public class BookService {
             );
             return categories;
         }catch (Exception e){
-            throw new CategoryException(e.getMessage());
+            log.info("Failed to get all categories{}", e.getMessage());
+            throw e;
         }
     }
     public BookDtoWithTotalElements getBooksByIds(BookDtoForReservations dto, int page){
@@ -186,7 +196,8 @@ public class BookService {
                     BookDtoWithTotalElements.class
             );
         }catch (Exception e){
-            throw new BookException(e.getMessage());
+            log.info("Failed to get books by IDs {}", e.getMessage());
+            throw e;
         }
 
     }

@@ -5,6 +5,7 @@ import com.library.FrontendMicroservice.exceptions.BookException;
 import com.library.FrontendMicroservice.exceptions.ExpectedBookException;
 import com.library.FrontendMicroservice.models.ExpectedBook;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.IOException;
 import java.util.UUID;
-
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class ExpectedBookService {
@@ -33,7 +34,8 @@ public class ExpectedBookService {
                     ExpectedBookDtoWithTotalElements.class
             );
         }catch (Exception e){
-            throw new ExpectedBookException(e.getMessage());
+            log.info("Failed to get all expected books {}", e.getMessage());
+            throw e;
         }
     }
     public ExpectedBook getBookById(UUID id){
@@ -45,7 +47,8 @@ public class ExpectedBookService {
                     ExpectedBook.class
             );
         }catch (Exception e){
-            throw new ExpectedBookException(e.getMessage());
+            log.info("Failed to get an expected book {}", e.getMessage());
+            throw e;
         }
     }
     public ExpectedBookDtoWithTotalElements getBooksForAdmin(int page, int pageSize, String search){
@@ -73,8 +76,8 @@ public class ExpectedBookService {
             }
 
         }catch (Exception e){
-            System.out.println(e.getMessage());
-            throw new ExpectedBookException(e.getMessage());
+            log.info("Failed to get all expected books for admin{}", e.getMessage());
+            throw e;
         }
 
     }
@@ -103,8 +106,8 @@ public class ExpectedBookService {
             }
 
         }catch (Exception e){
-            System.out.println(e.getMessage());
-            throw new ExpectedBookException(e.getMessage());
+            log.info("Failed to get all expected books {}", e.getMessage());
+            throw e;
         }
 
     }
@@ -117,7 +120,8 @@ public class ExpectedBookService {
                     String.class
             );
         }catch (Exception e){
-            throw new ExpectedBookException(e.getMessage());
+            log.info("Failed to add an expected book to current books {}", e.getMessage());
+            throw e;
         }
     }
     public void deleteBook(UUID id){
@@ -125,7 +129,8 @@ public class ExpectedBookService {
         try {
             authorizedRestTemplate.delete(url);
         }catch (Exception e){
-            throw new ExpectedBookException(e.getMessage());
+            log.info("Failed to delete the expected book {}", e.getMessage());
+            throw e;
         }
     }
     public void createBook(ExpectedBookDTOCreate dto, MultipartFile coverImage) throws IOException {

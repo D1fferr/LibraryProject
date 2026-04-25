@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -31,8 +32,6 @@ public class AdminExpectedBookController {
     public String listBooks(@RequestParam(defaultValue = "0") int page,
                             @RequestParam(required = false) String search,
                             Model model) {
-        try {
-
             ExpectedBookDtoWithTotalElements booksPage = adminExpectedBookService.getBooksForAdmin(page, PAGE_SIZE, search);
 
             List<ExpectedBook> books = booksPage.getExpectedBooks();
@@ -44,15 +43,6 @@ public class AdminExpectedBookController {
             model.addAttribute("totalPages", totalPages);
             model.addAttribute("totalBooks", totalBooks);
             model.addAttribute("searchQuery", search);
-
-
-        } catch (Exception e) {
-            model.addAttribute("error", "Unable to load expected books");
-            model.addAttribute("books", List.of());
-            model.addAttribute("totalPages", 0);
-            model.addAttribute("totalBooks", 0);
-            model.addAttribute("currentPage", 0);
-        }
 
         return "admin-panel/admin-expected-books";
     }
@@ -82,8 +72,7 @@ public class AdminExpectedBookController {
             adminExpectedBookService.createBook(expectedBookDTO, image);
             redirectAttributes.addFlashAttribute("success", "Expected book created successfully!");
             return "redirect:/admin/expected-books";
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        } catch (IOException e) {
             redirectAttributes.addFlashAttribute("error", "Failed to create expected book: " + e.getMessage());
             redirectAttributes.addFlashAttribute("bookData", expectedBookDTO);
             return "redirect:/admin/expected-books/create";
@@ -92,34 +81,24 @@ public class AdminExpectedBookController {
     @PostMapping("/{id}/delete")
     @ResponseBody
     public ResponseEntity<?> deleteBook(@PathVariable UUID id) {
-        try {
+
             adminExpectedBookService.deleteBook(id);
             return ResponseEntity.ok().build();
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(Map.of("message", e.getMessage()));
-        }
+
     }
 
     @PostMapping("/{id}/add-to-current")
     @ResponseBody
     public ResponseEntity<?> addToCurrentBooks(@PathVariable UUID id) {
-        try {
             adminExpectedBookService.addToCurrentBooks(id);
             return ResponseEntity.ok().build();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return ResponseEntity.badRequest().body(Map.of("message", e.getMessage()));
-        }
+
     }
     @GetMapping("/{id}/edit")
     public String editBookPage(@PathVariable UUID id, Model model) {
-        try {
             ExpectedBook book = adminExpectedBookService.getBookById(id);
             model.addAttribute("book", book);
             return "admin-panel/admin-edit-expected-book";
-        } catch (Exception e) {
-            return "redirect:/admin/expected-books";
-        }
     }
 
     @PostMapping(value = "/{id}/edit")
@@ -139,7 +118,7 @@ public class AdminExpectedBookController {
             redirectAttributes.addFlashAttribute("success", "Expected book updated successfully!");
             return "redirect:/admin/expected-books";
 
-        } catch (Exception e) {
+        } catch (IOException e) {
             redirectAttributes.addFlashAttribute("error", "Failed to update expected book: " + e.getMessage());
             return "redirect:/admin/expected-books/" + id + "/edit";
         }
@@ -147,8 +126,6 @@ public class AdminExpectedBookController {
     @GetMapping("/report-error")
     public String reportErrorPage(@RequestParam(defaultValue = "0") int page,
                                   Model model) {
-        try {
-
             PageReportAvailabilityErrorDTO reportsPage = reportAvailabilityErrorService.getErrors(page, REPORT_PAGE_SIZE);
 
             List<ReportAvailabilityErrorDTO> reports = reportsPage.getDtoList();
@@ -159,27 +136,14 @@ public class AdminExpectedBookController {
             model.addAttribute("currentPage", page);
             model.addAttribute("totalPages", totalPages);
             model.addAttribute("totalReports", totalReports);
-
-
-        } catch (Exception e) {
-            model.addAttribute("error", "Unable to load reports");
-            model.addAttribute("reports", List.of());
-            model.addAttribute("totalPages", 0);
-            model.addAttribute("totalReports", 0);
-            model.addAttribute("currentPage", 0);
-        }
-
         return "admin-panel/admin-report-error";
     }
 
     @PostMapping("/report-error/send")
     @ResponseBody
     public ResponseEntity<?> sendNotification(@Valid @RequestBody ReportAvailabilityErrorDTOWithId request) {
-        try {
             reportAvailabilityErrorService.sendNotification(request);
             return ResponseEntity.ok().build();
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(Map.of("message", e.getMessage()));
-        }
+
     }
 }

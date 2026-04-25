@@ -192,7 +192,7 @@
 
 <div th:replace="~{layout/footer :: footer}"></div>
 
-<script>
+<script th:inline="javascript">
     let currentBookId = null;
 
     function getCurrentUserId() {
@@ -216,8 +216,9 @@
         currentBookId = button.getAttribute('data-book-id');
         const userId = getCurrentUserId();
         if (!userId) {
-            alert('Please login to reserve books.');
-            window.location.href = '/login';
+            // Перенаправлення з параметром redirect для зручності
+            const currentUrl = window.location.pathname;
+            window.location.href = '/login?redirect=' + encodeURIComponent(currentUrl);
             return;
         }
 
@@ -238,7 +239,8 @@
         document.getElementById('reservationModal').style.display = 'none';
     }
 
-    function confirmReservation() {
+    // Виправлена асинхронна функція підтвердження
+    async function confirmReservation() {
         const dateInput = document.getElementById('reservationDate');
         const userId = getCurrentUserId();
 
@@ -249,21 +251,38 @@
             reservationStatus: 'CREATED'
         };
 
-        fetch('/books/reserve', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(reservationData)
-        }).then(response => {
+        try {
+            const response = await fetch('/books/reserve', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(reservationData)
+            });
+
             if (response.ok) {
                 alert('Success!');
                 closeModal();
+                window.location.reload(); // Оновлюємо сторінку для відображення статусу
             } else {
-                alert('Error processing reservation.');
+                // Отримуємо JSON об'єкт помилки від GlobalExceptionHandler
+                const errorData = await response.json();
+
+                if (response.status === 401) {
+                    alert('Session expired. Please login again.');
+                    window.location.href = '/login?expired=true';
+                } else {
+                    // Виводимо повідомлення, яке прийшло з бекенду (наприклад, про 5 книг)
+                    alert('Error: ' + (errorData.message || 'Error processing reservation.'));
+                }
             }
-        });
+        } catch (error) {
+            console.error('Network error:', error);
+            alert('Network error. Please try again later.');
+        }
     }
 
-    window.onclick = (e) => { if (e.target.classList.contains('modal')) closeModal(); };
+    window.onclick = (e) => {
+        if (e.target.classList.contains('modal')) closeModal();
+    };
 </script>
 </body>
 </html>

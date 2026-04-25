@@ -56,7 +56,7 @@ public class RegistrationController {
             return "register";
         }
 
-        try {
+
             String token = authService.register(registerRequest);
 
             cookieManager.setJwtCookie(response, token);
@@ -66,9 +66,6 @@ public class RegistrationController {
             }
             return "redirect:/home?registered=true";
 
-        } catch (Exception e) {
-            model.addAttribute("errorMessage", "Registration failed: " + e.getMessage());
-            return "register";
-        }
+
     }
 }

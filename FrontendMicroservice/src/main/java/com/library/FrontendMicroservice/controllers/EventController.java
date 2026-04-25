@@ -24,8 +24,6 @@ public class EventController {
     @GetMapping()
     public String events(@RequestParam(defaultValue = "0") int page,
                          Model model) {
-        try {
-
             AnnouncementDTOWithTotalElements eventsPage = eventService.getAllEvents(page);
 
             List<AnnouncementDTOForGetRequest> events = eventsPage.getAnnouncements();
@@ -37,26 +35,14 @@ public class EventController {
             model.addAttribute("totalPages", totalPages);
             model.addAttribute("totalEvents", totalEvents);
 
-        } catch (Exception e) {
-            model.addAttribute("error", "Unable to load events");
-            model.addAttribute("events", List.of());
-            model.addAttribute("totalPages", 0);
-            model.addAttribute("totalEvents", 0);
-            model.addAttribute("currentPage", 0);
-        }
-
         return "events";
     }
     @GetMapping("/{id}")
     public String eventDetails(@PathVariable UUID id, Model model) {
-        try {
 
             AnnouncementDTOForGetRequest event = eventService.getEventById(id);
             model.addAttribute("event", event);
 
-        } catch (Exception e) {
-            model.addAttribute("error", "Unable to load event details");
-        }
 
         return "event-details";
     }

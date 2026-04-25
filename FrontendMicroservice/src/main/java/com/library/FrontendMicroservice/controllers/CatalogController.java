@@ -34,7 +34,7 @@ public class CatalogController {
             @RequestParam(value = "sortBy", defaultValue = "bookAddedAt") String sort,
             @RequestParam(value = "sortDir", defaultValue = "desc") String sortDir,
             Model model) {
-        try {
+
             CategoriesDto categoriesDto = bookService.getAllCategories();
             List<Category> categories = categoriesDto.getCategories();
             BookDtoWithTotalElements booksDto = bookService.getBooks(search, sort, page, genre, sortDir);
@@ -51,15 +51,6 @@ public class CatalogController {
             model.addAttribute("totalBooks", totalBooks);
 
 
-        } catch (Exception e) {
-            log.error("Error loading catalog: {}", e.getMessage() + e.getCause());
-            model.addAttribute("error", "Unable to load catalog");
-            model.addAttribute("books", List.of());
-            model.addAttribute("categories", List.of());
-            model.addAttribute("totalPages", 0);
-            model.addAttribute("totalBooks", 0);
-        }
-
         return "catalog";
     }
     @GetMapping("/most-popular-books")
@@ -68,7 +59,7 @@ public class CatalogController {
             @RequestParam(value = "page", defaultValue = "0") int page,
             @RequestParam(value = "sortBy", defaultValue = "bookAddedAt") String sort,
             Model model) {
-        try {
+
             CategoriesDto categoriesDto = bookService.getAllCategories();
             List<Category> categories = categoriesDto.getCategories();
             BookDtoWithTotalElements booksDto = bookService.getMostPopularBooks();
@@ -85,15 +76,6 @@ public class CatalogController {
             model.addAttribute("totalBooks", totalBooks);
 
 
-        } catch (Exception e) {
-            log.error("Error loading catalog: {}", e.getMessage() + e.getCause());
-            model.addAttribute("error", "Unable to load catalog");
-            model.addAttribute("books", List.of());
-            model.addAttribute("categories", List.of());
-            model.addAttribute("totalPages", 0);
-            model.addAttribute("totalBooks", 0);
-        }
-
         return "most-popular-books";
     }
     @GetMapping("/upcoming-books")
@@ -102,7 +84,6 @@ public class CatalogController {
             @RequestParam(value = "sortBy", defaultValue = "expectedBookAddedAt") String sort,
             @RequestParam(value = "search", required = false) String search,
             Model model) {
-        try {
             CategoriesDto categoriesDto = bookService.getAllCategories();
             List<Category> categories = categoriesDto.getCategories();
             ExpectedBookDtoWithTotalElements booksDto = expectedBookService.getAllExpectedBooks(page, sort, search);
@@ -116,16 +97,6 @@ public class CatalogController {
             model.addAttribute("currentPage", page);
             model.addAttribute("totalPages", totalPages);
             model.addAttribute("totalBooks", totalBooks);
-
-
-        } catch (Exception e) {
-            log.error("Error loading catalog: {}", e.getMessage() + e.getCause());
-            model.addAttribute("error", "Unable to load catalog");
-            model.addAttribute("books", List.of());
-            model.addAttribute("categories", List.of());
-            model.addAttribute("totalPages", 0);
-            model.addAttribute("totalBooks", 0);
-        }
 
         return "upcoming-books";
     }
