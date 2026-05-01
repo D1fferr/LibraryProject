@@ -35,11 +35,16 @@ public class AdminReservationsController {
                                   @RequestParam(required = false) String search,
                                   Model model) {
             ReservationsPageDto reservationsPage = adminReservationService.getAllReservations(page, PAGE_SIZE, search);
-
-            List<ReservationDto> dtos = reservationsPage.getReservations();
+            List<ReservationDto> dtos;
+            List<ReservationForViewForReservationPage> reservations;
+            if (reservationsPage.getReservations()==null){
+                reservations = List.of();
+            }else {
+                dtos = reservationsPage.getReservations();
+                reservations = getDtoForAdmin(dtos);
+            }
             int totalPages = reservationsPage.getTotalPages();
             long totalReservations = reservationsPage.getTotalElements();
-            List<ReservationForViewForReservationPage> reservations = getDtoForAdmin(dtos);
 
 
 
@@ -53,7 +58,6 @@ public class AdminReservationsController {
         return "admin-panel/reservations";
     }
     private List<ReservationForViewForReservationPage> getDtoForAdmin(List<ReservationDto> reservations){
-
         List<UUID> userIds = reservations.stream()
                 .map(ReservationDto::getReservationUser)
                 .distinct()

@@ -229,22 +229,19 @@
             Error loading events
         </div>
 
-        <!-- Контейнер списку (починається ТУТ) -->
         <div class="events-list" th:if="${events != null and !events.isEmpty()}">
 
-            <!-- Цикл карток -->
             <div class="event-card" th:each="event : ${events}">
 
-                <!-- Блок фото -->
                 <div class="event-image" th:if="${event.photo != null and !event.photo.isEmpty()}">
-                    <img th:src="${event.photo}" th:alt="${event.name}"
+                    <img th:src="${event.photo != null and !event.photo.isEmpty() ? event.photo : '/api/images/default-event.jpg'}"
+                         th:alt="${event.photo}"
                          onerror="this.onerror=null; this.parentElement.innerHTML='<span class=\"material-icons\">event</span>';">
                 </div>
                 <div class="event-image-placeholder" th:unless="${event.photo != null and !event.photo.isEmpty()}">
                     <span class="material-icons">event</span>
                 </div>
 
-                <!-- Блок контенту -->
                 <div class="event-content">
                     <span class="event-type" th:text="${event.type}">Workshop</span>
                     <div class="event-date">
@@ -257,9 +254,9 @@
                         Learn More <span class="material-icons">arrow_forward</span>
                     </a>
                 </div>
-            </div> <!-- Кінець event-card -->
+            </div>
 
-        </div> <!-- Кінець events-list (тепер закриває ВСІ картки циклу) -->
+        </div>
 
         <div class="empty-state" th:if="${events == null or events.isEmpty()}">
             <span class="material-icons" style="font-size: 64px; color: #bdc3c7;">event_busy</span>

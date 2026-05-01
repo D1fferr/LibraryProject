@@ -7,6 +7,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.retry.support.RetryTemplate;
 import org.springframework.stereotype.Service;
+import ua.zakharchuk.ExpectedBooksService.config.ExternalConfig;
 import ua.zakharchuk.ExpectedBooksService.exceptions.EmailSendingException;
 import ua.zakharchuk.ExpectedBooksService.models.ReportAvailability;
 import ua.zakharchuk.ExpectedBooksService.models.ReportAvailabilityError;
@@ -20,8 +21,8 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @Slf4j
 public class EmailSenderService {
-    @Value("${send.message.from}")
-    private String from;
+
+    private final ExternalConfig config;
 
     private final JavaMailSender mailSender;
     private final ReportAvailabilityService reportAvailabilityService;
@@ -80,6 +81,7 @@ public class EmailSenderService {
     }
 
     private void sendEmail(ReportAvailability reportAvailability) {
+        String from = config.getMail().getFrom();
         try {
             SimpleMailMessage message = new SimpleMailMessage();
             message.setFrom(from);
@@ -99,9 +101,11 @@ public class EmailSenderService {
     }
 
     private String textPrep(String username, String id) {
+        String host = config.getServices().getCatalog();
         return "Hello dear " + username +
                 "." + " The book you wanted to review is now available. You can reserve it at the link:" +
-                "http://localhost:8080/book/" +
+                host +
+                "/book/" +
                 id +
                 " We will be glad to see you again";
 

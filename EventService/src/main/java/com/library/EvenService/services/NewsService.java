@@ -41,7 +41,7 @@ public class NewsService {
     private NewsDtoWithTotalElements getNewsDtoWithTotalElements(Page<News> allNews) {
         if (allNews.isEmpty()){
             log.warn("No news found");
-            throw new NewsNotFoundException("No news found. ");
+            return new NewsDtoWithTotalElements();
         }
         log.info("All news found");
         NewsDtoWithTotalElements dto = new NewsDtoWithTotalElements();

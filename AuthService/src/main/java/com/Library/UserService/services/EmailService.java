@@ -1,5 +1,6 @@
 package com.Library.UserService.services;
 
+import com.Library.UserService.config.ExternalConfig;
 import com.Library.UserService.models.AuthUser;
 import com.Library.UserService.exceptions.EmailSendingException;
 import lombok.RequiredArgsConstructor;
@@ -14,13 +15,13 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class EmailService {
-
+    private final ExternalConfig config;
     private final JavaMailSender mailSender;
 
-    @Value("${send.message.from}")
-    private String from;
+
 
     public void send(AuthUser authUser, String code) {
+        String from = config.getMail().getFrom();
         try {
             SimpleMailMessage message = new SimpleMailMessage();
             message.setFrom(from);

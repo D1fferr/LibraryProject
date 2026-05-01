@@ -38,6 +38,7 @@
             border-radius: 12px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
             overflow: hidden;
+            margin-bottom: 50px;
         }
 
         .edit-form {
@@ -96,6 +97,7 @@
             max-width: 150px;
             max-height: 150px;
             border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
         .current-image p {
@@ -133,13 +135,18 @@
         .image-preview {
             margin-top: 15px;
             display: none;
+            text-align: center;
+            padding: 15px;
+            background: #fdf4ff;
+            border-radius: 8px;
+            border: 1px solid #f0d7f7;
         }
 
         .image-preview img {
             max-width: 150px;
             max-height: 150px;
             border-radius: 8px;
-            border: 2px solid #e0e0e0;
+            border: 2px solid #9b59b6;
         }
 
         .image-preview .remove-image {
@@ -148,6 +155,8 @@
             color: #e74c3c;
             cursor: pointer;
             font-size: 0.8rem;
+            font-weight: 600;
+            text-decoration: underline;
         }
 
         .alert {
@@ -169,11 +178,6 @@
             background: #d4edda;
             color: #155724;
             border: 1px solid #c3e6cb;
-        }
-
-        .alert ul {
-            margin: 0;
-            padding-left: 20px;
         }
 
         .form-actions {
@@ -211,16 +215,12 @@
             font-size: 1rem;
             font-weight: 500;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: all 0.3s;
         }
 
         .btn-submit:hover {
             background: #8e44ad;
-        }
-
-        .btn-submit:disabled {
-            background: #bdc3c7;
-            cursor: not-allowed;
+            box-shadow: 0 4px 10px rgba(142, 68, 173, 0.2);
         }
 
         .breadcrumbs {
@@ -234,15 +234,7 @@
             text-decoration: none;
         }
 
-        .breadcrumbs a:hover {
-            text-decoration: underline;
-        }
-
         @media (max-width: 768px) {
-            .edit-hero h1 {
-                font-size: 1.5rem;
-            }
-
             .form-actions {
                 flex-direction: column;
             }
@@ -250,13 +242,10 @@
     </style>
 </head>
 <body>
-<!-- Header -->
 <div th:replace="~{layout/header :: header}"></div>
 
-<!-- Main Content -->
 <div class="container">
     <main class="main-content">
-        <!-- Breadcrumbs -->
         <div class="breadcrumbs">
             <a href="/">Home</a> /
             <a href="/admin/dashboard">Admin Panel</a> /
@@ -264,58 +253,54 @@
             <span>Edit Event</span>
         </div>
 
-        <!-- Page Header -->
         <div class="edit-hero">
             <span class="material-icons hero-icon">edit</span>
             <h1>Edit Event</h1>
             <p>Update event information</p>
         </div>
 
-        <!-- Form Container -->
         <div class="edit-container">
             <div class="edit-form">
-                <!-- Error Message -->
                 <div th:if="${error}" class="alert alert-error">
                     <span class="material-icons">error</span>
                     <span th:text="${error}"></span>
                 </div>
 
-                <!-- Success Message -->
                 <div th:if="${success}" class="alert alert-success">
                     <span class="material-icons">check_circle</span>
                     <span th:text="${success}"></span>
                 </div>
 
-                <form id="editEventForm" enctype="multipart/form-data" method="post" th:action="@{'/admin/events/' + ${event.id} + '/edit'}">
-                    <!-- Current Image -->
+                <form id="editEventForm"
+                      method="post"
+                      enctype="multipart/form-data"
+                      th:action="@{'/admin/events/' + ${event.id} + '/edit'}">
+
                     <div th:if="${event.photo != null and !event.photo.isEmpty()}" class="current-image">
                         <img th:src="${event.photo}" th:alt="${event.name}">
                         <p>Current image</p>
                     </div>
 
-                    <!-- Image Upload -->
                     <div class="image-upload" onclick="document.getElementById('coverImage').click()">
                         <div class="upload-icon">
                             <span class="material-icons">cloud_upload</span>
                         </div>
                         <div class="upload-text">Click to upload new image</div>
-                        <div class="upload-text">Leave empty to keep current image</div>
+                        <div class="upload-text" style="font-size: 0.8rem; opacity: 0.7;">Leave empty to keep current image</div>
                         <input type="file" id="coverImage" name="coverImage" accept="image/jpeg,image/png" style="display: none;" onchange="previewImage(this)">
                     </div>
 
                     <div id="imagePreview" class="image-preview">
                         <img id="previewImg" src="#" alt="Preview">
-                        <div class="remove-image" onclick="removeImage()">Remove</div>
+                        <br>
+                        <div class="remove-image" onclick="removeImage()">Remove selected file</div>
                     </div>
 
-                    <!-- Event Name -->
                     <div class="form-group">
                         <label for="name">Event Title <span class="required">*</span></label>
-                        <input type="text" id="name" name="name" th:value="${event.name}" placeholder="Enter event title" required maxlength="100">
-                        <div class="hint">Maximum 100 characters</div>
+                        <input type="text" id="name" name="name" th:value="${event.name}" required maxlength="100">
                     </div>
 
-                    <!-- Event Type -->
                     <div class="form-group">
                         <label for="type">Event Type <span class="required">*</span></label>
                         <select id="type" name="type" required>
@@ -331,21 +316,16 @@
                         </select>
                     </div>
 
-                    <!-- Event Date -->
                     <div class="form-group">
                         <label for="date">Event Date <span class="required">*</span></label>
                         <input type="date" id="date" name="date" th:value="${#temporals.format(event.date, 'yyyy-MM-dd')}" required>
-                        <div class="hint">Cannot be in the past</div>
                     </div>
 
-                    <!-- Event Body -->
                     <div class="form-group">
                         <label for="body">Description <span class="required">*</span></label>
-                        <textarea id="body" name="body" rows="10" placeholder="Enter event description..." required maxlength="1000" th:text="${event.body}"></textarea>
-                        <div class="hint">Maximum 1000 characters</div>
+                        <textarea id="body" name="body" rows="10" required maxlength="1000" th:text="${event.body}"></textarea>
                     </div>
 
-                    <!-- Form Actions -->
                     <div class="form-actions">
                         <a href="/admin/events" class="btn-cancel">Cancel</a>
                         <button type="submit" class="btn-submit">Save Changes</button>
@@ -356,14 +336,9 @@
     </main>
 </div>
 
-<!-- Footer -->
 <div th:replace="~{layout/footer :: footer}"></div>
 
-<script th:inline="javascript">
-    // Отримуємо ID безпосередньо з Thymeleaf
-    const eventId = [[${event.id}]];
-
-    // Функції попереднього перегляду зображення
+<script>
     function previewImage(input) {
         const preview = document.getElementById('imagePreview');
         const previewImg = document.getElementById('previewImg');
@@ -382,43 +357,6 @@
         document.getElementById('imagePreview').style.display = 'none';
         fileInput.value = '';
     }
-
-    // SUBMIT форми
-    document.getElementById('editEventForm').addEventListener('submit', async function(e) {
-        e.preventDefault();
-
-        const formData = new FormData();
-        // Додаємо поля ПРЯМО (так їх підхопить @ModelAttribute)
-        formData.append('name', document.getElementById('name').value);
-        formData.append('type', document.getElementById('type').value);
-        formData.append('date', document.getElementById('date').value);
-        formData.append('body', document.getElementById('body').value);
-
-        const coverImage = document.getElementById('coverImage').files[0];
-        if (coverImage) {
-            formData.append('coverImage', coverImage);
-        }
-
-        try {
-            const response = await fetch('/admin/events/' + eventId + '/edit', {
-                method: 'POST',
-                body: formData
-            });
-
-            if (response.redirected) {
-                window.location.href = response.url;
-            } else if (response.ok) {
-                window.location.href = '/admin/events';
-            } else {
-                const errorData = await response.text();
-                console.error('Server error:', errorData);
-                alert('Failed to update event. Check console for details.');
-            }
-        } catch (error) {
-            console.error('JS Error:', error);
-            alert('Error: ' + error.message);
-        }
-    });
 </script>
 </body>
 </html>

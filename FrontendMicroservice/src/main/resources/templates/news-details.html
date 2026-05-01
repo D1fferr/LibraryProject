@@ -7,7 +7,6 @@
   <link rel="stylesheet" href="/css/style.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <style>
-    /* Додаткові стилі для детальної сторінки новини */
     .news-details-hero {
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       padding: 40px 0;
@@ -192,8 +191,9 @@
     <div class="news-details-section" th:if="${news != null}">
       <!-- Left Column - Photo -->
       <div th:if="${news.photo != null and !news.photo.isEmpty()}" class="news-image-large">
-        <img th:src="${news.photo}" th:alt="${news.name}"
-             onerror="this.onerror=null; this.src='/images/default-news.jpg';">
+        <img th:src="${news.photo != null and !news.photo.isEmpty() ? news.photo : '/api/images/default-news.jpg'}"
+             th:alt="${news.photo}"
+             onerror="this.onerror=null; this.src='/api/images/default-news.jpg';">
       </div>
       <div th:unless="${news.photo != null and !news.photo.isEmpty()}" class="news-image-placeholder-large">
         <span class="material-icons">newspaper</span>
@@ -226,7 +226,6 @@
 <div th:replace="~{layout/footer :: footer}"></div>
 
 <script>
-  // Підсвічуємо активний пункт меню
   document.addEventListener('DOMContentLoaded', function() {
     const navLinks = document.querySelectorAll('.main-nav a');
     navLinks.forEach(link => {

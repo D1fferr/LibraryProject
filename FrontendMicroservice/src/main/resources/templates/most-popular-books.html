@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="/css/style.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
-        /* Стилі для сторінки популярних книг */
         .special-category {
             font-weight: 600;
             color: #e67e22 !important;
@@ -72,10 +71,8 @@
                 </a>
             </li>
 
-            <!-- Роздільник перед жанрами -->
             <li class="category-divider"></li>
 
-            <!-- Жанри -->
             <li th:each="category : ${categories}">
                 <a th:href="@{/catalog(genre=${category.name}, page=0, sortBy=${sortBy != null ? sortBy : 'bookAddedAt'}, sortDir=${sortDir != null ? sortDir : 'desc'})}"
                    th:class="${selectedGenre == category.name ? 'active' : ''}"
@@ -90,7 +87,6 @@
         </div>
     </aside>
 
-    <!-- Main Content Area -->
     <main class="main-content">
         <!-- Catalog Header -->
         <div class="catalog-header">
@@ -129,8 +125,7 @@
             <div class="books-grid" id="booksGrid">
                 <div class="book-card" th:each="book : ${books}">
                     <div class="book-cover">
-                        <img th:if="${book.bookImage != null and !book.bookImage.isEmpty()}"
-                             th:src="${book.bookImage}"
+                        <img th:src="${book.bookImage != null and !book.bookImage.isEmpty() ? book.bookImage : '/api/images/default-book-cover.jpg'}"
                              th:alt="${book.bookName}"
                              class="book-image"/>
                         <div th:unless="${book.bookImage != null and !book.bookImage.isEmpty()}"

@@ -1,5 +1,6 @@
 package com.library.FrontendMicroservice.services;
 
+import com.library.FrontendMicroservice.config.ExternalConfig;
 import com.library.FrontendMicroservice.dto.*;
 import com.library.FrontendMicroservice.exceptions.AnnouncementException;
 import com.library.FrontendMicroservice.exceptions.BookException;
@@ -21,12 +22,14 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class NewsService {
+    private final ExternalConfig config;
     private final RestTemplate publicRestTemplate;
     private final RestTemplate authorizedRestTemplate;
 
     public NewsDtoWithTotalElements getAllNews(int page){
+        String apiGateway = config.getServices().getApiGateway();
         try {
-            UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/api/news/get-all")
+            UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(apiGateway + "/api/news/get-all")
                     .queryParam("page", page);
 
             String url = builder.toUriString();
@@ -40,10 +43,11 @@ public class NewsService {
         }
     }
     public NewsDtoWithTotalElements getAllNewsForAdmin(int page, int pageSize, String search){
+        String apiGateway = config.getServices().getApiGateway();
         try {
             UriComponentsBuilder builder;
             if (search!=null){
-                builder = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/api/news/get-all")
+                builder = UriComponentsBuilder.fromHttpUrl(apiGateway + "/api/news/get-all")
                         .queryParam("page", page)
                         .queryParam("newsPerPage", pageSize)
                         .queryParam("search", search);
@@ -53,7 +57,7 @@ public class NewsService {
                         NewsDtoWithTotalElements.class
                 );
             }else {
-                builder = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/api/news/get-all")
+                builder = UriComponentsBuilder.fromHttpUrl(apiGateway + "/api/news/get-all")
                         .queryParam("page", page)
                         .queryParam("newsPerPage", pageSize);
                 String url = builder.toUriString();
@@ -69,9 +73,9 @@ public class NewsService {
     }
 
     public NewsDTOForGetRequest getNewsById(UUID id){
+        String apiGateway = config.getServices().getApiGateway();
         try {
-
-            String url = "http://localhost:8080/api/news/get-one/" + id;
+            String url = apiGateway + "/api/news/get-one/" + id;
             return publicRestTemplate.getForObject(
                     url,
                     NewsDTOForGetRequest.class
@@ -83,7 +87,8 @@ public class NewsService {
     }
 
     public void deleteNews(UUID id){
-        String url = "http://localhost:8080/api/news/auth/delete/" + id.toString();
+        String apiGateway = config.getServices().getApiGateway();
+        String url = apiGateway + "/api/news/auth/delete/" + id.toString();
         try {
             authorizedRestTemplate.delete(url);
         }catch (Exception e){
@@ -93,7 +98,8 @@ public class NewsService {
     }
 
     public void createNews(NewsDTO dto, MultipartFile coverImage) throws IOException {
-        final String bookServiceUrl = "http://localhost:8080/api/news/auth/create";
+        String apiGateway = config.getServices().getApiGateway();
+        String bookServiceUrl = apiGateway + "/api/news/auth/create";
 
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
 
@@ -132,7 +138,8 @@ public class NewsService {
     }
 
     public void updateNews(UUID id, NewsDTO dto, MultipartFile coverImage) throws IOException {
-        final String bookServiceUrl = "http://localhost:8080/api/news/auth/change/" + id;
+        String apiGateway = config.getServices().getApiGateway();
+        String bookServiceUrl = apiGateway + "/api/news/auth/change/" + id;
 
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
 

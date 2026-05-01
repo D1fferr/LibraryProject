@@ -1,5 +1,6 @@
 package com.library.orderservice.services;
 
+import com.library.orderservice.config.ExternalConfig;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import com.library.orderservice.dto.ReservationDTO;
@@ -17,6 +18,7 @@ import java.util.UUID;
 public class CrossServerRequestService {
     private final ReservationService reservationService;
     private final RestTemplate restTemplate;
+    private final ExternalConfig config;
 
     public void checkAvailableDate(ReservationDTO reservationDTO){
         int booksAvailable = booksAvailable(reservationDTO.getReservationBook());
@@ -34,10 +36,12 @@ public class CrossServerRequestService {
         log.info("There is available items for user: '{}'", reservationDTO.getReservationUser());
     }
     public Integer booksAvailable(UUID bookId) {
+
+        String host = config.getServices().getCatalog();
         try {
             log.info("Trying to connect to book service to get available items");
             Integer items = restTemplate.getForObject(
-                    "http://localhost:8081/book/public/pieces/{book_id}",
+                    host + "/book/public/pieces/{book_id}",
                     Integer.class,
                     bookId
             );

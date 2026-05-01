@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="/css/style.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
-        /* Стилі для сторінки News */
         .news-hero {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             padding: 60px 0;
@@ -227,19 +226,16 @@
 
         <!-- News List -->
         <div class="news-list" th:if="${news != null and !news.isEmpty()}">
-            <!-- Початок циклу картки -->
             <div class="news-card" th:each="item : ${news}">
 
-                <!-- Блок зображення -->
-                <div th:if="${item.photo != null and !item.photo.isEmpty()}" class="news-image">
-                    <img th:src="${item.photo}" th:alt="${item.name}"
+                <div th:src="${item.photo != null and !item.photo.isEmpty() ? item.photo : '/api/images/default-news.jpg'}"
+                     th:alt="${item.photo}"
                          onerror="this.onerror=null; this.parentElement.innerHTML='<span class=\"material-icons\">newspaper</span>';">
                 </div>
-                <div th:unless="${item.photo != null and !item.photo.isEmpty()}" class="news-image-placeholder">
-                    <span class="material-icons">newspaper</span>
-                </div>
+<!--                <div th:unless="${item.photo != null and !item.photo.isEmpty()}" class="news-image-placeholder">-->
+<!--                    <span class="material-icons">newspaper</span>-->
+<!--                </div>-->
 
-                <!-- Блок контенту -->
                 <div class="news-content">
                     <div class="news-date">
                         <span class="material-icons">calendar_today</span>
@@ -251,8 +247,8 @@
                         Read More <span class="material-icons">arrow_forward</span>
                     </a>
                 </div>
-            </div> <!-- Кінець news-card (ВАЖЛИВО: цей тег тепер на своєму місці) -->
-        </div> <!-- Кінець news-list -->
+            </div>
+        </div>
 
         <!-- Empty State -->
         <div class="empty-state" th:if="${news == null or news.isEmpty()}">

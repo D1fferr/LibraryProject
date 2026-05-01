@@ -59,7 +59,7 @@ public class AnnouncementService {
     private AnnouncementDTOWithTotalElements getAnnouncementDTOWithTotalElements(Page<Announcement> allAnnouncement) {
         if (allAnnouncement.isEmpty()){
             log.warn("Announcements not found");
-            throw new AnnouncementsNotFoundException("Announcements not found");
+            return new AnnouncementDTOWithTotalElements();
         }
         AnnouncementDTOWithTotalElements dto = new AnnouncementDTOWithTotalElements();
         dto.setAnnouncements(allAnnouncement.stream().map(this::toDTO).toList());

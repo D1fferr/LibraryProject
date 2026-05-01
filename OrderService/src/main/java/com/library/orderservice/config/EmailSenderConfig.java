@@ -1,5 +1,6 @@
 package com.library.orderservice.config;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,17 +10,17 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import java.util.Properties;
 
 @Configuration
+@RequiredArgsConstructor
 public class EmailSenderConfig {
 
-    @Value("${mail.sender.login}")
-    private String login;
-    @Value("${mail.sender.password}")
-    private String password;
-    @Value("${mail.sender.host}")
-    private String host;
+    private final ExternalConfig config;
+
 
     @Bean
     public JavaMailSender javaMailSender(){
+        String login = config.getMail().getLogin();
+        String password = config.getMail().getPassword();
+        String host = config.getMail().getHost();
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
         mailSender.setHost(host);
         mailSender.setPort(587);

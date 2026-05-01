@@ -78,13 +78,17 @@ public class AdminUserController {
                                    Model model) {
 
             UserDTOForView user = adminUserService.getUserById(UUID.fromString(id));
-
+            List<ReservationForViewForAdmin> reservations;
+            List<ReservationDto> dtos;
             ReservationsPageDto reservationsPage = adminReservationService.getUserReservations(id, page, PAGE_SIZE);
-
-            List<ReservationDto> dtos = reservationsPage.getReservations();
+            if (reservationsPage.getReservations()==null){
+                reservations = List.of();
+            }else {
+                dtos = reservationsPage.getReservations();
+                reservations = getReservationsForView(dtos);
+            }
             int totalPages = reservationsPage.getTotalPages();
             long totalReservations = reservationsPage.getTotalElements();
-            List<ReservationForViewForAdmin> reservations = getReservationsForView(dtos);
             model.addAttribute("user", user);
             model.addAttribute("userId", id);
             model.addAttribute("reservations", reservations);

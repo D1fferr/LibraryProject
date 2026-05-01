@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="/css/style.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
-        /* Стилі для сторінки реєстрації */
         .register-page {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: calc(100vh - 200px);
@@ -195,7 +194,6 @@
             color: #667eea;
         }
 
-        /* Адаптивність */
         @media (max-width: 480px) {
             .register-box {
                 padding: 30px 20px;
@@ -216,24 +214,19 @@
                 <p>Join BookLibrary and start your reading journey</p>
             </div>
 
-            <!-- Повідомлення про помилку -->
             <div th:if="${errorMessage}" class="alert alert-error">
                 <span class="material-icons">error</span>
                 <span th:text="${errorMessage}">Registration failed</span>
             </div>
 
-            <!-- Інформація про redirect (якщо є) -->
             <div th:if="${param.redirect != null and param.redirect != 'null'}" class="redirect-info">
                 <span class="material-icons">login</span>
                 <span>After registration you will be redirected to: <strong th:text="${param.redirect}">/books/123</strong></span>
             </div>
 
-            <!-- Форма реєстрації -->
             <form id="registerForm" method="post" action="/register" th:object="${registerRequest}">
-                <!-- Приховане поле для redirect -->
                 <input type="hidden" name="redirect" th:value="${param.redirect}" />
 
-                <!-- Username -->
                 <div class="form-group">
                     <label for="username">
                         Username
@@ -346,7 +339,6 @@
     const password = document.getElementById('password');
     const confirmPassword = document.getElementById('confirmPassword');
 
-    // Валідація співпадіння паролів
     function validatePasswordMatch() {
         if (password.value !== confirmPassword.value) {
             confirmPassword.setCustomValidity('Passwords do not match');
@@ -358,7 +350,6 @@
     password.addEventListener('change', validatePasswordMatch);
     confirmPassword.addEventListener('keyup', validatePasswordMatch);
 
-    // Додаткова валідація перед сабмітом
     form.addEventListener('submit', function(e) {
         if (password.value !== confirmPassword.value) {
             e.preventDefault();
@@ -366,7 +357,6 @@
         }
     });
 
-    // Валідація library code (макс. 20 символів)
     const libraryCodeInput = document.getElementById('libraryCode');
     libraryCodeInput.addEventListener('input', function() {
         const value = this.value.trim();
@@ -377,7 +367,6 @@
         }
     });
 
-    // Автоматичне очищення повідомлень про помилки при введенні
     const inputs = document.querySelectorAll('input');
     inputs.forEach(input => {
         input.addEventListener('input', function() {

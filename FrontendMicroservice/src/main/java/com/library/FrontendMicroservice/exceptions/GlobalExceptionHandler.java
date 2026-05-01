@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
+import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -40,34 +41,25 @@ public class GlobalExceptionHandler {
     }
 
 
-    @ExceptionHandler(HttpClientErrorException.class)
-    @ResponseBody
-    public ResponseEntity<Map<String, Object>> handleApiErrors(HttpClientErrorException e) {
+
+
+    @ExceptionHandler(HttpStatusCodeException.class)
+    public Object handleHttpError(HttpStatusCodeException e, HttpServletRequest request, Model model) {
 
         String errorMessage = extractMessage(e.getResponseBodyAsString());
 
-        Map<String, Object> body = new HashMap<>();
-        body.put("message", errorMessage);
-        body.put("status", e.getStatusCode().value());
-        body.put("error", e.getStatusText());
+        String requestedWith = request.getHeader("X-Requested-With");
+        if ("XMLHttpRequest".equals(requestedWith) || request.getHeader("Accept").contains("application/json")) {
+            Map<String, Object> body = new HashMap<>();
+            body.put("message", errorMessage);
+            body.put("status", e.getStatusCode().value());
+            return new ResponseEntity<>(body, e.getStatusCode());
+        }
 
-        return new ResponseEntity<>(body, e.getStatusCode());
-    }
+        model.addAttribute("error", errorMessage);
+        model.addAttribute("status", e.getStatusCode().value());
 
-
-
-    @ExceptionHandler(HttpServerErrorException.class)
-    @ResponseBody
-    public ResponseEntity<Map<String, Object>> handleHttpServerError(HttpServerErrorException e) {
-
-        String errorMessage = extractMessage(e.getResponseBodyAsString());
-
-        Map<String, Object> body = new HashMap<>();
-        body.put("message", errorMessage);
-        body.put("status", e.getStatusCode().value());
-        body.put("error", e.getStatusText());
-
-        return new ResponseEntity<>(body, e.getStatusCode());
+        return "error/error-page";
     }
     private String extractMessage(String body) {
         try {

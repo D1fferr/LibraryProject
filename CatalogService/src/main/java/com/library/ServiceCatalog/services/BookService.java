@@ -89,7 +89,7 @@ public class BookService {
         List<Book> books = booksPage.getContent();
         if (books.isEmpty()) {
             log.warn("Books not found");
-            throw new BooksNotFoundException("Books not found");
+            return new BookDtoWithTotalElements();
         }
         List<BookDTOForResponseGetBook> bookDTOForResponseGetBooks = books.stream().map(this::toBookDTOForResponseGetBook).toList();
         BookDtoWithTotalElements bookDtoWithTotalElements = new BookDtoWithTotalElements();
@@ -108,7 +108,7 @@ public class BookService {
         List<Book> books = booksPage.getContent();
         if (books.isEmpty()) {
             log.warn("Books not found");
-            throw new BooksNotFoundException("Books not found");
+            return new BookDtoWithTotalElements();
         }
         List<BookDTOForResponseGetBook> bookDTOForResponseGetBooks = books.stream().map(this::toBookDTOForResponseGetBook).toList();
         BookDtoWithTotalElements bookDtoWithTotalElements = new BookDtoWithTotalElements();
@@ -125,7 +125,7 @@ public class BookService {
         List<Book> books = booksPage.getContent();
         if (books.isEmpty()) {
             log.warn("Books not found");
-            throw new BooksNotFoundException("Books not found");
+            return new BookDtoWithTotalElements();
         }
         List<BookDTOForResponseGetBook> bookDTOForResponseGetBooks = books.stream().map(this::toBookDTOForResponseGetBook).toList();
         BookDtoWithTotalElements bookDtoWithTotalElements = new BookDtoWithTotalElements();
@@ -142,7 +142,7 @@ public class BookService {
         List<Book> books = booksPage.getContent();
         if (books.isEmpty()) {
             log.warn("Books not found");
-            throw new BooksNotFoundException("Books not found");
+            return new BookDtoWithTotalElements();
         }
         List<BookDTOForResponseGetBook> bookDTOForResponseGetBooks = books.stream().map(this::toBookDTOForResponseGetBook).toList();
         BookDtoWithTotalElements bookDtoWithTotalElements = new BookDtoWithTotalElements();
@@ -202,7 +202,7 @@ public class BookService {
         Page<Book> books = bookRepository.findAllByOrderByBookAddedAtDesc(pageable);
         if (books.isEmpty()){
             log.warn("The recently added books were not found");
-            throw new BooksNotFoundException("Books not found");
+            return new BookDtoWithTotalElements();
         }
         log.info("All recently added books were found");
         BookDtoWithTotalElements bookDtoWithTotalElements = new BookDtoWithTotalElements();

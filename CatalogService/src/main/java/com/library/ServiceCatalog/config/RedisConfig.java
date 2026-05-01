@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.library.ServiceCatalog.dto.BookDtoWithTotalElements;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.cache.RedisCache;
@@ -22,7 +23,11 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 import java.time.Duration;
 
 @Configuration
+@RequiredArgsConstructor
 public class RedisConfig {
+
+    private final ExternalConfig config;
+
 
     @Bean
     public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory connectionFactory, ObjectMapper objectMapper){
@@ -41,12 +46,12 @@ public class RedisConfig {
         objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
         return objectMapper;
     }
-    @Bean
-    public RedisConnectionFactory connectionFactory(){
-        RedisStandaloneConfiguration configuration = new RedisStandaloneConfiguration();
-        configuration.setHostName("localhost");
-        configuration.setPort(6379);
-        return new LettuceConnectionFactory(configuration);
-    }
+//    @Bean
+//    public RedisConnectionFactory connectionFactory(){
+//        RedisStandaloneConfiguration configuration = new RedisStandaloneConfiguration();
+//        configuration.setHostName(redisHost);
+//        configuration.setPort(Integer.parseInt(redisPort));
+//        return new LettuceConnectionFactory(configuration);
+//    }
 
 }

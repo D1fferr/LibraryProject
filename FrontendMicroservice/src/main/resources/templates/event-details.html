@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="/css/style.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
-        /* Додаткові стилі для сторінки деталей події */
         .event-details-hero {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             padding: 40px 0;
@@ -204,7 +203,7 @@
             <!-- Left Column - Photo -->
             <div th:if="${event.photo != null and !event.photo.isEmpty()}" class="event-image-large">
                 <img th:src="${event.photo}" th:alt="${event.name}"
-                     onerror="this.onerror=null; this.src='/images/default-event.jpg';">
+                     onerror="this.onerror=null; this.src='/api/images/default-event.jpg';">
             </div>
             <div th:unless="${event.photo != null and !event.photo.isEmpty()}" class="event-image-placeholder-large">
                 <span class="material-icons">event</span>
@@ -238,7 +237,6 @@
 <div th:replace="~{layout/footer :: footer}"></div>
 
 <script>
-    // Підсвічуємо активний пункт меню
     document.addEventListener('DOMContentLoaded', function() {
         const navLinks = document.querySelectorAll('.main-nav a');
         navLinks.forEach(link => {

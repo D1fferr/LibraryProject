@@ -16,10 +16,7 @@ import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
 import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @Slf4j
 @Component
@@ -41,11 +38,13 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
             "/api/news/get-all",
             "/api/news/get-one",
             "/api/reset-password/send-code",
-            "api/reset-password/reset"
+            "/api/reset-password/reset",
+            "/api/images/"
 
 
 
     );
+    private final Map<String, Set<String>> rolesMap = roleRequirements();
 
     private Map<String, Set<String>> roleRequirements() {
         Map<String, Set<String>> role = new HashMap<>();
@@ -105,7 +104,9 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
+        exchange.getAttributes().put(org.springframework.cloud.gateway.support.ServerWebExchangeUtils.PRESERVE_HOST_HEADER_ATTRIBUTE, true);
         ServerHttpRequest request = exchange.getRequest();
+
         String path = request.getPath().value();
         log.info("Starting of the filter");
         if (isPublicRoute(path)) {
@@ -143,6 +144,9 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
     }
 
     private boolean isPublicRoute(String path) {
+        if (!path.startsWith("/api/")) {
+            return true;
+        }
         return PUBLIC_ROUTES.stream().anyMatch(path::startsWith);
     }
 
@@ -163,15 +167,21 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
     }
 
     private boolean hasRequiredRole(String token, String path) {
-        String requirePath = roleRequirements().keySet().stream()
+        String requirePath = rolesMap.keySet().stream()
                 .filter(path::startsWith)
+                .sorted(Comparator.comparingInt(String::length).reversed())
                 .findFirst()
                 .orElse(null);
-        if (requirePath == null)
+        if (requirePath == null) {
             return true;
+        }
 
-        Set<String> requiredRoles = roleRequirements().get(requirePath);
+        Set<String> requiredRoles = rolesMap.get(requirePath);
         List<String> userRoles = jwtUtil.extractRoles(token);
+
+        if (userRoles == null || userRoles.isEmpty()) {
+            return false;
+        }
 
         return userRoles.stream().anyMatch(requiredRoles::contains);
     }

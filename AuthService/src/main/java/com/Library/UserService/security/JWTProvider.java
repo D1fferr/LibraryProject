@@ -29,12 +29,4 @@ public class JWTProvider {
                 .withExpiresAt(expirationDate)
                 .sign(Algorithm.HMAC256(jwtSecretKey));
     }
-//    public String validateToken(String token) {
-//        JWTVerifier jwtVerifier = JWT.require(Algorithm.HMAC256(jwtSecretKey))
-//                .withSubject("User details")
-//                .withIssuer("AuthService")
-//                .build();
-//        DecodedJWT decodedJWT = jwtVerifier.verify(token);
-//        return decodedJWT.getClaim("username").asString();
-//    }
 }

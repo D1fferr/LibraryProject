@@ -84,12 +84,6 @@
             margin-top: 5px;
         }
 
-        .field-error {
-            color: #e74c3c;
-            font-size: 0.75rem;
-            margin-top: 5px;
-        }
-
         .has-error input, .has-error textarea, .has-error select {
             border-color: #e74c3c;
         }
@@ -385,13 +379,11 @@
 
         const formData = new FormData();
 
-        // Додаємо кожне поле окремо
         formData.append('name', document.getElementById('name').value);
         formData.append('type', document.getElementById('type').value);
         formData.append('date', document.getElementById('date').value);
         formData.append('body', document.getElementById('body').value);
 
-        // Додаємо зображення
         const coverImage = document.getElementById('coverImage').files[0];
         if (coverImage) {
             formData.append('coverImage', coverImage);

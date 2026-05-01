@@ -1,5 +1,6 @@
 package com.library.ServiceCatalog.services;
 
+import com.library.ServiceCatalog.config.ExternalConfig;
 import com.library.ServiceCatalog.exceptions.FailedSaveImageException;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
@@ -17,23 +18,48 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @Slf4j
 public class ImageService {
-
+    private final ExternalConfig config;
     private final S3Client s3Client;
-    @Value("${minio.bucket.name}")
-    private String bucketName;
+
 
     @PostConstruct
     public void initBucket() {
+        String bucketName = config.getMinio().getBucketName();
         try {
             log.info("Initialising minio bucket '{}'", bucketName);
             s3Client.headBucket(builder -> builder.bucket(bucketName));
-            log.info("Minio bucket initialised '{}'", bucketName);
         } catch (Exception e) {
             s3Client.createBucket(builder -> builder.bucket(bucketName));
             log.info("Minio bucket created '{}'", bucketName);
+
+            setBucketPublicPolicy(bucketName);
+        }
+    }
+
+    private void setBucketPublicPolicy(String bucketName) {
+        String policy = "{\n" +
+                "  \"Version\": \"2012-10-17\",\n" +
+                "  \"Statement\": [\n" +
+                "    {\n" +
+                "      \"Effect\": \"Allow\",\n" +
+                "      \"Principal\": \"*\",\n" +
+                "      \"Action\": [\"s3:GetObject\"],\n" +
+                "      \"Resource\": [\"arn:aws:s3:::" + bucketName + "/*\"]\n" +
+                "    }\n" +
+                "  ]\n" +
+                "}";
+
+        try {
+            s3Client.putBucketPolicy(builder -> builder
+                    .bucket(bucketName)
+                    .policy(policy));
+            log.info("Public read policy set for bucket '{}'", bucketName);
+        } catch (Exception e) {
+            log.error("Failed to set public policy for bucket '{}': {}", bucketName, e.getMessage());
         }
     }
     public String storeImage(MultipartFile imageFile, UUID id){
+        String bucketName = config.getMinio().getBucketName();
         String fileName = generateFileName(imageFile.getOriginalFilename(), id);
         try {
             PutObjectRequest putObjectRequest = PutObjectRequest.builder()
@@ -56,16 +82,14 @@ public class ImageService {
         if (fileName == null || fileName.trim().isEmpty()) {
             return null;
         }
-        return s3Client.utilities()
-                .getUrl(builder -> builder.bucket(bucketName).key(fileName))
-                .toString();
+        return "/api/images" + fileName;
     }
 
     private String generateFileName(String originalFileName, UUID id){
         String extension = "";
         if (originalFileName != null && originalFileName.contains("."))
             extension = originalFileName.substring(originalFileName.lastIndexOf("."));
-        return String.format("books/images/%s%s", id.toString(), extension);
+        return String.format("/%s%s", id.toString(), extension);
     }
 
 }

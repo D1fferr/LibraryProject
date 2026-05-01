@@ -7,7 +7,6 @@
 
 <div th:fragment="header">
     <style>
-        /* ОСНОВНІ СТИЛІ ХЕДЕРА */
         .header {
             background-color: #2c3e50;
             color: white;
@@ -135,7 +134,6 @@
             border-bottom: 2px solid #e74c3c;
         }
 
-        /* Стиль для Admin Panel кнопки */
         .admin-link {
             color: #f39c12 !important;
             font-weight: 600;
@@ -146,7 +144,6 @@
             border-bottom-color: #e67e22 !important;
         }
 
-        /* СТИЛІ МОДАЛЬНОГО ВІКНА */
         .profile-modal {
             display: none;
             position: fixed;
@@ -331,7 +328,6 @@
                 <li><a th:href="@{/events}">Events</a></li>
                 <li><a th:href="@{/about}">About</a></li>
                 <li><a th:href="@{/contact}">Contact</a></li>
-                <!-- Admin Panel - доступно тільки для адмінів -->
                 <li th:if="${hasRoleAdmin}">
                     <a th:href="@{/admin/dashboard}" class="admin-link">Admin Panel</a>
                 </li>
@@ -339,7 +335,6 @@
         </nav>
     </header>
 
-    <!-- МОДАЛЬНЕ ВІКНО ПРОФІЛЮ -->
     <div id="profileModal" class="profile-modal" style="display: none;">
         <div class="profile-modal-content">
             <div class="profile-modal-header">
@@ -382,9 +377,7 @@
         </div>
     </div>
 
-    <!-- СКРИПТИ -->
     <script th:inline="javascript">
-        // Функції відкриття/закриття
         window.openProfileModal = function() {
             const modal = document.getElementById('profileModal');
             if (modal) {
@@ -401,7 +394,6 @@
             }
         };
 
-        // Закриття при кліку на фон
         window.addEventListener('click', function(event) {
             const modal = document.getElementById('profileModal');
             if (event.target === modal) {
@@ -409,7 +401,6 @@
             }
         });
 
-        // Підсвічування активного пункту меню
         document.addEventListener('DOMContentLoaded', function() {
             const currentPath = window.location.pathname;
             document.querySelectorAll('.main-nav a').forEach(link => {

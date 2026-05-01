@@ -1,5 +1,6 @@
 package com.library.FrontendMicroservice.services;
 
+import com.library.FrontendMicroservice.config.ExternalConfig;
 import com.library.FrontendMicroservice.dto.*;
 import com.library.FrontendMicroservice.exceptions.AnnouncementException;
 import com.library.FrontendMicroservice.exceptions.BookException;
@@ -23,12 +24,14 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class EventService {
+    private final ExternalConfig config;
     private final RestTemplate publicRestTemplate;
     private final RestTemplate authorizedRestTemplate;
 
     public AnnouncementDTOWithTotalElements getAllEvents(int page){
+        String apiGateway = config.getServices().getApiGateway();
         try {
-            UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/api/announcement/get-all")
+            UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(apiGateway + "/api/announcement/get-all")
                     .queryParam("page", page);
 
             String url = builder.toUriString();
@@ -43,10 +46,11 @@ public class EventService {
 
     }
     public AnnouncementDTOWithTotalElements getAllEventsForAdmin(int page, int pageSize, String search){
+        String apiGateway = config.getServices().getApiGateway();
         try {
             UriComponentsBuilder builder;
             if (search!=null){
-                builder = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/api/announcement/get-all")
+                builder = UriComponentsBuilder.fromHttpUrl(apiGateway + "/api/announcement/get-all")
                         .queryParam("page", page)
                         .queryParam("announcementPerPage", pageSize)
                         .queryParam("search", search);
@@ -56,7 +60,7 @@ public class EventService {
                         AnnouncementDTOWithTotalElements.class
                 );
             }else {
-                builder = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/api/announcement/get-all")
+                builder = UriComponentsBuilder.fromHttpUrl(apiGateway + "/api/announcement/get-all")
                         .queryParam("page", page)
                         .queryParam("announcementPerPage", pageSize);
                 String url = builder.toUriString();
@@ -73,7 +77,8 @@ public class EventService {
     }
 
     public void deleteEvent(UUID id){
-        String url = "http://localhost:8080/api/announcement/auth/delete/" + id.toString();
+        String apiGateway = config.getServices().getApiGateway();
+        String url = apiGateway + "/api/announcement/auth/delete/" + id.toString();
         try {
             authorizedRestTemplate.delete(url);
         }catch (Exception e){
@@ -82,9 +87,9 @@ public class EventService {
         }
     }
     public AnnouncementDTOForGetRequest getEventById(UUID id){
+        String apiGateway = config.getServices().getApiGateway();
         try {
-
-            String url = "http://localhost:8080/api/announcement/" + id;
+            String url = apiGateway + "/api/announcement/" + id;
             return publicRestTemplate.getForObject(
                     url,
                     AnnouncementDTOForGetRequest.class
@@ -95,7 +100,8 @@ public class EventService {
         }
     }
     public void createEvent(AnnouncementDTO dto, MultipartFile coverImage) throws IOException {
-        final String bookServiceUrl = "http://localhost:8080/api/announcement/auth/create";
+        String apiGateway = config.getServices().getApiGateway();
+        String bookServiceUrl = apiGateway + "/api/announcement/auth/create";
 
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
 
@@ -134,7 +140,8 @@ public class EventService {
     }
 
     public void updateEvent(UUID id, AnnouncementDTO dto, MultipartFile coverImage) throws IOException {
-        final String bookServiceUrl = "http://localhost:8080/api/announcement/auth/change/" + id;
+        String apiGateway = config.getServices().getApiGateway();
+        String bookServiceUrl = apiGateway + "/api/announcement/auth/change/" + id;
 
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
 

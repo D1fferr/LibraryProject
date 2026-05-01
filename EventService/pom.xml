@@ -11,7 +11,7 @@
 	<groupId>com.library</groupId>
 	<artifactId>EventService</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>EvenService</name>
+	<name>EventService</name>
 	<description>Event service in library</description>
 	<url/>
 	<licenses>

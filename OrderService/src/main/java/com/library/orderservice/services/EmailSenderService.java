@@ -1,5 +1,6 @@
 package com.library.orderservice.services;
 
+import com.library.orderservice.config.ExternalConfig;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import com.library.orderservice.dto.ReservationCancellationNotificationDTO;
@@ -20,14 +21,14 @@ import java.util.UUID;
 public class EmailSenderService {
 
 
-    @Value("${send.message.from}")
-    private String from;
+    private final ExternalConfig config;
     private final RestTemplate restTemplate;
     private final ReservationService reservationService;
     private final JavaMailSender mailSender;
 
 
     public void send(ReservationCancellationNotificationDTO dto, UUID id) {
+        String from = config.getMail().getFrom();
         try {
             SimpleMailMessage mailMessage = new SimpleMailMessage();
             log.info("Trying to send message to email. User id: '{}'", id);
@@ -43,9 +44,10 @@ public class EmailSenderService {
         }
 
     }
-    private UserDTO getUser (UUID id) throws Exception {
+    private UserDTO getUser (UUID id) {
+            String user = config.getServices().getUser();
             Reservation reservation = reservationService.findByReservationId(id);
-            String url = "http://localhost:8087/user/" + reservation.getReservationUser();
+            String url = user + "/user/" + reservation.getReservationUser();
             return restTemplate.getForObject(url, UserDTO.class);
     }
     private String textPrep(String username, String message) {

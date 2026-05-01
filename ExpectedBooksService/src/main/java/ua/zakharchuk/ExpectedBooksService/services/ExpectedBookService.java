@@ -90,7 +90,7 @@ public class ExpectedBookService {
 
     @Transactional(readOnly = true)
     public ExpectedBookDTO findById(UUID id) {
-        Optional<ExpectedBook> optionalExpectedBook = expectedBookRepository.findByExpectedBookIdAndStatusNot(id, ExpectedBookStatus.CREATED);
+        Optional<ExpectedBook> optionalExpectedBook = expectedBookRepository.findByExpectedBookIdAndStatusNot(id, ExpectedBookStatus.ADDED);
         if (optionalExpectedBook.isEmpty()){
             log.warn("The expected book not found. ID: '{}'", id);
             throw new ExpectedBookNotFoundException("The selected book was not found.");
@@ -139,7 +139,7 @@ public class ExpectedBookService {
     private ExpectedBookDtoWithTotalElements getExpectedBookDtoWithTotalElements(Page<ExpectedBook> expectedBook) {
         if (expectedBook.getContent().isEmpty()){
             log.warn("Expected books not found");
-            throw new ExpectedBooksNotFoundException("The selected books were not found.");
+            return new ExpectedBookDtoWithTotalElements();
         }
         ExpectedBookDtoWithTotalElements expectedBookDtoWithTotalElements = new ExpectedBookDtoWithTotalElements();
         expectedBookDtoWithTotalElements.setExpectedBooks(expectedBook.getContent().stream().map(this::toExpectedBookDTO).toList());

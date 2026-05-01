@@ -1,5 +1,6 @@
 package com.library.FrontendMicroservice.services;
 
+import com.library.FrontendMicroservice.config.ExternalConfig;
 import com.library.FrontendMicroservice.dto.*;
 import com.library.FrontendMicroservice.exceptions.BookException;
 import com.library.FrontendMicroservice.exceptions.ReservationException;
@@ -18,11 +19,11 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class UserService {
     private final RestTemplate authorizedRestTemplate;
-
+    private final ExternalConfig config;
     public UserDTOForView getUserById(UUID id){
+        String apiGateway = config.getServices().getApiGateway();
         try {
-
-            String url = "http://localhost:8080/api/user/" + id;
+            String url = apiGateway + "/api/user/" + id;
             return authorizedRestTemplate.getForObject(
                     url,
                     UserDTOForView.class
@@ -33,12 +34,13 @@ public class UserService {
         }
     }
     public void updateCredentials(String id, ChangeCredentialDTO dto){
+        String apiGateway = config.getServices().getApiGateway();
         try {
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
 
             HttpEntity<ChangeCredentialDTO> entity = new HttpEntity<>(dto, headers);
-            String authServiceUrl = "http://localhost:8080/api/auth";
+            String authServiceUrl = apiGateway + "/api/auth";
             System.out.println("trying make a request to api");
             authorizedRestTemplate.exchange(
                     authServiceUrl + "/change-credentials/" + id,
@@ -53,9 +55,9 @@ public class UserService {
     }
 
     public UserDtoWithListUsers getUsersById(UserDtoForReservations dto, int page){
-
+        String apiGateway = config.getServices().getApiGateway();
         try {
-            String url = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/api/user/for-reservations")
+            String url = UriComponentsBuilder.fromHttpUrl(apiGateway + "/api/user/for-reservations")
                     .queryParam("page", page).toUriString();
             return authorizedRestTemplate.postForObject(
                     url,
@@ -69,10 +71,11 @@ public class UserService {
 
     }
     public UserPageDto getAllUsers(int page, int pageSize, String search){
+        String apiGateway = config.getServices().getApiGateway();
         try {
             UriComponentsBuilder builder;
             if (search!=null){
-                builder = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/api/user/get-all")
+                builder = UriComponentsBuilder.fromHttpUrl(apiGateway + "/api/user/get-all")
                         .queryParam("page", page)
                         .queryParam("pageSize", pageSize)
                         .queryParam("search", search);
@@ -82,7 +85,7 @@ public class UserService {
                         UserPageDto.class
                 );
             }else {
-                builder = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/api/user/get-all")
+                builder = UriComponentsBuilder.fromHttpUrl(apiGateway + "/api/user/get-all")
                         .queryParam("page", page)
                         .queryParam("pageSize", pageSize);
                 String url = builder.toUriString();
@@ -101,8 +104,9 @@ public class UserService {
     }
 
     public void updateLibraryCode(UUID id, UserDTOForChangeProfile dto){
+        String apiGateway = config.getServices().getApiGateway();
         try {
-            UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/api/user/change-profile/" + id.toString());
+            UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(apiGateway + "/api/user/change-profile/" + id.toString());
 
             String url = builder.toUriString();
             HttpHeaders headers = new HttpHeaders();

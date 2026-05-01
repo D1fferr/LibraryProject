@@ -17,7 +17,6 @@
     <aside class="sidebar">
         <h3>Categories</h3>
         <ul class="categories-list">
-            <!-- Простий список основних категорій (без підрахунку книг) -->
             <li>
                 <a th:href="@{/catalog(genre='Fiction', page=0, sortBy='bookGenre', sortDir='asc')}">
                     Fiction
@@ -34,7 +33,6 @@
                 </a>
             </li>
 
-            <!-- Спеціальне посилання для New Arrivals (без genre, тільки сортування) -->
             <li>
                 <a th:href="@{/catalog(sortBy='bookAddedAt', sortDir='desc', page=0)}"
                    class="new-arrivals-link">
@@ -44,9 +42,7 @@
         </ul>
     </aside>
 
-    <!-- Main Content Area -->
     <main class="main-content">
-        <!-- Popular Books Section -->
         <section class="books-section">
             <div class="section-header">
                 <h2>Most Popular Books</h2>
@@ -59,9 +55,9 @@
             <div class="books-grid books-grid-3x3">
                 <div class="book-card" th:each="book : ${popularBooks}">
                     <div class="book-cover">
-                        <img th:src="${book.bookImage != null ? book.bookImage : '/images/default-book-cover.jpg'}"
+                        <img th:src="${book.bookImage != null ? book.bookImage : '/api/images/default-book-cover.jpg'}"
                              th:alt="${book.bookName}"
-                             onerror="this.onerror=null; this.src='/images/default-book-cover.jpg';"
+                             onerror="this.onerror=null; this.src='/api/images/default-book-cover.jpg';"
                              class="book-image"/>
                     </div>
                     <div class="book-info">
@@ -88,9 +84,9 @@
             <div class="books-grid">
                 <div class="book-card" th:each="book : ${newArrivals}">
                     <div class="book-cover">
-                        <img th:src="${book.bookImage != null ? book.bookImage : '/images/default-book-cover.jpg'}"
+                        <img th:src="${book.bookImage != null ? book.bookImage : '/api/images/default-book-cover.jpg'}"
                              th:alt="${book.bookName}"
-                             onerror="this.onerror=null; this.src='/images/default-book-cover.jpg';"
+                             onerror="this.onerror=null; this.src='/api/images/default-book-cover.jpg';"
                              class="book-image"/>
                     </div>
                     <div class="book-info">
@@ -117,9 +113,9 @@
             <div class="books-grid">
                 <div class="book-card" th:each="book : ${upcomingBooks}">
                     <div class="book-cover">
-                        <img th:src="${book.expectedBookImage != null ? book.expectedBookImage : '/images/default-book-cover.jpg'}"
+                        <img th:src="${book.expectedBookImage != null ? book.expectedBookImage : '/api/images/default-book-cover.jpg'}"
                              th:alt="${book.expectedBookName}"
-                             onerror="this.onerror=null; this.src='/images/default-book-cover.jpg';"
+                             onerror="this.onerror=null; this.src='/api/images/default-book-cover.jpg';"
                              class="book-image"/>
                     </div>
                     <div class="book-info">

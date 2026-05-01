@@ -1,5 +1,6 @@
 package com.library.FrontendMicroservice.services;
 
+import com.library.FrontendMicroservice.config.ExternalConfig;
 import com.library.FrontendMicroservice.dto.*;
 import com.library.FrontendMicroservice.exceptions.BookException;
 import com.library.FrontendMicroservice.exceptions.CategoryException;
@@ -26,7 +27,7 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class BookService {
-
+    private final ExternalConfig config;
     private final RestTemplate publicRestTemplate;
     private final RestTemplate authorizedRestTemplate;
 
@@ -34,9 +35,10 @@ public class BookService {
 
 
     public BookDtoWithTotalElements getMostPopularBooks(){
+        String apiGateway = config.getServices().getApiGateway();
         try {
             BookDtoWithTotalElements books = publicRestTemplate.getForObject(
-                    "http://localhost:8080/api/book/public/most-popular-books",
+                    apiGateway + "/api/book/public/most-popular-books",
                     BookDtoWithTotalElements.class
             );
             return books;
@@ -46,9 +48,10 @@ public class BookService {
         }
     }
     public BookDtoWithTotalElements getRecentlyAddedAt(){
+        String apiGateway = config.getServices().getApiGateway();
         try {
             BookDtoWithTotalElements books = publicRestTemplate.getForObject(
-                    "http://localhost:8080/api/book/public/recently-added-at?booksPerPage=4",
+                    apiGateway + "/api/book/public/recently-added-at?booksPerPage=4",
                     BookDtoWithTotalElements.class
             );
             return books;
@@ -58,9 +61,10 @@ public class BookService {
         }
     }
     public BookDtoWithTotalElements getBooks(String search, String sortBy, int page, String genre, String sortDir){
+        String apiGateway = config.getServices().getApiGateway();
         try {
             if (search!=null){
-            UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/api/book/public")
+            UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(apiGateway + "/api/book/public")
                     .queryParam("page", page)
                     .queryParam("sortBy", sortBy)
                     .queryParam("search", search)
@@ -73,7 +77,7 @@ public class BookService {
                     BookDtoWithTotalElements.class
                     );
             }else {
-                UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/api/book/public")
+                UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(apiGateway + "/api/book/public")
                         .queryParam("page", page)
                         .queryParam("sortBy", sortBy)
                         .queryParam("genre", genre)
@@ -91,10 +95,11 @@ public class BookService {
         }
     }
     public BookDtoWithTotalElements getBooksForAdmin(int page, String search){
+        String apiGateway = config.getServices().getApiGateway();
         try {
             UriComponentsBuilder builder;
             if (search!=null){
-                builder = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/api/book/auth")
+                builder = UriComponentsBuilder.fromHttpUrl(apiGateway + "/api/book/auth")
                         .queryParam("page", page)
                         .queryParam("search", search);
                 String url = builder.toUriString();
@@ -103,7 +108,7 @@ public class BookService {
                         BookDtoWithTotalElements.class
                 );
             }else {
-                builder = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/api/book/auth")
+                builder = UriComponentsBuilder.fromHttpUrl(apiGateway + "/api/book/auth")
                         .queryParam("page", page);
                 String url = builder.toUriString();
                 return authorizedRestTemplate.getForObject(
@@ -120,7 +125,8 @@ public class BookService {
     }
 
     public void deleteBook(UUID id){
-        String url = "http://localhost:8080/api/book/auth/delete/" + id.toString();
+        String apiGateway = config.getServices().getApiGateway();
+        String url = apiGateway + "/api/book/auth/delete/" + id.toString();
         try {
             authorizedRestTemplate.delete(url);
         }catch (Exception e){
@@ -129,9 +135,9 @@ public class BookService {
         }
     }
     public Book getBookById(UUID id){
+        String apiGateway = config.getServices().getApiGateway();
         try {
-
-            String url = "http://localhost:8080/api/book/public/" + id;
+            String url = apiGateway + "/api/book/public/" + id;
             return publicRestTemplate.getForObject(
                     url,
                     Book.class
@@ -142,8 +148,9 @@ public class BookService {
         }
     }
     public BookDtoWithTotalElements getBooksByAuthor(String author){
+        String apiGateway = config.getServices().getApiGateway();
         try {
-            String url = "http://localhost:8080/api/book/public/author/{author}";
+            String url = apiGateway + "/api/book/public/author/{author}";
             UriComponents builder = UriComponentsBuilder.fromHttpUrl(url)
                     .queryParam("page", 0)
                     .buildAndExpand(author);
@@ -157,9 +164,9 @@ public class BookService {
         }
     }
     public BookDtoWithTotalElements getBooksByGenre(String genre){
+        String apiGateway = config.getServices().getApiGateway();
         try {
-
-            String url = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/api/book/public/genre/{genre}")
+            String url = UriComponentsBuilder.fromHttpUrl(apiGateway + "/api/book/public/genre/{genre}")
                     .queryParam("page", 0)
                     .encode()
                     .buildAndExpand(genre)
@@ -174,9 +181,10 @@ public class BookService {
         }
     }
     public CategoriesDto getAllCategories(){
+        String apiGateway = config.getServices().getApiGateway();
         try {
             CategoriesDto categories = publicRestTemplate.getForObject(
-                    "http://localhost:8080/api/book/public/category",
+                    apiGateway + "/api/book/public/category",
                     CategoriesDto.class
             );
             return categories;
@@ -186,9 +194,9 @@ public class BookService {
         }
     }
     public BookDtoWithTotalElements getBooksByIds(BookDtoForReservations dto, int page){
-
+        String apiGateway = config.getServices().getApiGateway();
         try {
-            String url = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/api/book/auth/for-reservations")
+            String url = UriComponentsBuilder.fromHttpUrl(apiGateway + "/api/book/auth/for-reservations")
                     .queryParam("page", page).toUriString();
             return authorizedRestTemplate.postForObject(
                     url,
@@ -202,7 +210,8 @@ public class BookService {
 
     }
     public void createBook(BookDTOForCreate dto, MultipartFile coverImage) throws IOException {
-        final String bookServiceUrl = "http://localhost:8080/api/book/auth/create";
+        String apiGateway = config.getServices().getApiGateway();
+        String bookServiceUrl = apiGateway + "/api/book/auth/create";
 
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
 
@@ -241,7 +250,8 @@ public class BookService {
     }
 
     public void updateBook(UUID id, BookDto dto, MultipartFile coverImage) throws IOException {
-        final String bookServiceUrl = "http://localhost:8080/api/book/auth/change-book/" + id;
+        String apiGateway = config.getServices().getApiGateway();
+        String bookServiceUrl = apiGateway + "/api/book/auth/change-book/" + id;
 
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
 

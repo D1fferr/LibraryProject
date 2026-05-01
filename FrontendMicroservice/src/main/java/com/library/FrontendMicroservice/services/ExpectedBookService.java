@@ -1,5 +1,6 @@
 package com.library.FrontendMicroservice.services;
 
+import com.library.FrontendMicroservice.config.ExternalConfig;
 import com.library.FrontendMicroservice.dto.*;
 import com.library.FrontendMicroservice.exceptions.BookException;
 import com.library.FrontendMicroservice.exceptions.ExpectedBookException;
@@ -21,6 +22,7 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class ExpectedBookService {
+    private final ExternalConfig config;
     private final RestTemplate publicRestTemplate;
     private final RestTemplate authorizedRestTemplate;
 
@@ -28,9 +30,10 @@ public class ExpectedBookService {
 
 
     public ExpectedBookDtoWithTotalElements getExpectedBooks(){
+        String apiGateway = config.getServices().getApiGateway();
         try {
             return publicRestTemplate.getForObject(
-                    "http://localhost:8080/api/expected-book/get-all",
+                    apiGateway + "/api/expected-book/get-all",
                     ExpectedBookDtoWithTotalElements.class
             );
         }catch (Exception e){
@@ -39,9 +42,10 @@ public class ExpectedBookService {
         }
     }
     public ExpectedBook getBookById(UUID id){
+        String apiGateway = config.getServices().getApiGateway();
         try {
 
-            String url = "http://localhost:8080/api/expected-book/" + id;
+            String url = apiGateway + "/api/expected-book/" + id;
             return publicRestTemplate.getForObject(
                     url,
                     ExpectedBook.class
@@ -52,10 +56,11 @@ public class ExpectedBookService {
         }
     }
     public ExpectedBookDtoWithTotalElements getBooksForAdmin(int page, int pageSize, String search){
+        String apiGateway = config.getServices().getApiGateway();
         try {
             UriComponentsBuilder builder;
             if (search!=null){
-                builder = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/api/expected-book/get-all")
+                builder = UriComponentsBuilder.fromHttpUrl(apiGateway + "/api/expected-book/get-all")
                         .queryParam("page", page)
                         .queryParam("bookPerPage", pageSize)
                         .queryParam("search", search);
@@ -65,7 +70,7 @@ public class ExpectedBookService {
                         ExpectedBookDtoWithTotalElements.class
                 );
             }else {
-                builder = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/api/expected-book/get-all")
+                builder = UriComponentsBuilder.fromHttpUrl(apiGateway + "/api/expected-book/get-all")
                         .queryParam("page", page)
                         .queryParam("bookPerPage", pageSize);
                 String url = builder.toUriString();
@@ -82,10 +87,11 @@ public class ExpectedBookService {
 
     }
     public ExpectedBookDtoWithTotalElements getAllExpectedBooks(int page, String sort, String search){
+        String apiGateway = config.getServices().getApiGateway();
         try {
             UriComponentsBuilder builder;
             if (search!=null){
-                builder = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/api/expected-book/get-all")
+                builder = UriComponentsBuilder.fromHttpUrl(apiGateway + "/api/expected-book/get-all")
                         .queryParam("page", page)
                         .queryParam("sort", sort)
                         .queryParam("search", search);
@@ -95,7 +101,7 @@ public class ExpectedBookService {
                         ExpectedBookDtoWithTotalElements.class
                 );
             }else {
-                builder = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/api/expected-book/get-all")
+                builder = UriComponentsBuilder.fromHttpUrl(apiGateway + "/api/expected-book/get-all")
                         .queryParam("page", page)
                         .queryParam("sort", sort);
                 String url = builder.toUriString();
@@ -112,9 +118,9 @@ public class ExpectedBookService {
 
     }
     public void addToCurrentBooks(UUID id){
+        String apiGateway = config.getServices().getApiGateway();
         try {
-
-            String url = "http://localhost:8080/api/expected-book/auth/add-to-current-books/" + id;
+            String url = apiGateway + "/api/expected-book/auth/add-to-current-books/" + id;
             publicRestTemplate.getForObject(
                     url,
                     String.class
@@ -125,7 +131,8 @@ public class ExpectedBookService {
         }
     }
     public void deleteBook(UUID id){
-        String url = "http://localhost:8080/api/expected-book/auth/delete/" + id.toString();
+        String apiGateway = config.getServices().getApiGateway();
+        String url = apiGateway + "/api/expected-book/auth/delete/" + id.toString();
         try {
             authorizedRestTemplate.delete(url);
         }catch (Exception e){
@@ -134,7 +141,8 @@ public class ExpectedBookService {
         }
     }
     public void createBook(ExpectedBookDTOCreate dto, MultipartFile coverImage) throws IOException {
-        final String bookServiceUrl = "http://localhost:8080/api/expected-book/auth/create";
+        String apiGateway = config.getServices().getApiGateway();
+        String bookServiceUrl = apiGateway + "/api/expected-book/auth/create";
 
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
 
@@ -173,7 +181,8 @@ public class ExpectedBookService {
     }
 
     public void updateBook(UUID id, ExpectedBookDTOCreate dto, MultipartFile coverImage) throws IOException {
-        final String bookServiceUrl = "http://localhost:8080/api/expected-book/auth/change/" + id;
+        String apiGateway = config.getServices().getApiGateway();
+        String bookServiceUrl = apiGateway+ "/api/expected-book/auth/change/" + id;
 
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
 

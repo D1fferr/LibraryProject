@@ -16,13 +16,13 @@ public class TokenBlackListService {
 
 
     private final StringRedisTemplate redisTemplate;
-    private final long blacklistTtl = 7200;
 
     @CacheEvict(value = "tokenCheckCache", key = "#token")
     public void blacklistToken(String token) {
         String blacklistKey = "blacklist:" + token;
         try {
             log.info("Trying to add the password to the redis black list");
+            long blacklistTtl = 7200;
             redisTemplate.opsForValue().set(blacklistKey, "blacklisted", blacklistTtl, TimeUnit.SECONDS);
             log.info("Added the password to the redis black list");
         }catch (Exception e){
@@ -30,10 +30,4 @@ public class TokenBlackListService {
             throw new FailedToConnectWithRedisException(e.getMessage());
         }
     }
-
-//    @Cacheable(value = "tokenCheckCache", key = "#token", unless = "#result == true")
-//    public boolean isTokenBlacklisted(String token) {
-//        String blacklistKey = "blacklist:" + token;
-//        return Boolean.TRUE.equals(redisTemplate.hasKey(blacklistKey));
-//    }
 }

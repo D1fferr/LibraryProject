@@ -1,5 +1,6 @@
 package com.library.FrontendMicroservice.services;
 
+import com.library.FrontendMicroservice.config.ExternalConfig;
 import com.library.FrontendMicroservice.exceptions.UserExeption;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,11 +14,12 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class PasswordResetService {
-
+    private final ExternalConfig config;
     private final RestTemplate publicRestTemplate;
 
     public void sendResetCode(String param){
-        String url = "http://localhost:8080/api/reset-password/send-code";
+        String apiGateway = config.getServices().getApiGateway();
+        String url = apiGateway + "/api/reset-password/send-code";
 
         Map<String, String> requestBody = Map.of(
                 "param", param
@@ -31,7 +33,8 @@ public class PasswordResetService {
         }
     }
     public void resetPassword(String param, String code, String newPasssword){
-        String url = "http://localhost:8080/api/reset-password/reset";
+        String apiGateway = config.getServices().getApiGateway();
+        String url = apiGateway + "/api/reset-password/reset";
 
         Map<String, String> requestBody = Map.of(
                 "code", code,

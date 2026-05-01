@@ -1,5 +1,6 @@
 package com.Library.UserService.services;
 
+import com.Library.UserService.config.ExternalConfig;
 import com.Library.UserService.dto.UserDTO;
 import com.Library.UserService.dto.UserDTOForUserService;
 import com.Library.UserService.models.AuthUser;
@@ -17,10 +18,12 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class CrossServerRequestService {
 
+    private final ExternalConfig config;
     private final RestTemplate restTemplate;
 
     public void sendUser(UserDTO userDTO, UUID id){
-        String url = "http://localhost:8087/user/create";
+        String user = config.getServices().getUser();
+        String url = user + "/user/create";
 
         Map<String, String> requestBody = Map.of(
                 "id", id.toString(),
@@ -38,7 +41,8 @@ public class CrossServerRequestService {
         }
     }
     public void delete(UUID id){
-        String url = "http://localhost:8087/user/delete/" + id.toString();
+        String user = config.getServices().getUser();
+        String url = user + "/user/delete/" + id.toString();
         try {
             log.info("Trying to connect with user service to delete user. ID: '{}'", id);
             restTemplate.delete(url);
@@ -49,7 +53,8 @@ public class CrossServerRequestService {
         }
     }
     public void sendCredential(UserDTOForUserService authUser, UUID id){
-        String url = "http://localhost:8087/user/change-credentials/" + id;
+        String user = config.getServices().getUser();
+        String url = user + "/user/change-credentials/" + id;
 
         Map<String, String> requestBody = Map.of(
                 "username", authUser.getUsername(),

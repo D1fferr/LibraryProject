@@ -84,12 +84,6 @@
             margin-top: 5px;
         }
 
-        .field-error {
-            color: #e74c3c;
-            font-size: 0.75rem;
-            margin-top: 5px;
-        }
-
         .has-error input, .has-error textarea {
             border-color: #e74c3c;
         }
@@ -362,11 +356,9 @@
 
         const formData = new FormData();
 
-        // Замість JSON додаємо кожне поле окремо
         formData.append('name', document.getElementById('name').value);
         formData.append('body', document.getElementById('body').value);
 
-        // Додаємо зображення
         const coverImage = document.getElementById('coverImage').files[0];
         if (coverImage) {
             formData.append('coverImage', coverImage);
@@ -383,7 +375,6 @@
             } else if (response.ok) {
                 window.location.href = '/admin/news';
             } else {
-                // Спробуємо витягнути текст помилки, якщо це не JSON
                 const errorText = await response.text();
                 alert('Failed to create news. Check console for details.');
                 console.error(errorText);

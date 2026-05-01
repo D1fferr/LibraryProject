@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="/css/style.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
-        /* Базові стилі */
         .reservations-hero {
             background: linear-gradient(135deg, #2c3e50 0%, #1a252f 100%);
             padding: 40px 0;
@@ -48,7 +47,6 @@
             font-weight: 500;
         }
 
-        /* --- ОНОВЛЕНІ СТИЛІ КНОПОК --- */
         .reservation-actions {
             display: flex;
             gap: 12px;
@@ -56,14 +54,14 @@
 
         .btn-confirm, .btn-cancel {
             display: inline-flex;
-            align-items: center;    /* Центрування по вертикалі */
+            align-items: center;
             justify-content: center;
-            gap: 10px;              /* Відступ між іконкою і текстом */
-            padding: 12px 24px;     /* Збільшені відступи */
+            gap: 10px;
+            padding: 12px 24px;
             border: none;
             border-radius: 8px;
             cursor: pointer;
-            font-size: 1rem;      /* Більший шрифт */
+            font-size: 1rem;
             font-weight: 500;
             transition: all 0.3s ease;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
@@ -76,8 +74,8 @@
         .btn-cancel:hover { background: #c0392b; transform: translateY(-2px); }
 
         .btn-confirm .material-icons, .btn-cancel .material-icons {
-            font-size: 22px;        /* Розмір іконки під розмір тексту */
-            line-height: 1;         /* Щоб іконка не виштовхувала текст */
+            font-size: 22px;
+            line-height: 1;
         }
 
         .expired-message {

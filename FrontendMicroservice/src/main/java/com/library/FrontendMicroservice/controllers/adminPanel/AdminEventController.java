@@ -4,6 +4,7 @@ import com.library.FrontendMicroservice.dto.AnnouncementDTO;
 import com.library.FrontendMicroservice.dto.AnnouncementDTOForGetRequest;
 import com.library.FrontendMicroservice.dto.AnnouncementDTOWithTotalElements;
 import com.library.FrontendMicroservice.services.EventService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -116,8 +117,11 @@ public class AdminEventController {
                             @Valid @ModelAttribute AnnouncementDTO announcementDTO,
                             BindingResult bindingResult,
                             @RequestParam(value = "coverImage", required = false) MultipartFile image,
+                            HttpServletRequest request,
                             RedirectAttributes redirectAttributes) {
-
+        System.out.println("Host header: " + request.getHeader("Host"));
+        System.out.println("X-Forwarded-Port: " + request.getHeader("X-Forwarded-Port"));
+        System.out.println("Server Port: " + request.getServerPort());
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
             return "redirect:/admin/events/" + id + "/edit";

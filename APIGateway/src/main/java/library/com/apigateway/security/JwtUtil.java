@@ -14,7 +14,7 @@ import java.util.List;
 @Component
 public class JwtUtil {
 
-
+    @Value("${jwt.secret}")
     private String jwtSecret;
     private final JwtParser jwtParser;
 

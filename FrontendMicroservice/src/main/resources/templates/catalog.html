@@ -7,7 +7,6 @@
   <link rel="stylesheet" href="/css/style.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <style>
-    /* Додаткові стилі для нових пунктів меню */
     .category-divider {
       height: 1px;
       background-color: #e0e0e0;
@@ -83,7 +82,6 @@
       background: #fee;
     }
 
-    /* Стилі для повідомлення про відсутність книг */
     .no-books-message {
       text-align: center;
       padding: 60px 20px;
@@ -115,7 +113,6 @@
     <h3>Categories</h3>
 
     <ul class="categories-list" th:if="${categories != null and !categories.isEmpty()}">
-      <!-- All Books - без genre, зберігаємо поточне sortBy -->
       <li>
         <a th:href="@{/catalog(page=0, sortBy=${sortBy != null ? sortBy : 'bookAddedAt'}, sortDir=${sortDir != null ? sortDir : 'desc'})}"
            th:class="${selectedGenre == null ? 'active' : ''}">
@@ -123,7 +120,6 @@
         </a>
       </li>
 
-      <!-- Most Popular Books - спеціальна категорія (після All Books) -->
       <li>
         <a href="/catalog/most-popular-books"
            class="special-category"
@@ -132,7 +128,6 @@
         </a>
       </li>
 
-      <!-- Upcoming Books - спеціальна категорія (після Most Popular) -->
       <li>
         <a href="/catalog/upcoming-books"
            class="special-category"
@@ -141,12 +136,10 @@
         </a>
       </li>
 
-      <!-- Роздільник перед жанрами -->
       <li class="category-divider"></li>
 
-      <!-- Жанри - додаємо genre, зберігаємо поточне sortBy -->
       <li th:each="category : ${categories}">
-        <a th:href="@{/catalog(genre=${category.name}, page=0, sortBy=${sortBy != null ? sortBy : 'bookAddedAt'}, sortDir=${sortDir != null ? sortDir : 'desc'})}"
+        <a th:href="@{/catalog(genre=${category.name}, page=0, sortBy=${sortBy != null ? sortBy : 'bookGenre'}, sortDir=${sortDir != null ? sortDir : 'desc'})}"
            th:class="${selectedGenre == category.name ? 'active' : ''}"
            th:text="${category.name} + ' (' + ${category.count} + ')'">
           Fiction (98)
@@ -216,7 +209,6 @@
 
     <!-- Books Grid -->
     <div class="books-section">
-      <!-- Перевірка на наявність книг -->
       <div th:if="${books != null and !books.isEmpty()}">
         <div class="books-grid" id="booksGrid">
           <div class="book-card" th:each="book : ${books}">
@@ -225,7 +217,8 @@
                    th:src="${book.bookImage}"
                    th:alt="${book.bookName}"
                    class="book-image"/>
-              <div th:unless="${book.bookImage != null and !book.bookImage.isEmpty()}"
+              <div th:src="${book.bookImage != null and !book.bookImage.isEmpty() ? book.bookImage : '/api/images/default-book-cover.jpg'}"
+                   th:alt="${book.bookName}"
                    class="no-image-placeholder">
                 <span class="material-icons">book</span>
               </div>
@@ -241,7 +234,6 @@
         </div>
       </div>
 
-      <!-- Повідомлення про відсутність книг -->
       <div th:if="${books == null or books.isEmpty()}" class="no-books-message">
         <span class="material-icons">menu_book</span>
         <h3>No books found</h3>
@@ -250,7 +242,6 @@
       </div>
     </div>
 
-    <!-- Pagination - показуємо тільки якщо є книги -->
     <div class="pagination-section" th:if="${totalPages > 1 and books != null and !books.isEmpty()}">
       <div class="pagination-info">
         Showing page <span th:text="${currentPage + 1}">1</span>
@@ -362,7 +353,6 @@
       }
     }
 
-    // Додаткова перевірка URL при завантаженні сторінки
     const urlParams = new URLSearchParams(window.location.search);
     const sortByParam = urlParams.get('sortBy');
     if (!sortByParam) {

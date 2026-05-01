@@ -128,13 +128,17 @@ public class BookAdminController {
                                    Model model) {
 
             Book book = bookService.getBookById(id);
-
+            List<ReservationDto> dtos;
+            List <ReservationForView> reservations;
             ReservationsPageDto reservationsPage = reservationService.getReservationsByBook(id, page, 5);
-
-            List<ReservationDto> dtos = reservationsPage.getReservations();
+            if(reservationsPage.getReservations()==null){
+                reservations = List.of();
+            }else {
+                dtos = reservationsPage.getReservations();
+                reservations = getReservationsForView(dtos);
+            }
             int totalPages = reservationsPage.getTotalPages();
             long totalReservations = reservationsPage.getTotalElements();
-            List <ReservationForView> reservations = getReservationsForView(dtos);
 
 
             model.addAttribute("book", book);

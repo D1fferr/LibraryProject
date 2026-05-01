@@ -1,0 +1,1277 @@
+2026-04-28 15:51:39 | APIGateway | INFO  | o.h.validator.internal.util.Version | HV000001: Hibernate Validator 8.0.3.Final
+2026-04-28 15:51:39 | APIGateway | INFO  | l.c.apigateway.ApiGatewayApplication | Starting ApiGatewayApplication using Java 22 with PID 22612 (D:\Library\APIGateway\target\classes started by vasia in D:\Library\APIGateway)
+2026-04-28 15:51:39 | APIGateway | INFO  | l.c.apigateway.ApiGatewayApplication | No active profile set, falling back to 1 default profile: "default"
+2026-04-28 15:51:40 | APIGateway | INFO  | o.s.cloud.context.scope.GenericScope | BeanFactory id=4576b019-0fe0-3945-b60e-b0fbab6d7581
+2026-04-28 15:51:41 | APIGateway | WARN  | o.s.c.g.c.GatewayClassPathWarningAutoConfiguration | 
+
+**********************************************************
+
+The artifact spring-cloud-gateway-server is deprecated. It will be removed in the next major release. Please add spring-cloud-gateway-server-webflux dependency.
+
+**********************************************************
+
+
+2026-04-28 15:51:41 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [After]
+2026-04-28 15:51:41 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Before]
+2026-04-28 15:51:41 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Between]
+2026-04-28 15:51:41 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Cookie]
+2026-04-28 15:51:41 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Header]
+2026-04-28 15:51:41 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Host]
+2026-04-28 15:51:41 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Method]
+2026-04-28 15:51:41 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Path]
+2026-04-28 15:51:41 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Query]
+2026-04-28 15:51:41 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [ReadBody]
+2026-04-28 15:51:41 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [RemoteAddr]
+2026-04-28 15:51:41 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [XForwardedRemoteAddr]
+2026-04-28 15:51:41 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Weight]
+2026-04-28 15:51:41 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [CloudFoundryRouteService]
+2026-04-28 15:51:41 | APIGateway | WARN  | o.s.c.g.s.w.s.StarterDeprecatedAutoConfiguration | 
+
+**********************************************************
+
+spring-cloud-starter-gateway is deprecated. It will be removed in the next major release. Please use spring-cloud-starter-gateway-server-webflux instead.
+
+**********************************************************
+
+
+2026-04-28 15:51:41 | APIGateway | INFO  | o.s.b.w.e.netty.NettyWebServer | Netty started on port 8080 (http)
+2026-04-28 15:51:41 | APIGateway | INFO  | l.c.apigateway.ApiGatewayApplication | Started ApiGatewayApplication in 3.155 seconds (process running for 4.274)
+2026-04-28 15:52:53 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:52:53 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/most-popular-books'
+2026-04-28 15:52:54 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:52:54 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/recently-added-at'
+2026-04-28 15:52:54 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:52:54 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/expected-book/get-all'
+2026-04-28 15:52:58 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:52:58 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/most-popular-books'
+2026-04-28 15:52:58 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:52:58 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/recently-added-at'
+2026-04-28 15:52:58 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:52:58 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/expected-book/get-all'
+2026-04-28 15:53:00 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:53:00 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/auth/login'
+2026-04-28 15:53:01 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:53:01 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/most-popular-books'
+2026-04-28 15:53:01 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:53:01 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/recently-added-at'
+2026-04-28 15:53:01 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:53:01 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/expected-book/get-all'
+2026-04-28 15:53:01 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:53:01 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/most-popular-books'
+2026-04-28 15:53:01 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:53:01 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/recently-added-at'
+2026-04-28 15:53:01 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:53:01 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/expected-book/get-all'
+2026-04-28 15:53:06 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:53:06 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/auth/logout'
+2026-04-28 15:53:06 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 15:53:06 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 15:53:06 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-28 15:53:07 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:53:07 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/most-popular-books'
+2026-04-28 15:53:07 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:53:07 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/recently-added-at'
+2026-04-28 15:53:07 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:53:07 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/expected-book/get-all'
+2026-04-28 15:53:13 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:53:13 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/announcement/get-all'
+2026-04-28 15:53:14 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:53:14 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/news/get-all'
+2026-04-28 15:53:20 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:53:20 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/news/get-one/d67a2d5a-41b5-49ad-9623-01794138406f'
+2026-04-28 15:53:24 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:53:24 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/news/get-one/d4e92870-dc49-460b-893f-8cef3cfce482'
+2026-04-28 15:53:33 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:53:33 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/category'
+2026-04-28 15:53:33 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:53:33 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public'
+2026-04-28 15:53:34 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:53:34 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/category'
+2026-04-28 15:53:34 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:53:34 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/most-popular-books'
+2026-04-28 15:53:35 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:53:35 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/category'
+2026-04-28 15:53:35 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:53:35 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/expected-book/get-all'
+2026-04-28 15:53:37 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:53:37 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/expected-book/c0a80066-9a87-1adb-819a-87dcc76b0001'
+2026-04-28 15:53:47 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:53:47 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/expected-book/c0a80064-99d8-1dee-8199-d89097070002'
+2026-04-28 15:55:17 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:55:17 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/expected-book/c0a80066-9a87-1adb-819a-87dcc76b0001'
+2026-04-28 15:55:17 | APIGateway | ERROR | o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler | [ddf576b2-30]  500 Server Error for HTTP GET "/api/expected-book/c0a80066-9a87-1adb-819a-87dcc76b0001"
+io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: getsockopt: localhost/127.0.0.1:8082
+	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
+Error has been observed at the following site(s):
+	*__checkpoint ⇢ org.springframework.cloud.gateway.filter.WeightCalculatorWebFilter [DefaultWebFilterChain]
+	*__checkpoint ⇢ HTTP GET "/api/expected-book/c0a80066-9a87-1adb-819a-87dcc76b0001" [ExceptionHandlingWebHandler]
+Original Stack Trace:
+Caused by: java.net.ConnectException: Connection refused: getsockopt
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:682)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:1060)
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:336)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:339)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:784)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:732)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:658)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:998)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:1570)
+2026-04-28 15:55:19 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:55:19 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/expected-book/c0a80066-9a87-1adb-819a-87dcc76b0001'
+2026-04-28 15:55:19 | APIGateway | ERROR | o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler | [ddf576b2-31]  500 Server Error for HTTP GET "/api/expected-book/c0a80066-9a87-1adb-819a-87dcc76b0001"
+io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: getsockopt: localhost/127.0.0.1:8082
+	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
+Error has been observed at the following site(s):
+	*__checkpoint ⇢ org.springframework.cloud.gateway.filter.WeightCalculatorWebFilter [DefaultWebFilterChain]
+	*__checkpoint ⇢ HTTP GET "/api/expected-book/c0a80066-9a87-1adb-819a-87dcc76b0001" [ExceptionHandlingWebHandler]
+Original Stack Trace:
+Caused by: java.net.ConnectException: Connection refused: getsockopt
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:682)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:1060)
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:336)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:339)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:784)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:732)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:658)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:998)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:1570)
+2026-04-28 15:55:21 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:55:21 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/expected-book/c0a80066-9a87-1adb-819a-87dcc76b0001'
+2026-04-28 15:55:22 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:55:22 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/author/TestBookAuthor'
+2026-04-28 15:55:22 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:55:22 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/genre/TestBookGenre'
+2026-04-28 15:55:31 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:55:31 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/auth/login'
+2026-04-28 15:55:31 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:55:31 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/most-popular-books'
+2026-04-28 15:55:31 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:55:31 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/recently-added-at'
+2026-04-28 15:55:31 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:55:31 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/expected-book/get-all'
+2026-04-28 15:55:31 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:55:31 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/most-popular-books'
+2026-04-28 15:55:31 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:55:31 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/recently-added-at'
+2026-04-28 15:55:31 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:55:31 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/expected-book/get-all'
+2026-04-28 15:55:39 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:55:39 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_user/c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-28 15:55:39 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 15:55:39 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 15:55:39 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-28 15:55:39 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:55:39 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/book/auth/for-reservations'
+2026-04-28 15:55:39 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 15:55:39 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 15:55:39 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-28 15:55:43 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:55:43 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/delete/c0a80067-9dc4-1193-819d-c4b3c7fd0009'
+2026-04-28 15:55:43 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 15:55:43 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 15:55:43 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-28 15:55:44 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:55:44 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_user/c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-28 15:55:44 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 15:55:44 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 15:55:44 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-28 15:55:44 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:55:44 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/book/auth/for-reservations'
+2026-04-28 15:55:44 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 15:55:44 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 15:55:44 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-28 15:55:48 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:55:48 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/category'
+2026-04-28 15:55:48 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:55:48 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public'
+2026-04-28 15:55:51 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:55:51 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/category'
+2026-04-28 15:55:51 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:55:51 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public'
+2026-04-28 15:56:00 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:56:00 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/category'
+2026-04-28 15:56:00 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:56:00 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public'
+2026-04-28 15:56:03 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:56:03 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/category'
+2026-04-28 15:56:03 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:56:03 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public'
+2026-04-28 15:58:16 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:58:16 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/category'
+2026-04-28 15:58:16 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:58:16 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public'
+2026-04-28 15:58:28 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:58:28 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/category'
+2026-04-28 15:58:28 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:58:28 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public'
+2026-04-28 15:58:34 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:58:34 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/category'
+2026-04-28 15:58:34 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:58:34 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public'
+2026-04-28 15:58:38 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:58:38 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/category'
+2026-04-28 15:58:38 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:58:38 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public'
+2026-04-28 15:58:42 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:58:42 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/category'
+2026-04-28 15:58:42 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:58:42 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public'
+2026-04-28 15:58:46 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:58:46 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/category'
+2026-04-28 15:58:46 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:58:46 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public'
+2026-04-28 15:59:40 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:59:40 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/category'
+2026-04-28 15:59:40 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 15:59:40 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public'
+2026-04-28 16:01:44 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:01:44 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/category'
+2026-04-28 16:01:44 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:01:44 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public'
+2026-04-28 16:01:45 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:01:45 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/category'
+2026-04-28 16:01:45 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:01:45 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public'
+2026-04-28 16:01:48 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:01:48 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/category'
+2026-04-28 16:01:48 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:01:48 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public'
+2026-04-28 16:01:53 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:01:53 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/category'
+2026-04-28 16:01:53 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:01:53 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public'
+2026-04-28 16:01:57 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:01:57 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/news/get-all'
+2026-04-28 16:01:59 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:01:59 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/category'
+2026-04-28 16:01:59 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:01:59 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public'
+2026-04-28 16:02:00 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:02:00 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/most-popular-books'
+2026-04-28 16:02:00 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:02:00 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/recently-added-at'
+2026-04-28 16:02:00 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:02:00 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/expected-book/get-all'
+2026-04-28 16:02:01 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:02:01 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/category'
+2026-04-28 16:02:01 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:02:01 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public'
+2026-04-28 16:02:04 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:02:04 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/category'
+2026-04-28 16:02:04 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:02:04 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public'
+2026-04-28 16:02:10 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:02:10 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/category'
+2026-04-28 16:02:10 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:02:10 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public'
+2026-04-28 16:02:12 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:02:12 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/category'
+2026-04-28 16:02:12 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:02:12 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public'
+2026-04-28 16:11:55 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:11:55 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/most-popular-books'
+2026-04-28 16:11:55 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:11:55 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/recently-added-at'
+2026-04-28 16:11:55 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:11:55 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/expected-book/get-all'
+2026-04-28 16:11:57 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:11:57 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/category'
+2026-04-28 16:11:57 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:11:57 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public'
+2026-04-28 16:12:00 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:12:00 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/most-popular-books'
+2026-04-28 16:12:00 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:12:00 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/recently-added-at'
+2026-04-28 16:12:00 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:12:00 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/expected-book/get-all'
+2026-04-28 16:12:01 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:12:01 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/category'
+2026-04-28 16:12:01 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:12:01 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public'
+2026-04-28 16:12:03 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:12:03 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/most-popular-books'
+2026-04-28 16:12:03 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:12:03 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/recently-added-at'
+2026-04-28 16:12:03 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:12:03 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/expected-book/get-all'
+2026-04-28 16:12:07 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:12:07 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/news/get-all'
+2026-04-28 16:12:08 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:12:08 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/announcement/get-all'
+2026-04-28 16:12:12 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:12:12 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_user/c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-28 16:12:12 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:12:12 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:12:12 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-28 16:12:12 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:12:12 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/book/auth/for-reservations'
+2026-04-28 16:12:12 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:12:12 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:12:12 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-28 16:12:24 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:12:24 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/delete/c0a80067-9d91-1c4a-819d-913199550001'
+2026-04-28 16:12:24 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:12:24 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:12:24 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-28 16:12:24 | APIGateway | ERROR | o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler | [4f19f861-108]  500 Server Error for HTTP DELETE "/api/reservation/auth/delete/c0a80067-9d91-1c4a-819d-913199550001"
+io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: getsockopt: localhost/127.0.0.1:8084
+	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
+Error has been observed at the following site(s):
+	*__checkpoint ⇢ org.springframework.cloud.gateway.filter.WeightCalculatorWebFilter [DefaultWebFilterChain]
+	*__checkpoint ⇢ HTTP DELETE "/api/reservation/auth/delete/c0a80067-9d91-1c4a-819d-913199550001" [ExceptionHandlingWebHandler]
+Original Stack Trace:
+Caused by: java.net.ConnectException: Connection refused: getsockopt
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:682)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:1060)
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:336)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:339)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:784)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:732)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:658)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:998)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:1570)
+2026-04-28 16:12:25 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:12:25 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_user/c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-28 16:12:25 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:12:25 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:12:25 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-28 16:12:25 | APIGateway | ERROR | o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler | [4f19f861-109]  500 Server Error for HTTP GET "/api/reservation/auth/view_for_the_user/c0a80065-9d8b-1f41-819d-8c4222d30000?page=0&reservationPerPage=4"
+io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: getsockopt: localhost/127.0.0.1:8084
+	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
+Error has been observed at the following site(s):
+	*__checkpoint ⇢ org.springframework.cloud.gateway.filter.WeightCalculatorWebFilter [DefaultWebFilterChain]
+	*__checkpoint ⇢ HTTP GET "/api/reservation/auth/view_for_the_user/c0a80065-9d8b-1f41-819d-8c4222d30000?page=0&reservationPerPage=4" [ExceptionHandlingWebHandler]
+Original Stack Trace:
+Caused by: java.net.ConnectException: Connection refused: getsockopt
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:682)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:1060)
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:336)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:339)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:784)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:732)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:658)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:998)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:1570)
+2026-04-28 16:12:28 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:12:28 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/most-popular-books'
+2026-04-28 16:12:28 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:12:28 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/recently-added-at'
+2026-04-28 16:12:28 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:12:28 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/expected-book/get-all'
+2026-04-28 16:12:31 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:12:31 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_user/c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-28 16:12:31 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:12:31 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:12:31 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-28 16:12:31 | APIGateway | ERROR | o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler | [4f19f861-113]  500 Server Error for HTTP GET "/api/reservation/auth/view_for_the_user/c0a80065-9d8b-1f41-819d-8c4222d30000?page=0&reservationPerPage=4"
+io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: getsockopt: localhost/127.0.0.1:8084
+	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
+Error has been observed at the following site(s):
+	*__checkpoint ⇢ org.springframework.cloud.gateway.filter.WeightCalculatorWebFilter [DefaultWebFilterChain]
+	*__checkpoint ⇢ HTTP GET "/api/reservation/auth/view_for_the_user/c0a80065-9d8b-1f41-819d-8c4222d30000?page=0&reservationPerPage=4" [ExceptionHandlingWebHandler]
+Original Stack Trace:
+Caused by: java.net.ConnectException: Connection refused: getsockopt
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:682)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:1060)
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:336)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:339)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:784)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:732)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:658)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:998)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:1570)
+2026-04-28 16:12:37 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:12:37 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80067-9d96-14a9-819d-966594520000'
+2026-04-28 16:12:37 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:12:37 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/author/Joanne%20Rowling'
+2026-04-28 16:12:37 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:12:37 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/genre/Fantasy'
+2026-04-28 16:12:39 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:12:39 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/create'
+2026-04-28 16:12:39 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:12:39 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:12:39 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-28 16:12:39 | APIGateway | ERROR | o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler | [4f19f861-117]  500 Server Error for HTTP POST "/api/reservation/auth/create"
+io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: getsockopt: localhost/127.0.0.1:8084
+	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
+Error has been observed at the following site(s):
+	*__checkpoint ⇢ org.springframework.cloud.gateway.filter.WeightCalculatorWebFilter [DefaultWebFilterChain]
+	*__checkpoint ⇢ HTTP POST "/api/reservation/auth/create" [ExceptionHandlingWebHandler]
+Original Stack Trace:
+Caused by: java.net.ConnectException: Connection refused: getsockopt
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:682)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:1060)
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:336)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:339)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:784)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:732)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:658)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:998)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:1570)
+2026-04-28 16:12:40 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:12:40 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80067-9d96-14a9-819d-966594520000'
+2026-04-28 16:12:40 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:12:40 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/author/Joanne%20Rowling'
+2026-04-28 16:12:40 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:12:40 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/genre/Fantasy'
+2026-04-28 16:12:44 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:12:44 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/create'
+2026-04-28 16:12:44 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:12:44 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:12:44 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-28 16:12:44 | APIGateway | ERROR | o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler | [4f19f861-121]  500 Server Error for HTTP POST "/api/reservation/auth/create"
+io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: getsockopt: localhost/127.0.0.1:8084
+	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
+Error has been observed at the following site(s):
+	*__checkpoint ⇢ org.springframework.cloud.gateway.filter.WeightCalculatorWebFilter [DefaultWebFilterChain]
+	*__checkpoint ⇢ HTTP POST "/api/reservation/auth/create" [ExceptionHandlingWebHandler]
+Original Stack Trace:
+Caused by: java.net.ConnectException: Connection refused: getsockopt
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:682)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:1060)
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:336)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:339)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:784)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:732)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:658)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:998)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:1570)
+2026-04-28 16:12:45 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:12:45 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80067-9d96-14a9-819d-966594520000'
+2026-04-28 16:12:45 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:12:45 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/author/Joanne%20Rowling'
+2026-04-28 16:12:45 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:12:45 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/genre/Fantasy'
+2026-04-28 16:13:45 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:13:45 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/create'
+2026-04-28 16:13:45 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:13:45 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:13:45 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-28 16:13:47 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:13:47 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80067-9d96-14a9-819d-966594520000'
+2026-04-28 16:13:47 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:13:47 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/author/Joanne%20Rowling'
+2026-04-28 16:13:47 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:13:47 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/genre/Fantasy'
+2026-04-28 16:13:58 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:13:58 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/create'
+2026-04-28 16:13:58 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:13:58 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:13:58 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-28 16:13:58 | APIGateway | ERROR | o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler | [6ea95e84-129]  500 Server Error for HTTP POST "/api/reservation/auth/create"
+io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: getsockopt: localhost/127.0.0.1:8084
+	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
+Error has been observed at the following site(s):
+	*__checkpoint ⇢ org.springframework.cloud.gateway.filter.WeightCalculatorWebFilter [DefaultWebFilterChain]
+	*__checkpoint ⇢ HTTP POST "/api/reservation/auth/create" [ExceptionHandlingWebHandler]
+Original Stack Trace:
+Caused by: java.net.ConnectException: Connection refused: getsockopt
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:682)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:1060)
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:336)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:339)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:784)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:732)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:658)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:998)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:1570)
+2026-04-28 16:13:59 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:13:59 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80067-9d96-14a9-819d-966594520000'
+2026-04-28 16:13:59 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:13:59 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/author/Joanne%20Rowling'
+2026-04-28 16:13:59 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:13:59 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/genre/Fantasy'
+2026-04-28 16:14:03 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:14:03 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/create'
+2026-04-28 16:14:03 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:14:03 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:14:03 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-28 16:14:03 | APIGateway | ERROR | o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler | [6ea95e84-133]  500 Server Error for HTTP POST "/api/reservation/auth/create"
+io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: getsockopt: localhost/127.0.0.1:8084
+	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
+Error has been observed at the following site(s):
+	*__checkpoint ⇢ org.springframework.cloud.gateway.filter.WeightCalculatorWebFilter [DefaultWebFilterChain]
+	*__checkpoint ⇢ HTTP POST "/api/reservation/auth/create" [ExceptionHandlingWebHandler]
+Original Stack Trace:
+Caused by: java.net.ConnectException: Connection refused: getsockopt
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:682)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:1060)
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:336)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:339)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:784)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:732)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:658)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:998)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:1570)
+2026-04-28 16:14:04 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:14:04 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80067-9d96-14a9-819d-966594520000'
+2026-04-28 16:14:04 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:14:04 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/author/Joanne%20Rowling'
+2026-04-28 16:14:04 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:14:04 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/genre/Fantasy'
+2026-04-28 16:14:05 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:14:05 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/create'
+2026-04-28 16:14:05 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:14:05 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:14:05 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-28 16:14:05 | APIGateway | ERROR | o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler | [6ea95e84-137]  500 Server Error for HTTP POST "/api/reservation/auth/create"
+io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: getsockopt: localhost/127.0.0.1:8084
+	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
+Error has been observed at the following site(s):
+	*__checkpoint ⇢ org.springframework.cloud.gateway.filter.WeightCalculatorWebFilter [DefaultWebFilterChain]
+	*__checkpoint ⇢ HTTP POST "/api/reservation/auth/create" [ExceptionHandlingWebHandler]
+Original Stack Trace:
+Caused by: java.net.ConnectException: Connection refused: getsockopt
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:682)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:1060)
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:336)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:339)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:784)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:732)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:658)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:998)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:1570)
+2026-04-28 16:14:06 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:14:06 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80067-9d96-14a9-819d-966594520000'
+2026-04-28 16:14:06 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:14:06 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/author/Joanne%20Rowling'
+2026-04-28 16:14:06 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:14:06 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/genre/Fantasy'
+2026-04-28 16:14:08 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:14:08 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/create'
+2026-04-28 16:14:08 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:14:08 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:14:08 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-28 16:14:08 | APIGateway | ERROR | o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler | [6ea95e84-141]  500 Server Error for HTTP POST "/api/reservation/auth/create"
+io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: getsockopt: localhost/127.0.0.1:8084
+	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
+Error has been observed at the following site(s):
+	*__checkpoint ⇢ org.springframework.cloud.gateway.filter.WeightCalculatorWebFilter [DefaultWebFilterChain]
+	*__checkpoint ⇢ HTTP POST "/api/reservation/auth/create" [ExceptionHandlingWebHandler]
+Original Stack Trace:
+Caused by: java.net.ConnectException: Connection refused: getsockopt
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:682)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:1060)
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:336)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:339)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:784)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:732)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:658)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:998)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:1570)
+2026-04-28 16:14:09 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:14:09 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80067-9d96-14a9-819d-966594520000'
+2026-04-28 16:14:09 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:14:09 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/author/Joanne%20Rowling'
+2026-04-28 16:14:09 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:14:09 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/genre/Fantasy'
+2026-04-28 16:14:12 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:14:12 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_user/c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-28 16:14:12 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:14:12 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:14:12 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-28 16:14:12 | APIGateway | ERROR | o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler | [6ea95e84-145]  500 Server Error for HTTP GET "/api/reservation/auth/view_for_the_user/c0a80065-9d8b-1f41-819d-8c4222d30000?page=0&reservationPerPage=4"
+io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: getsockopt: localhost/127.0.0.1:8084
+	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
+Error has been observed at the following site(s):
+	*__checkpoint ⇢ org.springframework.cloud.gateway.filter.WeightCalculatorWebFilter [DefaultWebFilterChain]
+	*__checkpoint ⇢ HTTP GET "/api/reservation/auth/view_for_the_user/c0a80065-9d8b-1f41-819d-8c4222d30000?page=0&reservationPerPage=4" [ExceptionHandlingWebHandler]
+Original Stack Trace:
+Caused by: java.net.ConnectException: Connection refused: getsockopt
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:682)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:1060)
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:336)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:339)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:784)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:732)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:658)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:998)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:1570)
+2026-04-28 16:14:14 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:14:14 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/most-popular-books'
+2026-04-28 16:14:14 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:14:14 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/recently-added-at'
+2026-04-28 16:14:14 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:14:14 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/expected-book/get-all'
+2026-04-28 16:14:17 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:14:17 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/category'
+2026-04-28 16:14:17 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:14:17 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public'
+2026-04-28 16:14:18 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:14:18 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-28 16:14:18 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:14:18 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/author/TestBookAuthor'
+2026-04-28 16:14:18 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:14:18 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/genre/TestBookGenre'
+2026-04-28 16:14:20 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:14:20 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/create'
+2026-04-28 16:14:20 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:14:20 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:14:20 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-28 16:14:20 | APIGateway | ERROR | o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler | [6ea95e84-154]  500 Server Error for HTTP POST "/api/reservation/auth/create"
+io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: getsockopt: localhost/127.0.0.1:8084
+	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
+Error has been observed at the following site(s):
+	*__checkpoint ⇢ org.springframework.cloud.gateway.filter.WeightCalculatorWebFilter [DefaultWebFilterChain]
+	*__checkpoint ⇢ HTTP POST "/api/reservation/auth/create" [ExceptionHandlingWebHandler]
+Original Stack Trace:
+Caused by: java.net.ConnectException: Connection refused: getsockopt
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:682)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:1060)
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:336)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:339)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:784)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:732)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:658)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:998)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:1570)
+2026-04-28 16:14:21 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:14:21 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-28 16:14:21 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:14:21 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/author/TestBookAuthor'
+2026-04-28 16:14:21 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:14:21 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/genre/TestBookGenre'
+2026-04-28 16:21:38 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:21:38 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-28 16:21:38 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:21:38 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/author/TestBookAuthor'
+2026-04-28 16:21:38 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:21:38 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/genre/TestBookGenre'
+2026-04-28 16:21:40 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:21:40 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/create'
+2026-04-28 16:21:40 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:21:40 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:21:40 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-28 16:21:40 | APIGateway | ERROR | o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler | [8cd14780-161]  500 Server Error for HTTP POST "/api/reservation/auth/create"
+io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: getsockopt: localhost/127.0.0.1:8084
+	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
+Error has been observed at the following site(s):
+	*__checkpoint ⇢ org.springframework.cloud.gateway.filter.WeightCalculatorWebFilter [DefaultWebFilterChain]
+	*__checkpoint ⇢ HTTP POST "/api/reservation/auth/create" [ExceptionHandlingWebHandler]
+Original Stack Trace:
+Caused by: java.net.ConnectException: Connection refused: getsockopt
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:682)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:1060)
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:336)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:339)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:784)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:732)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:658)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:998)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:1570)
+2026-04-28 16:21:52 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:21:52 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-28 16:21:52 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:21:52 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/author/TestBookAuthor'
+2026-04-28 16:21:52 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:21:52 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/genre/TestBookGenre'
+2026-04-28 16:21:53 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:21:53 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/create'
+2026-04-28 16:21:53 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:21:53 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:21:53 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-28 16:21:55 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:21:55 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-28 16:21:55 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:21:55 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/author/TestBookAuthor'
+2026-04-28 16:21:55 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:21:55 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/genre/TestBookGenre'
+2026-04-28 16:21:57 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:21:57 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/category'
+2026-04-28 16:21:57 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:21:57 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public'
+2026-04-28 16:21:59 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:21:59 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/news/get-all'
+2026-04-28 16:22:00 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:22:00 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/news/get-one/d67a2d5a-41b5-49ad-9623-01794138406f'
+2026-04-28 16:22:13 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:22:13 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/announcement/get-all'
+2026-04-28 16:22:13 | APIGateway | ERROR | o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler | [c8b1b8a9-173]  500 Server Error for HTTP GET "/api/announcement/get-all?page=0"
+io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: getsockopt: localhost/127.0.0.1:8083
+	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
+Error has been observed at the following site(s):
+	*__checkpoint ⇢ org.springframework.cloud.gateway.filter.WeightCalculatorWebFilter [DefaultWebFilterChain]
+	*__checkpoint ⇢ HTTP GET "/api/announcement/get-all?page=0" [ExceptionHandlingWebHandler]
+Original Stack Trace:
+Caused by: java.net.ConnectException: Connection refused: getsockopt
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:682)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:1060)
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:336)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:339)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:784)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:732)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:658)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:998)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:1570)
+2026-04-28 16:22:15 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:22:15 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/most-popular-books'
+2026-04-28 16:22:15 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:22:15 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/recently-added-at'
+2026-04-28 16:22:15 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:22:15 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/expected-book/get-all'
+2026-04-28 16:22:20 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:22:20 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/announcement/get-all'
+2026-04-28 16:22:20 | APIGateway | ERROR | o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler | [c8b1b8a9-177]  500 Server Error for HTTP GET "/api/announcement/get-all?page=0"
+io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: getsockopt: localhost/127.0.0.1:8083
+	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
+Error has been observed at the following site(s):
+	*__checkpoint ⇢ org.springframework.cloud.gateway.filter.WeightCalculatorWebFilter [DefaultWebFilterChain]
+	*__checkpoint ⇢ HTTP GET "/api/announcement/get-all?page=0" [ExceptionHandlingWebHandler]
+Original Stack Trace:
+Caused by: java.net.ConnectException: Connection refused: getsockopt
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:682)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:1060)
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:336)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:339)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:784)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:732)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:658)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:998)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:1570)
+2026-04-28 16:22:22 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:22:22 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/news/get-all'
+2026-04-28 16:22:22 | APIGateway | ERROR | o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler | [c8b1b8a9-178]  500 Server Error for HTTP GET "/api/news/get-all?page=0"
+io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: getsockopt: localhost/127.0.0.1:8083
+	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
+Error has been observed at the following site(s):
+	*__checkpoint ⇢ org.springframework.cloud.gateway.filter.WeightCalculatorWebFilter [DefaultWebFilterChain]
+	*__checkpoint ⇢ HTTP GET "/api/news/get-all?page=0" [ExceptionHandlingWebHandler]
+Original Stack Trace:
+Caused by: java.net.ConnectException: Connection refused: getsockopt
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:682)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:1060)
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:336)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:339)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:784)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:732)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:658)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:998)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:1570)
+2026-04-28 16:22:34 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:22:34 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_user/c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-28 16:22:34 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:22:34 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:22:34 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-28 16:22:35 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:22:35 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/book/auth/for-reservations'
+2026-04-28 16:22:35 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:22:35 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:22:35 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-28 16:22:45 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:22:45 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/delete/c0a80067-9dc4-1193-819d-c4b3c0240008'
+2026-04-28 16:22:45 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:22:45 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:22:45 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-28 16:22:45 | APIGateway | ERROR | o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler | [87938b43-181]  500 Server Error for HTTP DELETE "/api/reservation/auth/delete/c0a80067-9dc4-1193-819d-c4b3c0240008"
+io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: getsockopt: localhost/127.0.0.1:8084
+	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
+Error has been observed at the following site(s):
+	*__checkpoint ⇢ org.springframework.cloud.gateway.filter.WeightCalculatorWebFilter [DefaultWebFilterChain]
+	*__checkpoint ⇢ HTTP DELETE "/api/reservation/auth/delete/c0a80067-9dc4-1193-819d-c4b3c0240008" [ExceptionHandlingWebHandler]
+Original Stack Trace:
+Caused by: java.net.ConnectException: Connection refused: getsockopt
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:682)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:1060)
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:336)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:339)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:784)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:732)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:658)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:998)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:1570)
+2026-04-28 16:22:46 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:22:46 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_user/c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-28 16:22:46 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:22:46 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:22:46 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-28 16:22:46 | APIGateway | ERROR | o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler | [87938b43-182]  500 Server Error for HTTP GET "/api/reservation/auth/view_for_the_user/c0a80065-9d8b-1f41-819d-8c4222d30000?page=0&reservationPerPage=4"
+io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: getsockopt: localhost/127.0.0.1:8084
+	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
+Error has been observed at the following site(s):
+	*__checkpoint ⇢ org.springframework.cloud.gateway.filter.WeightCalculatorWebFilter [DefaultWebFilterChain]
+	*__checkpoint ⇢ HTTP GET "/api/reservation/auth/view_for_the_user/c0a80065-9d8b-1f41-819d-8c4222d30000?page=0&reservationPerPage=4" [ExceptionHandlingWebHandler]
+Original Stack Trace:
+Caused by: java.net.ConnectException: Connection refused: getsockopt
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:682)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:1060)
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:336)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:339)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:784)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:732)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:658)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:998)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:1570)
+2026-04-28 16:22:47 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:22:47 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/most-popular-books'
+2026-04-28 16:22:47 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:22:47 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/recently-added-at'
+2026-04-28 16:22:48 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:22:48 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/expected-book/get-all'
+2026-04-28 16:22:49 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:22:49 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_user/c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-28 16:22:49 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:22:49 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:22:49 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-28 16:22:49 | APIGateway | ERROR | o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler | [87938b43-186]  500 Server Error for HTTP GET "/api/reservation/auth/view_for_the_user/c0a80065-9d8b-1f41-819d-8c4222d30000?page=0&reservationPerPage=4"
+io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: getsockopt: localhost/127.0.0.1:8084
+	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
+Error has been observed at the following site(s):
+	*__checkpoint ⇢ org.springframework.cloud.gateway.filter.WeightCalculatorWebFilter [DefaultWebFilterChain]
+	*__checkpoint ⇢ HTTP GET "/api/reservation/auth/view_for_the_user/c0a80065-9d8b-1f41-819d-8c4222d30000?page=0&reservationPerPage=4" [ExceptionHandlingWebHandler]
+Original Stack Trace:
+Caused by: java.net.ConnectException: Connection refused: getsockopt
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:682)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:1060)
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:336)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:339)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:784)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:732)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:658)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:998)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:1570)
+2026-04-28 16:23:05 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:23:05 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/book/auth'
+2026-04-28 16:23:05 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:23:05 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:23:05 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-28 16:23:10 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:23:10 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80067-9d96-14a9-819d-966594520000'
+2026-04-28 16:23:10 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:23:10 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_book/c0a80067-9d96-14a9-819d-966594520000'
+2026-04-28 16:23:10 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:23:10 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:23:10 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-28 16:23:10 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:23:10 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/user/for-reservations'
+2026-04-28 16:23:10 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:23:10 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:23:10 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-28 16:23:20 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:23:20 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/change_status/c0a80065-9dd4-18ae-819d-d43969210000'
+2026-04-28 16:23:20 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:23:20 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:23:20 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-28 16:23:20 | APIGateway | ERROR | o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler | [87938b43-191]  500 Server Error for HTTP PATCH "/api/reservation/auth/change_status/c0a80065-9dd4-18ae-819d-d43969210000"
+io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: getsockopt: localhost/127.0.0.1:8084
+	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
+Error has been observed at the following site(s):
+	*__checkpoint ⇢ org.springframework.cloud.gateway.filter.WeightCalculatorWebFilter [DefaultWebFilterChain]
+	*__checkpoint ⇢ HTTP PATCH "/api/reservation/auth/change_status/c0a80065-9dd4-18ae-819d-d43969210000" [ExceptionHandlingWebHandler]
+Original Stack Trace:
+Caused by: java.net.ConnectException: Connection refused: getsockopt
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:682)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:1060)
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:336)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:339)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:784)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:732)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:658)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:998)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:1570)
+2026-04-28 16:23:20 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:23:20 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80067-9d96-14a9-819d-966594520000'
+2026-04-28 16:23:20 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:23:20 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_book/c0a80067-9d96-14a9-819d-966594520000'
+2026-04-28 16:23:20 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:23:20 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:23:20 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-28 16:23:20 | APIGateway | ERROR | o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler | [87938b43-193]  500 Server Error for HTTP GET "/api/reservation/auth/view_for_the_book/c0a80067-9d96-14a9-819d-966594520000?page=0&reservationPerPage=5"
+io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: getsockopt: localhost/127.0.0.1:8084
+	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
+Error has been observed at the following site(s):
+	*__checkpoint ⇢ org.springframework.cloud.gateway.filter.WeightCalculatorWebFilter [DefaultWebFilterChain]
+	*__checkpoint ⇢ HTTP GET "/api/reservation/auth/view_for_the_book/c0a80067-9d96-14a9-819d-966594520000?page=0&reservationPerPage=5" [ExceptionHandlingWebHandler]
+Original Stack Trace:
+Caused by: java.net.ConnectException: Connection refused: getsockopt
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:682)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:1060)
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:336)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:339)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:784)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:732)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:658)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:998)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:1570)
+2026-04-28 16:23:23 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:23:23 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-28 16:23:23 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:23:23 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_book/c0a80066-9a82-19ea-819a-82dc3fb60000'
+2026-04-28 16:23:23 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:23:23 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:23:23 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-28 16:23:23 | APIGateway | ERROR | o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler | [87938b43-195]  500 Server Error for HTTP GET "/api/reservation/auth/view_for_the_book/c0a80066-9a82-19ea-819a-82dc3fb60000?page=0&reservationPerPage=5"
+io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: getsockopt: localhost/127.0.0.1:8084
+	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
+Error has been observed at the following site(s):
+	*__checkpoint ⇢ org.springframework.cloud.gateway.filter.WeightCalculatorWebFilter [DefaultWebFilterChain]
+	*__checkpoint ⇢ HTTP GET "/api/reservation/auth/view_for_the_book/c0a80066-9a82-19ea-819a-82dc3fb60000?page=0&reservationPerPage=5" [ExceptionHandlingWebHandler]
+Original Stack Trace:
+Caused by: java.net.ConnectException: Connection refused: getsockopt
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:682)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:1060)
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:336)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:339)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:784)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:732)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:658)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:998)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:1570)
+2026-04-28 16:23:44 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:23:44 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/user/get-all'
+2026-04-28 16:23:44 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:23:44 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:23:44 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-28 16:23:53 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:23:53 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/user/change-profile/c0a80067-9a73-1900-819a-7359572a0000'
+2026-04-28 16:23:53 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:23:53 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:23:53 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-28 16:23:53 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:23:53 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/user/get-all'
+2026-04-28 16:23:53 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:23:53 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:23:53 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-28 16:24:03 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:24:03 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/user/c0a80065-9d3f-168f-819d-3f0734b20000'
+2026-04-28 16:24:03 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:24:03 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:24:03 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-28 16:24:03 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:24:03 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_for_the_user/c0a80065-9d3f-168f-819d-3f0734b20000'
+2026-04-28 16:24:03 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:24:03 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:24:03 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-28 16:24:04 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:24:04 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/book/auth/for-reservations'
+2026-04-28 16:24:04 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:24:04 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:24:04 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-28 16:24:05 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:24:05 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/most-popular-books'
+2026-04-28 16:24:05 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:24:05 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/recently-added-at'
+2026-04-28 16:24:05 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:24:05 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/expected-book/get-all'
+2026-04-28 16:24:10 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:24:10 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_all'
+2026-04-28 16:24:10 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:24:10 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:24:10 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-28 16:24:10 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:24:10 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/user/for-reservations'
+2026-04-28 16:24:10 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:24:10 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:24:10 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-28 16:24:10 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:24:10 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/book/auth/for-reservations'
+2026-04-28 16:24:10 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:24:10 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:24:10 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-28 16:24:13 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:24:13 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/reservation/auth/view_all'
+2026-04-28 16:24:13 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:24:13 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:24:13 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-28 16:24:13 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:24:13 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/user/for-reservations'
+2026-04-28 16:24:13 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:24:13 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:24:13 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-28 16:24:13 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:24:13 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/book/auth/for-reservations'
+2026-04-28 16:24:13 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:24:13 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:24:13 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-28 16:24:20 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:24:20 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/announcement/get-all'
+2026-04-28 16:24:21 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:24:21 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/category'
+2026-04-28 16:24:21 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:24:21 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public'
+2026-04-28 16:24:22 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:24:22 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/most-popular-books'
+2026-04-28 16:24:22 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:24:22 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/recently-added-at'
+2026-04-28 16:24:22 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:24:22 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/expected-book/get-all'
+2026-04-28 16:24:23 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:24:23 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/category'
+2026-04-28 16:24:23 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:24:23 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public'
+2026-04-28 16:24:26 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:24:26 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/announcement/get-all'
+2026-04-28 16:24:27 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:24:27 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/news/get-all'
+2026-04-28 16:24:29 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:24:29 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/api/user/c0a80065-9d8b-1f41-819d-8c4222d30000'
+2026-04-28 16:24:29 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:24:29 | APIGateway | INFO  | l.com.apigateway.security.JwtUtil | Trying to extract all claims from token
+2026-04-28 16:24:29 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The filter is completed
+2026-04-28 16:24:40 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:24:40 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/category'
+2026-04-28 16:24:40 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 16:24:40 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public'
+2026-04-28 16:37:32 | APIGateway | INFO  | o.s.b.w.e.netty.GracefulShutdown | Commencing graceful shutdown. Waiting for active requests to complete
+2026-04-28 16:37:32 | APIGateway | INFO  | o.s.b.w.e.netty.GracefulShutdown | Graceful shutdown complete
+2026-04-28 17:01:12 | APIGateway | INFO  | o.h.validator.internal.util.Version | HV000001: Hibernate Validator 8.0.3.Final
+2026-04-28 17:01:12 | APIGateway | INFO  | l.c.apigateway.ApiGatewayApplication | Starting ApiGatewayApplication using Java 22 with PID 15196 (D:\Library\APIGateway\target\classes started by vasia in D:\Library\APIGateway)
+2026-04-28 17:01:12 | APIGateway | INFO  | l.c.apigateway.ApiGatewayApplication | No active profile set, falling back to 1 default profile: "default"
+2026-04-28 17:01:13 | APIGateway | INFO  | o.s.cloud.context.scope.GenericScope | BeanFactory id=4576b019-0fe0-3945-b60e-b0fbab6d7581
+2026-04-28 17:01:14 | APIGateway | WARN  | o.s.c.g.c.GatewayClassPathWarningAutoConfiguration | 
+
+**********************************************************
+
+The artifact spring-cloud-gateway-server is deprecated. It will be removed in the next major release. Please add spring-cloud-gateway-server-webflux dependency.
+
+**********************************************************
+
+
+2026-04-28 17:01:14 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [After]
+2026-04-28 17:01:14 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Before]
+2026-04-28 17:01:14 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Between]
+2026-04-28 17:01:14 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Cookie]
+2026-04-28 17:01:14 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Header]
+2026-04-28 17:01:14 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Host]
+2026-04-28 17:01:14 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Method]
+2026-04-28 17:01:14 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Path]
+2026-04-28 17:01:14 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Query]
+2026-04-28 17:01:14 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [ReadBody]
+2026-04-28 17:01:14 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [RemoteAddr]
+2026-04-28 17:01:14 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [XForwardedRemoteAddr]
+2026-04-28 17:01:14 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Weight]
+2026-04-28 17:01:14 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [CloudFoundryRouteService]
+2026-04-28 17:01:14 | APIGateway | WARN  | o.s.c.g.s.w.s.StarterDeprecatedAutoConfiguration | 
+
+**********************************************************
+
+spring-cloud-starter-gateway is deprecated. It will be removed in the next major release. Please use spring-cloud-starter-gateway-server-webflux instead.
+
+**********************************************************
+
+
+2026-04-28 17:01:14 | APIGateway | INFO  | o.s.b.w.e.netty.NettyWebServer | Netty started on port 8080 (http)
+2026-04-28 17:01:14 | APIGateway | INFO  | l.c.apigateway.ApiGatewayApplication | Started ApiGatewayApplication in 3.268 seconds (process running for 4.216)
+2026-04-28 17:03:01 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 17:03:01 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/about'
+2026-04-28 17:03:01 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Missing jwt token for authorized request. Path: '/about'
+2026-04-28 17:03:01 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 17:03:01 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is not public. Path: '/favicon.ico'
+2026-04-28 17:03:01 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Missing jwt token for authorized request. Path: '/favicon.ico'
+2026-04-28 17:08:29 | APIGateway | INFO  | o.s.b.w.e.netty.GracefulShutdown | Commencing graceful shutdown. Waiting for active requests to complete
+2026-04-28 17:08:29 | APIGateway | INFO  | o.s.b.w.e.netty.GracefulShutdown | Graceful shutdown complete
+2026-04-28 17:08:37 | APIGateway | INFO  | o.h.validator.internal.util.Version | HV000001: Hibernate Validator 8.0.3.Final
+2026-04-28 17:08:37 | APIGateway | INFO  | l.c.apigateway.ApiGatewayApplication | Starting ApiGatewayApplication using Java 22 with PID 8424 (D:\Library\APIGateway\target\classes started by vasia in D:\Library\APIGateway)
+2026-04-28 17:08:37 | APIGateway | INFO  | l.c.apigateway.ApiGatewayApplication | No active profile set, falling back to 1 default profile: "default"
+2026-04-28 17:08:38 | APIGateway | INFO  | o.s.cloud.context.scope.GenericScope | BeanFactory id=4576b019-0fe0-3945-b60e-b0fbab6d7581
+2026-04-28 17:08:39 | APIGateway | WARN  | o.s.c.g.c.GatewayClassPathWarningAutoConfiguration | 
+
+**********************************************************
+
+The artifact spring-cloud-gateway-server is deprecated. It will be removed in the next major release. Please add spring-cloud-gateway-server-webflux dependency.
+
+**********************************************************
+
+
+2026-04-28 17:08:39 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [After]
+2026-04-28 17:08:39 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Before]
+2026-04-28 17:08:39 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Between]
+2026-04-28 17:08:39 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Cookie]
+2026-04-28 17:08:39 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Header]
+2026-04-28 17:08:39 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Host]
+2026-04-28 17:08:39 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Method]
+2026-04-28 17:08:39 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Path]
+2026-04-28 17:08:39 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Query]
+2026-04-28 17:08:39 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [ReadBody]
+2026-04-28 17:08:39 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [RemoteAddr]
+2026-04-28 17:08:39 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [XForwardedRemoteAddr]
+2026-04-28 17:08:39 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Weight]
+2026-04-28 17:08:39 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [CloudFoundryRouteService]
+2026-04-28 17:08:39 | APIGateway | WARN  | o.s.c.g.s.w.s.StarterDeprecatedAutoConfiguration | 
+
+**********************************************************
+
+spring-cloud-starter-gateway is deprecated. It will be removed in the next major release. Please use spring-cloud-starter-gateway-server-webflux instead.
+
+**********************************************************
+
+
+2026-04-28 17:08:39 | APIGateway | INFO  | o.s.b.w.e.netty.NettyWebServer | Netty started on port 8080 (http)
+2026-04-28 17:08:40 | APIGateway | INFO  | l.c.apigateway.ApiGatewayApplication | Started ApiGatewayApplication in 3.301 seconds (process running for 4.122)
+2026-04-28 17:08:46 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 17:08:46 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/about'
+2026-04-28 17:08:46 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 17:08:46 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/css/style.css'
+2026-04-28 17:08:46 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 17:08:46 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/favicon.ico'
+2026-04-28 17:08:49 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 17:08:49 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/catalog'
+2026-04-28 17:08:49 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 17:08:49 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/category'
+2026-04-28 17:08:49 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 17:08:49 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public'
+2026-04-28 17:08:53 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 17:08:53 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/events'
+2026-04-28 17:08:53 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 17:08:53 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/announcement/get-all'
+2026-04-28 17:08:55 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 17:08:55 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/news'
+2026-04-28 17:08:55 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 17:08:55 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/news/get-all'
+2026-04-28 17:08:56 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 17:08:56 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/events'
+2026-04-28 17:08:56 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 17:08:56 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/announcement/get-all'
+2026-04-28 17:08:57 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 17:08:57 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/catalog'
+2026-04-28 17:08:57 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 17:08:57 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/category'
+2026-04-28 17:08:57 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 17:08:57 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public'
+2026-04-28 17:08:57 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 17:08:57 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/'
+2026-04-28 17:08:57 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 17:08:57 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/most-popular-books'
+2026-04-28 17:08:58 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 17:08:58 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/book/public/recently-added-at'
+2026-04-28 17:08:58 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 17:08:58 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/api/expected-book/get-all'
+2026-04-28 17:08:58 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 17:08:58 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/TestBookImage'
+2026-04-28 17:08:58 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 17:08:58 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/images/default-book-cover.jpg'
+2026-04-28 17:08:58 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | Starting of the filter
+2026-04-28 17:08:58 | APIGateway | INFO  | l.c.a.filters.AuthenticationFilter | The route is public. Path: '/images/default-book-cover.jpg'
+2026-04-28 17:17:23 | APIGateway | INFO  | o.s.b.w.e.netty.GracefulShutdown | Commencing graceful shutdown. Waiting for active requests to complete
+2026-04-28 17:17:23 | APIGateway | INFO  | o.s.b.w.e.netty.GracefulShutdown | Graceful shutdown complete
+2026-04-28 17:17:32 | APIGateway | INFO  | o.h.validator.internal.util.Version | HV000001: Hibernate Validator 8.0.3.Final
+2026-04-28 17:17:32 | APIGateway | INFO  | l.c.apigateway.ApiGatewayApplication | Starting ApiGatewayApplication using Java 22 with PID 5916 (D:\Library\APIGateway\target\classes started by vasia in D:\Library\APIGateway)
+2026-04-28 17:17:32 | APIGateway | INFO  | l.c.apigateway.ApiGatewayApplication | No active profile set, falling back to 1 default profile: "default"
+2026-04-28 17:17:33 | APIGateway | INFO  | o.s.cloud.context.scope.GenericScope | BeanFactory id=4576b019-0fe0-3945-b60e-b0fbab6d7581
+2026-04-28 17:17:34 | APIGateway | WARN  | o.s.c.g.c.GatewayClassPathWarningAutoConfiguration | 
+
+**********************************************************
+
+The artifact spring-cloud-gateway-server is deprecated. It will be removed in the next major release. Please add spring-cloud-gateway-server-webflux dependency.
+
+**********************************************************
+
+
+2026-04-28 17:17:34 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [After]
+2026-04-28 17:17:34 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Before]
+2026-04-28 17:17:34 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Between]
+2026-04-28 17:17:34 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Cookie]
+2026-04-28 17:17:34 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Header]
+2026-04-28 17:17:34 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Host]
+2026-04-28 17:17:34 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Method]
+2026-04-28 17:17:34 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Path]
+2026-04-28 17:17:34 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Query]
+2026-04-28 17:17:34 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [ReadBody]
+2026-04-28 17:17:34 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [RemoteAddr]
+2026-04-28 17:17:34 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [XForwardedRemoteAddr]
+2026-04-28 17:17:34 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [Weight]
+2026-04-28 17:17:34 | APIGateway | INFO  | o.s.c.g.r.RouteDefinitionRouteLocator | Loaded RoutePredicateFactory [CloudFoundryRouteService]
+2026-04-28 17:17:34 | APIGateway | WARN  | o.s.c.g.s.w.s.StarterDeprecatedAutoConfiguration | 
+
+**********************************************************
+
+spring-cloud-starter-gateway is deprecated. It will be removed in the next major release. Please use spring-cloud-starter-gateway-server-webflux instead.
+
+**********************************************************
+
+
+2026-04-28 17:17:34 | APIGateway | INFO  | o.s.b.w.e.netty.NettyWebServer | Netty started on port 8080 (http)
+2026-04-28 17:17:34 | APIGateway | INFO  | l.c.apigateway.ApiGatewayApplication | Started ApiGatewayApplication in 3.134 seconds (process running for 4.044)
+2026-04-28 17:17:37 | APIGateway | INFO  | o.s.b.w.e.netty.GracefulShutdown | Commencing graceful shutdown. Waiting for active requests to complete
+2026-04-28 17:17:37 | APIGateway | INFO  | o.s.b.w.e.netty.GracefulShutdown | Graceful shutdown complete

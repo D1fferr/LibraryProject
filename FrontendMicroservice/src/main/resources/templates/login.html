@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="/css/style.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
-        /* Додаткові стилі специфічні для сторінки логіну */
         .login-page {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: calc(100vh - 200px);
@@ -191,7 +190,6 @@
 <div class="login-page">
     <div class="login-container">
         <div class="login-box">
-            <!-- Приховане поле для redirect -->
             <input type="hidden" id="redirectUrl" th:value="${redirect}" />
 
             <div class="login-header">
@@ -200,7 +198,6 @@
                 <p>Sign in to your account</p>
             </div>
 
-            <!-- Alert повідомлення -->
             <div th:if="${errorMessage}" class="alert alert-error">
                 <span class="material-icons">error</span>
                 <span th:text="${errorMessage}">Invalid username or password</span>
@@ -211,13 +208,11 @@
                 <span th:text="${warningMessage}">Your session has expired</span>
             </div>
 
-            <!-- Інформація про redirect (якщо є) -->
             <div th:if="${redirect != null and redirect != 'null'}" class="redirect-info">
                 <span class="material-icons">login</span>
                 <span>Please login to continue to: <strong th:text="${redirect}">/books/123</strong></span>
             </div>
 
-            <!-- Форма логіну - тепер без action, використовуємо fetch -->
             <form id="loginForm">
                 <div class="form-group">
                     <label for="username">
@@ -263,7 +258,6 @@
 <!-- Footer -->
 <div th:replace="~{layout/footer :: footer}"></div>
 
-<!-- JavaScript для відправки JSON -->
 <script>
     document.getElementById('loginForm').addEventListener('submit', async function(e) {
         e.preventDefault();
@@ -273,24 +267,20 @@
         const password = document.getElementById('password').value.trim();
         let redirect = document.getElementById('redirectUrl').value;
 
-        // Валідація
         if (!username || !password) {
             alert('Please fill in all fields');
             return;
         }
 
-        // Блокуємо кнопку під час запиту
         loginBtn.disabled = true;
         loginBtn.textContent = 'Signing in...';
 
         try {
-            // Формуємо тіло запиту
             const requestBody = {
                 username: username,
                 password: password
             };
 
-            // Додаємо redirect в тіло якщо він є
             if (redirect && redirect !== 'null' && redirect !== '') {
                 requestBody.redirect = redirect;
             }
@@ -298,7 +288,6 @@
             console.log('Sending request to /login');
             console.log('Request body:', requestBody);
 
-            // Відправляємо JSON на /login (без параметрів в URL)
             const response = await fetch('/login', {
                 method: 'POST',
                 headers: {
@@ -314,15 +303,12 @@
                 console.log('Redirecting to:', response.url);
                 window.location.href = response.url;
             } else if (response.ok) {
-                // Якщо все добре, але немає redirect - йдемо на головну
                 window.location.href = redirect || '/home';
             } else {
-                // Помилка
                 const errorText = await response.text();
                 console.error('Login failed:', errorText);
                 alert('Invalid username or password');
 
-                // Додаємо клас error до полів
                 document.getElementById('username').classList.add('error');
                 document.getElementById('password').classList.add('error');
             }
@@ -330,7 +316,6 @@
             console.error('Login error:', error);
             alert('Network error. Please try again.');
         } finally {
-            // Розблоковуємо кнопку
             loginBtn.disabled = false;
             loginBtn.textContent = 'Sign In';
         }

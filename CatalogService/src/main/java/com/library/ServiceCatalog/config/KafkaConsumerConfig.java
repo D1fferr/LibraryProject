@@ -1,6 +1,7 @@
 package com.library.ServiceCatalog.config;
 
 import com.library.ServiceCatalog.dto.BookDTOForKafka;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
 import com.library.ServiceCatalog.models.Book;
@@ -18,12 +19,19 @@ import java.util.Map;
 
 @Configuration
 @EnableKafka
+@RequiredArgsConstructor
 public class KafkaConsumerConfig {
+
+    private final ExternalConfig config;
+
+
+
 
     @Bean
     public ConsumerFactory<String, BookDTOForKafka> bookConsumerFactory() {
+        String kafkaEndpoint = config.getKafka().getEndpoint();
         Map<String, Object> configKafkaConsumer = new HashMap<>();
-        configKafkaConsumer.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        configKafkaConsumer.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaEndpoint);
         configKafkaConsumer.put(ConsumerConfig.GROUP_ID_CONFIG, "catalog-service");
         configKafkaConsumer.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         configKafkaConsumer.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
@@ -42,8 +50,9 @@ public class KafkaConsumerConfig {
 
     @Bean
     public ConsumerFactory<String, String> reservationConsumerFactory() {
+        String kafkaEndpoint = config.getKafka().getEndpoint();
         Map<String, Object> configKafkaConsumer = new HashMap<>();
-        configKafkaConsumer.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        configKafkaConsumer.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaEndpoint);
         configKafkaConsumer.put(ConsumerConfig.GROUP_ID_CONFIG, "catalog-service");
         configKafkaConsumer.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         configKafkaConsumer.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
@@ -53,7 +62,7 @@ public class KafkaConsumerConfig {
     @Bean
     public ConcurrentKafkaListenerContainerFactory<String, String> reservationConcurrentKafkaListenerContainerFactory() {
         ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
-        factory.setConsumerFactory(reservationConsumerFactory()); // ✅ Виправлено: використовуємо правильну фабрику
+        factory.setConsumerFactory(reservationConsumerFactory());
         return factory;
     }
 

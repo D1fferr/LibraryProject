@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="/css/style.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
-        /* Додаткові стилі для кнопки Notify Me */
         .btn-notify {
             display: inline-flex;
             align-items: center;
@@ -69,7 +68,6 @@
 <!-- Header -->
 <div th:replace="~{layout/header :: header}"></div>
 
-<!-- Прихований елемент з ID поточного користувача та email -->
 <div th:if="${currentUserId != null}" id="current-user-id" th:data-user-id="${currentUserId}" style="display: none;"></div>
 <div th:if="${currentUserEmail != null}" id="current-user-email" th:data-user-email="${currentUserEmail}" style="display: none;"></div>
 <div th:if="${currentUsername != null}" id="current-username" th:data-username="${currentUsername}" style="display: none;"></div>
@@ -91,9 +89,9 @@
         <div class="book-details-section">
             <!-- Left Column - Cover -->
             <div class="book-cover-large">
-                <img th:src="${expectedBook.expectedBookImage != null ? expectedBook.expectedBookImage : '/images/default-book-cover.jpg'}"
+                <img th:src="${expectedBook.expectedBookImage != null ? expectedBook.expectedBookImage : '/api/images/default-book-cover.jpg'}"
                      th:alt="${expectedBook.expectedBookName}"
-                     onerror="this.onerror=null; this.src='/images/default-book-cover.jpg';"
+                     onerror="this.onerror=null; this.src='/api/images/default-book-cover.jpg';"
                      class="book-image-large"/>
             </div>
 
@@ -143,9 +141,9 @@
             <div class="books-grid" th:if="${authorBooks != null and !authorBooks.isEmpty()}">
                 <div class="book-card" th:each="authorBook : ${authorBooks}">
                     <div class="book-cover">
-                        <img th:src="${authorBook.bookImage != null ? authorBook.bookImage : '/images/default-book-cover.jpg'}"
+                        <img th:src="${authorBook.bookImage != null ? authorBook.bookImage : '/api/images/default-book-cover.jpg'}"
                              th:alt="${authorBook.bookName}"
-                             onerror="this.onerror=null; this.src='/images/default-book-cover.jpg';"
+                             onerror="this.onerror=null; this.src='/api/images/default-book-cover.jpg';"
                              class="book-image"/>
                     </div>
                     <div class="book-info">
@@ -174,9 +172,9 @@
             <div class="books-grid" th:if="${similarBooks != null and !similarBooks.isEmpty()}">
                 <div class="book-card" th:each="similarBook : ${similarBooks}">
                     <div class="book-cover">
-                        <img th:src="${similarBook.bookImage != null ? similarBook.bookImage : '/images/default-book-cover.jpg'}"
+                        <img th:src="${similarBook.bookImage != null ? similarBook.bookImage : '/api/images/default-book-cover.jpg'}"
                              th:alt="${similarBook.bookName}"
-                             onerror="this.onerror=null; this.src='/images/default-book-cover.jpg';"
+                             onerror="this.onerror=null; this.src='/api/images/default-book-cover.jpg';"
                              class="book-image"/>
                     </div>
                     <div class="book-info">
@@ -220,7 +218,6 @@
 <div th:replace="~{layout/footer :: footer}"></div>
 
 <script th:inline="javascript">
-    // Отримання даних користувача
     function getCurrentUserId() {
         const userElement = document.getElementById('current-user-id');
         return userElement ? userElement.dataset.userId : null;
@@ -236,18 +233,15 @@
         return usernameElement ? usernameElement.dataset.username : null;
     }
 
-    // Відправка повідомлення про наявність
     function sendNotification() {
         const userId = getCurrentUserId();
 
-        // Якщо користувач не залогінений - перенаправляємо на логін
         if (!userId) {
             const currentUrl = window.location.pathname;
             window.location.href = '/login?redirect=' + encodeURIComponent(currentUrl);
             return;
         }
 
-        // Отримуємо bookId з моделі Thymeleaf
         const bookId = /*[[${expectedBook.expectedBookId}]]*/ null;
         const userEmail = getCurrentUserEmail();
         const username = getCurrentUsername();
@@ -262,7 +256,6 @@
         const notifyBtn = document.getElementById('notifyBtn');
         const originalText = notifyBtn.innerHTML;
 
-        // Блокуємо кнопку та показуємо стан завантаження
         notifyBtn.disabled = true;
         notifyBtn.innerHTML = '<span class="material-icons">hourglass_empty</span> Sending...';
 
@@ -297,7 +290,6 @@
     }
 
     function showMessage(message, type) {
-        // Видаляємо попереднє повідомлення, якщо воно є
         const existingMessage = document.querySelector('.notification-success, .notification-error');
         if (existingMessage) {
             existingMessage.remove();
@@ -309,7 +301,6 @@
         messageDiv.innerHTML = '<span class="material-icons">' + (type === 'success' ? 'check_circle' : 'error') + '</span><span>' + message + '</span>';
         btnSection.appendChild(messageDiv);
 
-        // Автоматичне видалення повідомлення через 5 секунд
         setTimeout(() => {
             if (messageDiv.parentNode) {
                 messageDiv.remove();

@@ -4,6 +4,12 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+# Application configuration files
+application.properties
+application-*.properties
+*.yml
+*.yaml
+
 ### STS ###
 .apt_generated
 .classpath
@@ -18,6 +24,11 @@ target/
 *.iws
 *.iml
 *.ipr
+
+logs/
+**/logs/
+*.log
+**/*.log
 
 ### NetBeans ###
 /nbproject/private/

@@ -1,5 +1,6 @@
 package com.library.FrontendMicroservice.services;
 
+import com.library.FrontendMicroservice.config.ExternalConfig;
 import com.library.FrontendMicroservice.dto.PageReportAvailabilityErrorDTO;
 import com.library.FrontendMicroservice.dto.ReportAvailabilityDTO;
 import com.library.FrontendMicroservice.dto.ReportAvailabilityErrorDTOWithId;
@@ -13,12 +14,14 @@ import org.springframework.web.util.UriComponentsBuilder;
 @Service
 @RequiredArgsConstructor
 public class ReportAvailabilityErrorService {
+    private final ExternalConfig config;
     private final RestTemplate authorizedRestTemplate;
 
 
     public PageReportAvailabilityErrorDTO getErrors(int page, int pageSize){
+        String apiGateway = config.getServices().getApiGateway();
         try {
-            UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/api/report-availability-error/auth/get-all")
+            UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(apiGateway + "/api/report-availability-error/auth/get-all")
                         .queryParam("page", page)
                         .queryParam("items-per-page", pageSize);
                 String url = builder.toUriString();
@@ -33,7 +36,8 @@ public class ReportAvailabilityErrorService {
     }
 
     public void sendNotification(ReportAvailabilityErrorDTOWithId id){
-        String url = "http://localhost:8080/api/report-availability-error/auth/send";
+        String apiGateway = config.getServices().getApiGateway();
+        String url = apiGateway + "/api/report-availability-error/auth/send";
         try {
             authorizedRestTemplate.postForObject(url, id, String.class);
         }catch(Exception e){
@@ -43,7 +47,8 @@ public class ReportAvailabilityErrorService {
 
     }
     public void sendAvailabilityNotification(ReportAvailabilityDTO dto){
-        String url = "http://localhost:8080/api/report-availability/auth/add";
+        String apiGateway = config.getServices().getApiGateway();
+        String url = apiGateway + "/api/report-availability/auth/add";
         try {
             authorizedRestTemplate.postForObject(url, dto, String.class);
         }catch(Exception e){

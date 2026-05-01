@@ -94,59 +94,66 @@
             background: #2980b9;
         }
 
+        /* Список у вигляді рядків */
         .books-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
             margin-bottom: 30px;
         }
 
         .book-card {
             background: white;
             border-radius: 12px;
-            overflow: hidden;
+            padding: 15px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
             transition: transform 0.3s, box-shadow 0.3s;
             display: flex;
-            flex-direction: column;
+            gap: 20px;
+            align-items: center;
         }
 
         .book-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
-        .book-cover {
-            height: 200px;
+        .book-cover-container {
+            flex-shrink: 0;
+            width: 80px;
+            height: 110px;
+            border-radius: 6px;
+            overflow: hidden;
             background: #f0f4ff;
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
-        .book-cover img {
+        .book-cover-container img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
 
         .book-cover-placeholder {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            height: 100%;
-            background: #f0f4ff;
-        }
-
-        .book-cover-placeholder .material-icons {
-            font-size: 64px;
             color: #667eea;
         }
 
-        .book-info {
-            padding: 16px;
+        .book-cover-placeholder .material-icons {
+            font-size: 40px;
+        }
+
+        .book-content {
+            flex: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .book-main-info {
             flex: 1;
         }
 
@@ -154,73 +161,55 @@
             font-size: 1.1rem;
             font-weight: 600;
             color: #2c3e50;
-            margin-bottom: 5px;
-            line-height: 1.3;
+            margin: 0 0 4px 0;
         }
 
         .book-author {
             color: #7f8c8d;
-            font-size: 0.85rem;
-            margin-bottom: 10px;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
         }
 
-        .book-details {
+        .book-meta-row {
             display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-            font-size: 0.85rem;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+            font-size: 0.8rem;
         }
 
-        .book-year {
-            color: #95a5a6;
+        .meta-tag {
+            background: #f1f5f9;
+            padding: 2px 10px;
+            border-radius: 4px;
+            color: #475569;
+        }
+
+        .book-genre {
+            background: #e8f0fe;
+            color: #667eea;
+            font-weight: 500;
         }
 
         .book-items {
             color: #27ae60;
-            font-weight: 500;
-        }
-
-        .book-publisher {
-            color: #7f8c8d;
-            font-size: 0.8rem;
-            margin-bottom: 5px;
-        }
-
-        .book-language {
-            color: #7f8c8d;
-            font-size: 0.8rem;
-            margin-bottom: 5px;
-        }
-
-        .book-genre {
-            display: inline-block;
-            padding: 4px 10px;
-            background: #e8f0fe;
-            color: #667eea;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 500;
-            margin-top: 8px;
+            font-weight: 600;
         }
 
         .book-id {
             font-size: 0.7rem;
-            color: #95a5a6;
-            margin-top: 8px;
+            color: #cbd5e0;
             font-family: monospace;
-            word-break: break-all;
+            margin-top: 5px;
         }
 
         .book-actions {
             display: flex;
             gap: 8px;
-            padding: 12px 16px;
-            border-top: 1px solid #f0f0f0;
-            background: #fafafa;
+            flex-shrink: 0;
         }
 
         .btn-edit, .btn-delete, .btn-add {
-            flex: 1;
             padding: 8px 12px;
             border: none;
             border-radius: 6px;
@@ -229,41 +218,20 @@
             cursor: pointer;
             display: flex;
             align-items: center;
-            justify-content: center;
             gap: 6px;
             text-decoration: none;
             transition: all 0.3s;
-        }
-
-        .btn-edit {
-            background: #f39c12;
             color: white;
         }
 
-        .btn-edit:hover {
-            background: #e67e22;
-            transform: translateY(-2px);
-        }
+        .btn-edit { background: #f39c12; }
+        .btn-edit:hover { background: #e67e22; }
 
-        .btn-delete {
-            background: #e74c3c;
-            color: white;
-        }
+        .btn-delete { background: #e74c3c; }
+        .btn-delete:hover { background: #c0392b; }
 
-        .btn-delete:hover {
-            background: #c0392b;
-            transform: translateY(-2px);
-        }
-
-        .btn-add {
-            background: #27ae60;
-            color: white;
-        }
-
-        .btn-add:hover {
-            background: #2ecc71;
-            transform: translateY(-2px);
-        }
+        .btn-add { background: #27ae60; }
+        .btn-add:hover { background: #219150; }
 
         .pagination-section {
             background: white;
@@ -284,7 +252,6 @@
             display: flex;
             justify-content: center;
             gap: 5px;
-            flex-wrap: wrap;
         }
 
         .page-link {
@@ -293,18 +260,11 @@
             justify-content: center;
             min-width: 36px;
             height: 36px;
-            padding: 0 10px;
             border: 1px solid #ddd;
             border-radius: 4px;
             color: #333;
             text-decoration: none;
             transition: all 0.3s;
-        }
-
-        .page-link:hover {
-            background: #f5f5f5;
-            border-color: #e67e22;
-            color: #e67e22;
         }
 
         .page-link.active {
@@ -315,115 +275,53 @@
 
         .page-link.disabled {
             color: #bdc3c7;
-            cursor: not-allowed;
             pointer-events: none;
         }
 
-        .empty-state {
-            text-align: center;
-            padding: 60px 20px;
-            background: white;
-            border-radius: 8px;
-        }
-
-        .empty-icon {
-            font-size: 64px !important;
-            color: #bdc3c7;
-            margin-bottom: 20px;
-        }
-
-        .empty-state h3 {
-            color: #2c3e50;
-            margin-bottom: 10px;
-        }
-
-        .alert {
-            padding: 12px 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .alert-error {
-            background: #fee;
-            color: #c0392b;
-            border: 1px solid #fcc;
-        }
-
-        .alert-success {
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-
-        .breadcrumbs {
-            margin-bottom: 20px;
-            font-size: 0.9rem;
-            color: #7f8c8d;
-        }
-
-        .breadcrumbs a {
-            color: #3498db;
-            text-decoration: none;
-        }
-
-        .breadcrumbs a:hover {
-            text-decoration: underline;
-        }
-
-        @media (max-width: 768px) {
-            .expected-hero h1 {
-                font-size: 1.5rem;
-            }
-
-            .admin-controls {
+        @media (max-width: 992px) {
+            .book-content {
                 flex-direction: column;
-                align-items: stretch;
+                align-items: flex-start;
+                gap: 10px;
             }
-
-            .search-box {
-                max-width: none;
-            }
-
-            .books-list {
-                grid-template-columns: 1fr;
-            }
-
             .book-actions {
-                flex-wrap: wrap;
+                width: 100%;
+                justify-content: flex-start;
             }
+        }
 
-            .btn-edit, .btn-delete, .btn-add {
-                flex: 1;
-                min-width: 80px;
+        @media (max-width: 576px) {
+            .book-card {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .book-meta-row {
+                justify-content: center;
+            }
+            .book-actions {
+                justify-content: center;
             }
         }
     </style>
 </head>
 <body>
-<!-- Header -->
 <div th:replace="~{layout/header :: header}"></div>
 
-<!-- Main Content -->
 <div class="container">
     <main class="main-content">
-        <!-- Breadcrumbs -->
         <div class="breadcrumbs">
             <a href="/">Home</a> /
             <a href="/admin/dashboard">Admin Panel</a> /
             <span>Manage Expected Books</span>
         </div>
 
-        <!-- Hero Section -->
         <div class="expected-hero">
             <span class="material-icons hero-icon">event_available</span>
             <h1>Manage Expected Books</h1>
             <p>Manage upcoming book releases</p>
         </div>
 
-        <!-- Success/Error Messages -->
         <div th:if="${success}" class="alert alert-success">
             <span class="material-icons">check_circle</span>
             <span th:text="${success}"></span>
@@ -433,7 +331,6 @@
             <span th:text="${error}"></span>
         </div>
 
-        <!-- Controls -->
         <div class="admin-controls">
             <div class="search-box">
                 <form th:action="@{/admin/expected-books}" method="get" style="display: flex; gap: 10px; width: 100%;">
@@ -450,69 +347,68 @@
             </a>
         </div>
 
-        <!-- Books List -->
+        <!-- Books List View -->
         <div class="books-list" th:if="${books != null and !books.isEmpty()}">
             <div class="book-card" th:each="book : ${books}">
-                <div class="book-cover">
-                    <div th:if="${book.expectedBookImage != null and !book.expectedBookImage.isEmpty()}" class="book-cover">
-                        <img th:src="${book.expectedBookImage}" th:alt="${book.expectedBookName}">
-                    </div>
+
+                <div class="book-cover-container">
+                    <img th:if="${book.expectedBookImage != null and !book.expectedBookImage.isEmpty()}"
+                         th:src="${book.expectedBookImage}" th:alt="${book.expectedBookName}">
                     <div th:unless="${book.expectedBookImage != null and !book.expectedBookImage.isEmpty()}" class="book-cover-placeholder">
                         <span class="material-icons">menu_book</span>
                     </div>
                 </div>
-                <div class="book-info">
-                    <h3 class="book-title" th:text="${book.expectedBookName}">Book Title</h3>
-                    <p class="book-author" th:text="${book.expectedBookAuthor}">Author Name</p>
-                    <div class="book-details">
-                        <span class="book-year" th:text="'Year: ' + ${book.expectedBookYear}">Year: 2024</span>
-                        <span class="book-items" th:text="${book.expectedBookItems + ' copies'}">5 copies</span>
+
+                <div class="book-content">
+                    <div class="book-main-info">
+                        <h3 class="book-title" th:text="${book.expectedBookName}">Book Title</h3>
+                        <p class="book-author" th:text="${book.expectedBookAuthor}">Author Name</p>
+
+                        <div class="book-meta-row">
+                            <span class="meta-tag" th:text="${book.expectedBookYear}">2024</span>
+                            <span class="meta-tag book-genre" th:text="${book.expectedBookGenre}">Genre</span>
+                            <span class="meta-tag" th:text="${book.expectedBookLanguage}">Language</span>
+                            <span class="book-items" th:text="${book.expectedBookItems + ' copies'}">5 copies</span>
+                        </div>
+
+                        <div class="book-id" th:text="'ID: ' + ${book.expectedBookId}">ID: uuid</div>
                     </div>
-                    <p class="book-publisher" th:text="'Publisher: ' + ${book.expectedBookPublication}">Publisher</p>
-                    <p class="book-language" th:text="'Language: ' + ${book.expectedBookLanguage}">Language</p>
-                    <span class="book-genre" th:text="${book.expectedBookGenre}">Genre</span>
-                    <div class="book-id" th:text="'ID: ' + ${book.expectedBookId}">ID: 123e4567-e89b-12d3-a456-426614174000</div>
-                </div>
-                <div class="book-actions">
-                    <a th:href="@{'/admin/expected-books/' + ${book.expectedBookId} + '/edit'}" class="btn-edit">
-                        <span class="material-icons">edit</span>
-                        Edit
-                    </a>
-                    <button class="btn-delete" th:data-book-id="${book.expectedBookId}" onclick="deleteBook(this)">
-                        <span class="material-icons">delete</span>
-                        Delete
-                    </button>
-                    <button class="btn-add" th:data-book-id="${book.expectedBookId}" onclick="addToCurrentBooks(this)">
-                        <span class="material-icons">add</span>
-                        Add to Current
-                    </button>
+
+                    <div class="book-actions">
+                        <button class="btn-add" th:data-book-id="${book.expectedBookId}" onclick="addToCurrentBooks(this)" title="Move to main collection">
+                            <span class="material-icons">publish</span>
+                            Move to Stock
+                        </button>
+                        <a th:href="@{'/admin/expected-books/' + ${book.expectedBookId} + '/edit'}" class="btn-edit">
+                            <span class="material-icons">edit</span>
+                            Edit
+                        </a>
+                        <button class="btn-delete" th:data-book-id="${book.expectedBookId}" onclick="deleteBook(this)">
+                            <span class="material-icons">delete</span>
+                            Delete
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Empty State -->
         <div class="empty-state" th:if="${books == null or books.isEmpty()}">
             <span class="material-icons empty-icon">event_available</span>
             <h3>No expected books found</h3>
             <p th:if="${searchQuery}">No results for "<span th:text="${searchQuery}"></span>"</p>
-            <p th:unless="${searchQuery}">Start by creating your first expected book</p>
             <a href="/admin/expected-books/create" class="btn-create" style="display: inline-block; margin-top: 15px;">Create Expected Book</a>
         </div>
 
         <!-- Pagination -->
         <div class="pagination-section" th:if="${totalPages > 1}">
             <div class="pagination-info">
-                Showing page <span th:text="${currentPage + 1}">1</span>
-                of <span th:text="${totalPages}">1</span>
-                (<span th:text="${totalBooks}">0</span> books total)
+                Page <span th:text="${currentPage + 1}">1</span> of <span th:text="${totalPages}">1</span>
             </div>
             <div class="pagination">
                 <th:block th:with="hasSearch=${searchQuery != null and !searchQuery.isEmpty()}">
-
                     <a th:if="${currentPage > 0}"
                        th:href="@{/admin/expected-books(page=${currentPage - 1}, search=${hasSearch ? searchQuery : null})}"
-                       class="page-link prev">‹</a>
-                    <span th:unless="${currentPage > 0}" class="page-link disabled">‹</span>
+                       class="page-link">‹</a>
 
                     <th:block th:each="i : ${#numbers.sequence(0, totalPages - 1)}">
                         <th:block th:if="${i >= currentPage - 2 and i <= currentPage + 2}">
@@ -525,65 +421,43 @@
 
                     <a th:if="${currentPage < totalPages - 1}"
                        th:href="@{/admin/expected-books(page=${currentPage + 1}, search=${hasSearch ? searchQuery : null})}"
-                       class="page-link next">›</a>
-                    <span th:unless="${currentPage < totalPages - 1}" class="page-link disabled">›</span>
-
+                       class="page-link">›</a>
                 </th:block>
             </div>
         </div>
     </main>
 </div>
 
-<!-- Footer -->
 <div th:replace="~{layout/footer :: footer}"></div>
 
 <script>
     function deleteBook(button) {
         const bookId = button.getAttribute('data-book-id');
-
-        if (confirm('Are you sure you want to delete this expected book? This action cannot be undone.')) {
+        if (confirm('Are you sure you want to delete this expected book?')) {
             fetch('/admin/expected-books/' + bookId + '/delete', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                }
+                headers: { 'Content-Type': 'application/json' }
             })
                 .then(response => {
-                    if (response.ok) {
-                        alert('Book deleted successfully');
-                        location.reload();
-                    } else {
-                        alert('Failed to delete book. Please try again.');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('Network error. Please try again.');
+                    if (response.ok) { location.reload(); }
+                    else { alert('Failed to delete.'); }
                 });
         }
     }
 
     function addToCurrentBooks(button) {
         const bookId = button.getAttribute('data-book-id');
-
-        if (confirm('Are you sure you want to add this book to current books? This will create a new book entry.')) {
+        if (confirm('Move this book to current books collection?')) {
             fetch('/admin/expected-books/' + bookId + '/add-to-current', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                }
+                headers: { 'Content-Type': 'application/json' }
             })
                 .then(response => {
                     if (response.ok) {
-                        alert('Book added to current books successfully');
+                        alert('Successfully moved to main collection!');
                         location.reload();
-                    } else {
-                        alert('Failed to add book to current books. Please try again.');
                     }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('Network error. Please try again.');
+                    else { alert('Failed to move.'); }
                 });
         }
     }

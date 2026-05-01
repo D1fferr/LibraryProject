@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="/css/style.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
-        /* Базові стилі */
         .reservations-hero {
             background: linear-gradient(135deg, #2c3e50 0%, #1a252f 100%);
             padding: 40px 0;
@@ -20,7 +19,6 @@
         .reservations-hero h1 { font-size: 2.2rem; margin-bottom: 10px; }
         .reservations-hero p { font-size: 1rem; opacity: 0.95; }
 
-        /* Інформація про користувача */
         .user-info-card {
             background: white;
             border-radius: 12px;
@@ -63,7 +61,6 @@
             color: #95a5a6;
         }
 
-        /* Список резервацій */
         .reservations-list { display: flex; flex-direction: column; gap: 15px; margin-bottom: 30px; }
 
         .reservation-card {
@@ -118,7 +115,6 @@
         .status-CONFIRMED { background: #e3f2fd; color: #1565c0; }
         .status-CANCELLED { background: #ffebee; color: #c62828; }
 
-        /* Кнопки дій */
         .reservation-actions { display: flex; gap: 12px; }
         .btn-confirm, .btn-cancel {
             display: inline-flex;
@@ -170,7 +166,6 @@
             font-weight: 500;
         }
 
-        /* Пагінація */
         .pagination-section {
             background: white;
             padding: 20px;
@@ -345,7 +340,6 @@
             </div>
         </div>
 
-        <!-- Empty State -->
         <div class="empty-state" th:if="${reservations == null or reservations.isEmpty()}">
             <span class="material-icons empty-icon">bookmark_border</span>
             <h3>No reservations found</h3>

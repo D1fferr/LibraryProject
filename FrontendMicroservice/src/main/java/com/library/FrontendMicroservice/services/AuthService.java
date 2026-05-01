@@ -1,5 +1,6 @@
 package com.library.FrontendMicroservice.services;
 
+import com.library.FrontendMicroservice.config.ExternalConfig;
 import com.library.FrontendMicroservice.dto.UserDTO;
 import com.library.FrontendMicroservice.exceptions.AuthRequestException;
 import com.library.FrontendMicroservice.models.AuthRequest;
@@ -15,19 +16,20 @@ import org.springframework.web.client.RestTemplate;
 @Component
 @RequiredArgsConstructor
 public class AuthService {
-
+    private final ExternalConfig config;
     private final RestTemplate publicRestTemplate;
     private final RestTemplate authorizedRestTemplate;
 
-    private final String authServiceUrl = "http://localhost:8080/api/auth";
+    private final String authServiceUrl = "/api/auth";
 
     public String login(AuthRequest authRequest) {
+        String apiGateway = config.getServices().getApiGateway();
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         HttpEntity<AuthRequest> entity = new HttpEntity<>(authRequest, headers);
         ResponseEntity<AuthRequest> response = publicRestTemplate.exchange(
-                authServiceUrl + "/login",
+                apiGateway + authServiceUrl + "/login",
                 HttpMethod.POST,
                 entity,
                 AuthRequest.class
@@ -36,12 +38,13 @@ public class AuthService {
 
     }
     public String register(RegisterRequest registerRequest) {
+        String apiGateway = config.getServices().getApiGateway();
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         UserDTO userDTO = convertToUserDTO(registerRequest);
         HttpEntity<UserDTO> entity = new HttpEntity<>(userDTO, headers);
         ResponseEntity<HttpStatus> response = publicRestTemplate.exchange(
-                authServiceUrl + "/registration",
+                apiGateway + authServiceUrl + "/registration",
                 HttpMethod.POST,
                 entity,
                 HttpStatus.class
@@ -51,7 +54,8 @@ public class AuthService {
 
     }
     public void logout(){
-            String url = authServiceUrl + "/logout";
+        String apiGateway = config.getServices().getApiGateway();
+        String url = apiGateway + authServiceUrl + "/logout";
             try {
                 authorizedRestTemplate.postForObject(url, "Logout", String.class);
                 log.info("Logout successful");

@@ -73,7 +73,6 @@
             background: #fee;
         }
 
-        /* Список резервацій */
         .reservations-list { display: flex; flex-direction: column; gap: 15px; margin-bottom: 30px; }
 
         .reservation-card {
@@ -120,7 +119,6 @@
         .status-CONFIRMED { background: #e3f2fd; color: #1565c0; }
         .status-CANCELLED { background: #ffebee; color: #c62828; }
 
-        /* Кнопки дій */
         .reservation-actions { display: flex; gap: 12px; }
         .btn-confirm, .btn-cancel, .btn-view {
             display: inline-flex;
@@ -160,7 +158,6 @@
             border: 1px dashed #cbd5e0;
         }
 
-        /* Пагінація */
         .pagination-section {
             background: white;
             padding: 20px;
@@ -300,7 +297,6 @@
                     </div>
 
                     <div class="reservation-actions">
-                        <!-- Активні кнопки для не прострочених та не скасованих резервацій -->
                         <th:block th:if="${!isPast and !isCancelled}">
                             <button th:if="${reservation.status.toString() == 'CREATED'}"
                                     class="btn-confirm"
@@ -318,13 +314,11 @@
                             </button>
                         </th:block>
 
-                        <!-- Повідомлення про прострочення -->
                         <div th:if="${isPast and !isCancelled}" class="expired-message">
                             <span class="material-icons">event_busy</span>
                             <span>Reservation Expired</span>
                         </div>
 
-                        <!-- Для скасованих резервацій - кнопка View Details -->
                         <div th:if="${isCancelled}" class="expired-message" style="display: flex; gap: 10px; background: none; border: none; padding: 0;">
                             <span class="material-icons">block</span>
                             <span>Cancelled</span>

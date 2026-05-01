@@ -64,7 +64,7 @@ public class UserService {
         Page<User> users = userRepository.searchEverywhere(searchPattern, PageRequest.of(page, pageSize));
         if (users.isEmpty()) {
             log.warn("Users not found");
-            throw new UserNotFoundException("Users not found");
+            return new UserPageDto();
         }
         UserPageDto dto = new UserPageDto();
         dto.setUsers(users.stream().map(this::toUserDtoWithId).toList());
@@ -77,7 +77,7 @@ public class UserService {
         Page<User> users = userRepository.findAll(PageRequest.of(page, pageSize));
         if (users.isEmpty()) {
             log.warn("Users not found");
-            throw new UserNotFoundException("Users not found");
+            return new UserPageDto();
         }
         UserPageDto dto = new UserPageDto();
         dto.setUsers(users.stream().map(this::toUserDtoWithId).toList());
@@ -107,7 +107,7 @@ public class UserService {
         Page<User> dto = userRepository.findAllByIdIn(uuids, PageRequest.of(page, usersPerPage));
         if (dto.isEmpty()) {
             log.warn("Users not found");
-            throw new UserNotFoundException("Users not found");
+            return new UserDtoWithListUsers();
         }
         UserDtoWithListUsers users = new UserDtoWithListUsers();
         users.setUserDTOForViewList(dto.getContent().stream().map(this::toUserDtoWithId).toList());

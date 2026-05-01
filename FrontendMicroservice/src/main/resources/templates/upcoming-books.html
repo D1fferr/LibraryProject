@@ -7,7 +7,6 @@
   <link rel="stylesheet" href="/css/style.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <style>
-    /* Стилі для сторінки очікуваних книг */
     .category-divider {
       height: 1px;
       background-color: #e0e0e0;
@@ -101,7 +100,6 @@
       background: #fee;
     }
 
-    /* Empty state для пошуку */
     .empty-state {
       text-align: center;
       padding: 60px 20px;
@@ -149,7 +147,7 @@
         </a>
       </li>
 
-      <!-- Upcoming Books - активна сторінка -->
+      <!-- Upcoming Books  -->
       <li>
         <a href="/catalog/upcoming-books"
            class="special-category active">
@@ -157,10 +155,8 @@
         </a>
       </li>
 
-      <!-- Роздільник перед жанрами -->
       <li class="category-divider"></li>
 
-      <!-- Жанри -->
       <li th:each="category : ${categories}">
         <a th:href="@{/catalog(genre=${category.name}, page=0, sortBy=${sort != null ? sort : 'bookAddedAt'})}"
            th:class="${selectedGenre == category.name ? 'active' : ''}"
@@ -231,10 +227,10 @@
       <div class="books-grid" id="booksGrid" th:if="${books != null and !books.isEmpty()}">
         <div class="book-card" th:each="book : ${books}">
           <div class="book-cover">
-            <img th:if="${book.expectedBookImage != null and !book.expectedBookImage.isEmpty()}"
-                 th:src="${book.expectedBookImage}"
+            <img th:src="${book.expectedBookImage != null ? book.expectedBookImage : '/api/images/default-book-cover.jpg'}"
                  th:alt="${book.expectedBookName}"
-                 class="book-image"/>
+                 onerror="this.onerror=null; this.src='/api/images/default-book-cover.jpg';"
+                 class="book-image-large"/>
             <div th:unless="${book.expectedBookImage != null and !book.expectedBookImage.isEmpty()}"
                  class="no-image-placeholder">
               <span class="material-icons">book</span>

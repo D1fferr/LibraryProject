@@ -106,7 +106,7 @@ public class ReservationService {
         Page<Reservation> reservationList = reservationRepository.findReservationByReservationBook(reservationBook, pageRequest);
         if (reservationList.isEmpty()) {
             log.warn("No reservations by book id found '{}'", reservationBook);
-            throw new ReservationsNotFoundException("No reservations found");
+            return new ReservationsPageDto();
         }
 
         ReservationsPageDto dto = new ReservationsPageDto();
@@ -145,7 +145,7 @@ public class ReservationService {
         Page<Reservation> reservationList = reservationRepository.findReservationByReservationUser(reservationUser, pageRequest);
         if (reservationList.isEmpty()) {
             log.warn("No reservations by user id found '{}'", reservationUser);
-            throw new ReservationsNotFoundException("No reservations found");
+            return new ReservationsPageDto();
         }
         ReservationsPageDto dto = new ReservationsPageDto();
         dto.setReservations(reservationList.get().map(this::toDTOForView).toList());
@@ -160,7 +160,7 @@ public class ReservationService {
         Page<Reservation> reservationList = reservationRepository.findAllByReservationBookIsNotNullAndReservationUserIsNotNull(pageRequest);
         if (reservationList.isEmpty()) {
             log.warn("No reservations found");
-            throw new ReservationsNotFoundException("No reservations found");
+            return new ReservationsPageDto();
         }
         log.info("All reservations found");
         ReservationsPageDto dto = new ReservationsPageDto();
@@ -199,7 +199,7 @@ public class ReservationService {
         Page<Reservation> reservationList = reservationRepository.findByParam(searchPattern, pageable);
         if (reservationList.isEmpty()) {
             log.warn("No reservations found");
-            throw new ReservationsNotFoundException("No reservations found");
+            return new ReservationsPageDto();
         }
         log.info("All reservations found");
         ReservationsPageDto dto = new ReservationsPageDto();

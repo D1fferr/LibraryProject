@@ -57,10 +57,9 @@ public class BookDetailsController {
         return "book-details";
     }
     @PostMapping("/books/reserve")
-    public ResponseEntity<HttpStatus> reserveBook(@RequestBody Reservation reservation){
+    public ResponseEntity<?> reserveBook(@RequestBody Reservation reservation){
         reserveService.reserveBook(reservation);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
+        return ResponseEntity.ok(Map.of("message", "Success"));    }
     @GetMapping("/expected-books/{bookId}")
     public String expectedBookDetails(@PathVariable UUID bookId, Model model) {
             ExpectedBook book = expectedBookService.getBookById(bookId);

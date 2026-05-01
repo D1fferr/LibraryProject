@@ -65,10 +65,16 @@ public class ProfileController {
 
             String id = jwtUtil.getCurrentUserId();
             ReservationsPageDto reservationsPage = reservationService.getUserReservations(id, page, PAGE_SIZE);
-            List<ReservationDto> reservations = reservationsPage.getReservations();
+            List<ReservationDto> reservations;
+            List<ReservationDtoForView> reservationDtoForViews;
+            if (reservationsPage.getReservations() == null){
+                reservationDtoForViews = List.of();
+            }else {
+                reservations = reservationsPage.getReservations();
+                reservationDtoForViews = getReservationsForView(reservations);
+            }
             int totalPages = reservationsPage.getTotalPages();
             long totalReservations = reservationsPage.getTotalElements();
-            List<ReservationDtoForView> reservationDtoForViews = getReservationsForView(reservations);
 
             model.addAttribute("reservations", reservationDtoForViews);
             model.addAttribute("currentPage", page);
