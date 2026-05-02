@@ -123,7 +123,7 @@ public class ReserveService {
         String apiGateway = config.getServices().getApiGateway();
         try {
             return authorizedRestTemplate.getForObject(
-                    apiGateway + "/api/cancel-reservation/user/get-one/" + id.toString(),
+                    apiGateway + "/api/cancel-reservation/auth/user/get-one/" + id.toString(),
                     JoinDTOForCancelledReservations.class
             );
         } catch (Exception e) {

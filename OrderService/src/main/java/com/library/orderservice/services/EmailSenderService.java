@@ -47,7 +47,7 @@ public class EmailSenderService {
     private UserDTO getUser (UUID id) {
             String user = config.getServices().getUser();
             Reservation reservation = reservationService.findByReservationId(id);
-            String url = user + "/user/" + reservation.getReservationUser();
+            String url = user + "/user/auth/" + reservation.getReservationUser();
             return restTemplate.getForObject(url, UserDTO.class);
     }
     private String textPrep(String username, String message) {

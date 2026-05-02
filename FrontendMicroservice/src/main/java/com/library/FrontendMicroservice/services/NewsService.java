@@ -29,7 +29,7 @@ public class NewsService {
     public NewsDtoWithTotalElements getAllNews(int page){
         String apiGateway = config.getServices().getApiGateway();
         try {
-            UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(apiGateway + "/api/news/get-all")
+            UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(apiGateway + "/api/news/public/get-all")
                     .queryParam("page", page);
 
             String url = builder.toUriString();
@@ -47,7 +47,7 @@ public class NewsService {
         try {
             UriComponentsBuilder builder;
             if (search!=null){
-                builder = UriComponentsBuilder.fromHttpUrl(apiGateway + "/api/news/get-all")
+                builder = UriComponentsBuilder.fromHttpUrl(apiGateway + "/api/news/public/get-all")
                         .queryParam("page", page)
                         .queryParam("newsPerPage", pageSize)
                         .queryParam("search", search);
@@ -57,7 +57,7 @@ public class NewsService {
                         NewsDtoWithTotalElements.class
                 );
             }else {
-                builder = UriComponentsBuilder.fromHttpUrl(apiGateway + "/api/news/get-all")
+                builder = UriComponentsBuilder.fromHttpUrl(apiGateway + "/api/news/public/get-all")
                         .queryParam("page", page)
                         .queryParam("newsPerPage", pageSize);
                 String url = builder.toUriString();
@@ -75,7 +75,7 @@ public class NewsService {
     public NewsDTOForGetRequest getNewsById(UUID id){
         String apiGateway = config.getServices().getApiGateway();
         try {
-            String url = apiGateway + "/api/news/get-one/" + id;
+            String url = apiGateway + "/api/news/public/get-one/" + id;
             return publicRestTemplate.getForObject(
                     url,
                     NewsDTOForGetRequest.class

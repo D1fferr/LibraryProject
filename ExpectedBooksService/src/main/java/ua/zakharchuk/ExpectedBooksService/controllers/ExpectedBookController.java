@@ -31,11 +31,11 @@ public class ExpectedBookController {
     private final ExpectedBookService expectedBookService;
 
 
-    @GetMapping("/{id}")
+    @GetMapping("/public/{id}")
     public ResponseEntity<ExpectedBookDTO> getOne(@PathVariable UUID id){
         return new ResponseEntity<>(expectedBookService.findById(id), HttpStatus.OK);
     }
-    @GetMapping("/get-all")
+    @GetMapping("/public/get-all")
     public ResponseEntity<ExpectedBookDtoWithTotalElements> getAll(
             @RequestParam(value = "page", defaultValue = "0") Integer page,
             @RequestParam(value = "bookPerPage", defaultValue = "5") Integer bookPerPage,

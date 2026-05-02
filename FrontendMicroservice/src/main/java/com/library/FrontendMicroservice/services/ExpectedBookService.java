@@ -33,7 +33,7 @@ public class ExpectedBookService {
         String apiGateway = config.getServices().getApiGateway();
         try {
             return publicRestTemplate.getForObject(
-                    apiGateway + "/api/expected-book/get-all",
+                    apiGateway + "/api/expected-book/public/get-all",
                     ExpectedBookDtoWithTotalElements.class
             );
         }catch (Exception e){
@@ -45,7 +45,7 @@ public class ExpectedBookService {
         String apiGateway = config.getServices().getApiGateway();
         try {
 
-            String url = apiGateway + "/api/expected-book/" + id;
+            String url = apiGateway + "/api/expected-book/public/" + id;
             return publicRestTemplate.getForObject(
                     url,
                     ExpectedBook.class
@@ -60,21 +60,21 @@ public class ExpectedBookService {
         try {
             UriComponentsBuilder builder;
             if (search!=null){
-                builder = UriComponentsBuilder.fromHttpUrl(apiGateway + "/api/expected-book/get-all")
+                builder = UriComponentsBuilder.fromHttpUrl(apiGateway + "/api/expected-book/public/get-all")
                         .queryParam("page", page)
                         .queryParam("bookPerPage", pageSize)
                         .queryParam("search", search);
                 String url = builder.toUriString();
-                return authorizedRestTemplate.getForObject(
+                return publicRestTemplate.getForObject(
                         url,
                         ExpectedBookDtoWithTotalElements.class
                 );
             }else {
-                builder = UriComponentsBuilder.fromHttpUrl(apiGateway + "/api/expected-book/get-all")
+                builder = UriComponentsBuilder.fromHttpUrl(apiGateway + "/api/expected-book/public/get-all")
                         .queryParam("page", page)
                         .queryParam("bookPerPage", pageSize);
                 String url = builder.toUriString();
-                return authorizedRestTemplate.getForObject(
+                return publicRestTemplate.getForObject(
                         url,
                         ExpectedBookDtoWithTotalElements.class
                 );
@@ -91,17 +91,17 @@ public class ExpectedBookService {
         try {
             UriComponentsBuilder builder;
             if (search!=null){
-                builder = UriComponentsBuilder.fromHttpUrl(apiGateway + "/api/expected-book/get-all")
+                builder = UriComponentsBuilder.fromHttpUrl(apiGateway + "/api/expected-book/public/get-all")
                         .queryParam("page", page)
                         .queryParam("sort", sort)
                         .queryParam("search", search);
                 String url = builder.toUriString();
-                return authorizedRestTemplate.getForObject(
+                return publicRestTemplate.getForObject(
                         url,
                         ExpectedBookDtoWithTotalElements.class
                 );
             }else {
-                builder = UriComponentsBuilder.fromHttpUrl(apiGateway + "/api/expected-book/get-all")
+                builder = UriComponentsBuilder.fromHttpUrl(apiGateway + "/api/expected-book/public/get-all")
                         .queryParam("page", page)
                         .queryParam("sort", sort);
                 String url = builder.toUriString();
@@ -210,7 +210,6 @@ public class ExpectedBookService {
         headers.setContentType(MediaType.MULTIPART_FORM_DATA);
 
         HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
-        System.out.println("Trying to connect");
         authorizedRestTemplate.exchange(
                 bookServiceUrl,
                 HttpMethod.PATCH,

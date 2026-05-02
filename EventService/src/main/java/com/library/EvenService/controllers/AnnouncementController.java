@@ -28,12 +28,12 @@ public class AnnouncementController {
     private final AnnouncementService announcementService;
 
 
-    @GetMapping("/{id}")
+    @GetMapping("/public/{id}")
     public ResponseEntity<AnnouncementDTOForGetRequest> getOneAnnouncement(@PathVariable UUID id){
         return new ResponseEntity<>(announcementService.findOneById(id), HttpStatus.OK);
     }
 
-    @GetMapping("/get-all")
+    @GetMapping("/public/get-all")
     public ResponseEntity<AnnouncementDTOWithTotalElements> getAllAnnouncement(
             @RequestParam(value = "page", defaultValue = "0") Integer page,
             @RequestParam(value = "announcementPerPage", defaultValue = "5") Integer announcementPerPage,

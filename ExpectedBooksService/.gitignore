@@ -10,7 +10,7 @@ application-*.properties
 *.yml
 *.yaml
 
-### STS ###
+### STS ##
 .apt_generated
 .classpath
 .factorypath

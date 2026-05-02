@@ -26,22 +26,14 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
     private final JwtUtil jwtUtil;
     private final JwtBlacklistHandler blacklistHandler;
     private static final Set<String> PUBLIC_ROUTES = Set.of(
-            "/api/auth/login",
-            "/api/auth/registration",
+            "/api/auth/public",
             "/api/book/public",
-            "/api/reset-password/",
-            "/api/user/create",
-            "/api/expected-book/get-all",
-            "/api/expected-book",
-            "/api/announcement/get-all",
-            "/api/announcement",
-            "/api/news/get-all",
-            "/api/news/get-one",
-            "/api/reset-password/send-code",
-            "/api/reset-password/reset",
+            "/api/reset-password/public",
+            "/api/user/public",
+            "/api/expected-book/public",
+            "/api/announcement/public",
+            "/api/news/public",
             "/api/images/"
-
-
 
     );
     private final Map<String, Set<String>> rolesMap = roleRequirements();
@@ -50,54 +42,57 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
         Map<String, Set<String>> role = new HashMap<>();
 
         // catalog service
-        role.put("/book/auth/create", Set.of("ADMIN", "OWNER"));
-        role.put("/book/auth/delete/", Set.of("ADMIN", "OWNER"));
-        role.put("/book/auth/change-book/", Set.of("ADMIN", "OWNER"));
+        role.put("/api/book/auth/create", Set.of("ADMIN", "OWNER"));
+        role.put("/api/book/auth/delete/", Set.of("ADMIN", "OWNER"));
+        role.put("/api/book/auth/change-book/", Set.of("ADMIN", "OWNER"));
+        role.put("/api/book/auth/for-reservations", Set.of("ADMIN", "USER", "OWNER"));
+        role.put("/api/book/auth", Set.of("ADMIN", "OWNER"));
 
         // expected book service
-        role.put("/expected-book/auth/create", Set.of("ADMIN", "OWNER"));
-        role.put("/expected-book/auth/change/", Set.of("ADMIN", "OWNER"));
-        role.put("/expected-book/auth/delete/", Set.of("ADMIN", "OWNER"));
-        role.put("/expected-book/auth/add-to-current-books/", Set.of("ADMIN", "OWNER"));
-        role.put("/report-availability/auth/add", Set.of("ADMIN", "USER", "OWNER"));
-        role.put("/report-availability/auth/delete/", Set.of("ADMIN", "USER", "OWNER"));
-        role.put("/report-availability-error/auth/get-all", Set.of("ADMIN", "OWNER"));
-        role.put("/report-availability-error/auth/send", Set.of("ADMIN", "OWNER"));
+        role.put("/api/expected-book/auth/create", Set.of("ADMIN", "OWNER"));
+        role.put("/api/expected-book/auth/change/", Set.of("ADMIN", "OWNER"));
+        role.put("/api/expected-book/auth/delete/", Set.of("ADMIN", "OWNER"));
+        role.put("/api/expected-book/auth/add-to-current-books/", Set.of("ADMIN", "OWNER"));
+        role.put("/api/report-availability/auth/add", Set.of("ADMIN", "USER", "OWNER"));
+        role.put("/api/report-availability/auth/delete/", Set.of("ADMIN", "USER", "OWNER"));
+        role.put("/api/report-availability-error/auth/get-all", Set.of("ADMIN", "OWNER"));
+        role.put("/api/report-availability-error/auth/send", Set.of("ADMIN", "OWNER"));
 
         //event service
-        role.put("/announcement/auth/create", Set.of("ADMIN", "OWNER"));
-        role.put("/announcement/auth/change/", Set.of("ADMIN", "OWNER"));
-        role.put("/announcement/auth/delete/", Set.of("ADMIN", "OWNER"));
-        role.put("/news/auth/create", Set.of("ADMIN", "OWNER"));
-        role.put("/news/auth/change", Set.of("ADMIN", "OWNER"));
-        role.put("/news/auth/delete/", Set.of("ADMIN", "OWNER"));
+        role.put("/api/announcement/auth/create", Set.of("ADMIN", "OWNER"));
+        role.put("/api/announcement/auth/change/", Set.of("ADMIN", "OWNER"));
+        role.put("/api/announcement/auth/delete/", Set.of("ADMIN", "OWNER"));
+        role.put("/api/news/auth/create", Set.of("ADMIN", "OWNER"));
+        role.put("/api/news/auth/change", Set.of("ADMIN", "OWNER"));
+        role.put("/api/news/auth/delete/", Set.of("ADMIN", "OWNER"));
 
         // order service
-        role.put("/reservation/auth/view_for_the_user/", Set.of("ADMIN", "USER", "OWNER"));
-        role.put("/reservation/auth/view_for_the_book/", Set.of("ADMIN", "OWNER"));
-        role.put("/reservation/auth/view_all", Set.of("ADMIN", "OWNER"));
-        role.put("/reservation/auth/view/", Set.of("ADMIN", "USER", "OWNER"));
-        role.put("/reservation/auth/create", Set.of("ADMIN", "USER", "OWNER"));
-        role.put("/reservation/auth/change_date/", Set.of("ADMIN", "USER", "OWNER"));
-        role.put("/reservation/auth/change_status/", Set.of("ADMIN", "OWNER"));
-        role.put("/reservation/auth/delete/", Set.of("ADMIN", "USER", "OWNER"));
-        role.put("/cancel-reservation/cancel/", Set.of("ADMIN", "OWNER"));
-        role.put("/cancel-reservation/user/", Set.of("ADMIN", "OWNER"));
+        role.put("/api/reservation/auth/view_for_the_user/", Set.of("ADMIN", "USER", "OWNER"));
+        role.put("/api/reservation/auth/view_for_the_book/", Set.of("ADMIN", "OWNER"));
+        role.put("/api/reservation/auth/view_all", Set.of("ADMIN", "OWNER"));
+        role.put("/api/reservation/auth/view/", Set.of("ADMIN", "USER", "OWNER"));
+        role.put("/api/reservation/auth/create", Set.of("ADMIN", "USER", "OWNER"));
+        role.put("/api/reservation/auth/change_date/", Set.of("ADMIN", "USER", "OWNER"));
+        role.put("/api/reservation/auth/change_status/", Set.of("ADMIN", "OWNER"));
+        role.put("/api/reservation/auth/delete/", Set.of("ADMIN", "USER", "OWNER"));
+        role.put("/api/cancel-reservation/auth/cancel/", Set.of("ADMIN", "OWNER"));
+        role.put("/api/cancel-reservation/auth/user/", Set.of("ADMIN", "OWNER"));
+        role.put("/api/cancel-reservation/auth/user/get-one/", Set.of("ADMIN", "USER", "OWNER"));
 
         //auth service
-        role.put("/auth/logout", Set.of("ADMIN", "USER", "OWNER"));
-        role.put("/auth/change-credentials/", Set.of("ADMIN", "USER", "OWNER"));
-        role.put("/auth/delete/", Set.of("ADMIN", "USER", "OWNER"));
-        role.put("/auth/do-admin", Set.of("ADMIN", "USER", "OWNER"));
+        role.put("/api/auth/auth/logout", Set.of("ADMIN", "USER", "OWNER"));
+        role.put("/api/auth/auth/change-credentials/", Set.of("ADMIN", "USER", "OWNER"));
+        role.put("/api/auth/auth/delete/", Set.of("ADMIN", "USER", "OWNER"));
+        role.put("/api/auth/auth/do-admin", Set.of("OWNER"));
 
         //user service
-        role.put("/user/change-profile/", Set.of("ADMIN", "USER", "OWNER"));
-        role.put("/user/change-credentials/", Set.of("ADMIN", "USER", "OWNER"));
-        role.put("/user/", Set.of("ADMIN", "USER", "OWNER"));
-        role.put("/user/delete/", Set.of("ADMIN", "USER", "OWNER"));
-        role.put("/user/get-user-by/", Set.of("ADMIN", "OWNER"));
-
-
+        role.put("/api/user/auth/change-profile/", Set.of("ADMIN", "USER", "OWNER"));
+        role.put("/api/user/auth/change-credentials/", Set.of("ADMIN", "USER", "OWNER"));
+        role.put("/api/user/auth/create", Set.of("ADMIN", "USER", "OWNER"));
+        role.put("/api/user/auth/", Set.of("ADMIN", "USER", "OWNER"));
+        role.put("/api/user/auth/delete/", Set.of("ADMIN", "USER", "OWNER"));
+        role.put("/api/user/auth/for-reservations/", Set.of("ADMIN", "USER", "OWNER"));
+        role.put("/api/user/auth/get-all/", Set.of("ADMIN", "OWNER"));
 
         return role;
     }
@@ -177,13 +172,11 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
         }
 
         Set<String> requiredRoles = rolesMap.get(requirePath);
-        List<String> userRoles = jwtUtil.extractRoles(token);
-
+        String userRoles = jwtUtil.extractRoles(token);
         if (userRoles == null || userRoles.isEmpty()) {
             return false;
         }
-
-        return userRoles.stream().anyMatch(requiredRoles::contains);
+        return requiredRoles.stream().anyMatch(userRoles::contains);
     }
 
     private Mono<Void> forbidden(ServerWebExchange exchange, String message) {

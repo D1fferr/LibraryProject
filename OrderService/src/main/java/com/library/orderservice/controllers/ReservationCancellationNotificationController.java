@@ -36,13 +36,13 @@ public class ReservationCancellationNotificationController {
         return new ResponseEntity<>(dto, HttpStatus.CREATED);
 
     }
-    @GetMapping("/user/{id}")
+    @GetMapping("/auth/user/{id}")
     public ResponseEntity<List<JoinDTOForCancelledReservations>> getAllCanceledReservationsForUser(@PathVariable UUID id){
 
         List<JoinDTOForCancelledReservations> reservations = service.findAllReservationsForUser(id);
         return new ResponseEntity<>(reservations, HttpStatus.OK);
     }
-    @GetMapping("/user/get-one/{id}")
+    @GetMapping("/auth/user/get-one/{id}")
     public ResponseEntity<JoinDTOForCancelledReservations> getOneForUser(@PathVariable UUID id){
         JoinDTOForCancelledReservations dto = service.findOneForUser(id);
         return new ResponseEntity<>(dto, HttpStatus.OK);

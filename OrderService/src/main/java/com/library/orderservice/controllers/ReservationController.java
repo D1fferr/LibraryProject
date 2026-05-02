@@ -54,11 +54,11 @@ public class ReservationController {
 
         if (search!=null){
             ReservationsPageDto reservationDTOS = reservationService
-                    .findAllReservationByParam(search, PageRequest.of(page, reservationPerPage, Sort.by(sortBy)));
+                    .findAllReservationByParam(search, PageRequest.of(page, reservationPerPage, Sort.by(Sort.Direction.DESC, sortBy)));
             return new ResponseEntity<>(reservationDTOS, HttpStatus.OK);
         }
         ReservationsPageDto reservationDTOS = reservationService
-                .findAllReservation(PageRequest.of(page, reservationPerPage, Sort.by(sortBy)));
+                .findAllReservation(PageRequest.of(page, reservationPerPage, Sort.by(Sort.Direction.DESC, sortBy)));
         return new ResponseEntity<>(reservationDTOS, HttpStatus.OK);
     }
     @GetMapping("/auth/view/{id}")

@@ -23,7 +23,7 @@ public class UserService {
     public UserDTOForView getUserById(UUID id){
         String apiGateway = config.getServices().getApiGateway();
         try {
-            String url = apiGateway + "/api/user/" + id;
+            String url = apiGateway + "/api/user/auth/" + id;
             return authorizedRestTemplate.getForObject(
                     url,
                     UserDTOForView.class
@@ -57,7 +57,7 @@ public class UserService {
     public UserDtoWithListUsers getUsersById(UserDtoForReservations dto, int page){
         String apiGateway = config.getServices().getApiGateway();
         try {
-            String url = UriComponentsBuilder.fromHttpUrl(apiGateway + "/api/user/for-reservations")
+            String url = UriComponentsBuilder.fromHttpUrl(apiGateway + "/api/user/auth/for-reservations")
                     .queryParam("page", page).toUriString();
             return authorizedRestTemplate.postForObject(
                     url,
@@ -75,7 +75,7 @@ public class UserService {
         try {
             UriComponentsBuilder builder;
             if (search!=null){
-                builder = UriComponentsBuilder.fromHttpUrl(apiGateway + "/api/user/get-all")
+                builder = UriComponentsBuilder.fromHttpUrl(apiGateway + "/api/user/auth/get-all")
                         .queryParam("page", page)
                         .queryParam("pageSize", pageSize)
                         .queryParam("search", search);
@@ -85,7 +85,7 @@ public class UserService {
                         UserPageDto.class
                 );
             }else {
-                builder = UriComponentsBuilder.fromHttpUrl(apiGateway + "/api/user/get-all")
+                builder = UriComponentsBuilder.fromHttpUrl(apiGateway + "/api/user/auth/get-all")
                         .queryParam("page", page)
                         .queryParam("pageSize", pageSize);
                 String url = builder.toUriString();
@@ -106,7 +106,7 @@ public class UserService {
     public void updateLibraryCode(UUID id, UserDTOForChangeProfile dto){
         String apiGateway = config.getServices().getApiGateway();
         try {
-            UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(apiGateway + "/api/user/change-profile/" + id.toString());
+            UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(apiGateway + "/api/user/auth/change-profile/" + id.toString());
 
             String url = builder.toUriString();
             HttpHeaders headers = new HttpHeaders();

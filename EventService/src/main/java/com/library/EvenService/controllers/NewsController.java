@@ -28,7 +28,7 @@ public class NewsController {
 
     private final NewsService newsService;
 
-    @GetMapping("/get-all")
+    @GetMapping("/public/get-all")
     public ResponseEntity<NewsDtoWithTotalElements> getAllNews(@RequestParam(value = "page", defaultValue = "0") Integer page,
                                                                @RequestParam(value = "newsPerPage", defaultValue = "5") Integer newsPerPage,
                                                                @RequestParam(value = "search", required = false) String search
@@ -41,7 +41,7 @@ public class NewsController {
         NewsDtoWithTotalElements dto = newsService.findAll(PageRequest.of(page, newsPerPage));
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
-    @GetMapping("/get-one/{id}")
+    @GetMapping("/public/get-one/{id}")
     public ResponseEntity<NewsDTOForGetRequest> getOneNews(@PathVariable UUID id){
         return new ResponseEntity<>(newsService.findOneById(id), HttpStatus.OK);
     }

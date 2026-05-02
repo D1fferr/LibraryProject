@@ -52,9 +52,9 @@ public class JwtUtil {
         }
     }
     @SuppressWarnings("unchecked")
-    public List<String> extractRoles(String token){
+    public String extractRoles(String token){
         Claims claims = extractAllClaims(token);
-        return claims.get("roles", List.class);
+        return claims.get("role", String.class);
     }
     public Date extractExpirationDate(String token){
         return extractAllClaims(token).getExpiration();

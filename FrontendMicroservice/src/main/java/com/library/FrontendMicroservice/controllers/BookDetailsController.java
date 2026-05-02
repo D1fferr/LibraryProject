@@ -70,7 +70,6 @@ public class BookDetailsController {
             List<Book> similarBooks = booksByGenre.getBooks();
 
             if (jwtUtil.isAuthenticated()) {
-                System.out.println("Auth");
                 String currentUserId = jwtUtil.getCurrentUserId();
                 UserDTOForView user = userService.getUserById(UUID.fromString(currentUserId));
                 String currentUserEmail = user.getEmail();

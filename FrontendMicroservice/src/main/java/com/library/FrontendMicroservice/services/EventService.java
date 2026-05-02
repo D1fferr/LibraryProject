@@ -31,7 +31,7 @@ public class EventService {
     public AnnouncementDTOWithTotalElements getAllEvents(int page){
         String apiGateway = config.getServices().getApiGateway();
         try {
-            UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(apiGateway + "/api/announcement/get-all")
+            UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(apiGateway + "/api/announcement/public/get-all")
                     .queryParam("page", page);
 
             String url = builder.toUriString();
@@ -50,7 +50,7 @@ public class EventService {
         try {
             UriComponentsBuilder builder;
             if (search!=null){
-                builder = UriComponentsBuilder.fromHttpUrl(apiGateway + "/api/announcement/get-all")
+                builder = UriComponentsBuilder.fromHttpUrl(apiGateway + "/api/announcement/public/get-all")
                         .queryParam("page", page)
                         .queryParam("announcementPerPage", pageSize)
                         .queryParam("search", search);
@@ -60,7 +60,7 @@ public class EventService {
                         AnnouncementDTOWithTotalElements.class
                 );
             }else {
-                builder = UriComponentsBuilder.fromHttpUrl(apiGateway + "/api/announcement/get-all")
+                builder = UriComponentsBuilder.fromHttpUrl(apiGateway + "/api/announcement/public/get-all")
                         .queryParam("page", page)
                         .queryParam("announcementPerPage", pageSize);
                 String url = builder.toUriString();
@@ -89,7 +89,7 @@ public class EventService {
     public AnnouncementDTOForGetRequest getEventById(UUID id){
         String apiGateway = config.getServices().getApiGateway();
         try {
-            String url = apiGateway + "/api/announcement/" + id;
+            String url = apiGateway + "/api/announcement/public/" + id;
             return publicRestTemplate.getForObject(
                     url,
                     AnnouncementDTOForGetRequest.class

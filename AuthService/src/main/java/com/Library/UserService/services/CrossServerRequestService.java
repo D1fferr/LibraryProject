@@ -23,7 +23,7 @@ public class CrossServerRequestService {
 
     public void sendUser(UserDTO userDTO, UUID id){
         String user = config.getServices().getUser();
-        String url = user + "/user/create";
+        String url = user + "/user/auth/create";
 
         Map<String, String> requestBody = Map.of(
                 "id", id.toString(),
@@ -42,7 +42,7 @@ public class CrossServerRequestService {
     }
     public void delete(UUID id){
         String user = config.getServices().getUser();
-        String url = user + "/user/delete/" + id.toString();
+        String url = user + "/user/auth/delete/" + id.toString();
         try {
             log.info("Trying to connect with user service to delete user. ID: '{}'", id);
             restTemplate.delete(url);
@@ -54,7 +54,7 @@ public class CrossServerRequestService {
     }
     public void sendCredential(UserDTOForUserService authUser, UUID id){
         String user = config.getServices().getUser();
-        String url = user + "/user/change-credentials/" + id;
+        String url = user + "/user/auth/change-credentials/" + id;
 
         Map<String, String> requestBody = Map.of(
                 "username", authUser.getUsername(),

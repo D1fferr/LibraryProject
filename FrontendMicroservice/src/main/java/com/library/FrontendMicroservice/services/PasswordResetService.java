@@ -19,7 +19,7 @@ public class PasswordResetService {
 
     public void sendResetCode(String param){
         String apiGateway = config.getServices().getApiGateway();
-        String url = apiGateway + "/api/reset-password/send-code";
+        String url = apiGateway + "/api/reset-password/public/send-code";
 
         Map<String, String> requestBody = Map.of(
                 "param", param
@@ -34,7 +34,7 @@ public class PasswordResetService {
     }
     public void resetPassword(String param, String code, String newPasssword){
         String apiGateway = config.getServices().getApiGateway();
-        String url = apiGateway + "/api/reset-password/reset";
+        String url = apiGateway + "/api/reset-password/public/reset";
 
         Map<String, String> requestBody = Map.of(
                 "code", code,

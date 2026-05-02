@@ -29,7 +29,7 @@ public class AuthService {
 
         HttpEntity<AuthRequest> entity = new HttpEntity<>(authRequest, headers);
         ResponseEntity<AuthRequest> response = publicRestTemplate.exchange(
-                apiGateway + authServiceUrl + "/login",
+                apiGateway + authServiceUrl + "/public/login",
                 HttpMethod.POST,
                 entity,
                 AuthRequest.class
@@ -44,7 +44,7 @@ public class AuthService {
         UserDTO userDTO = convertToUserDTO(registerRequest);
         HttpEntity<UserDTO> entity = new HttpEntity<>(userDTO, headers);
         ResponseEntity<HttpStatus> response = publicRestTemplate.exchange(
-                apiGateway + authServiceUrl + "/registration",
+                apiGateway + authServiceUrl + "/public/registration",
                 HttpMethod.POST,
                 entity,
                 HttpStatus.class
@@ -55,7 +55,7 @@ public class AuthService {
     }
     public void logout(){
         String apiGateway = config.getServices().getApiGateway();
-        String url = apiGateway + authServiceUrl + "/logout";
+        String url = apiGateway + authServiceUrl + "/auth/logout";
             try {
                 authorizedRestTemplate.postForObject(url, "Logout", String.class);
                 log.info("Logout successful");

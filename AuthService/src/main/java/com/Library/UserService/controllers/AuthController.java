@@ -31,7 +31,7 @@ public class AuthController {
     private final TokenBlackListService tokenBlackListService;
     private final AuthUserService authUserService;
     private final CrossServerRequestService crossServerRequestService;
-    @PostMapping("/registration")
+    @PostMapping("/public/registration")
     public ResponseEntity<HttpStatus> create(@RequestBody @Valid UserDTO userDTO,
                                              BindingResult bindingResult) {
 
@@ -42,7 +42,7 @@ public class AuthController {
                 .header("Authorization", "Bearer " + token)
                 .build();
     }
-    @PostMapping("/registration/admin")
+    @PostMapping("/public/registration/admin")
     public ResponseEntity<HttpStatus> createAsAdmin(@RequestBody @Valid UserDTO userDTO,
                                              BindingResult bindingResult) {
 
@@ -54,7 +54,7 @@ public class AuthController {
                 .build();
     }
 
-    @PostMapping("/login")
+    @PostMapping("/public/login")
     public ResponseEntity<LoginDTO> login(@RequestBody LoginDTO loginDTO) {
         AuthUser authUser = authUserService.login(loginDTO);
         String token = jwtProvider.generatedToken(loginDTO.getUsername(), authUser.getId(), authUser.getRole());
@@ -62,13 +62,13 @@ public class AuthController {
                 .header("Authorization", "Bearer " + token).body(loginDTO);
     }
 
-    @PostMapping("/logout")
+    @PostMapping("/auth/logout")
     public ResponseEntity<String> logout(@RequestHeader(name = "Authorization", required = false) String token) {
         token = token.substring(7);
         tokenBlackListService.blacklistToken(token);
         return ResponseEntity.ok("Logged out successfully");
     }
-    @PostMapping("/change-credentials/{id}")
+    @PostMapping("/auth/change-credentials/{id}")
     public ResponseEntity<HttpStatus> changeCredentials(@PathVariable UUID id,
                                                         @RequestBody @Valid ChangeCredentialDTO changeCredentialDTO,
                                                         BindingResult bindingResult){
@@ -77,12 +77,12 @@ public class AuthController {
         return new ResponseEntity<>(HttpStatus.OK);
 
     }
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/auth/delete/{id}")
     public ResponseEntity<HttpStatus> deleteUser(@PathVariable UUID id){
         authUserService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-    @PatchMapping("/do-admin")
+    @PatchMapping("/auth/do-admin")
     public ResponseEntity<HttpStatus> doAdmin(@RequestBody @Valid DoAdminDTO dto,
                                               BindingResult bindingResult){
         checkErrors(bindingResult);

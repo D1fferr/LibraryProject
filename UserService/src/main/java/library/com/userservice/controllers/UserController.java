@@ -2,9 +2,7 @@ package library.com.userservice.controllers;
 
 import jakarta.validation.Valid;
 import library.com.userservice.dtos.*;
-import library.com.userservice.exceptions.UserNotChangedException;
 import library.com.userservice.exceptions.UserNotCreatedException;
-import library.com.userservice.models.User;
 import library.com.userservice.services.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +24,7 @@ public class UserController {
     private final UserService userService;
 
 
-    @PostMapping("/create")
+    @PostMapping("/auth/create")
     public ResponseEntity<HttpStatus> create(@RequestBody @Valid UserDTO userDTO,
                                              BindingResult bindingResult){
         if (bindingResult.hasErrors()) {
@@ -42,13 +40,13 @@ public class UserController {
         userService.save(userDTO);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
-    @PutMapping("/change-profile/{id}")
+    @PutMapping("/auth/change-profile/{id}")
     public ResponseEntity<UserDTOForChangeProfile> changeProfile(@PathVariable UUID id,
                                                                  @RequestBody UserDTOForChangeProfile userDTO){
         userService.updateProfile(id, userDTO);
         return new ResponseEntity<>(userDTO, HttpStatus.OK);
     }
-    @PatchMapping("/change-credentials/{id}")
+    @PatchMapping("/auth/change-credentials/{id}")
     public ResponseEntity<HttpStatus> changeCredential(@PathVariable UUID id,
                                                        @RequestBody ChangeCredentialDTO changeCredentialDTO){
 
@@ -56,23 +54,23 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.OK);
 
     }
-    @GetMapping("/{id}")
+    @GetMapping("/auth/{id}")
     public ResponseEntity<UserDTOForView> getOne(@PathVariable UUID id){
         return new ResponseEntity<>(userService.findUser(id), HttpStatus.OK);
     }
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/auth/delete/{id}")
     public ResponseEntity<HttpStatus> delete(@PathVariable UUID id){
         userService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
     }
-    @PostMapping("/for-reservations")
+    @PostMapping("/auth/for-reservations")
     public ResponseEntity<UserDtoWithListUsers> getOne(@RequestBody UserDtoForReservations dto,
                                                        @RequestParam(value = "page", defaultValue = "0") Integer page,
                                                        @RequestParam(value = "usersForPage", defaultValue = "5", required = false) Integer usersForPage){
         return new ResponseEntity<>(userService.findUsersByIds(dto.getUserDTOForViews(), page, usersForPage), HttpStatus.OK);
     }
-    @GetMapping("/get-all")
+    @GetMapping("/auth/get-all")
     public ResponseEntity<UserPageDto> getUserBy(@RequestParam(value = "page", defaultValue = "0") int page,
                                                 @RequestParam(value = "pageSize", defaultValue = "0") int pageSize,
                                                 @RequestParam(required = false) String search){

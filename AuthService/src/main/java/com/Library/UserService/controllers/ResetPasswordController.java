@@ -15,12 +15,12 @@ public class ResetPasswordController {
 
     private final PasswordResetService passwordResetService;
 
-    @PostMapping("/send-code")
+    @PostMapping("/public/send-code")
     public ResponseEntity<SendCodeDTO> sendCode(@RequestBody SendCodeDTO sendCodeDTO){
         passwordResetService.sendResetCode(sendCodeDTO.getParam());
         return new ResponseEntity<>(sendCodeDTO, HttpStatus.OK);
     }
-    @PostMapping("/reset")
+    @PostMapping("/public/reset")
     public ResponseEntity<HttpStatus> resetPassword(@RequestBody ResetPasswordDTO resetPasswordDTO){
         passwordResetService.resetPassword(resetPasswordDTO.getParam(),
                 resetPasswordDTO.getCode(), resetPasswordDTO.getNewPassword());
