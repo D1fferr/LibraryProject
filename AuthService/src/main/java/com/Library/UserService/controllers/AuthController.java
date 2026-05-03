@@ -1,9 +1,6 @@
 package com.Library.UserService.controllers;
 
-import com.Library.UserService.dto.ChangeCredentialDTO;
-import com.Library.UserService.dto.DoAdminDTO;
-import com.Library.UserService.dto.LoginDTO;
-import com.Library.UserService.dto.UserDTO;
+import com.Library.UserService.dto.*;
 import com.Library.UserService.models.AuthUser;
 import com.Library.UserService.security.JWTProvider;
 import com.Library.UserService.services.AuthUserService;
@@ -77,18 +74,27 @@ public class AuthController {
         return new ResponseEntity<>(HttpStatus.OK);
 
     }
+    @PostMapping("/auth/get-users")
+    public ResponseEntity<UserDtoWithRole> changeCredentials(@RequestBody UserDtoWithListIDs dto){
+
+        return ResponseEntity.ok(authUserService.getUsersByIDs(dto));
+
+    }
     @DeleteMapping("/auth/delete/{id}")
     public ResponseEntity<HttpStatus> deleteUser(@PathVariable UUID id){
         authUserService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-    @PatchMapping("/auth/do-admin")
-    public ResponseEntity<HttpStatus> doAdmin(@RequestBody @Valid DoAdminDTO dto,
-                                              BindingResult bindingResult){
-        checkErrors(bindingResult);
-        authUserService.doAdmin(dto);
+    @PatchMapping("/auth/do-admin/{id}")
+    public ResponseEntity<HttpStatus> doAdmin(@PathVariable UUID id){
+        authUserService.doAdmin(id);
         return new ResponseEntity<>(HttpStatus.OK);
 
+    }
+    @PatchMapping("/auth/do-user/{id}")
+    public ResponseEntity<HttpStatus> doUser(@PathVariable UUID id){
+        authUserService.doUser(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     private void checkErrors(BindingResult bindingResult) {

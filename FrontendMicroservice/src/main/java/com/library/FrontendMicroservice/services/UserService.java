@@ -2,10 +2,6 @@ package com.library.FrontendMicroservice.services;
 
 import com.library.FrontendMicroservice.config.ExternalConfig;
 import com.library.FrontendMicroservice.dto.*;
-import com.library.FrontendMicroservice.exceptions.BookException;
-import com.library.FrontendMicroservice.exceptions.ReservationException;
-import com.library.FrontendMicroservice.exceptions.UserExeption;
-import com.library.FrontendMicroservice.models.AuthRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.*;
@@ -68,8 +64,24 @@ public class UserService {
             log.info("Failed to get users by IDs {}", e.getMessage());
             throw e;
         }
-
     }
+
+    public UserDtoWithRole getUsersByIdWithRole(UserDtoWithListIDs dto){
+        String apiGateway = config.getServices().getApiGateway();
+        try {
+            String url = UriComponentsBuilder.fromHttpUrl(apiGateway + "/api/auth/auth/get-users")
+                    .toUriString();
+            return authorizedRestTemplate.postForObject(
+                    url,
+                    dto,
+                    UserDtoWithRole.class
+            );
+        }catch (Exception e){
+            log.info("Failed to get users by IDs {}", e.getMessage());
+            throw e;
+        }
+    }
+
     public UserPageDto getAllUsers(int page, int pageSize, String search){
         String apiGateway = config.getServices().getApiGateway();
         try {
@@ -122,5 +134,38 @@ public class UserService {
             log.info("Failed to update a library code {}", e.getMessage());
             throw e;
         }
+
+
+
     }
+
+    public void makeAdmin(UUID id){
+        String apiGateway = config.getServices().getApiGateway();
+        try {
+            String url = UriComponentsBuilder.fromHttpUrl(apiGateway + "/api/auth/auth/do-admin/" + id).toUriString();
+            authorizedRestTemplate.patchForObject(
+                    url,
+                    null,
+                    String.class
+            );
+        }catch (Exception e){
+            log.info("Failed to get users by IDs {}", e.getMessage());
+            throw e;
+        }
+    }
+    public void makeUser(UUID id){
+        String apiGateway = config.getServices().getApiGateway();
+        try {
+            String url = UriComponentsBuilder.fromHttpUrl(apiGateway + "/api/auth/auth/do-user/" + id).toUriString();
+            authorizedRestTemplate.patchForObject(
+                    url,
+                    null,
+                    String.class
+            );
+        }catch (Exception e){
+            log.info("Failed to get users by IDs {}", e.getMessage());
+            throw e;
+        }
+    }
+
 }

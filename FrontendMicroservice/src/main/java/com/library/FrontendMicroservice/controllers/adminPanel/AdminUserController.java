@@ -32,7 +32,6 @@ public class AdminUserController {
     public String allUsers(@RequestParam(defaultValue = "0") int page,
                            @RequestParam(required = false) String search,
                            Model model) {
-        try {
 
             UserPageDto usersPage = adminUserService.getAllUsers(page, PAGE_SIZE, search);
 
@@ -47,13 +46,7 @@ public class AdminUserController {
             model.addAttribute("searchQuery", search);
 
 
-        } catch (Exception e) {
-            model.addAttribute("error", "Unable to load users");
-            model.addAttribute("users", List.of());
-            model.addAttribute("totalPages", 0);
-            model.addAttribute("totalUsers", 0);
-            model.addAttribute("currentPage", 0);
-        }
+
 
         return "admin-panel/users";
     }

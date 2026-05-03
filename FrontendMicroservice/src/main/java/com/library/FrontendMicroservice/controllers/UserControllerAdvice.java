@@ -31,4 +31,12 @@ public class UserControllerAdvice {
             return false;
         }
     }
+    @ModelAttribute("hasRoleOwner")
+    public boolean hasRoleOwner() {
+        try {
+            return jwtUtil.hasRoleOwner();
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }

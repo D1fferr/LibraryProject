@@ -83,7 +83,9 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
         role.put("/api/auth/auth/logout", Set.of("ADMIN", "USER", "OWNER"));
         role.put("/api/auth/auth/change-credentials/", Set.of("ADMIN", "USER", "OWNER"));
         role.put("/api/auth/auth/delete/", Set.of("ADMIN", "USER", "OWNER"));
+        role.put("/api/auth//auth/get-users", Set.of("OWNER"));
         role.put("/api/auth/auth/do-admin", Set.of("OWNER"));
+        role.put("/api/auth/auth/do-user", Set.of("OWNER"));
 
         //user service
         role.put("/api/user/auth/change-profile/", Set.of("ADMIN", "USER", "OWNER"));

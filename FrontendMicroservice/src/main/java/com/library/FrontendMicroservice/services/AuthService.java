@@ -53,6 +53,22 @@ public class AuthService {
         return extractTokenFromHeaders(response.getHeaders());
 
     }
+    public String registerAsAdmin(RegisterRequest registerRequest) {
+        String apiGateway = config.getServices().getApiGateway();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        UserDTO userDTO = convertToUserDTO(registerRequest);
+        HttpEntity<UserDTO> entity = new HttpEntity<>(userDTO, headers);
+        ResponseEntity<HttpStatus> response = publicRestTemplate.exchange(
+                apiGateway + authServiceUrl + "/public/registration/admin",
+                HttpMethod.POST,
+                entity,
+                HttpStatus.class
+        );
+
+        return extractTokenFromHeaders(response.getHeaders());
+
+    }
     public void logout(){
         String apiGateway = config.getServices().getApiGateway();
         String url = apiGateway + authServiceUrl + "/auth/logout";

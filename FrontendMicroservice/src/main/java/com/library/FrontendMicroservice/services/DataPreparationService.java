@@ -52,4 +52,18 @@ public class DataPreparationService {
                 ));
         return bookMap;
     }
+    public Map<UUID, UserDtoWithRoleAndID> findAuthUserData(List<UserDtoWithId> dto){
+        List<UUID> userIds = dto.stream()
+                .map(UserDtoWithId::getId)
+                .distinct()
+                .toList();
+
+        UserDtoWithListIDs iDs = new UserDtoWithListIDs();
+        iDs.setUuids(userIds);
+        UserDtoWithRole userDTO = userService.getUsersByIdWithRole(iDs);
+        Map<UUID, UserDtoWithRoleAndID> userMap = userDTO.getRole().stream()
+                .collect(Collectors.toMap(UserDtoWithRoleAndID::getId, Function.identity()));
+
+        return userMap;
+    }
 }

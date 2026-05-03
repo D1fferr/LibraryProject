@@ -68,4 +68,33 @@ public class RegistrationController {
 
 
     }
+    @PostMapping("/register/admin")
+    public String registerAsAdmin(@Valid @ModelAttribute RegisterRequest registerRequest,
+                           BindingResult bindingResult,
+                           @RequestParam(required = false) String redirect,
+                           Model model,
+                           HttpServletResponse response) {
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("errorMessage", "Please correct the errors below");
+            return "register";
+        }
+
+        if (!registerRequest.getPassword().equals(registerRequest.getConfirmPassword())) {
+            model.addAttribute("errorMessage", "Passwords do not match");
+            return "register";
+        }
+
+
+        String token = authService.registerAsAdmin(registerRequest);
+
+        cookieManager.setJwtCookie(response, token);
+
+        if (redirect != null && !redirect.isEmpty() && !redirect.equals("null")) {
+            return "redirect:" + redirect;
+        }
+        return "redirect:/home?registered=true";
+
+
+    }
 }

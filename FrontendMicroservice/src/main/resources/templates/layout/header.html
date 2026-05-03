@@ -143,6 +143,15 @@
             color: #e67e22 !important;
             border-bottom-color: #e67e22 !important;
         }
+        .admins-link {
+            color: #f39c12 !important;
+            font-weight: 600;
+        }
+
+        .admins-link:hover, .admins-link.active {
+            color: #e67e22 !important;
+            border-bottom-color: #e67e22 !important;
+        }
 
         .profile-modal {
             display: none;
@@ -330,6 +339,12 @@
                 <li><a th:href="@{/contact}">Contact</a></li>
                 <li th:if="${hasRoleAdmin}">
                     <a th:href="@{/admin/dashboard}" class="admin-link">Admin Panel</a>
+                </li>
+                <li th:if="${hasRoleOwner}">
+                    <a th:href="@{/admin/dashboard}" class="admin-link">Admin Panel</a>
+                </li>
+                <li th:if="${hasRoleOwner}">
+                    <a th:href="@{/owner/users}" class="admins-link">Admins</a>
                 </li>
             </ul>
         </nav>

@@ -132,25 +132,46 @@
             font-size: 20px;
         }
 
-        .btn-register {
-            width: 100%;
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .btn-register, .btn-register-admin {
+            flex: 1;
             padding: 14px;
-            background: #667eea;
-            color: white;
             border: none;
             border-radius: 5px;
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
             transition: background 0.3s;
-            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-register {
+            background: #667eea;
+            color: white;
         }
 
         .btn-register:hover {
             background: #5a67d8;
         }
 
-        .btn-register:active {
+        .btn-register-admin {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .btn-register-admin:hover {
+            background: #c0392b;
+        }
+
+        .btn-register:active, .btn-register-admin:active {
             transform: translateY(1px);
         }
 
@@ -198,6 +219,10 @@
             .register-box {
                 padding: 30px 20px;
             }
+            .button-group {
+                flex-direction: column;
+                gap: 10px;
+            }
         }
     </style>
 </head>
@@ -224,7 +249,8 @@
                 <span>After registration you will be redirected to: <strong th:text="${param.redirect}">/books/123</strong></span>
             </div>
 
-            <form id="registerForm" method="post" action="/register" th:object="${registerRequest}">
+            <!-- Єдина форма -->
+            <form id="registerForm" method="post" th:object="${registerRequest}">
                 <input type="hidden" name="redirect" th:value="${param.redirect}" />
 
                 <div class="form-group">
@@ -317,10 +343,17 @@
                          th:errors="*{libraryCode}">Error</div>
                 </div>
 
-                <button type="submit" class="btn-register">
-                    <span class="material-icons" style="font-size: 18px; vertical-align: middle;">check_circle</span>
-                    Create Account
-                </button>
+                <!-- Дві кнопки -->
+                <div class="button-group">
+                    <button type="submit" formaction="/register" class="btn-register">
+                        <span class="material-icons" style="font-size: 18px;">check_circle</span>
+                        Create Account
+                    </button>
+                    <button type="submit" formaction="/register/admin" class="btn-register-admin">
+                        <span class="material-icons" style="font-size: 18px;">admin_panel_settings</span>
+                        Create as Admin
+                    </button>
+                </div>
             </form>
 
             <div class="register-footer">

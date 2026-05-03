@@ -7,11 +7,15 @@ import com.Library.UserService.exceptions.UserAlreadyExistException;
 import com.Library.UserService.exceptions.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -118,17 +122,41 @@ public class AuthUserService {
         log.info("The user deleted. ID: '{}'", id);
     }
     @Transactional
-    public void doAdmin(DoAdminDTO dto){
-        log.info("Trying to find user to make him admin. ID: '{}'", dto.getId());
-        Optional<AuthUser> optionalAuthUser = authUserRepository.findById(dto.getId());
+    public void doAdmin(UUID uuid){
+        log.info("Trying to find user to make him admin. ID: '{}'", uuid);
+        Optional<AuthUser> optionalAuthUser = authUserRepository.findById(uuid);
         if (optionalAuthUser.isEmpty()){
-            log.warn("The user not found. ID: '{}'", dto.getId());
+            log.warn("The user not found. ID: '{}'", uuid);
             throw new UserNotFoundException("User not found");
         }
         AuthUser authUser = optionalAuthUser.get();
         authUser.setRole("ADMIN");
         authUserRepository.save(authUser);
         log.info("The user saved. ID: '{}'", authUser.getId());
+    }
+    @Transactional
+    public void doUser(UUID uuid){
+        log.info("Trying to find user to make him user. ID: '{}'", uuid);
+        Optional<AuthUser> optionalAuthUser = authUserRepository.findById(uuid);
+        if (optionalAuthUser.isEmpty()){
+            log.warn("The user not found. ID: '{}'", uuid);
+            throw new UserNotFoundException("User not found");
+        }
+        AuthUser authUser = optionalAuthUser.get();
+        authUser.setRole("USER");
+        authUserRepository.save(authUser);
+        log.info("The user saved. ID: '{}'", authUser.getId());
+    }
+
+    public UserDtoWithRole getUsersByIDs(UserDtoWithListIDs iDs){
+        List<AuthUser> list = authUserRepository.findAllByIdIn(iDs.getUuids());
+        if (list.isEmpty()) {
+            log.warn("Users not found");
+            return new UserDtoWithRole();
+        }
+        UserDtoWithRole users = new UserDtoWithRole();
+        users.setRole(list.stream().map(this::userDtoWithRoleAndID).toList());
+        return users;
     }
 
     private AuthUser toAuthUser(UserDTO userDTO){
@@ -148,5 +176,11 @@ public class AuthUserService {
         userDTO.setUserLibraryCode(dto.getLibraryCode());
         userDTO.setUsername(dto.getUsername());
         return userDTO;
+    }
+    private UserDtoWithRoleAndID userDtoWithRoleAndID(AuthUser authUser){
+        UserDtoWithRoleAndID dtoWithRoleAndID = new UserDtoWithRoleAndID();
+        dtoWithRoleAndID.setId(authUser.getId());
+        dtoWithRoleAndID.setRole(authUser.getRole());
+        return dtoWithRoleAndID;
     }
 }
