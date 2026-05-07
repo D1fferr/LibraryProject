@@ -1,0 +1,333 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    container_name: library-db
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: library_db
+    ports:
+      - "5433:5432"
+    volumes:
+      - ./postgres-init:/docker-entrypoint-initdb.d
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres -d library_db" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+  redis:
+    image: redis:latest
+    container_name: library-redis
+    restart: always
+    ports:
+      - "6379:6379"
+
+  minio:
+    image: minio/minio:latest
+    container_name: library-minio
+    restart: always
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+    command: server /data --console-address ":9001"
+    volumes:
+      - minio_data:/data
+      - ./photo:/tmp/photo:ro
+
+  minio-init:
+    image: minio/minio:latest
+    container_name: minio-mc
+    depends_on:
+      - minio
+    volumes:
+      - ./photo:/tmp/photo:ro
+    entrypoint: >
+      /bin/sh -c "
+      until (/usr/bin/mc alias set myminio http://minio:9000 ${MINIO_ROOT_USER} ${MINIO_ROOT_PASSWORD}) do echo 'Waiting for MinIO...' && sleep 1; done;
+      /usr/bin/mc mb --ignore-existing myminio/images;
+      /usr/bin/mc anonymous set public myminio/images;
+      /usr/bin/mc cp --recursive /tmp/photo/ myminio/images;
+      "
+  kafka:
+    image: apache/kafka:latest
+    container_name: library-kafka
+    restart: always
+    ports:
+      - "9092:9092"
+    environment:
+      # Назви змінних для офіційного образу Apache
+      - KAFKA_NODE_ID=1
+      - KAFKA_PROCESS_ROLES=broker,controller
+      - KAFKA_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093
+      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092
+      - KAFKA_CONTROLLER_LISTENER_NAMES=CONTROLLER
+      - KAFKA_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
+      - KAFKA_CONTROLLER_QUORUM_VOTERS=1@kafka:9093
+      - KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1
+      - KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR=1
+      - KAFKA_TRANSACTION_STATE_LOG_MIN_ISR=1
+      - KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS=0
+      - KAFKA_AUTO_CREATE_TOPICS_ENABLE=true
+    volumes:
+      - kafka_data:/kafka
+
+  kafka-init:
+    image: apache/kafka:latest
+    depends_on:
+      - kafka
+    entrypoint: [ "/bin/sh", "-c" ]
+    command: |
+      "
+      /opt/kafka/bin/kafka-topics.sh --list --bootstrap-server kafka:9092
+      /opt/kafka/bin/kafka-topics.sh --create --if-not-exists --bootstrap-server kafka:9092 --partitions 3 --replication-factor 1 --topic expected-book-topic
+      /opt/kafka/bin/kafka-topics.sh --create --if-not-exists --bootstrap-server kafka:9092 --partitions 3 --replication-factor 1 --topic reservations
+      "
+  catalog-service:
+    build:
+      context: ./CatalogService
+    container_name: library-catalog
+    restart: on-failure
+    ports:
+      - "8081:8081"
+    environment:
+      - DB_URL=jdbc:postgresql://db:5432/library_db
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+
+      - MINIO_ENDPOINT=http://minio:9000
+      - MINIO_BUCKET=images
+      - MINIO_ACCESS_KEY=${MINIO_ROOT_USER}
+      - MINIO_SECRET_KEY=${MINIO_ROOT_PASSWORD}
+
+      - KAFKA_ENDPOINT=kafka:9092
+
+      - GATEWAY_URL=http://api-gateway:8080
+      - RESERVATION_URL=http://reservation-service:8082
+    volumes:
+      - ./logs/catalog:/app/logs
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
+      minio:
+        condition: service_started
+      kafka:
+        condition: service_started
+
+  event-service:
+    build:
+      context: ./EventService
+    container_name: library-event
+    restart: on-failure
+    ports:
+      - "8083:8083"
+    environment:
+      - DB_URL=jdbc:postgresql://db:5432/library_db
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+
+      - MINIO_ENDPOINT=http://minio:9000
+      - MINIO_BUCKET=images
+      - MINIO_ACCESS_KEY=${MINIO_ROOT_USER}
+      - MINIO_SECRET_KEY=${MINIO_ROOT_PASSWORD}
+
+      - CATALOG_URL=http://catalog-service:8081
+
+    volumes:
+      - ./logs/event:/app/logs
+
+    depends_on:
+      db:
+        condition: service_healthy
+      minio:
+        condition: service_started
+
+  expected-books-service:
+    build:
+      context: ./ExpectedBooksService
+    container_name: library-expected-books
+    restart: on-failure
+    ports:
+      - "8082:8082"
+    environment:
+      - DB_URL=jdbc:postgresql://db:5432/library_db
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+
+      - MAIL_LOGIN=${MAIL_LOGIN}
+      - MAIL_PASSWORD=${MAIL_PASSWORD}
+      - MAIL_FROM=${MAIL_FROM}
+      - MAIL_HOST=${MAIL_HOST:-smtp-relay.brevo.com}
+
+      - MINIO_ENDPOINT=http://minio:9000
+      - MINIO_BUCKET=images
+      - MINIO_ACCESS_KEY=${MINIO_ROOT_USER}
+      - MINIO_SECRET_KEY=${MINIO_ROOT_PASSWORD}
+
+      - KAFKA_ENDPOINT=kafka:9092
+
+      - CATALOG_URL=http://catalog-service:8081
+    volumes:
+      - ./logs/expected-books:/app/logs
+
+    depends_on:
+      db:
+        condition: service_healthy
+      minio:
+        condition: service_started
+      kafka:
+        condition: service_started
+
+
+  user-service:
+    build:
+      context: ./UserService
+    container_name: library-user
+    restart: on-failure
+    ports:
+      - "8087:8087"
+    environment:
+      - DB_URL=jdbc:postgresql://db:5432/library_db
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+
+    volumes:
+      - ./logs/user:/app/logs
+
+    depends_on:
+      db:
+        condition: service_healthy
+
+
+  auth-service:
+    build:
+      context: ./AuthService
+    container_name: library-auth
+    restart: on-failure
+    ports:
+      - "8086:8086"
+    environment:
+      - DB_URL=jdbc:postgresql://db:5432/library_db
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+
+      - JWT_SECRET=${JWT_SECRET}
+
+      - MAIL_LOGIN=${MAIL_LOGIN}
+      - MAIL_PASSWORD=${MAIL_PASSWORD}
+      - MAIL_FROM=${MAIL_FROM}
+      - MAIL_HOST=${MAIL_HOST:-smtp-relay.brevo.com}
+
+      - USER_URL=http://user-service:8087
+
+    volumes:
+      - ./logs/auth:/app/logs
+
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
+      user-service:
+        condition: service_started
+
+  order-service:
+    build:
+      context: ./OrderService
+    container_name: library-order
+    restart: on-failure
+    ports:
+      - "8084:8084"
+    environment:
+      - DB_URL=jdbc:postgresql://db:5432/library_db
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+
+      - MAIL_LOGIN=${MAIL_LOGIN}
+      - MAIL_PASSWORD=${MAIL_PASSWORD}
+      - MAIL_FROM=${MAIL_FROM}
+      - MAIL_HOST=${MAIL_HOST:-smtp-relay.brevo.com}
+
+      - KAFKA_ENDPOINT=kafka:9092
+
+      - CATALOG_URL=http://catalog-service:8081
+      - USER_URL=http://user-service:8087
+
+    volumes:
+      - ./logs/order:/app/logs
+
+    depends_on:
+      db:
+        condition: service_healthy
+      kafka:
+        condition: service_started
+      catalog-service:
+        condition: service_started
+      user-service:
+        condition: service_started
+
+  frontend-service:
+    build:
+      context: ./FrontendMicroservice
+    container_name: library-frontend
+    restart: on-failure
+    ports:
+      - "8089:8089"
+    environment:
+      - GATEWAY_URL=http://api-gateway:8080
+
+    volumes:
+      - ./logs/frontend:/app/logs
+
+    depends_on:
+      - api-gateway
+
+
+
+  api-gateway:
+    build:
+      context: ./APIGateway
+    container_name: library-gateway
+    restart: on-failure
+    ports:
+      - "8080:8080"
+    environment:
+      - CATALOG_SERVICE_URL=http://catalog-service:8081
+      - RESERVATION_SERVICE_URL=http://order-service:8084
+      - EXPECTED_BOOK_SERVICE_URL=http://expected-books-service:8082
+      - EVENT_SERVICE_URL=http://event-service:8083
+      - USER_SERVICE_URL=http://user-service:8087
+      - AUTH_SERVICE_URL=http://auth-service:8086
+      - FRONTEND_SERVICE_URL=http://frontend-service:8089
+      - MINIO_SERVICE_URL=http://minio:9000
+
+      - JWT_SECRET=${JWT_SECRET}
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+
+    volumes:
+      - ./logs/gateway:/app/logs
+
+    depends_on:
+      - auth-service
+      - user-service
+      - redis
+
+volumes:
+  postgres_data:
+  minio_data:
+  kafka_data:

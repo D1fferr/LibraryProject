@@ -35,7 +35,7 @@ public class BookController {
                                                        @RequestParam(value = "genre", required = false) String genre,
                                                        @RequestParam(value = "sortDir", defaultValue = "desc") String sortDir)
     {
-        if (sortBy.equals("bookGenre") && genre !=null && !genre.isEmpty()){
+        if (genre !=null && !genre.isEmpty()){
             BookDtoWithTotalElements books = bookService.findAllByGenre(genre, PageRequest.of(page, booksPerPage, Sort.by(Sort.Direction.fromString(sortDir), sortBy)));
             return new ResponseEntity<>(books, HttpStatus.OK);
         }

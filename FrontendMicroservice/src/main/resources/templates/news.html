@@ -228,18 +228,21 @@
         <div class="news-list" th:if="${news != null and !news.isEmpty()}">
             <div class="news-card" th:each="item : ${news}">
 
-                <div th:src="${item.photo != null and !item.photo.isEmpty() ? item.photo : '/api/images/default-news.jpg'}"
-                     th:alt="${item.photo}"
-                         onerror="this.onerror=null; this.parentElement.innerHTML='<span class=\"material-icons\">newspaper</span>';">
+                <div class="news-image">
+                    <img th:if="${item.photo != null and !item.photo.isEmpty()}"
+                         th:src="${item.photo}"
+                         th:alt="${item.name}">
+
+                    <div th:unless="${item.photo != null and !item.photo.isEmpty()}"
+                         class="news-image-placeholder">
+                        <span class="material-icons">newspaper</span>
+                    </div>
                 </div>
-<!--                <div th:unless="${item.photo != null and !item.photo.isEmpty()}" class="news-image-placeholder">-->
-<!--                    <span class="material-icons">newspaper</span>-->
-<!--                </div>-->
 
                 <div class="news-content">
                     <div class="news-date">
                         <span class="material-icons">calendar_today</span>
-                        <span th:text="${#temporals.format(item.date, 'MMMM d, yyyy')}">April 10, 2026</span>
+                        <span th:text="${item.date != null ? #temporals.format(item.date, 'MMMM d, yyyy') : 'Recent'}">April 10, 2026</span>
                     </div>
                     <h3 class="news-name" th:text="${item.name}">News Title</h3>
                     <p class="news-body" th:text="${item.body}">News description...</p>

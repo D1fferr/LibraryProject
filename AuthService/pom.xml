@@ -11,7 +11,7 @@
 	<groupId>com.Library</groupId>
 	<artifactId>AuthService</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>UserService</name>
+	<name>AuthService</name>
 	<description>Service for user authentication and registration</description>
 	<url/>
 	<licenses>

@@ -121,7 +121,7 @@ public class ExpectedBookService {
         String apiGateway = config.getServices().getApiGateway();
         try {
             String url = apiGateway + "/api/expected-book/auth/add-to-current-books/" + id;
-            publicRestTemplate.getForObject(
+            authorizedRestTemplate.getForObject(
                     url,
                     String.class
             );

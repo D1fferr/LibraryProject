@@ -7,174 +7,77 @@
   <link rel="stylesheet" href="/css/style.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <style>
-    .category-divider {
-      height: 1px;
-      background-color: #e0e0e0;
-      margin: 12px 0;
-    }
-
-    .special-category {
-      font-weight: 600;
-      color: #e67e22 !important;
-    }
-
-    .special-category:hover {
-      color: #d35400 !important;
-      background-color: #fff3e0;
-    }
-
-    .special-category .material-icons {
-      font-size: 16px;
-      margin-right: 4px;
-      vertical-align: middle;
-    }
-
-    /* Стилі для пошуку */
-    .search-section {
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      margin-bottom: 25px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    }
-    .search-box {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-    .search-box input {
-      flex: 1;
-      padding: 12px 16px;
-      border: 2px solid #e0e0e0;
-      border-radius: 8px;
-      font-size: 1rem;
-      transition: all 0.3s;
-    }
-    .search-box input:focus {
-      outline: none;
-      border-color: #27ae60;
-    }
-    .search-box button {
-      padding: 12px 24px;
-      background: #27ae60;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 1rem;
-      transition: background 0.3s;
-    }
-    .search-box button:hover {
-      background: #2ecc71;
-    }
-    .search-clear {
-      color: #e74c3c;
-      text-decoration: none;
-      padding: 12px 20px;
-      border-radius: 8px;
-      transition: background 0.3s;
-    }
-    .search-clear:hover {
-      background: #fee;
-    }
-
-    .no-books-message {
-      text-align: center;
-      padding: 60px 20px;
-      background: white;
-      border-radius: 8px;
-      color: #7f8c8d;
-    }
-
-    .no-books-message .material-icons {
-      font-size: 64px;
-      color: #bdc3c7;
-      margin-bottom: 20px;
-    }
-
-    .no-books-message h3 {
-      color: #2c3e50;
-      margin-bottom: 10px;
-    }
+    .category-divider { height: 1px; background-color: #e0e0e0; margin: 12px 0; }
+    .special-category { font-weight: 600; color: #e67e22 !important; }
+    .special-category:hover { color: #d35400 !important; background-color: #fff3e0; }
+    .special-category .material-icons { font-size: 16px; margin-right: 4px; vertical-align: middle; }
+    .search-section { background: white; padding: 20px; border-radius: 12px; margin-bottom: 25px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+    .search-box { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+    .search-box input { flex: 1; padding: 12px 16px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1rem; transition: all 0.3s; }
+    .search-box input:focus { outline: none; border-color: #27ae60; }
+    .search-box button { padding: 12px 24px; background: #27ae60; color: white; border: none; border-radius: 8px; cursor: pointer; display: flex; align-items: center; gap: 8px; font-size: 1rem; transition: background 0.3s; }
+    .search-box button:hover { background: #2ecc71; }
+    .search-clear { color: #e74c3c; text-decoration: none; padding: 12px 20px; border-radius: 8px; transition: background 0.3s; }
+    .search-clear:hover { background: #fee; }
+    .no-books-message { text-align: center; padding: 60px 20px; background: white; border-radius: 8px; color: #7f8c8d; }
+    .no-books-message .material-icons { font-size: 64px; color: #bdc3c7; margin-bottom: 20px; }
+    .no-books-message h3 { color: #2c3e50; margin-bottom: 10px; }
+    .catalog-controls { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; min-height: 40px; }
   </style>
 </head>
 <body>
-<!-- Header -->
 <div th:replace="~{layout/header :: header}"></div>
 
-<!-- Main Content -->
 <div class="container">
-  <!-- Categories Sidebar -->
   <aside class="sidebar">
     <h3>Categories</h3>
-
     <ul class="categories-list" th:if="${categories != null and !categories.isEmpty()}">
       <li>
-        <a th:href="@{/catalog(page=0, sortBy=${sortBy != null ? sortBy : 'bookAddedAt'}, sortDir=${sortDir != null ? sortDir : 'desc'})}"
-           th:class="${selectedGenre == null ? 'active' : ''}">
+        <a href="/catalog?page=0&sortBy=bookAddedAt&sortDir=desc"
+           th:class="${selectedGenre == null and currentPageName != 'upcoming' and currentPageName != 'most-popular' ? 'active' : ''}">
           All Books
         </a>
       </li>
-
       <li>
-        <a href="/catalog/most-popular-books"
+        <a href="/catalog/most-popular-books?page=0&sortBy=bookAddedAt&sortDir=desc"
            class="special-category"
-           th:classappend="${currentPage == 'most-popular' ? 'active' : ''}">
+           th:classappend="${currentPageName == 'most-popular' ? 'active' : ''}">
           <span class="material-icons">trending_up</span> Most Popular Books
         </a>
       </li>
-
       <li>
-        <a href="/catalog/upcoming-books"
+        <a href="/catalog/upcoming-books?page=0&sortBy=expectedBookAddedAt&sortDir=desc"
            class="special-category"
-           th:classappend="${currentPage == 'upcoming' ? 'active' : ''}">
+           th:classappend="${currentPageName == 'upcoming' ? 'active' : ''}">
           <span class="material-icons">upcoming</span> Upcoming Books
         </a>
       </li>
-
       <li class="category-divider"></li>
-
       <li th:each="category : ${categories}">
-        <a th:href="@{/catalog(genre=${category.name}, page=0, sortBy=${sortBy != null ? sortBy : 'bookGenre'}, sortDir=${sortDir != null ? sortDir : 'desc'})}"
+        <a th:href="'/catalog?genre=' + ${category.name} + '&page=0&sortBy=bookAddedAt&sortDir=desc'"
            th:class="${selectedGenre == category.name ? 'active' : ''}"
            th:text="${category.name} + ' (' + ${category.count} + ')'">
-          Fiction (98)
         </a>
       </li>
     </ul>
-
-    <div th:if="${categories == null or categories.isEmpty()}" class="no-categories">
-      <p>No categories available</p>
-    </div>
   </aside>
 
-  <!-- Main Content Area -->
   <main class="main-content">
-    <!-- Catalog Header -->
     <div class="catalog-header">
       <div class="breadcrumbs">
-        <a href="/">Home</a> /
-        <a href="/catalog">Catalog</a>
-        <span th:if="${selectedGenre}">/ <span th:text="${selectedGenre}">Fiction</span></span>
-        <span th:if="${currentPage == 'most-popular'}">/ Most Popular Books</span>
-        <span th:if="${currentPage == 'upcoming'}">/ Upcoming Books</span>
+        <a href="/">Home</a> / <a href="/catalog">Catalog</a>
+        <span th:if="${selectedGenre}">/ <span th:text="${selectedGenre}">Genre</span></span>
+        <span th:if="${currentPageName == 'most-popular'}">/ Most Popular</span>
+        <span th:if="${currentPageName == 'upcoming'}">/ Upcoming</span>
       </div>
 
       <div class="catalog-controls">
         <div class="view-toggle">
-          <button class="view-btn active" data-view="grid" title="Grid view">
-            <span class="material-icons">grid_view</span>
-          </button>
-          <button class="view-btn" data-view="list" title="List view">
-            <span class="material-icons">view_list</span>
-          </button>
+          <button class="view-btn active" data-view="grid"><span class="material-icons">grid_view</span></button>
+          <button class="view-btn" data-view="list"><span class="material-icons">view_list</span></button>
         </div>
 
-        <div class="sort-selector">
+        <div class="sort-selector" th:if="${currentPageName != 'most-popular' and currentPageName != 'upcoming'}">
           <select id="sortSelect" onchange="applySort()">
             <option value="bookAddedAt,desc" th:selected="${sortBy == 'bookAddedAt' and sortDir == 'desc'}">Newest First</option>
             <option value="bookAddedAt,asc" th:selected="${sortBy == 'bookAddedAt' and sortDir == 'asc'}">Oldest First</option>
@@ -187,135 +90,72 @@
       </div>
     </div>
 
-    <!-- Search Section -->
     <div class="search-section">
-      <form method="get" action="/catalog" class="search-box">
-        <input type="text" name="search" th:value="${searchQuery}" placeholder="Search by title or author...">
-        <button type="submit">
-          <span class="material-icons">search</span>
-          Search
-        </button>
-        <a th:href="@{/catalog}" class="search-clear" th:if="${searchQuery != null and !searchQuery.isEmpty()}">
-          <span class="material-icons">clear</span>
-          Clear
+      <form method="get" th:action="@{/catalog}" class="search-box">
+
+
+        <input type="hidden" name="sortBy" th:value="${sortBy}">
+        <input type="hidden" name="sortDir" th:value="${sortDir}">
+
+        <input type="text" name="search" th:value="${searchQuery}" placeholder="Search books...">
+        <button type="submit"><span class="material-icons">search</span> Search</button>
+
+        <a href="/catalog" class="search-clear" th:if="${searchQuery != null and !searchQuery.isEmpty()}">
+          <span class="material-icons">clear</span> Clear
         </a>
       </form>
     </div>
 
-    <!-- Error Message -->
-    <div class="error-message" th:if="${error}" th:text="${error}">
-      Error loading catalog
-    </div>
-
-    <!-- Books Grid -->
     <div class="books-section">
       <div th:if="${books != null and !books.isEmpty()}">
         <div class="books-grid" id="booksGrid">
           <div class="book-card" th:each="book : ${books}">
             <div class="book-cover">
-              <img th:if="${book.bookImage != null and !book.bookImage.isEmpty()}"
-                   th:src="${book.bookImage}"
-                   th:alt="${book.bookName}"
-                   class="book-image"/>
-              <div th:src="${book.bookImage != null and !book.bookImage.isEmpty() ? book.bookImage : '/api/images/default-book-cover.jpg'}"
-                   th:alt="${book.bookName}"
-                   class="no-image-placeholder">
+              <img th:if="${book.bookImage != null and !book.bookImage.isEmpty()}" th:src="${book.bookImage}" class="book-image"/>
+              <div th:if="${book.bookImage == null or book.bookImage.isEmpty()}" class="no-image-placeholder">
                 <span class="material-icons">book</span>
               </div>
             </div>
             <div class="book-info">
-              <h3 class="book-title" th:text="${book.bookName}">Book Title</h3>
-              <p class="book-author" th:text="${book.bookAuthor}">Author Name</p>
-              <p class="book-year" th:text="${book.bookYear}">2024</p>
-              <p class="book-genre" th:text="${book.bookGenre}">Fiction</p>
+              <h3 class="book-title" th:text="${book.bookName}"></h3>
+              <p class="book-author" th:text="${book.bookAuthor}"></p>
+              <p class="book-genre" th:text="${book.bookGenre}"></p>
               <a th:href="@{'/books/' + ${book.bookId}}" class="btn-details">Details</a>
             </div>
           </div>
         </div>
       </div>
-
       <div th:if="${books == null or books.isEmpty()}" class="no-books-message">
         <span class="material-icons">menu_book</span>
         <h3>No books found</h3>
-        <p th:if="${searchQuery}">No results for "<span th:text="${searchQuery}"></span>"</p>
-        <p th:unless="${searchQuery}">Try selecting a different category</p>
       </div>
     </div>
 
-    <div class="pagination-section" th:if="${totalPages > 1 and books != null and !books.isEmpty()}">
-      <div class="pagination-info">
-        Showing page <span th:text="${currentPage + 1}">1</span>
-        of <span th:text="${totalPages}">10</span>
-        (<span th:text="${totalBooks}">98</span> books total)
-      </div>
-
+    <div class="pagination-section" th:if="${totalPages > 1}">
       <div class="pagination">
-        <th:block th:with="hasSearch=${searchQuery != null and !searchQuery.isEmpty()}">
-          <!-- Previous button -->
+        <th:block th:with="baseUrl=${currentPageName == 'upcoming' ? '/catalog/upcoming-books' : (currentPageName == 'most-popular' ? '/catalog/most-popular-books' : '/catalog')}">
           <a th:if="${currentPage > 0}"
-             th:href="@{/catalog(page=${currentPage - 1}, genre=${selectedGenre}, sortBy=${sortBy != null ? sortBy : 'bookAddedAt'}, sortDir=${sortDir != null ? sortDir : 'desc'}, search=${hasSearch ? searchQuery : null})}"
-             class="page-link prev">
-            <span class="material-icons">chevron_left</span>
-          </a>
-          <span th:unless="${currentPage > 0}" class="page-link disabled">
-                        <span class="material-icons">chevron_left</span>
-                    </span>
+             th:href="@{${baseUrl}(page=${currentPage - 1}, genre=${selectedGenre}, sortBy=${sortBy}, sortDir=${sortDir}, search=${searchQuery})}"
+             class="page-link"><span class="material-icons">chevron_left</span></a>
 
-          <!-- Page numbers -->
           <th:block th:each="i : ${#numbers.sequence(0, totalPages - 1)}">
-            <th:block th:if="${i >= currentPage - 2 and i <= currentPage + 2}">
-              <a th:if="${i == currentPage}" class="page-link active"
-                 th:text="${i + 1}">1</a>
-              <a th:unless="${i == currentPage}"
-                 th:href="@{/catalog(page=${i}, genre=${selectedGenre}, sortBy=${sortBy != null ? sortBy : 'bookAddedAt'}, sortDir=${sortDir != null ? sortDir : 'desc'}, search=${hasSearch ? searchQuery : null})}"
-                 class="page-link" th:text="${i + 1}">2</a>
-            </th:block>
+            <a th:href="@{${baseUrl}(page=${i}, genre=${selectedGenre}, sortBy=${sortBy}, sortDir=${sortDir}, search=${searchQuery})}"
+               th:text="${i + 1}" class="page-link" th:classappend="${i == currentPage ? 'active' : ''}"></a>
           </th:block>
 
-          <!-- Next button -->
           <a th:if="${currentPage < totalPages - 1}"
-             th:href="@{/catalog(page=${currentPage + 1}, genre=${selectedGenre}, sortBy=${sortBy != null ? sortBy : 'bookAddedAt'}, sortDir=${sortDir != null ? sortDir : 'desc'}, search=${hasSearch ? searchQuery : null})}"
-             class="page-link next">
-            <span class="material-icons">chevron_right</span>
-          </a>
-          <span th:unless="${currentPage < totalPages - 1}" class="page-link disabled">
-                        <span class="material-icons">chevron_right</span>
-                    </span>
+             th:href="@{${baseUrl}(page=${currentPage + 1}, genre=${selectedGenre}, sortBy=${sortBy}, sortDir=${sortDir}, search=${searchQuery})}"
+             class="page-link"><span class="material-icons">chevron_right</span></a>
         </th:block>
-      </div>
-    </div>
-
-    <!-- Quick Links and Contact -->
-    <div class="info-section">
-      <div class="quick-links">
-        <h3>Quick Links</h3>
-        <ul>
-          <li><a href="#">Borrowing Rules</a></li>
-          <li><a href="#">FAQ</a></li>
-          <li><a href="#">Opening Hours</a></li>
-          <li><a href="#">Membership</a></li>
-        </ul>
-      </div>
-
-      <div class="contact-info">
-        <h3>Contact</h3>
-        <ul>
-          <li><span class="material-icons">email</span> library@mail.com</li>
-          <li><span class="material-icons">phone</span> (044) 123-4567</li>
-          <li><span class="material-icons">location_on</span> Kyiv, Book St. 1</li>
-        </ul>
       </div>
     </div>
   </main>
 </div>
 
-<!-- Footer -->
-<div th:replace="~{layout/footer :: footer}"></div>
-
-<!-- JavaScript -->
 <script>
   function applySort() {
     const select = document.getElementById('sortSelect');
+    if (!select) return; // Захист, якщо елемент прихований
     const [sortBy, sortDir] = select.value.split(',');
     const url = new URL(window.location.href);
     url.searchParams.set('sortBy', sortBy);
@@ -323,43 +163,6 @@
     url.searchParams.set('page', '0');
     window.location.href = url.toString();
   }
-
-  document.addEventListener('DOMContentLoaded', function() {
-    // View toggle functionality
-    const viewButtons = document.querySelectorAll('.view-btn');
-    const booksGrid = document.getElementById('booksGrid');
-
-    if (booksGrid) {
-      viewButtons.forEach(btn => {
-        btn.addEventListener('click', function() {
-          viewButtons.forEach(b => b.classList.remove('active'));
-          this.classList.add('active');
-
-          const view = this.dataset.view;
-          if (view === 'list') {
-            booksGrid.classList.add('list-view');
-          } else {
-            booksGrid.classList.remove('list-view');
-          }
-
-          localStorage.setItem('catalogView', view);
-        });
-      });
-
-      const savedView = localStorage.getItem('catalogView');
-      if (savedView === 'list') {
-        const listBtn = document.querySelector('[data-view="list"]');
-        if (listBtn) listBtn.click();
-      }
-    }
-
-    const urlParams = new URLSearchParams(window.location.search);
-    const sortByParam = urlParams.get('sortBy');
-    if (!sortByParam) {
-      const sortSelect = document.getElementById('sortSelect');
-      if (sortSelect) sortSelect.value = 'bookAddedAt,desc';
-    }
-  });
 </script>
 </body>
 </html>

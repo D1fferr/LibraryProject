@@ -82,14 +82,14 @@ public class ImageService {
         if (fileName == null || fileName.trim().isEmpty()) {
             return null;
         }
-        return "/api/images" + fileName;
+        return "/api/images/" + fileName;
     }
 
     private String generateFileName(String originalFileName, UUID id){
         String extension = "";
         if (originalFileName != null && originalFileName.contains("."))
             extension = originalFileName.substring(originalFileName.lastIndexOf("."));
-        return String.format("/%s%s", id.toString(), extension);
+        return String.format("%s%s", id.toString(), extension);
     }
 
 }

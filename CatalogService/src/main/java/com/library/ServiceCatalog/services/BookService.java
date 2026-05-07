@@ -233,7 +233,14 @@ public class BookService {
             Page<Book> books = bookRepository.findMostPopularBooks(PageRequest.of(page, PAGE_SIZE));
             if (books.isEmpty()){
                 log.warn("The most popular books were not found.");
-                throw new BooksNotFoundException("Books not found");
+                Page<Book> bookPage = bookRepository.findAllByOrderByBookAddedAtDesc(PageRequest.of(page, PAGE_SIZE));
+                List<BookDTOForResponseGetBook> dto = bookPage.getContent().stream().map(this::toBookDTOForResponseGetBook).toList();
+                BookDtoWithTotalElements bookDtoWithTotalElements = new BookDtoWithTotalElements();
+                bookDtoWithTotalElements.setBooks(dto);
+                bookDtoWithTotalElements.setBookCount(books.getTotalElements());
+                bookDtoWithTotalElements.setBookPages(books.getTotalPages());
+                log.info("Recently added books were found instead of all most popular books");
+                return bookDtoWithTotalElements;
             }
             List<BookDTOForResponseGetBook> dto = books.getContent().stream().map(this::toBookDTOForResponseGetBook).toList();
             BookDtoWithTotalElements bookDtoWithTotalElements = new BookDtoWithTotalElements();
@@ -264,8 +271,15 @@ public class BookService {
             log.info("Trying to find all most popular books");
             Page<Book> books = bookRepository.findMostPopularBooks(PageRequest.of(page, PAGE_SIZE));
             if (books.getContent().isEmpty()){
-                log.warn("The most popular books were not found");
-                throw new BooksNotFoundException("Books not found");
+                log.warn("The most popular books were not found.");
+                Page<Book> bookPage = bookRepository.findAllByOrderByBookAddedAtDesc(PageRequest.of(page, PAGE_SIZE));
+                List<BookDTOForResponseGetBook> dto = bookPage.getContent().stream().map(this::toBookDTOForResponseGetBook).toList();
+                BookDtoWithTotalElements bookDtoWithTotalElements = new BookDtoWithTotalElements();
+                bookDtoWithTotalElements.setBooks(dto);
+                bookDtoWithTotalElements.setBookCount(books.getTotalElements());
+                bookDtoWithTotalElements.setBookPages(books.getTotalPages());
+                log.info("Recently added books were found instead of all most popular books");
+                return bookDtoWithTotalElements;
             }
             log.info("Trying to save all most popular books in redis");
             List<BookDTOForResponseGetBook> dto = books.getContent().stream().map(this::toBookDTOForResponseGetBook).toList();

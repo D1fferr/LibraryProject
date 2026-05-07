@@ -36,5 +36,6 @@ public class ExternalConfig {
     @Data
     public static class Services {
         private String catalog;
+        private String gateway;
     }
 }

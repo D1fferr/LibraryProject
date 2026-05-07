@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: EventService
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/library_db}
+    username:
+    password:
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        show_sql: true
+  mvc:
+    hidden method:
+      filter:
+        enabled: true
+  cloud:
+    aws:
+      region:
+        static: us-east-1
+
+server:
+  port: 8083
+
+external:
+  minio:
+    endpoint: ${MINIO_ENDPOINT:http://localhost:9000}
+    bucket-name:
+    access-key:
+    secret-key:

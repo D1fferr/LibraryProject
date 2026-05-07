@@ -101,7 +101,7 @@ public class EmailSenderService {
     }
 
     private String textPrep(String username, String id) {
-        String host = config.getServices().getCatalog();
+        String host = config.getServices().getGateway();
         return "Hello dear " + username +
                 "." + " The book you wanted to review is now available. You can reserve it at the link:" +
                 host +

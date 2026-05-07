@@ -235,8 +235,7 @@
 
                 <div class="event-image" th:if="${event.photo != null and !event.photo.isEmpty()}">
                     <img th:src="${event.photo != null and !event.photo.isEmpty() ? event.photo : '/api/images/default-event.jpg'}"
-                         th:alt="${event.photo}"
-                         onerror="this.onerror=null; this.parentElement.innerHTML='<span class=\"material-icons\">event</span>';">
+                         th:alt="${event.photo}">
                 </div>
                 <div class="event-image-placeholder" th:unless="${event.photo != null and !event.photo.isEmpty()}">
                     <span class="material-icons">event</span>

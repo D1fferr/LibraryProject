@@ -101,17 +101,6 @@
                     Showing <span th:text="${books != null ? books.size() : 0}">0</span>
                     of <span th:text="${totalBooks}">0</span> books
                 </div>
-
-                <div class="sort-selector">
-                    <select id="sortSelect" onchange="applySort()">
-                        <option value="bookAddedAt,desc" th:selected="${sortBy == 'bookAddedAt' and sortDir == 'desc'}">Newest First</option>
-                        <option value="bookAddedAt,asc" th:selected="${sortBy == 'bookAddedAt' and sortDir == 'asc'}">Oldest First</option>
-                        <option value="bookName,asc" th:selected="${sortBy == 'bookName' and sortDir == 'asc'}">Title A-Z</option>
-                        <option value="bookName,desc" th:selected="${sortBy == 'bookName' and sortDir == 'desc'}">Title Z-A</option>
-                        <option value="bookAuthor,asc" th:selected="${sortBy == 'bookAuthor' and sortDir == 'asc'}">Author A-Z</option>
-                        <option value="bookAuthor,desc" th:selected="${sortBy == 'bookAuthor' and sortDir == 'desc'}">Author Z-A</option>
-                    </select>
-                </div>
             </div>
         </div>
 
