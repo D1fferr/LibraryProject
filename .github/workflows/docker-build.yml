@@ -62,7 +62,7 @@ jobs:
       - name: Build and push Expected Book Service
         uses: docker/build-push-action@v5
         with:
-          context: ./ExpectedBookService
+          context: ./ExpectedBooksService
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/library-expected-book:latest
           platforms: linux/amd64
