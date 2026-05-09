@@ -445,20 +445,31 @@
         }
     }
 
-    function addToCurrentBooks(button) {
+    async function addToCurrentBooks(button) {
         const bookId = button.getAttribute('data-book-id');
-        if (confirm('Move this book to current books collection?')) {
-            fetch('/admin/expected-books/' + bookId + '/add-to-current', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' }
-            })
-                .then(response => {
-                    if (response.ok) {
-                        alert('Successfully moved to main collection!');
-                        location.reload();
+        try {
+
+            if (confirm('Move this book to current books collection?')) {
+                const response = await fetch('/admin/expected-books/' + bookId + '/add-to-current', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
                     }
-                    else { alert('Failed to move.'); }
                 });
+                const isJson = response.headers.get('content-type')?.includes('application/json');
+                const data = isJson ? await response.json() : null;
+                if (response.ok) {
+                    alert('Successfully moved to main collection!');
+                    location.reload();
+                } else {
+                    const errorMsg = data && data.message ? data.message : 'Server error occurred';
+                    alert('Error (' + response.status + '): ' + errorMsg);
+                }
+            }
+        } catch (error) {
+            console.error('JS Error:', error);
+            alert('Critical error in application. Check console.');
         }
     }
 </script>
