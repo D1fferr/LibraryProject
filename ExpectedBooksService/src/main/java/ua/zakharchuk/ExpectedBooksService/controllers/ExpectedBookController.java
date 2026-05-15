@@ -38,7 +38,7 @@ public class ExpectedBookController {
     @GetMapping("/public/get-all")
     public ResponseEntity<ExpectedBookDtoWithTotalElements> getAll(
             @RequestParam(value = "page", defaultValue = "0") Integer page,
-            @RequestParam(value = "bookPerPage", defaultValue = "5") Integer bookPerPage,
+            @RequestParam(value = "bookPerPage", defaultValue = "8") Integer bookPerPage,
             @RequestParam(value = "sort", defaultValue = "expectedBookAddedAt") String sort,
             @RequestParam(value = "search", required = false) String search)
     {

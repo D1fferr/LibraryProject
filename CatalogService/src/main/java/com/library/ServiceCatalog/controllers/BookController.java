@@ -29,7 +29,7 @@ public class BookController {
 
     @GetMapping("/public")
     public ResponseEntity<BookDtoWithTotalElements> getAllBooks(@RequestParam(value = "page", defaultValue = "0") Integer page,
-                                                       @RequestParam(value = "booksPerPage", defaultValue = "5", required = false) Integer booksPerPage,
+                                                       @RequestParam(value = "booksPerPage", defaultValue = "8", required = false) Integer booksPerPage,
                                                        @RequestParam(value = "sortBy", defaultValue = "bookAddedAt") String sortBy,
                                                        @RequestParam(value = "search", required = false) String search,
                                                        @RequestParam(value = "genre", required = false) String genre,
@@ -71,7 +71,7 @@ public class BookController {
     public ResponseEntity<BookDtoWithTotalElements> getAllBooksByAuthor(
             @PathVariable String bookAuthor,
             @RequestParam(value = "page", defaultValue = "0", required = false) Integer page,
-            @RequestParam(value = "booksPerPage", defaultValue = "5", required = false) Integer booksPerPage)
+            @RequestParam(value = "booksPerPage", defaultValue = "4", required = false) Integer booksPerPage)
     {
         Pageable pageable = PageRequest.of(page, booksPerPage);
         BookDtoWithTotalElements books = bookService.findAllByAuthor(bookAuthor, pageable);
@@ -81,7 +81,7 @@ public class BookController {
     public ResponseEntity<BookDtoWithTotalElements> getAllBooksByGenre(
             @PathVariable String bookGenre,
             @RequestParam(value = "page", defaultValue = "0", required = false) Integer page,
-            @RequestParam(value = "booksPerPage", defaultValue = "5", required = false) Integer booksPerPage)
+            @RequestParam(value = "booksPerPage", defaultValue = "4", required = false) Integer booksPerPage)
     {
         Pageable pageable = PageRequest.of(page, booksPerPage);
         BookDtoWithTotalElements books = bookService.findAllByGenre(bookGenre, pageable);
@@ -90,7 +90,7 @@ public class BookController {
 
     @GetMapping("/public/recently-added-at")
     public ResponseEntity<BookDtoWithTotalElements> getAllRecentlyAddedAtBooks(@RequestParam(value = "page", defaultValue = "0") Integer page,
-                                     @RequestParam(value = "booksPerPage", defaultValue = "5") Integer booksPerPage)
+                                     @RequestParam(value = "booksPerPage", defaultValue = "8") Integer booksPerPage)
     {
         BookDtoWithTotalElements books = bookService.findAllRecentlyAddedAt(page, booksPerPage);
         return new ResponseEntity<>(books, HttpStatus.OK);
