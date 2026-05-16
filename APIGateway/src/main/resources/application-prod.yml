@@ -1,12 +1,12 @@
 services:
-  catalog: "${CATALOG_SERVICE_URL}"
-  reservation: "${RESERVATION_SERVICE_URL}"
-  expected book: "${EXPECTED_BOOK_SERVICE_URL}"
-  event: "${EVENT_SERVICE_URL}"
-  user: "${USER_SERVICE_URL}"
-  auth: "${AUTH_SERVICE_URL}"
-  frontend: "${FRONTEND_SERVICE_URL}"
-  minio: "${MINIO_SERVICE_URL}"
+  catalog: "${CATALOG_URL}"
+  reservation: "${RESERVATION_URL}"
+  expected book: "${EXPECTED_BOOK_URL}"
+  event: "${EVENT_URL}"
+  user: "${USER_URL}"
+  auth: "${AUTH_URL}"
+  frontend: "${FRONTEND_URL}"
+  minio: "${MINIO_URL}"
 jwt:
   secret: "${JWT_SECRET}"
 spring:

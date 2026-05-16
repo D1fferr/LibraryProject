@@ -19,16 +19,14 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
-    networks:
-      - library-network
+
   redis:
     image: redis:latest
     container_name: library-redis
     restart: always
     ports:
       - "6379:6379"
-    networks:
-      - library-network
+
 
   minio:
     image: minio/minio:latest
@@ -41,8 +39,7 @@ services:
       MINIO_ROOT_USER: ${MINIO_ROOT_USER}
       MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
     command: server /data --console-address ":9001"
-    networks:
-      - library-network
+
     volumes:
       - minio_data:/data
       - ./photo:/tmp/photo:ro
@@ -80,8 +77,6 @@ services:
       - KAFKA_TRANSACTION_STATE_LOG_MIN_ISR=1
       - KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS=0
       - KAFKA_AUTO_CREATE_TOPICS_ENABLE=true
-    networks:
-      - library-network
     volumes:
       - kafka_data:/kafka
 
@@ -102,26 +97,26 @@ services:
     ports:
       - "8081:8081"
     environment:
-      - DB_URL=jdbc:postgresql://db:5432/library_db
+      - SPRING_PROFILES_ACTIVE=prod
+      - DB_URL=${DB_URL}
       - DB_USERNAME=${DB_USERNAME}
       - DB_PASSWORD=${DB_PASSWORD}
 
-      - REDIS_HOST=redis
-      - REDIS_PORT=6379
+      - REDIS_HOST=${REDIS_HOST}
+      - REDIS_PORT=${REDIS_PORT}
 
-      - MINIO_ENDPOINT=http://minio:9000
-      - MINIO_BUCKET=images
+      - MINIO_ENDPOINT=${MINIO_ENDPOINT}
+      - MINIO_BUCKET=${MINIO_BUCKET}
       - MINIO_ACCESS_KEY=${MINIO_ROOT_USER}
       - MINIO_SECRET_KEY=${MINIO_ROOT_PASSWORD}
 
-      - KAFKA_ENDPOINT=kafka:9092
+      - KAFKA_ENDPOINT=${KAFKA_ENDPOINT}
 
-      - GATEWAY_URL=http://api-gateway:8080
-      - RESERVATION_URL=http://reservation-service:8082
+      - GATEWAY_URL=${GATEWAY_URL}
+      - RESERVATION_URL=${RESERVATION_URL}
     volumes:
       - ./logs/catalog:/app/logs
-    networks:
-      - library-network
+
     deploy:
       resources:
         limits:
@@ -143,21 +138,21 @@ services:
     ports:
       - "8083:8083"
     environment:
-      - DB_URL=jdbc:postgresql://db:5432/library_db
+      - SPRING_PROFILES_ACTIVE=prod
+      - DB_URL=${DB_URL}
       - DB_USERNAME=${DB_USERNAME}
       - DB_PASSWORD=${DB_PASSWORD}
 
-      - MINIO_ENDPOINT=http://minio:9000
-      - MINIO_BUCKET=images
+      - MINIO_ENDPOINT=${MINIO_ENDPOINT}
+      - MINIO_BUCKET=${MINIO_BUCKET}
       - MINIO_ACCESS_KEY=${MINIO_ROOT_USER}
       - MINIO_SECRET_KEY=${MINIO_ROOT_PASSWORD}
 
-      - CATALOG_URL=http://catalog-service:8081
+      - CATALOG_URL=${CATALOG_URL}
 
     volumes:
       - ./logs/event:/app/logs
-    networks:
-      - library-network
+
     deploy:
       resources:
         limits:
@@ -175,27 +170,27 @@ services:
     ports:
       - "8082:8082"
     environment:
-      - DB_URL=jdbc:postgresql://db:5432/library_db
+      - SPRING_PROFILES_ACTIVE=prod
+      - DB_URL=${DB_URL}
       - DB_USERNAME=${DB_USERNAME}
       - DB_PASSWORD=${DB_PASSWORD}
 
       - MAIL_LOGIN=${MAIL_LOGIN}
       - MAIL_PASSWORD=${MAIL_PASSWORD}
       - MAIL_FROM=${MAIL_FROM}
-      - MAIL_HOST=${MAIL_HOST:-smtp-relay.brevo.com}
+      - MAIL_HOST=${MAIL_HOST}
 
-      - MINIO_ENDPOINT=http://minio:9000
-      - MINIO_BUCKET=images
+      - MINIO_ENDPOINT=${MINIO_ENDPOINT}
+      - MINIO_BUCKET=${MINIO_BUCKET}
       - MINIO_ACCESS_KEY=${MINIO_ROOT_USER}
       - MINIO_SECRET_KEY=${MINIO_ROOT_PASSWORD}
 
-      - KAFKA_ENDPOINT=kafka:9092
+      - KAFKA_ENDPOINT=${KAFKA_ENDPOINT}
 
-      - CATALOG_URL=http://catalog-service:8081
+      - CATALOG_URL=${CATALOG_URL}
     volumes:
       - ./logs/expected-books:/app/logs
-    networks:
-      - library-network
+
     deploy:
       resources:
         limits:
@@ -216,14 +211,14 @@ services:
     ports:
       - "8087:8087"
     environment:
-      - DB_URL=jdbc:postgresql://db:5432/library_db
+      - SPRING_PROFILES_ACTIVE=prod
+      - DB_URL=${DB_URL}
       - DB_USERNAME=${DB_USERNAME}
       - DB_PASSWORD=${DB_PASSWORD}
 
     volumes:
       - ./logs/user:/app/logs
-    networks:
-      - library-network
+
     deploy:
       resources:
         limits:
@@ -240,26 +235,26 @@ services:
     ports:
       - "8086:8086"
     environment:
-      - DB_URL=jdbc:postgresql://db:5432/library_db
+      - SPRING_PROFILES_ACTIVE=prod
+      - DB_URL=${DB_URL}
       - DB_USERNAME=${DB_USERNAME}
       - DB_PASSWORD=${DB_PASSWORD}
 
-      - REDIS_HOST=redis
-      - REDIS_PORT=6379
+      - REDIS_HOST=${REDIS_HOST}
+      - REDIS_PORT=${REDIS_PORT}
 
       - JWT_SECRET=${JWT_SECRET}
 
       - MAIL_LOGIN=${MAIL_LOGIN}
       - MAIL_PASSWORD=${MAIL_PASSWORD}
       - MAIL_FROM=${MAIL_FROM}
-      - MAIL_HOST=${MAIL_HOST:-smtp-relay.brevo.com}
+      - MAIL_HOST=${MAIL_HOST}
 
-      - USER_URL=http://user-service:8087
+      - USER_URL=${USER_URL}
 
     volumes:
       - ./logs/auth:/app/logs
-    networks:
-      - library-network
+
     deploy:
       resources:
         limits:
@@ -279,24 +274,24 @@ services:
     ports:
       - "8084:8084"
     environment:
-      - DB_URL=jdbc:postgresql://db:5432/library_db
+      - SPRING_PROFILES_ACTIVE=prod
+      - DB_URL=${DB_URL}
       - DB_USERNAME=${DB_USERNAME}
       - DB_PASSWORD=${DB_PASSWORD}
 
       - MAIL_LOGIN=${MAIL_LOGIN}
       - MAIL_PASSWORD=${MAIL_PASSWORD}
       - MAIL_FROM=${MAIL_FROM}
-      - MAIL_HOST=${MAIL_HOST:-smtp-relay.brevo.com}
+      - MAIL_HOST=${MAIL_HOST}
 
-      - KAFKA_ENDPOINT=kafka:9092
+      - KAFKA_ENDPOINT=${KAFKA_ENDPOINT}
 
-      - CATALOG_URL=http://catalog-service:8081
-      - USER_URL=http://user-service:8087
+      - CATALOG_URL=${CATALOG_URL}
+      - USER_URL=${USER_URL}
 
     volumes:
       - ./logs/order:/app/logs
-    networks:
-      - library-network
+
     deploy:
       resources:
         limits:
@@ -318,12 +313,12 @@ services:
     ports:
       - "8089:8089"
     environment:
-      - GATEWAY_URL=http://api-gateway:8080
+      - SPRING_PROFILES_ACTIVE=prod
+      - GATEWAY_URL=${GATEWAY_URL}
 
     volumes:
       - ./logs/frontend:/app/logs
-    networks:
-      - library-network
+
     deploy:
       resources:
         limits:
@@ -340,23 +335,23 @@ services:
     ports:
       - "8080:8080"
     environment:
-      - CATALOG_SERVICE_URL=http://catalog-service:8081
-      - RESERVATION_SERVICE_URL=http://order-service:8084
-      - EXPECTED_BOOK_SERVICE_URL=http://expected-books-service:8082
-      - EVENT_SERVICE_URL=http://event-service:8083
-      - USER_SERVICE_URL=http://user-service:8087
-      - AUTH_SERVICE_URL=http://auth-service:8086
-      - FRONTEND_SERVICE_URL=http://frontend-service:8089
-      - MINIO_SERVICE_URL=http://minio:9000
+      - SPRING_PROFILES_ACTIVE=prod
+      - CATALOG_URL=${CATALOG_URL}
+      - RESERVATION_URL=${RESERVATION_URL}
+      - EXPECTED_BOOK_URL=${EXPECTED_BOOK_URL}
+      - EVENT_URL=${EVENT_URL}
+      - USER_URL=${USER_URL}
+      - AUTH_URL=${AUTH_URL}
+      - FRONTEND_URL=${FRONTEND_URL}
+      - MINIO_URL=${MINIO_ENDPOINT}
 
       - JWT_SECRET=${JWT_SECRET}
-      - REDIS_HOST=redis
-      - REDIS_PORT=6379
+      - REDIS_HOST=${REDIS_HOST}
+      - REDIS_PORT=${REDIS_PORT}
 
     volumes:
       - ./logs/gateway:/app/logs
-    networks:
-      - library-network
+
     deploy:
       resources:
         limits:
@@ -370,6 +365,3 @@ volumes:
   postgres_data:
   minio_data:
   kafka_data:
-networks:
-  library-network:
-    driver: bridge
