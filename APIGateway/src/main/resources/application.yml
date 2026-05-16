@@ -1,23 +1,7 @@
-services:
-  catalog:
-  reservation:
-  expected book:
-  event:
-  user:
-  auth:
-  frontend:
-  minio:
-jwt:
-  secret:
+
 spring:
   application:
     name: APIGateway
-  data:
-    redis:
-      repositories:
-        enabled: false
-      host: ${REDIS_HOST:localhost}
-      port: ${REDIS_PORT:6379}
   cloud:
     gateway:
       default-filters:
@@ -27,5 +11,7 @@ spring:
           httpclient:
             connect-timeout: 1000
             response-timeout: 10s
+  profiles:
+    active: local
 server:
   port: 8080

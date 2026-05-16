@@ -1,0 +1,18 @@
+services:
+  catalog: "${CATALOG_SERVICE_URL}"
+  reservation: "${RESERVATION_SERVICE_URL}"
+  expected book: "${EXPECTED_BOOK_SERVICE_URL}"
+  event: "${EVENT_SERVICE_URL}"
+  user: "${USER_SERVICE_URL}"
+  auth: "${AUTH_SERVICE_URL}"
+  frontend: "${FRONTEND_SERVICE_URL}"
+  minio: "${MINIO_SERVICE_URL}"
+jwt:
+  secret: "${JWT_SECRET}"
+spring:
+  data:
+    redis:
+      repositories:
+        enabled: false
+      host: "${REDIS_HOST}"
+      port: "${REDIS_PORT}"
