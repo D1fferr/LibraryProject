@@ -1,6 +1,6 @@
 # 📚 Library Microservices System
 
-The project is a scalable microservices platform for managing an online library, built on Spring Cloud.
+The project is a scalable microservices platform for managing an online library, built on Spring Boot.
 ---
 
 ## 🏗️ System architecture
